@@ -1,0 +1,3 @@
+[submodule "SignalList"]
+	path = SignalList
+	url = git@github.com:rom1504/SignalList.git
