@@ -13,11 +13,11 @@ QVariant SignalListAdapter<Episode*>::data ( const QModelIndex & index, int role
     if (index.row() >= mList->size())
        return QVariant();
 
-    if(role==FullItemRole) return QVariant::fromValue(mList->get(index.row()));
+    if(role == FullItemRole) return QVariant::fromValue(mList->get(index.row()));
 
-    if (role == NumberRole) return mList->get(index.row())->number();
-    if (role == NameRole) return mList->get(index.row())->name();
-    if (role == DescriptionRole) return mList->get(index.row())->description();
+    if(role == NumberRole) return mList->get(index.row())->number();
+    if(role == NameRole) return mList->get(index.row())->name();
+    if(role == DescriptionRole) return mList->get(index.row())->description();
 
     return QVariant();
 }
