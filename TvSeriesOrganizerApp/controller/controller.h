@@ -5,7 +5,7 @@
 #include <QTimer>
 
 #include "qtquick2applicationviewer.h"
-#include "model/season.h"
+#include "model/serieslist.h"
 
 class Controller : public QObject
 {
@@ -19,13 +19,19 @@ public:
 signals:
 
 private slots:
+    void showSeriesList();
+    void willShowSeriesDetails(const int row);
+    void showSeriesDetails(const int row);
+    void willShowSeasonDetails(const int row);
     void willShowEpisodeDetails(const int row);
     void showEpisodeDetails(const int row);
-    void showSeasonDetails();
+    void showSeasonDetails(const int row);
 
 private:
     QQuickView mViewer;
-    Season mSeason1;
+    SeriesList * mSeriesList;
+    Series * mCurrentSeries;
+    Season * mCurrentSeason;
     QTimer mTimer;
 
 };

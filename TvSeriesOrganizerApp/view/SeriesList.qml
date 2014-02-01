@@ -2,17 +2,17 @@ import QtQuick 2.0
 
 Rectangle
 {
-    id:seasonDetails
+    id:seriesDetails
     width: 400
     height: 800
     color: "#EAEAEA"
-    signal episodeClicked(int episodeNumber)
+    signal seriesClicked(int seriesNumber)
 
     ListView
     {
         id: listView
         anchors.fill: parent
-        model: season
-        delegate: Episode{}
+        model: seriesList
+        delegate: Series{}
     }
 }

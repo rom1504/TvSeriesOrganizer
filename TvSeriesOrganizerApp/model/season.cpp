@@ -1,7 +1,7 @@
 #include "season.h"
 
-Season::Season(QObject *parent) :
-    QObject(parent)
+Season::Season(int number,QObject *parent) :
+    QObject(parent),mNumber(number)
 {
 }
 
@@ -20,4 +20,9 @@ Episode * Season::getEpisode(int row) const
 SignalList<Episode *> & Season::episodes()
 {
     return mEpisodes;
+}
+
+int Season::number() const
+{
+    return mNumber;
 }

@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     model/season.cpp \
     model/episode.cpp \
     controller/controller.cpp \
-    model/series.cpp
+    model/series.cpp \
+    model/serieslist.cpp
 
 # Installation path
 # target.path =
@@ -23,7 +24,8 @@ HEADERS += \
     model/season.h \
     model/episode.h \
     controller/controller.h \
-    model/series.h
+    model/series.h \
+    model/serieslist.h
 
 unix:!macx: LIBS += -L$$OUT_PWD/../SignalList/ -lSignalList
 
@@ -41,4 +43,9 @@ RESOURCES += \
 OTHER_FILES += \
     view/Episode.qml \
     view/EpisodeDetails.qml \
-    view/SeasonDetails.qml
+    view/SeasonDetails.qml \
+    view/Season.qml \
+    view/SeriesDetails.qml \
+    view/ShadowBorderRectangle.qml \
+    view/Series.qml \
+    view/SeriesList.qml
