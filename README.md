@@ -18,6 +18,10 @@ Application targetting desktop and mobile to organize your tv series
  * Good looking interface
  
 ## Installation
+### Binary
+ * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/TvSeriesOrganizer.tgz
+
+### Compilation
  * qmake && make
  
 ## Technical description

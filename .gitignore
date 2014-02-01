@@ -1,2 +1,4 @@
 *.pro.user
 description.txt
+*.kate-swp
+secret/

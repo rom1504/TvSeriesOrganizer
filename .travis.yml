@@ -14,3 +14,19 @@ script:
   - qmake -qt=qt5 -v
   - qmake -qt=qt5
   - make
+
+env:
+  - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
+
+  
+
+after_success:
+  - mkdir -p ~/.ssh
+  - openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/id_rsa_deploy.enc -out ~/.ssh/id_rsa -d -a
+  - chmod 600 ~/.ssh/id_rsa
+
+  - cd TvSeriesOrganizerApp
+  - mv TvSeriesOrganizerApp TvSeriesOrganizer
+  - tar czf TvSeriesOrganizer.tgz TvSeriesOrganizer
+  
+  - scp -o StrictHostKeyChecking=no TvSeriesOrganizer.tgz travis@download.rom1504.fr:download/TvSeriesOrganizer/
