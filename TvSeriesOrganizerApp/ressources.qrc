@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>view/Episode.qml</file>
+        <file>view/EpisodeDetails.qml</file>
+        <file>view/SeasonDetails.qml</file>
+    </qresource>
+</RCC>

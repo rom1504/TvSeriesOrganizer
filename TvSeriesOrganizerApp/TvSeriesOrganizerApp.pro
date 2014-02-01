@@ -1,6 +1,6 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml/DownloaderInterface
-folder_01.target = qml
+folder_01.source = view
+folder_01.target = view
 DEPLOYMENTFOLDERS = folder_01
 
 # Additional import path used to resolve QML modules in Creator's code model
@@ -40,5 +40,6 @@ RESOURCES += \
     ressources.qrc
 
 OTHER_FILES += \
-    qml/DownloaderInterface/Episode.qml \
-    qml/DownloaderInterface/SeasonDetails.qml
+    view/Episode.qml \
+    view/EpisodeDetails.qml \
+    view/SeasonDetails.qml

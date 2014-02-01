@@ -27,7 +27,7 @@ void Controller::showSeasonDetails()
 
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("season", &adapter);
-    mViewer.setSource(QUrl("qrc:/qml/DownloaderInterface/SeasonDetails.qml"));
+    mViewer.setSource(QUrl("qrc:/view/SeasonDetails.qml"));
     QObject *seasonDetails = mViewer.rootObject();
     connect(seasonDetails, SIGNAL(episodeClicked(const int)),this,SLOT(willShowEpisodeDetails(const int)));
 }
@@ -44,7 +44,7 @@ void Controller::showEpisodeDetails(const int row)
 {
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("episode",mSeason1.getEpisode(row));
-    mViewer.setSource(QUrl("qrc:/qml/DownloaderInterface/EpisodeDetails.qml"));
+    mViewer.setSource(QUrl("qrc:/view/EpisodeDetails.qml"));
 }
 
 void Controller::run()
