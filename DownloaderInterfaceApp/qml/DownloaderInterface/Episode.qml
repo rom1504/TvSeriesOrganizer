@@ -29,7 +29,7 @@ Item {
         Text
         {
             x: 15; y: 15;
-            text: "Number: " + number + "\nName: " + name + "\nDescription: "+ description+"\n"
+            text: "Number: " + episode.number + "\nName: " + episode.name + "\nDescription: "+ episode.description+"\n"
             font.pointSize: 12
         }
     }
@@ -44,5 +44,16 @@ Item {
         color: "#80000000"
         smooth: true
         source: container
+    }
+    MouseArea
+    {
+        id: mouseArea
+        anchors.fill: parent
+        hoverEnabled: true
+
+        onClicked:
+        {
+            listView.parent.episodeClicked(index);
+        }
     }
 }

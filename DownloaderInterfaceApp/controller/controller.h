@@ -2,8 +2,10 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QTimer>
 
 #include "qtquick2applicationviewer.h"
+#include "model/season.h"
 
 class Controller : public QObject
 {
@@ -16,10 +18,15 @@ public:
 
 signals:
 
-public slots:
+private slots:
+    void willShowEpisodeDetails(const int row);
+    void showEpisodeDetails(const int row);
+    void showSeasonDetails();
 
 private:
-    QtQuick2ApplicationViewer mViewer;
+    QQuickView mViewer;
+    Season mSeason1;
+    QTimer mTimer;
 
 };
 

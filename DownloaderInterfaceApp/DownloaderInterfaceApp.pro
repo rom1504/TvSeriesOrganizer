@@ -8,11 +8,10 @@ QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    model/serie.cpp \
     model/season.cpp \
     model/episode.cpp \
-    adapter/episodesignallistadapter.cpp \
-    controller/controller.cpp
+    controller/controller.cpp \
+    model/series.cpp
 
 # Installation path
 # target.path =
@@ -22,11 +21,10 @@ include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
 HEADERS += \
-    model/serie.h \
     model/season.h \
     model/episode.h \
-    adapter/episodesignallistadapter.h \
-    controller/controller.h
+    controller/controller.h \
+    model/series.h
 
 unix:!macx: LIBS += -L$$OUT_PWD/../SignalList/ -lSignalList
 

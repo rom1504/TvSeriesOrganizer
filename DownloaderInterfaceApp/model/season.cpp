@@ -12,6 +12,11 @@ void Season::addEpisode(Episode * episode)
 }
 
 
+Episode * Season::getEpisode(int row) const
+{
+    return mEpisodes.get(row);
+}
+
 SignalList<Episode *> & Season::episodes()
 {
     return mEpisodes;

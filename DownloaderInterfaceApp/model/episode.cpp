@@ -23,14 +23,17 @@ QString Episode::description() const
 void Episode::setNumber(int number)
 {
     mNumber=number;
+    emit numberChanged();
 }
 
 void Episode::setName(const QString &name)
 {
     mName=name;
+    emit nameChanged();
 }
 
 void Episode::setDescription(const QString & description)
 {
     mDescription=description;
+    emit descriptionChanged();
 }

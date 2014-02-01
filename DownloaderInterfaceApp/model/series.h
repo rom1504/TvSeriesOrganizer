@@ -6,11 +6,11 @@
 #include "season.h"
 #include "model/signallist.h"
 
-class Serie : public QObject
+class Series : public QObject
 {
     Q_OBJECT
 public:
-    explicit Serie(QObject *parent = 0);
+    explicit Series(QObject *parent = 0);
     void addSeason(Season * season);
 
 signals:

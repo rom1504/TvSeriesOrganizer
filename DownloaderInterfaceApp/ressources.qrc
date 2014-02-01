@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/DownloaderInterface/main.qml</file>
         <file>qml/DownloaderInterface/Episode.qml</file>
         <file>qml/DownloaderInterface/EpisodeDetails.qml</file>
         <file>qml/DownloaderInterface/SeasonDetails.qml</file>

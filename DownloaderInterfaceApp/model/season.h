@@ -12,6 +12,7 @@ class Season : public QObject
 public:
     explicit Season(QObject *parent = 0);
     void addEpisode(Episode * episode);
+    Episode *getEpisode(int row) const;
 
 
     SignalList<Episode *> &episodes();
