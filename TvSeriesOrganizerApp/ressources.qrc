@@ -8,5 +8,6 @@
         <file>view/ShadowBorderRectangle.qml</file>
         <file>view/Series.qml</file>
         <file>view/SeriesList.qml</file>
+        <file>view/SimplePage.qml</file>
     </qresource>
 </RCC>

@@ -1,17 +1,17 @@
 import QtQuick 2.0
 
-Rectangle
+SimplePage
 {
     id:seasonDetails
-    width: 400
-    height: 800
-    color: "#EAEAEA"
     signal episodeClicked(int episodeNumber)
 
     ListView
     {
         id: listView
-        anchors.fill: parent
+        x:30
+        y:10
+        width: 300
+        height: 400
         model: season
         delegate: Episode{}
     }

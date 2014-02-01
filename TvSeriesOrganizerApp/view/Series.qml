@@ -4,11 +4,5 @@ ShadowBorderRectangle
 {
     text:series.name
     height: 40
-    MouseArea
-    {
-        id: mouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        onClicked:listView.parent.seriesClicked(index)
-    }
+    onClicked:listView.parent.seriesClicked(index)
 }

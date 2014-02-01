@@ -11,7 +11,10 @@ Rectangle
     ListView
     {
         id: listView
-        anchors.fill: parent
+        x:30
+        y:10
+        width: 300
+        height: 400
         model: seriesList
         delegate: Series{}
     }

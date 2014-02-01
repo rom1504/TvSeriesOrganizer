@@ -5,9 +5,9 @@ import QtGraphicalEffects 1.0
 Item
 {
     id:root
-    width: parent.width*0.8
-    x: 10
+    width: parent.width
     property alias text:insideText.text
+    signal clicked
 
     Item
     {
@@ -19,7 +19,7 @@ Item
         Rectangle
         {
             id: rect
-            width: 300
+            width: root.width
             height: root.height-10
             color: "white"
             radius: 2
@@ -52,10 +52,12 @@ Item
         smooth: true
         source: container
     }
+
     MouseArea
     {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        onClicked: parent.clicked()
     }
 }

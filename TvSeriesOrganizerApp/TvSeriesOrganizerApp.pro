@@ -48,4 +48,5 @@ OTHER_FILES += \
     view/SeriesDetails.qml \
     view/ShadowBorderRectangle.qml \
     view/Series.qml \
-    view/SeriesList.qml
+    view/SeriesList.qml \
+    view/SimplePage.qml

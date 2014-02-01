@@ -19,10 +19,11 @@ public:
 signals:
 
 private slots:
+    void willShowSeriesList();
     void showSeriesList();
-    void willShowSeriesDetails(const int row);
+    void willShowSeriesDetails(const int row=-1);
     void showSeriesDetails(const int row);
-    void willShowSeasonDetails(const int row);
+    void willShowSeasonDetails(const int row=-1);
     void willShowEpisodeDetails(const int row);
     void showEpisodeDetails(const int row);
     void showSeasonDetails(const int row);
