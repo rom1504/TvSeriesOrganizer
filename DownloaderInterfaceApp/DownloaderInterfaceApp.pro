@@ -40,3 +40,7 @@ QMAKE_CXXFLAGS += -std=c++11
 
 RESOURCES += \
     ressources.qrc
+
+OTHER_FILES += \
+    qml/DownloaderInterface/Episode.qml \
+    qml/DownloaderInterface/SeasonDetails.qml

@@ -19,7 +19,7 @@ Controller::Controller(QObject *parent) :
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("season", &adapter);
 
-    mViewer.setSource(QUrl("qrc:qml/DownloaderInterface/main.qml"));
+    mViewer.setSource(QUrl("qrc:/qml/DownloaderInterface/main.qml"));
 }
 
 void Controller::run()
