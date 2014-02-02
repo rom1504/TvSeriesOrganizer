@@ -17,15 +17,15 @@ mkdir -p  screenshot/
 xwd -id $id | convert xwd:- screenshot/SeriesList.png
 xte -x $DISPLAY "mousemove $(($x+40)) $(($y+20))"
 xte -x $DISPLAY 'mouseclick 1'
-usleep 200000
+sleep 1
 xwd -id $id | convert xwd:- screenshot/SeriesDetails.png
 xte -x $DISPLAY "mousemove $(($x+40)) $(($y+20))"
 xte -x $DISPLAY 'mouseclick 1'
-usleep 200000
+sleep 1
 xwd -id $id | convert xwd:- screenshot/SeasonDetails.png
 xte -x $DISPLAY "mousemove $(($x+40)) $(($y+20))"
 xte -x $DISPLAY 'mouseclick 1'
-usleep 200000
+sleep 1
 xwd -id $id | convert xwd:- screenshot/EpisodeDetails.png
 pkill Xvfb
 export DISPLAY=:0
