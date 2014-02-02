@@ -5,9 +5,9 @@ Application targetting desktop and mobile to organize your tv series
 
 ## Features
  * See a list of episode of a season
+ * List of episodes organized by season and series
  
 ### Roadmap
- * List of episodes organized by season and series
  * Download those lists from the web
  * Download subtitles from subtitles website
  * Track the episode and series you have seen
@@ -19,7 +19,7 @@ Application targetting desktop and mobile to organize your tv series
  
 ## Installation
 ### Binary
- * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/TvSeriesOrganizer.tgz
+ * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/bin/TvSeriesOrganizer.tgz
 
 ### Compilation
  * qmake && make
