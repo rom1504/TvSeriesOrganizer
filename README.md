@@ -30,6 +30,7 @@ Dependencies : gcc >=4.8, Qt >=5.1
  * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/bin/TvSeriesOrganizer.tgz
 
 ### Compilation
+ * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git
  * qmake && make
  
 ## Technical description
