@@ -29,7 +29,7 @@ private slots:
     void showSeasonDetails(const int row);
 
 private:
-    QQuickView mViewer;
+    QtQuick2ApplicationViewer mViewer;
     SeriesList * mSeriesList;
     Series * mCurrentSeries;
     Season * mCurrentSeason;

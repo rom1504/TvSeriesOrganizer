@@ -12,19 +12,19 @@ Rectangle
     {
         x:350
         y:10
-        width:40
-        height:20
+        width: backButton.width +5
+        height: backButton.height +5
         Rectangle
         {
             id: rectangle
             border.color: "white"
             anchors.fill: parent
-        }
-        Text
-        {
-            font.pointSize: 12
-            id: backButton
-            text: "Back"
+            Text
+            {
+                font.pointSize: 12
+                id: backButton
+                text: "Back"
+            }
         }
         MouseArea
         {

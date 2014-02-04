@@ -111,5 +111,5 @@ void Controller::showEpisodeDetails(const int row)
 
 void Controller::run()
 {
-    mViewer.show();
+    mViewer.showExpanded();
 }

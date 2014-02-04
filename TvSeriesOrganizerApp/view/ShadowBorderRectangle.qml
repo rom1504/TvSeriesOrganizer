@@ -6,6 +6,7 @@ Item
 {
     id:root
     width: parent.width
+    height:container.height
     property alias text:insideText.text
     signal clicked
 
@@ -13,14 +14,14 @@ Item
     {
         id: container
         anchors.centerIn: parent
-        width:  rect.width  + (2 * rectShadow.radius)
+        width:  parent.width
         height: rect.height + (2 * rectShadow.radius)
 
         Rectangle
         {
             id: rect
-            width: root.width
-            height: root.height-10
+            height: insideText.height +insideText.y+5
+            width: parent.width-(2 * rectShadow.radius)
             color: "white"
             radius: 2
             antialiasing: true
@@ -30,13 +31,16 @@ Item
                 color: "#EAEAEA"
             }
             anchors.centerIn: parent
-        }
-        Text
-        {
-            id:insideText
-            x: 15;
-            y: 15;
-            font.pointSize: 12
+            Text
+            {
+                id:insideText
+                width:parent.width-5
+                wrapMode: Text.WordWrap
+                clip: true
+                x: 5;
+                y: 5;
+                font.pointSize: 12
+            }
         }
     }
     DropShadow

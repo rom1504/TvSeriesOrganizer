@@ -14,7 +14,7 @@ Rectangle
         x:30
         y:10
         width: 300
-        height: 400
+        height: 600
         model: seriesList
         delegate: Series{}
     }
