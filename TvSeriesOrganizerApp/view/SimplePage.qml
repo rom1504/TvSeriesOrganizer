@@ -3,15 +3,24 @@ import QtQuick 2.0
 Rectangle
 {
     id: simplePage
-    width: 400
-    height: 800
+    width: 580
+    height: 880
     color: "#EAEAEA"
     signal back()
+    property alias imageSource:image.source
 
+    Image
+    {
+        id:image
+        x:0
+        y:0
+        width: parent.width
+        height: 200
+    }
     Item
     {
-        x:350
-        y:10
+        x:parent.width-60
+        y:215
         width: backButton.width +5
         height: backButton.height +5
         Rectangle

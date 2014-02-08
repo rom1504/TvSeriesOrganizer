@@ -9,5 +9,10 @@
         <file>view/Series.qml</file>
         <file>view/SeriesList.qml</file>
         <file>view/SimplePage.qml</file>
+        <file>images/series.jpg</file>
+        <file>view/ListPage.qml</file>
+        <file>images/episode.jpg</file>
+        <file>images/season.jpg</file>
+        <file>images/TvSeriesOrganizer.jpg</file>
     </qresource>
 </RCC>
