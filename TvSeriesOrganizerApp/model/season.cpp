@@ -1,7 +1,7 @@
 #include "season.h"
 
-Season::Season(int number,QObject *parent) :
-    QObject(parent),mNumber(number)
+Season::Season(int number, QUrl banner, QObject *parent) :
+    QObject(parent),mNumber(number),mBanner(banner)
 {
 }
 
@@ -25,4 +25,9 @@ SignalList<Episode *> & Season::episodes()
 int Season::number() const
 {
     return mNumber;
+}
+
+QUrl Season::banner() const
+{
+    return mBanner;
 }

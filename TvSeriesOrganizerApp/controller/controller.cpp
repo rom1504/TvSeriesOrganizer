@@ -10,13 +10,13 @@ Controller::Controller(QObject *parent) :
     QObject(parent)
 {
 
-    Season * season1=new Season(1);
-    season1->addEpisode(new Episode(1,"First episode","First description"));
-    season1->addEpisode(new Episode(2,"Second episode","Second description"));
-    season1->addEpisode(new Episode(3,"Third episode","Third description"));
-    season1->addEpisode(new Episode(4,"Fourth episode","Fourth description"));
+    Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"));
+    season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg")));
+    season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg")));
+    season1->addEpisode(new Episode(3,"Third episode","Third description",QUrl("qrc:/images/episode.jpg")));
+    season1->addEpisode(new Episode(4,"Fourth episode","Fourth description",QUrl("qrc:/images/episode.jpg")));
 
-    Series * series1=new Series("Series 1");
+    Series * series1=new Series("Series 1",QUrl("qrc:/images/series.jpg"));
     series1->addSeason(season1);
 
     mSeriesList=new SeriesList;
@@ -63,7 +63,8 @@ void Controller::showSeriesDetails(const int row)
     SignalListAdapter<Season*> adapter(&(mCurrentSeries->seasons()),"season");
 
     QQmlContext *ctxt = mViewer.rootContext();
-    ctxt->setContextProperty("series", &adapter);
+    ctxt->setContextProperty("seriesModel", &adapter);
+    ctxt->setContextProperty("series", mCurrentSeries);
     mViewer.setSource(QUrl("qrc:/view/SeriesDetails.qml"));
     QObject *seriesDetails = mViewer.rootObject();
     connect(seriesDetails, SIGNAL(seasonClicked(const int)),this,SLOT(willShowSeasonDetails(const int)));
@@ -85,7 +86,8 @@ void Controller::showSeasonDetails(const int row)
     SignalListAdapter<Episode*> adapter(&(mCurrentSeason->episodes()),"episode");
 
     QQmlContext *ctxt = mViewer.rootContext();
-    ctxt->setContextProperty("season", &adapter);
+    ctxt->setContextProperty("seasonModel", &adapter);
+    ctxt->setContextProperty("season", mCurrentSeason);
     mViewer.setSource(QUrl("qrc:/view/SeasonDetails.qml"));
     QObject *seasonDetails = mViewer.rootObject();
     connect(seasonDetails, SIGNAL(episodeClicked(const int)),this,SLOT(willShowEpisodeDetails(const int)));

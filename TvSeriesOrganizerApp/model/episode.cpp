@@ -1,7 +1,7 @@
 #include "episode.h"
 
-Episode::Episode(int number,const QString & name,const QString& description,QObject *parent) :
-    QObject(parent),mNumber(number),mName(name),mDescription(description)
+Episode::Episode(int number,const QString & name,const QString& description,QUrl banner,QObject *parent) :
+    QObject(parent),mNumber(number),mName(name),mDescription(description),mBanner(banner)
 {
 }
 
@@ -20,20 +20,7 @@ QString Episode::description() const
     return mDescription;
 }
 
-void Episode::setNumber(int number)
+QUrl Episode::banner() const
 {
-    mNumber=number;
-    emit numberChanged();
-}
-
-void Episode::setName(const QString &name)
-{
-    mName=name;
-    emit nameChanged();
-}
-
-void Episode::setDescription(const QString & description)
-{
-    mDescription=description;
-    emit descriptionChanged();
+    return mBanner;
 }

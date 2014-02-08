@@ -4,7 +4,7 @@ ListPage
 {
     id:seasonDetails
     signal episodeClicked(int episodeNumber)
-    imageSource:"qrc:/images/season.jpg"
+    imageSource:season.banner
     pageDelegate: Episode{}
-    pageModel: season
+    pageModel: seasonModel
 }

@@ -1,7 +1,7 @@
 #include "series.h"
 
-Series::Series(QString name, QObject *parent) :
-    QObject(parent),mName(name)
+Series::Series(QString name, QUrl banner, QObject *parent) :
+    QObject(parent),mName(name),mBanner(banner)
 {
 }
 
@@ -23,4 +23,9 @@ SignalList<Season *> & Series::seasons()
 QString Series::name() const
 {
     return mName;
+}
+
+QUrl Series::banner() const
+{
+    return mBanner;
 }

@@ -3,7 +3,7 @@ import QtQuick 2.0
 SimplePage
 {
     id: episodeDetails
-    imageSource:"qrc:/images/episode.jpg"
+    imageSource:episode.banner
     ShadowBorderRectangle
     {
         text:"Number: " + episode.number + "\nName: " + episode.name + "\nDescription: "+ episode.description+"\n"
