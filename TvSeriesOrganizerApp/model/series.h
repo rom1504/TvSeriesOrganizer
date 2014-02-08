@@ -13,6 +13,7 @@ class Series : public QObject
     Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
 public:
     explicit Series(QString name, QUrl banner, QObject *parent = 0);
+    explicit Series(QString name, QObject *parent = 0);
     void addSeason(Season * season);
     Season *getSeason(int row) const;
     SignalList<Season *> &seasons();
@@ -27,9 +28,14 @@ signals:
 public slots:
 
 private:
+    void loadFullSeries();
+    void loadSeries(QString xmlFileContent);
+
+private:
     QString mName;
     QUrl mBanner;
     SignalList<Season*> mSeasons;
+    QString mId;
 
 };
 Q_DECLARE_METATYPE (Series*)

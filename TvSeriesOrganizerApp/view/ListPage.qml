@@ -12,5 +12,7 @@ SimplePage
         y:250
         width: parent.width-40
         height: 600
+        clip: true
+        focus: true
     }
 }

@@ -51,3 +51,5 @@ OTHER_FILES += \
     view/SeriesList.qml \
     view/SimplePage.qml \
     view/ListPage.qml
+
+QT+= xml

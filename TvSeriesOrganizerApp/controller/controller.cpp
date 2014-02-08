@@ -10,6 +10,7 @@ Controller::Controller(QObject *parent) :
     QObject(parent)
 {
 
+    Series * suits=new Series("suits");
     Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"));
     season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg")));
     season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg")));
@@ -21,11 +22,10 @@ Controller::Controller(QObject *parent) :
 
     mSeriesList=new SeriesList;
     mSeriesList->addSeries(series1);
+    mSeriesList->addSeries(suits);
+    mSeriesList->addSeries(new Series("breaking bad"));
 
 
-    //showEpisodeDetails(0);
-    //showSeasonDetails();
-    //showSeriesDetails();
     showSeriesList();
 }
 
