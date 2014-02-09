@@ -3,10 +3,8 @@ Application targetting desktop and mobile to organize your tv series
 
 [![Build Status](https://travis-ci.org/rom1504/TvSeriesOrganizer.png?branch=master)](https://travis-ci.org/rom1504/TvSeriesOrganizer)
 
-<img src="http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot/SeriesList.png " alt="SeriesList" width="150px;"/> &nbsp;&nbsp;
-<img src="http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot/SeriesDetails.png " alt="SeriesDetails" width="150px;"/> &nbsp;&nbsp;
-<img src="http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot/SeasonDetails.png " alt="SeasonDetails" width="150px;"/> &nbsp;&nbsp;
-<img src="http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot/EpisodeDetails.png " alt="EpisodeDetails" width="150px;"/>
+[Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot/)
+
 
 ## Features
  * See a list of episode of a season
