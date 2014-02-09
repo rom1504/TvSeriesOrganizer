@@ -9,9 +9,12 @@ Application targetting desktop and mobile to organize your tv series
 ## Features
  * See a list of episode of a season
  * List of episodes organized by season and series
+ * From  http://www.thetvdb.com/ database, download list of episode and season with :
+   * banners
+   * description
+   * name
  
 ### Roadmap
- * Download those lists from the web
  * Download subtitles from subtitles website
  * Track the episode and series you have seen
  * Recommend you some other series you might like
@@ -28,8 +31,9 @@ Dependencies : gcc >=4.8, Qt >=5.1
  * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/bin/TvSeriesOrganizer.tgz
 
 ### Compilation
- * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git
- * qmake && make
+Two possibilities :
+ * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git && cd TvSeriesOrganizer && qmake && make
+ * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git && cd TvSeriesOrganizer && qtcreator TvSeriesOrganizer.pro
  
 ## Technical description
  * Programmed with c++11, Qt5 and Qml
