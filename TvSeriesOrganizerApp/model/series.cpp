@@ -94,7 +94,7 @@ void Series::loadSeries(QString xmlFileContent)
             if(seasonNumber!=currentSeasonNumber)
             {
                 currentSeasonNumber=seasonNumber;
-                currentSeason=new Season(currentSeasonNumber.toInt(),QUrl("qrc:/images/series.jpg"));
+                currentSeason=new Season(currentSeasonNumber.toInt(),QUrl("qrc:/images/season.jpg"));
                 addSeason(currentSeason);
             }
             currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeDescription,QUrl(episodeBanner=="" ? "qrc:/images/episode.jpg" : "http://thetvdb.com/banners/"+episodeBanner)));
