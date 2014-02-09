@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd TvSeriesOrganizerApp
-mv TvSeriesOrganizerApp TvSeriesOrganizer
 tar czf TvSeriesOrganizer.tgz TvSeriesOrganizer
  
 scp -o StrictHostKeyChecking=no TvSeriesOrganizer.tgz travis@download.rom1504.fr:download/TvSeriesOrganizer/bin/
