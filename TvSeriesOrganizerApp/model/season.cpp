@@ -17,9 +17,9 @@ Episode * Season::getEpisode(int row) const
     return mEpisodes.get(row);
 }
 
-SignalList<Episode *> & Season::episodes()
+SignalList<Episode *> *Season::episodes()
 {
-    return mEpisodes;
+    return &mEpisodes;
 }
 
 int Season::number() const

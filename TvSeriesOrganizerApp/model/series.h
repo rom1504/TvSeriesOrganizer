@@ -16,7 +16,7 @@ public:
     explicit Series(QString name, QObject *parent = 0);
     void addSeason(Season * season);
     Season *getSeason(int row) const;
-    SignalList<Season *> &seasons();
+    SignalList<Season *> *seasons();
 
     QString name() const;
     QUrl banner() const;

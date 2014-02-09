@@ -114,9 +114,9 @@ Season * Series::getSeason(int row) const
     return mSeasons.get(row);
 }
 
-SignalList<Season *> & Series::seasons()
+SignalList<Season *> *Series::seasons()
 {
-    return mSeasons;
+    return &mSeasons;
 }
 QString Series::name() const
 {

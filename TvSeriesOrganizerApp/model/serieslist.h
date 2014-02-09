@@ -13,7 +13,7 @@ public:
     explicit SeriesList(QObject *parent = 0);
     void addSeries(Series * series);
     Series *getSeries(int row) const;
-    SignalList<Series *> &series();
+    SignalList<Series *> *series();
 
 signals:
 

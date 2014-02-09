@@ -19,7 +19,7 @@ public:
     QUrl banner() const;
 
 
-    SignalList<Episode *> &episodes();
+    SignalList<Episode *> * episodes();
 
 signals:
     void numberChanged();

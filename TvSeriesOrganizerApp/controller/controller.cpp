@@ -39,10 +39,10 @@ void Controller::willShowSeriesList()
 
 void Controller::showSeriesList()
 {
-    SignalListAdapter<Series*> adapter(&(mSeriesList->series()),"series");
+    SignalListAdapter<Series*> * adapter=new SignalListAdapter<Series*>(mSeriesList->series(),"series");
 
     QQmlContext *ctxt = mViewer.rootContext();
-    ctxt->setContextProperty("seriesList", &adapter);
+    ctxt->setContextProperty("seriesList", adapter);
     mViewer.setSource(QUrl("qrc:/view/SeriesList.qml"));
     QObject *seriesDetails = mViewer.rootObject();
     connect(seriesDetails, SIGNAL(seriesClicked(const int)),this,SLOT(willShowSeriesDetails(const int)));
@@ -60,10 +60,11 @@ void Controller::willShowSeriesDetails(const int row)
 void Controller::showSeriesDetails(const int row)
 {
     if(row!=-1) mCurrentSeries=mSeriesList->getSeries(row);
-    SignalListAdapter<Season*> adapter(&(mCurrentSeries->seasons()),"season");
+    SignalListAdapter<Season*> * adapter=new SignalListAdapter<Season*>(mCurrentSeries->seasons(),"season");
+
 
     QQmlContext *ctxt = mViewer.rootContext();
-    ctxt->setContextProperty("seriesModel", &adapter);
+    ctxt->setContextProperty("seriesModel", adapter);
     ctxt->setContextProperty("series", mCurrentSeries);
     mViewer.setSource(QUrl("qrc:/view/SeriesDetails.qml"));
     QObject *seriesDetails = mViewer.rootObject();
@@ -83,10 +84,9 @@ void Controller::willShowSeasonDetails(const int row)
 void Controller::showSeasonDetails(const int row)
 {
     if(row!=-1) mCurrentSeason=mCurrentSeries->getSeason(row);
-    SignalListAdapter<Episode*> adapter(&(mCurrentSeason->episodes()),"episode");
-
+    SignalListAdapter<Episode*> * adapter= new SignalListAdapter<Episode*>(mCurrentSeason->episodes(),"episode");
     QQmlContext *ctxt = mViewer.rootContext();
-    ctxt->setContextProperty("seasonModel", &adapter);
+    ctxt->setContextProperty("seasonModel", adapter);
     ctxt->setContextProperty("season", mCurrentSeason);
     mViewer.setSource(QUrl("qrc:/view/SeasonDetails.qml"));
     QObject *seasonDetails = mViewer.rootObject();

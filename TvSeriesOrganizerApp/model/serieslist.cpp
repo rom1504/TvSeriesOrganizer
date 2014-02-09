@@ -16,7 +16,7 @@ Series * SeriesList::getSeries(int row) const
     return mSeries.get(row);
 }
 
-SignalList<Series *> & SeriesList::series()
+SignalList<Series *> * SeriesList::series()
 {
-    return mSeries;
+    return &mSeries;
 }
