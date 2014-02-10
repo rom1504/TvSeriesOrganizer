@@ -7,6 +7,7 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get remove g++ gcc g++-4.6 libstdc++6-4.6-dev
   - sudo apt-get install -qq g++-4.8 gcc-4.8
+  - sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch
   - sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
   - sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
   - CI_HOME=`pwd`
@@ -22,6 +23,9 @@ install:
   - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
   - sudo mv android-ndk-r9 ndk
   - sudo chmod -R a+rx /opt/
+  - ls -l /opt/sdk/build-tools/
+  - find /opt/sdk/ -name "aidl"
+  - file /opt/sdk/build-tools/19.0.1/aidl
   - cd $CI_HOME
   
 
