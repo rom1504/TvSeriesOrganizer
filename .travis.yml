@@ -16,22 +16,18 @@ install:
   - sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
   - sudo wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | sudo tar zx
   - sudo mv android-sdk-linux sdk
-  - sudo $ANDROID list sdk --extended -a
   - echo yes | sudo $ANDROID update sdk -a --filter android-18,platform-tool,build-tools-19.0.1,tools --no-ui --force
-  - sudo chmod -R a+rx /opt/
-  - /opt/sdk/tools/android list targets
   - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
   - sudo mv android-ndk-r9 ndk
   - sudo chmod -R a+rx /opt/
-  - ls -l /opt/sdk/build-tools/
-  - find /opt/sdk/ -name "aidl"
-  - file /opt/sdk/build-tools/19.0.1/aidl
   - cd $CI_HOME
   
 
 script:
   - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
   - ./travis_script.sh
+  - find -name "*.apk"
+  - find -name "TvSeriesOrganizer"
 
 env:
   - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
