@@ -4,10 +4,12 @@ CI_HOME=`pwd`
 export ANDROID_NDK_TOOLCHAIN_VERSION=4.8
 export ANDROID_NDK_TOOLS_PREFIX=arm-linux-androideabi
 export ANDROID_NDK_HOST=linux-x86_64
-export ANDROID_NDK_ROOT=$CI_HOME/android-ndk-r9
+export ANDROID_NDK_ROOT=/opt/ndk
+echo $ANDROID_NDK_ROOT
+ls $ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc
 export ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi
-export ANDROID_SDK_ROOT=$CI_HOME/android-sdk-linux
-export ANDROID_HOME=$CI_HOME/android-sdk-linux
+export ANDROID_SDK_ROOT=/opt/sdk
+export ANDROID_HOME=/opt/sdk
 export ANDROID_NDK_PLATFORM=android-18
 /opt/Qt/5.2.1/android_armv7/bin/qmake -r -spec android-g++
 make

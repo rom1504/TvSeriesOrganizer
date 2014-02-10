@@ -2,7 +2,7 @@ language: cpp
 compiler:
   - gcc
 install:
-  - export ANDROID="android-sdk-linux/tools/android"
+  - export ANDROID="/opt/sdk/tools/android"
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
 #   - sudo apt-add-repository ppa:beineri/opt-qt52 -y
   - sudo apt-get update -qq
@@ -24,14 +24,25 @@ install:
   - sudo mkdir -p /opt
   - cd /opt
   - sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
+  - sudo wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | sudo tar zx
+  - sudo mv android-sdk-linux sdk
+  - sudo $ANDROID list sdk --extended -a
+  - echo yes | sudo $ANDROID update sdk -a --filter android-18,platform-tool --no-ui --force
+  - ls
+  - sudo chmod -R a+rx /opt/
+  - /opt/sdk/tools/android list targets
+  - sudo wget http://dl.google.com/android/ndk/android-ndk-r9-linux-x86_64.tar.bz2 -O - | sudo tar --absolute-names  -jx
+  - ls
+  - sudo mv android-ndk-r9 ndk
+  - sudo chmod -R a+rx /opt/
+  - ls /opt/ndk
   - cd $CI_HOME
-  - wget http://dev.rom1504.fr/android-ndk-r9c_small.tgz -O - | tar -zx
-  - wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | tar zx
-  - $ANDROID list sdk --extended -a
-  - echo yes | $ANDROID update sdk -a --filter android-18 --filter platform-tool --no-ui --force
+  
 
 script:
   - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
+  - pwd
+  - echo $CI_HOME
   - ./travis_script.sh
 
 env:
