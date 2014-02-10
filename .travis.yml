@@ -33,4 +33,4 @@ env:
   
 
 after_success:
-  - if [ $TRAVIS_BRANCH = travisAndroid ] ; then ./travis_after_success.sh  ; fi
+  - if [ $TRAVIS_BRANCH = master ] ; then ./travis_after_success.sh  ; fi
