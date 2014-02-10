@@ -28,7 +28,8 @@ Application targetting desktop and mobile to organize your tv series
 Dependencies : gcc >=4.8, Qt >=5.1 
 
 ### Binary
- * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/bin/TvSeriesOrganizer.tgz
+ * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz
+ * android : http://download.rom1504.fr/TvSeriesOrganizer/android/TvSeriesOrganizer.apk
 
 ### Compilation
 Two possibilities :

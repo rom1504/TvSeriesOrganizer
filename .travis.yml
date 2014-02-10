@@ -2,20 +2,30 @@ language: cpp
 compiler:
   - gcc
 install:
+  - export ANDROID="/opt/sdk/tools/android"
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-add-repository ppa:beineri/opt-qt521 -y
   - sudo apt-get update -qq
   - sudo apt-get remove g++ gcc g++-4.6 libstdc++6-4.6-dev
   - sudo apt-get install -qq g++-4.8 gcc-4.8
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1
   - sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
   - sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
-  - sudo apt-get install -qq qt52declarative qt52graphicaleffects
-  - source /opt/qt52/bin/qt52-env.sh
+  - CI_HOME=`pwd`
+  - sudo mkdir -p /opt
+  - cd /opt
+  - sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
+  - sudo wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | sudo tar zx
+  - sudo mv android-sdk-linux sdk
+  - echo yes | sudo $ANDROID update sdk -a --filter android-18,platform-tool,build-tools-19.0.1,tools --no-ui --force
+  - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
+  - sudo mv android-ndk-r9 ndk
+  - sudo chmod -R a+rx /opt/
+  - cd $CI_HOME
+  
 
 script:
-  - qmake --version
-  - qmake
-  - make
+  - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
+  - ./travis_script.sh
 
 env:
   - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
@@ -23,11 +33,4 @@ env:
   
 
 after_success:
-  - mkdir -p ~/.ssh
-  - openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/id_rsa_deploy.enc -out ~/.ssh/id_rsa -d -a
-  - chmod 600 ~/.ssh/id_rsa
-  - ./deploy.sh
-  - sudo gcc usleep.c -o /bin/usleep
-  - sudo apt-get install -qq xvfb xautomation x11-utils x11-apps
-  - ./screenshot.sh
-  - ./sendScreenShot.sh
+  - if [ $TRAVIS_BRANCH = travisAndroid ] ; then ./travis_after_success.sh  ; fi
