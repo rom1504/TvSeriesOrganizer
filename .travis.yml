@@ -25,11 +25,10 @@ install:
   - cd /opt
   - sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
   - cd $CI_HOME
-  - wget http://dl.google.com/android/ndk/android-ndk-r9-linux-x86_64.tar.bz2 -O - | tar --absolute-names -jx
-  - ls
+  - wget http://dev.rom1504.fr/android-ndk-r9c_small.tgz -O - | tar -zx
   - wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | tar zx
   - $ANDROID list sdk --extended -a
-  - echo yes | $ANDROID update sdk -a --filter android-18 --no-ui --force
+  - echo yes | $ANDROID update sdk -a --filter android-18 --filter platform-tool --no-ui --force
 
 script:
   - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
