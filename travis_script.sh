@@ -13,7 +13,14 @@ export ANDROID_NDK_PLATFORM=android-18
 /opt/Qt/5.2.1/android_armv7/bin/qmake -r -spec android-g++
 make
 make install INSTALL_ROOT=$CI_HOME/android-build/
-/opt/Qt/5.2.1/android_armv7/bin/androiddeployqt --input ./TvSeriesOrganizerApp/android-libTvSeriesOrganizer.so-deployment-settings.json --output $CI_HOME/android-build/ --android-platform android-18 --release
+if [[ $MY_SECRET_ENV != "" ]]
+then
+	openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/android_release.keystore.enc -out .travis/android_release.keystore -d -a
+	openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/keystore_password.enc -out .travis/keystore_password -d -a
+	/opt/Qt/5.2.1/android_armv7/bin/androiddeployqt --input ./TvSeriesOrganizerApp/android-libTvSeriesOrganizer.so-deployment-settings.json --output $CI_HOME/android-build/ --android-platform android-18 --sign .travis/android_release.keystore TvSeries --storepass `cat .travis/keystore_password`
+else
+	/opt/Qt/5.2.1/android_armv7/bin/androiddeployqt --input ./TvSeriesOrganizerApp/android-libTvSeriesOrganizer.so-deployment-settings.json --output $CI_HOME/android-build/ --android-platform android-18 --release
+fi
 
 cd ../TvSeriesOrganizerLinux
 /opt/Qt/5.2.1/gcc_64/bin/qmake

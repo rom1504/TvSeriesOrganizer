@@ -1,4 +1,5 @@
 #!/bin/bash
+
 dir=`dirname $0`
 
 rm -rf $dir/id_rsa_deploy.enc
