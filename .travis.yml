@@ -7,7 +7,7 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get remove g++ gcc g++-4.6 libstdc++6-4.6-dev
   - sudo apt-get install -qq g++-4.8 gcc-4.8
-  - sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1
   - sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
   - sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
   - CI_HOME=`pwd`
@@ -39,12 +39,4 @@ env:
   
 
 after_success:
-  - if [ `git rev-parse --abbrev-ref HEAD` = master ] ; then exit 0 ; else exit 1 ; fi
-  - mkdir -p ~/.ssh
-  - openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/id_rsa_deploy.enc -out ~/.ssh/id_rsa -d -a
-  - chmod 600 ~/.ssh/id_rsa
-  - ./deploy.sh
-  - sudo gcc usleep.c -o /bin/usleep
-  - sudo apt-get install -qq xvfb xautomation x11-utils x11-apps
-  - ./screenshot.sh
-  - ./sendScreenShot.sh
+  - if [ `git rev-parse --abbrev-ref HEAD` = master ] ; then ./travis_after_success.sh  ; fi
