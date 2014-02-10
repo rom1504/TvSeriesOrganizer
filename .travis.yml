@@ -4,22 +4,11 @@ compiler:
 install:
   - export ANDROID="/opt/sdk/tools/android"
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-#   - sudo apt-add-repository ppa:beineri/opt-qt52 -y
   - sudo apt-get update -qq
   - sudo apt-get remove g++ gcc g++-4.6 libstdc++6-4.6-dev
   - sudo apt-get install -qq g++-4.8 gcc-4.8
   - sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
   - sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
-#   - sudo apt-get install -qq qt52declarative qt52graphicaleffects
-#   - wget http://dev.rom1504.fr/android_armv7.tgz
-#   - tar xzf android_armv7.tgz
-#   - sudo cp -R android_armv7/ /opt/
-#   - source /opt/qt52/bin/qt52-env.sh
-#   - git clone git://gitorious.org/qt/qttools.git
-#   - cd qttools/src/androiddeployqt/
-#   - qmake
-#   - make
-#   - sudo make install
   - CI_HOME=`pwd`
   - sudo mkdir -p /opt
   - cd /opt
@@ -27,22 +16,17 @@ install:
   - sudo wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | sudo tar zx
   - sudo mv android-sdk-linux sdk
   - sudo $ANDROID list sdk --extended -a
-  - echo yes | sudo $ANDROID update sdk -a --filter android-18,platform-tool --no-ui --force
-  - ls
+  - echo yes | sudo $ANDROID update sdk -a --filter android-18,platform-tool,build-tools-19.0.1,tools --no-ui --force
   - sudo chmod -R a+rx /opt/
   - /opt/sdk/tools/android list targets
-  - sudo wget http://dl.google.com/android/ndk/android-ndk-r9-linux-x86_64.tar.bz2 -O - | sudo tar --absolute-names  -jx
-  - ls
+  - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
   - sudo mv android-ndk-r9 ndk
   - sudo chmod -R a+rx /opt/
-  - ls /opt/ndk
   - cd $CI_HOME
   
 
 script:
   - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
-  - pwd
-  - echo $CI_HOME
   - ./travis_script.sh
 
 env:

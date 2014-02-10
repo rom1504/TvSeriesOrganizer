@@ -6,7 +6,6 @@ export ANDROID_NDK_TOOLS_PREFIX=arm-linux-androideabi
 export ANDROID_NDK_HOST=linux-x86_64
 export ANDROID_NDK_ROOT=/opt/ndk
 echo $ANDROID_NDK_ROOT
-ls $ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.8/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc
 export ANDROID_NDK_TOOLCHAIN_PREFIX=arm-linux-androideabi
 export ANDROID_SDK_ROOT=/opt/sdk
 export ANDROID_HOME=/opt/sdk
