@@ -26,8 +26,6 @@ install:
 script:
   - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
   - ./travis_script.sh
-  - find -name "*.apk"
-  - find -name "TvSeriesOrganizer"
 
 env:
   - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
@@ -35,4 +33,4 @@ env:
   
 
 after_success:
-  - if [ `git rev-parse --abbrev-ref HEAD` = master ] ; then ./travis_after_success.sh  ; fi
+  - if [ $TRAVIS_BRANCH = travisAndroid ] ; then ./travis_after_success.sh  ; fi
