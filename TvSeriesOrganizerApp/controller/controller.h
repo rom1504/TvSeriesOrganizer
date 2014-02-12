@@ -13,6 +13,8 @@ class Controller : public QObject
 public:
     explicit Controller(QObject *parent = 0);
 
+    static QString cachePath;
+
 
     void run();
 

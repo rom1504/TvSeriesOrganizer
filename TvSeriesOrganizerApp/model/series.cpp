@@ -7,6 +7,7 @@
 #include <QCoreApplication>
 
 #include "series.h"
+#include "controller/controller.h"
 
 
 
@@ -17,7 +18,7 @@ Series::Series(QString name, QUrl banner, QObject *parent) :
 
 Series::Series(QString name, QObject *parent) : QObject(parent),mName(name)
 {
-    loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mName+"_small.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+mName),std::bind(&Series::beginLoadingSeries,this,std::placeholders::_1));
+    loadLocallyOrRemotely(Controller::cachePath+"/"+mName+"_small.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+mName),std::bind(&Series::beginLoadingSeries,this,std::placeholders::_1));
 }
 
 void Series::beginLoadingSeries(QString xmlContent)
@@ -36,7 +37,7 @@ void Series::beginLoadingSeries(QString xmlContent)
         else if(root.tagName() == "Overview") setOverview(root.text());
         root = root.nextSiblingElement();
     }
-    loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mId+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/all/en.xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
+    loadLocallyOrRemotely(Controller::cachePath+"/"+mId+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/all/en.xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
 }
 
 void Series::setName(QString name)
@@ -160,7 +161,7 @@ void Series::loadSeries(QString xmlFileContent)
         }
         root = root.nextSiblingElement();
     }
-    loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
+    loadLocallyOrRemotely(Controller::cachePath+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
 }
 
 

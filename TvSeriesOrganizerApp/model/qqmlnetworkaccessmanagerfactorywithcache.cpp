@@ -2,6 +2,7 @@
 #include <QCoreApplication>
 
 #include "qqmlnetworkaccessmanagerfactorywithcache.h"
+#include "controller/controller.h"
 
 QQmlNetworkAccessManagerFactoryWithCache::QQmlNetworkAccessManagerFactoryWithCache()
 {
@@ -12,7 +13,7 @@ QNetworkAccessManager *	QQmlNetworkAccessManagerFactoryWithCache::create(QObject
 {
     QNetworkAccessManager * manager=new QNetworkAccessManager(parent);
     QNetworkDiskCache * cache=new QNetworkDiskCache(parent);
-    cache->setCacheDirectory(QCoreApplication::applicationDirPath());
+    cache->setCacheDirectory(Controller::cachePath);
     manager->setCache(cache);
     return manager;
 }

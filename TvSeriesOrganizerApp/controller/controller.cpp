@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QQuickItem>
 #include <QQmlEngine>
+#include <QDir>
 
 #include "controller.h"
 
@@ -9,14 +10,27 @@
 
 #include "model/qqmlnetworkaccessmanagerfactorywithcache.h"
 
+
+QString Controller::cachePath;
+
 Controller::Controller(QObject *parent) :
     QObject(parent)
 {
 
+#if defined(Q_OS_ANDROID)
+    QDir current=QDir::current();
+    current.cdUp();
+    Controller::cachePath=current.absolutePath()+"/cache";
+#else
+    Controller::cachePath=QCoreApplication::applicationDirPath();
+#endif
     Series * suits=new Series("suits");
     Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"),QUrl());
     season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
     season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
+
+
+
     season1->addEpisode(new Episode(3,"Third episode","Third description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
     season1->addEpisode(new Episode(4,"Fourth episode","Fourth description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
 
