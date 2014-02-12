@@ -24,6 +24,7 @@ public:
 
     void setName(QString name);
     void setOverview(QString overview);
+    void setPoster(QUrl poster);
 
     QString name() const;
     QUrl banner() const;

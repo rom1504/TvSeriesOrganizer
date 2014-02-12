@@ -37,7 +37,6 @@ void Series::beginLoadingSeries(QString xmlContent)
         root = root.nextSiblingElement();
     }
     loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mId+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/all/en.xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
-    loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
 }
 
 void Series::setName(QString name)
@@ -50,6 +49,13 @@ void Series::setOverview(QString overview)
 {
     mOverview=overview;
     emit overviewChanged();
+}
+
+
+void Series::setPoster(QUrl poster)
+{
+    mPoster=poster;
+    emit posterChanged();
 }
 
 void Series::loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load)
@@ -103,7 +109,7 @@ void Series::loadBanners(QString xmlFileContent)
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
-            if(bannerType=="poster" && language=="en") mPoster=QUrl("http://thetvdb.com/banners/"+bannerPath);
+            if(bannerType=="poster" && language=="en") setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
             else if(bannerType=="season")
             {
                 auto i=std::find_if(mSeasons.constBegin(),mSeasons.constEnd(),[season](Season * a){return a->number()==season;});
@@ -122,7 +128,7 @@ void Series::loadSeries(QString xmlFileContent)
     QDomElement root = doc.documentElement();
     root = root.firstChildElement();
     QString currentSeasonNumber="";
-    Season * currentSeason;
+    Season * currentSeason=nullptr;
     while(!root.isNull())
     {
         if(root.tagName() == "Episode")
@@ -154,6 +160,7 @@ void Series::loadSeries(QString xmlFileContent)
         }
         root = root.nextSiblingElement();
     }
+    loadLocallyOrRemotely(QCoreApplication::applicationDirPath()+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
 }
 
 
