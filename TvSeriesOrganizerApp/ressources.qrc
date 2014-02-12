@@ -14,5 +14,7 @@
         <file>images/episode.jpg</file>
         <file>images/season.jpg</file>
         <file>images/TvSeriesOrganizer.jpg</file>
+        <file>view/ShadowBorderRectangleText.qml</file>
+        <file>view/TitleImageDescriptionItem.qml</file>
     </qresource>
 </RCC>

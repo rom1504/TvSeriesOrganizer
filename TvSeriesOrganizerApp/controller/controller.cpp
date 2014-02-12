@@ -1,21 +1,24 @@
 #include <QQmlContext>
 #include <QDebug>
 #include <QQuickItem>
+#include <QQmlEngine>
 
 #include "controller.h"
 
 #include "adapter/signallistadapter.h"
+
+#include "model/qqmlnetworkaccessmanagerfactorywithcache.h"
 
 Controller::Controller(QObject *parent) :
     QObject(parent)
 {
 
     Series * suits=new Series("suits");
-    Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"));
-    season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg")));
-    season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg")));
-    season1->addEpisode(new Episode(3,"Third episode","Third description",QUrl("qrc:/images/episode.jpg")));
-    season1->addEpisode(new Episode(4,"Fourth episode","Fourth description",QUrl("qrc:/images/episode.jpg")));
+    Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"),QUrl());
+    season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
+    season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
+    season1->addEpisode(new Episode(3,"Third episode","Third description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
+    season1->addEpisode(new Episode(4,"Fourth episode","Fourth description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
 
     Series * series1=new Series("Series 1",QUrl("qrc:/images/series.jpg"));
     series1->addSeason(season1);
@@ -24,7 +27,8 @@ Controller::Controller(QObject *parent) :
     mSeriesList->addSeries(series1);
     mSeriesList->addSeries(suits);
     mSeriesList->addSeries(new Series("breaking bad"));
-
+    QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
+    mViewer.engine()->setNetworkAccessManagerFactory(factory);
 
     showSeriesList();
 }

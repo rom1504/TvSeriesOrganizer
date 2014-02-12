@@ -1,7 +1,7 @@
 #include "season.h"
 
-Season::Season(int number, QUrl banner, QObject *parent) :
-    QObject(parent),mNumber(number),mBanner(banner)
+Season::Season(int number, QUrl banner,QUrl poster, QObject *parent) :
+    QObject(parent),mNumber(number),mBanner(banner),mPoster(poster)
 {
 }
 
@@ -11,6 +11,18 @@ void Season::addEpisode(Episode * episode)
     mEpisodes.append(episode);
 }
 
+
+void Season::setBanner(QUrl banner)
+{
+    mBanner=banner;
+    emit bannerChanged();
+}
+
+void Season::setPoster(QUrl poster)
+{
+    mPoster=poster;
+    emit posterChanged();
+}
 
 Episode * Season::getEpisode(int row) const
 {
@@ -30,4 +42,9 @@ int Season::number() const
 QUrl Season::banner() const
 {
     return mBanner;
+}
+
+QUrl Season::poster() const
+{
+    return mPoster;
 }

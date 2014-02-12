@@ -4,11 +4,15 @@ SimplePage
 {
     id: episodeDetails
     imageSource:episode.banner
-    ShadowBorderRectangle
+    ShadowBorderRectangleText
     {
-        text:"Number: " + episode.number + "\nName: " + episode.name + "\nDescription: "+ episode.description+"\n"
-        width:parent.width-40
-        x:20
-        y:250
+        TitleImageDescriptionItem
+        {
+            title:episode.name
+            imageSource:episode.banner
+            description:"Episode number "+episode.number+"\n"+"First aired: "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+        }
+        width:episodeDetails.width-40
     }
+
 }

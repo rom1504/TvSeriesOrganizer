@@ -2,6 +2,11 @@ import QtQuick 2.0
 
 ShadowBorderRectangle
 {
-    text:"Season " + season.number
-    onClicked:listView.parent.seasonClicked(index)
+    onClicked:seriesDetails.seasonClicked(index)
+    TitleImageDescriptionItem
+    {
+        title:"Season " + season.number
+        imageSource:season.poster
+        description:""
+    }
 }

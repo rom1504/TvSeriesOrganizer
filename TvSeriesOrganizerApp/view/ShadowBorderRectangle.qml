@@ -7,7 +7,7 @@ Item
     id:root
     width: parent.width
     height:container.height
-    property alias text:insideText.text
+    default property alias children : insideItem.children
     signal clicked
 
     Item
@@ -20,7 +20,7 @@ Item
         Rectangle
         {
             id: rect
-            height: insideText.height +insideText.y+5
+            height: insideItem.childrenRect.height +insideItem.y+5
             width: parent.width-(2 * rectShadow.radius)
             color: "white"
             radius: 2
@@ -31,15 +31,12 @@ Item
                 color: "#EAEAEA"
             }
             anchors.centerIn: parent
-            Text
+            Item
             {
-                id:insideText
-                width:parent.width-5
-                wrapMode: Text.WordWrap
-                clip: true
+                id:insideItem
                 x: 5;
                 y: 5;
-                font.pointSize: 12
+                width:parent.width-5
             }
         }
     }

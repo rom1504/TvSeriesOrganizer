@@ -2,7 +2,7 @@
 
 binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
-export DISPLAY=:10
+export DISPLAY=:0
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
 sleep 3
 $binaryName  &
@@ -15,11 +15,11 @@ y=`echo "$info" | grep "Absolute upper-left Y" | cut -f7 -d' '`
 mkdir -p  screenshot/
 
 xwd -id $id | convert xwd:- screenshot/SeriesList.png
-xte -x $DISPLAY "mousemove $(($x+40)) $(($y+350))"
+xte -x $DISPLAY "mousemove $(($x+40)) $(($y+550))"
 xte -x $DISPLAY 'mouseclick 1'
 sleep 3
 xwd -id $id | convert xwd:- screenshot/SeriesDetails.png
-xte -x $DISPLAY "mousemove $(($x+40)) $(($y+300))"
+xte -x $DISPLAY "mousemove $(($x+40)) $(($y+400))"
 xte -x $DISPLAY 'mouseclick 1'
 sleep 3
 xwd -id $id | convert xwd:- screenshot/SeasonDetails.png

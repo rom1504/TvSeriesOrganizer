@@ -11,17 +11,18 @@ Application targetting desktop and mobile to organize your tv series
  * List of episodes organized by season and series
  * From  http://www.thetvdb.com/ database, download list of episode and season with :
    * banners
+   * poster
    * description
    * name
+ * Good looking interface
  
 ### Roadmap
  * Download subtitles from subtitles website
  * Track the episode and series you have seen
  * Recommend you some other series you might like
- * Description and pictures of episode, season, series
  * Actors of series
  * Calendar and airing times
- * Good looking interface
+ * Explore series
  
 ## Installation
 

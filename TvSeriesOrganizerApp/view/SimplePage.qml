@@ -8,19 +8,22 @@ Rectangle
     color: "#EAEAEA"
     signal back()
     property alias imageSource:image.source
+    default property alias children : insidePageItem.children
 
     Image
     {
         id:image
         x:0
         y:0
-        width: parent.width
-        height: 200
+        //sourceSize.width: parent.width
+        width:parent.width
+        height:width*sourceSize.height/sourceSize.width
     }
     Item
     {
+        id:backContainer
         x:parent.width-60
-        y:215
+        y:image.height+5
         width: backButton.width +5
         height: backButton.height +5
         Rectangle
@@ -40,5 +43,12 @@ Rectangle
             anchors.fill: parent
             onClicked: parent.parent.back()
         }
+    }
+    Item
+    {
+        id:insidePageItem
+        x:20
+        y:backContainer.height+backContainer.y+5
+        height:simplePage.height-backContainer.y-backContainer.height
     }
 }

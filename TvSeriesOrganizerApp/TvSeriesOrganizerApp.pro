@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     model/episode.cpp \
     controller/controller.cpp \
     model/series.cpp \
-    model/serieslist.cpp
+    model/serieslist.cpp \
+    model/qqmlnetworkaccessmanagerfactorywithcache.cpp
 
 # Installation path
 # target.path =
@@ -27,7 +28,8 @@ HEADERS += \
     model/episode.h \
     controller/controller.h \
     model/series.h \
-    model/serieslist.h
+    model/serieslist.h \
+    model/qqmlnetworkaccessmanagerfactorywithcache.h
 
 unix:!macx: LIBS += -L$$OUT_PWD/../SignalList/ -lSignalList
 
@@ -52,6 +54,8 @@ OTHER_FILES += \
     view/Series.qml \
     view/SeriesList.qml \
     view/SimplePage.qml \
-    view/ListPage.qml
+    view/ListPage.qml \
+    view/ShadowBorderRectangleText.qml \
+    view/TitleImageDescriptionItem.qml
 
 QT+= xml
