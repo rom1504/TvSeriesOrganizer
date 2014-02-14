@@ -169,6 +169,7 @@ void Series::loadSeries(QString xmlFileContent)
 void Series::addSeason(Season * season)
 {
     mSeasons.append(season);
+    emit seasonCountChanged();
 }
 
 
@@ -201,5 +202,11 @@ QUrl Series::banner() const
 QUrl Series::poster() const
 {
     return mPoster;
+}
+
+
+int Series::seasonCount() const
+{
+   return mSeasons.size();
 }
 

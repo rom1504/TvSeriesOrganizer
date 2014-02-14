@@ -2,9 +2,14 @@
 #define SEASON_H
 
 #include <QObject>
+#include <QAbstractItemModel>
+#include <QtQml>
+#include <QQmlEngine>
+
 
 #include "episode.h"
 #include "model/signallist.h"
+#include "adapter/signallistadapter.h"
 
 class Season : public QObject
 {
@@ -12,6 +17,8 @@ class Season : public QObject
     Q_PROPERTY(int number READ number NOTIFY numberChanged)
     Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
     Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
+    Q_PROPERTY(QAbstractItemModel * seasonModel READ seasonModel NOTIFY seasonModelChanged)
+
 public:
     explicit Season(int number,QUrl banner,QUrl poster,QObject *parent = 0);
     void addEpisode(Episode * episode);
@@ -19,6 +26,7 @@ public:
     int number() const;
     QUrl banner() const;
     QUrl poster() const;
+    QAbstractItemModel *seasonModel();
 
 
     void setBanner(QUrl banner);
@@ -30,6 +38,7 @@ signals:
     void numberChanged();
     void bannerChanged();
     void posterChanged();
+    void seasonModelChanged();
 
 public slots:
 
@@ -41,5 +50,6 @@ private:
 
 };
 Q_DECLARE_METATYPE (Season*)
+QML_DECLARE_TYPE (SignalListAdapter<Episode *>*)
 
 #endif // SEASON_H

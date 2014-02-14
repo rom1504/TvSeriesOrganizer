@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Rectangle
 {
@@ -19,6 +20,13 @@ Rectangle
         width:parent.width
         height:width*sourceSize.height/sourceSize.width
     }
+
+    BrightnessContrast {
+            anchors.fill: image
+            source: image
+            brightness: -0.3
+        }
+
     Item
     {
         id:backContainer

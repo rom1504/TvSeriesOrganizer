@@ -18,6 +18,13 @@ void Season::setBanner(QUrl banner)
     emit bannerChanged();
 }
 
+
+QAbstractItemModel *Season::seasonModel()
+{
+    return  new SignalListAdapter<Episode*>(episodes(),"episode");
+}
+
+
 void Season::setPoster(QUrl poster)
 {
     mPoster=poster;

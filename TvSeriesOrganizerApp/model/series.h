@@ -13,6 +13,7 @@ class Series : public QObject
     Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
     Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
     Q_PROPERTY(QUrl overview READ overview NOTIFY overviewChanged)
+    Q_PROPERTY(int seasonCount READ seasonCount NOTIFY seasonCountChanged)
 
 
 public:
@@ -30,12 +31,14 @@ public:
     QUrl banner() const;
     QUrl poster() const;
     QString overview() const;
+    int seasonCount() const;
 
 signals:
     void nameChanged();
     void bannerChanged();
     void posterChanged();
     void overviewChanged();
+    void seasonCountChanged();
 
 public slots:
 

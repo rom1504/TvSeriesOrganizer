@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.1
 
 ListPage
 {
@@ -7,4 +7,5 @@ ListPage
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
     pageModel: seriesList
     pageDelegate: Series{}
+
 }

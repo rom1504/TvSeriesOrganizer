@@ -29,13 +29,19 @@ private slots:
     void willShowEpisodeDetails(const int row);
     void showEpisodeDetails(const int row);
     void showSeasonDetails(const int row);
+    void changeCurrentSeason(int row);
+
+private:
+    void disconnectConnections();
 
 private:
     QtQuick2ApplicationViewer mViewer;
     SeriesList * mSeriesList;
     Series * mCurrentSeries;
     Season * mCurrentSeason;
+    int mCurrentSeasonRow;
     QTimer mTimer;
+    QList<QMetaObject::Connection> mConnections;
 
 };
 
