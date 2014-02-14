@@ -56,6 +56,8 @@ OTHER_FILES += \
     view/SimplePage.qml \
     view/ListPage.qml \
     view/ShadowBorderRectangleText.qml \
-    view/TitleImageDescriptionItem.qml
+    view/TitleImageDescriptionItem.qml \
+    view/TabPage.qml \
+    view/TabItem.qml
 
 QT+= xml

@@ -16,5 +16,7 @@
         <file>images/TvSeriesOrganizer.jpg</file>
         <file>view/ShadowBorderRectangleText.qml</file>
         <file>view/TitleImageDescriptionItem.qml</file>
+        <file>view/TabPage.qml</file>
+        <file>view/TabItem.qml</file>
     </qresource>
 </RCC>
