@@ -158,6 +158,7 @@ void Controller::showEpisodeDetails(const int row)
 {
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("episode",mCurrentSeason->getEpisode(row));
+    ctxt->setContextProperty("episodeIndex",row);
     mViewer.setSource(QUrl("qrc:/view/EpisodeDetails.qml"));
     QObject *episodeDetails = mViewer.rootObject();
     disconnectConnections();
