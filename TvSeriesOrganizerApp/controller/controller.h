@@ -11,9 +11,10 @@ class Controller : public QObject
 {
     Q_OBJECT
 public:
-    explicit Controller(QObject *parent = 0);
+    explicit Controller(bool demo,QObject *parent = 0);
 
     static QString cachePath;
+    static QString filesPath;
 
 
     void run();

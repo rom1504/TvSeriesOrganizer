@@ -17,8 +17,9 @@
 
 
 QString Controller::cachePath;
+QString Controller::filesPath;
 
-Controller::Controller(QObject *parent) :
+Controller::Controller(bool demo, QObject *parent) :
     QObject(parent)
 {
     qmlRegisterInterface<QAbstractItemModel >("QAbstractItemModel");
@@ -27,31 +28,26 @@ Controller::Controller(QObject *parent) :
     QDir current=QDir::current();
     current.cdUp();
     Controller::cachePath=current.absolutePath()+"/cache";
+    Controller::filesPath=current.absolutePath()+"/files";
 #else
     Controller::cachePath=QCoreApplication::applicationDirPath();
+    Controller::filesPath=QCoreApplication::applicationDirPath();
 #endif
-    Series * suits=new Series("suits");
-    Season * season1=new Season(1,QUrl("qrc:/images/season.jpg"),QUrl());
-    season1->addEpisode(new Episode(1,"First episode","First description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
-    season1->addEpisode(new Episode(2,"Second episode","Second description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
-
-
-
-    season1->addEpisode(new Episode(3,"Third episode","Third description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
-    season1->addEpisode(new Episode(4,"Fourth episode","Fourth description",QUrl("qrc:/images/episode.jpg"),QDate::fromString("2014/02/12","yyyy/MM/dd")));
-
-    Series * series1=new Series("Series 1",QUrl("qrc:/images/series.jpg"));
-    series1->addSeason(season1);
-
-    mSeriesList=new SeriesList;
-    mSeriesList->addSeries(series1);
-    mSeriesList->addSeries(suits);
-    mSeriesList->addSeries(new Series("breaking bad"));
-    mSeriesList->addSeries(new Series("the big bang theory"));
 
     QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
     mViewer.engine()->setNetworkAccessManagerFactory(factory);
 
+    if(demo)
+    {
+        QFile file(Controller::filesPath+"/mydemoseries.txt");
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        QTextStream flux(&file);
+        flux<<"suits\nbreaking bad\nthe big bang theory\n";
+        file.close();
+    }
+
+    mSeriesList=new SeriesList;
+    mSeriesList->loadSeries(demo ? Controller::filesPath+"/mydemoseries.txt" : Controller::filesPath+"/myseries.txt");
     showSeriesList();
 }
 

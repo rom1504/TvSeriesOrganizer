@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    Controller c;
+    Controller c(argc==2);
     c.run();
 
     return app.exec();

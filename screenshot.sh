@@ -2,10 +2,10 @@
 
 binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
-export DISPLAY=:0
+export DISPLAY=:10
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
 sleep 3
-$binaryName  &
+$binaryName demo  &
 sleep 7
 info=`xwininfo -display $DISPLAY -name $windowName`
 id=`echo "$info" | grep "Window id" | cut -f4 -d' '`

@@ -14,6 +14,8 @@ public:
     void addSeries(Series * series);
     Series *getSeries(int row) const;
     SignalList<Series *> *series();
+    void saveSeries(QString fileName) const;
+    void loadSeries(QString fileName);
 
 signals:
 
