@@ -12,7 +12,7 @@ class Series : public QObject
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
     Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
-    Q_PROPERTY(QUrl overview READ overview NOTIFY overviewChanged)
+    Q_PROPERTY(QString overview READ overview NOTIFY overviewChanged)
     Q_PROPERTY(int seasonCount READ seasonCount NOTIFY seasonCountChanged)
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
     Q_PROPERTY(QString network READ network NOTIFY networkChanged)
