@@ -35,6 +35,8 @@ void Series::beginLoadingSeries(QString xmlContent)
         else if(root.tagName() == "id") mId=root.text();
         else if(root.tagName() == "SeriesName") setName(root.text());
         else if(root.tagName() == "Overview") setOverview(root.text());
+        else if(root.tagName()=="FirstAired") mFirstAired=QDate::fromString(root.text(),"yyyy-MM-dd");
+        else if(root.tagName()=="Network") mNetwork=root.text();
         root = root.nextSiblingElement();
     }
     loadLocallyOrRemotely(Controller::cachePath+"/"+mId+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/all/en.xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
@@ -208,5 +210,16 @@ QUrl Series::poster() const
 int Series::seasonCount() const
 {
    return mSeasons.size();
+}
+
+
+QDate Series::firstAired() const
+{
+    return mFirstAired;
+}
+
+QString Series::network() const
+{
+    return mNetwork;
 }
 

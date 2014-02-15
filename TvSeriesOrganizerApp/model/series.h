@@ -14,6 +14,8 @@ class Series : public QObject
     Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
     Q_PROPERTY(QUrl overview READ overview NOTIFY overviewChanged)
     Q_PROPERTY(int seasonCount READ seasonCount NOTIFY seasonCountChanged)
+    Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
+    Q_PROPERTY(QString network READ network NOTIFY networkChanged)
 
 
 public:
@@ -32,6 +34,9 @@ public:
     QUrl poster() const;
     QString overview() const;
     int seasonCount() const;
+    QDate firstAired() const;
+    QString network() const;
+
 
 signals:
     void nameChanged();
@@ -39,6 +44,8 @@ signals:
     void posterChanged();
     void overviewChanged();
     void seasonCountChanged();
+    void firstAiredChanged();
+    void networkChanged();
 
 public slots:
 
@@ -55,6 +62,8 @@ private:
     SignalList<Season*> mSeasons;
     QString mId;
     QString mOverview;
+    QDate mFirstAired;
+    QString mNetwork;
 
 };
 Q_DECLARE_METATYPE (Series*)

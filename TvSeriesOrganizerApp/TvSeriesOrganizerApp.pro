@@ -58,6 +58,8 @@ OTHER_FILES += \
     view/ShadowBorderRectangleText.qml \
     view/TitleImageDescriptionItem.qml \
     view/TabPage.qml \
-    view/TabItem.qml
+    view/TabItem.qml \
+    view/Title.qml \
+    view/Description.qml
 
 QT+= xml

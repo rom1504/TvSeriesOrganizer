@@ -18,5 +18,7 @@
         <file>view/TitleImageDescriptionItem.qml</file>
         <file>view/TabPage.qml</file>
         <file>view/TabItem.qml</file>
+        <file>view/Title.qml</file>
+        <file>view/Description.qml</file>
     </qresource>
 </RCC>

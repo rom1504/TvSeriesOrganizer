@@ -7,6 +7,7 @@ SimplePage
     signal currentTabChanged(int currentIndex,Item currentItem)
     signal tabClicked(int index)
     property alias tabContentModel: listview.model
+    property var tabModel:tabContentModel
     property alias tabContentDelegate: listview.delegate
     property alias tabDelegate:tabList.delegate
     property alias tabBar:tabbar
@@ -29,7 +30,7 @@ SimplePage
             var newX=(listview.contentX/(tabPage.width-40)-1)*(tabPage.width-100)/3
             tabList.contentX=newX<0 || newX>(tabPage.width-100)/3*(count-3)? tabList.contentX : newX
             if(newX<0) marquer.x=newX+tabbar.width/3;
-            else if(newX>(tabPage.width-100)/3*(count-3)) marquer.x=newX+tabbar.width/3-(tabPage.width-100)/3*(count-3);
+            else if(newX>(tabPage.width-100)/3*(count-3) && count>2) marquer.x=newX+tabbar.width/3-(tabPage.width-100)/3*(count-3);
             else marquer.x=tabbar.width/3;
         }
         onCurrentIndexChanged:
@@ -50,7 +51,7 @@ SimplePage
         {
             id:tabList
             width:parent.width
-            model:tabContentModel
+            model:tabModel
             orientation:ListView.Horizontal
         }
 

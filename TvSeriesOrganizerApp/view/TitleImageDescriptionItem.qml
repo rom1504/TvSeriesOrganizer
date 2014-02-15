@@ -8,13 +8,9 @@ Item
     property alias imageSource:image.source
     property alias description:text2.text
 
-    Text
+    Title
     {
         id:text1
-        width:parent.width
-        font { family: 'arial'}
-        wrapMode: Text.WordWrap
-        font.pointSize: 20
     }
     Image
     {
@@ -24,15 +20,10 @@ Item
         width:100
         fillMode: Image.PreserveAspectCrop
     }
-    Text
+    Description
     {
         x:image.width+5
         y:text1.y+text1.height+5
         id:text2
-        width:parent.width-x
-        color: "#717171"
-        font { family: 'arial'}
-        wrapMode: Text.WordWrap
-        font.pointSize: 12
     }
 }
