@@ -27,30 +27,13 @@ Rectangle
             brightness: -0.3
         }
 
-    Item
+    Button
     {
         id:backContainer
         x:parent.width-60
         y:image.height+5
-        width: backButton.width +5
-        height: backButton.height +5
-        Rectangle
-        {
-            id: rectangle
-            border.color: "white"
-            anchors.fill: parent
-            Text
-            {
-                font.pointSize: 12
-                id: backButton
-                text: "Back"
-            }
-        }
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked: parent.parent.back()
-        }
+        onClicked:simplePage.back()
+        text:"Back"
     }
     Item
     {

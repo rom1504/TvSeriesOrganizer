@@ -1,4 +1,4 @@
-import QtQuick 2.1
+import QtQuick 2.2
 
 ListPage
 {
@@ -7,5 +7,25 @@ ListPage
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
     pageModel: seriesList
     pageDelegate: Series{}
+    signal addSeries(string seriesName)
 
+    LineInput
+    {
+        id:lineInput
+        x:40
+        y:-28
+        width:330
+        height:25
+        onAccepted: addSeries(lineInput.text)
+        hint:"Tv series name"
+    }
+
+    Button
+    {
+        id:add
+        x:380
+        y:-26
+        onClicked:lineInput.accepted()
+        text:"Add"
+    }
 }

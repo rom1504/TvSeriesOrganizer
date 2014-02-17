@@ -20,5 +20,7 @@
         <file>view/TabItem.qml</file>
         <file>view/Title.qml</file>
         <file>view/Description.qml</file>
+        <file>view/Button.qml</file>
+        <file>view/LineInput.qml</file>
     </qresource>
 </RCC>

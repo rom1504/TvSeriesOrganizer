@@ -60,6 +60,8 @@ OTHER_FILES += \
     view/TabPage.qml \
     view/TabItem.qml \
     view/Title.qml \
-    view/Description.qml
+    view/Description.qml \
+    view/Button.qml \
+    view/LineInput.qml
 
 QT+= xml

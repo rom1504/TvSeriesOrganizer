@@ -14,15 +14,18 @@ public:
     void addSeries(Series * series);
     Series *getSeries(int row) const;
     SignalList<Series *> *series();
-    void saveSeries(QString fileName) const;
-    void loadSeries(QString fileName);
+    void saveSeries(QString fileName="") const;
+    void loadSeries(QString fileName="");
+    void addSeries(const QString &seriesName);
 
 signals:
 
 public slots:
+    void addSaveSeries(const QString &seriesName);
 
 private:
     SignalList<Series*> mSeries;
+    QString mSaveFileName;
 
 };
 

@@ -22,6 +22,7 @@ public:
 signals:
 
 private slots:
+    void willDo(std::function<void(void)> f);
     void willShowSeriesList();
     void showSeriesList();
     void willShowSeriesDetails(const int row=-1);

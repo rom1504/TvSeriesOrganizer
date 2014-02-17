@@ -53,10 +53,15 @@ Controller::Controller(bool demo, QObject *parent) :
 
 void Controller::willShowSeriesList()
 {
+    willDo([this](){showSeriesList();});
+}
+
+void Controller::willDo(std::function<void(void)> f)
+{
     mTimer.setSingleShot(1);
     mTimer.setInterval(1);
     disconnectConnections();
-    mConnections<<connect(&mTimer,&QTimer::timeout,[this](){showSeriesList();});
+    mConnections<<connect(&mTimer,&QTimer::timeout,f);
     mTimer.start();
 }
 
@@ -70,16 +75,12 @@ void Controller::showSeriesList()
     QObject *seriesDetails = mViewer.rootObject();
     disconnectConnections();
     mConnections<<connect(seriesDetails, SIGNAL(seriesClicked(const int)),this,SLOT(willShowSeriesDetails(const int)));
+    mConnections<<connect(seriesDetails,SIGNAL(addSeries(const QString)),mSeriesList,SLOT(addSaveSeries(const QString)));
 }
-
 
 void Controller::willShowSeriesDetails(const int row)
 {
-    mTimer.setSingleShot(1);
-    mTimer.setInterval(1);
-    disconnectConnections();
-    mConnections<<connect(&mTimer,&QTimer::timeout,[this,row](){showSeriesDetails(row);});
-    mTimer.start();
+    willDo([this,row](){showSeriesDetails(row);});
 }
 
 void Controller::showSeriesDetails(const int row)
@@ -101,11 +102,7 @@ void Controller::showSeriesDetails(const int row)
 
 void Controller::willShowSeasonDetails(const int row)
 {
-    mTimer.setSingleShot(1);
-    mTimer.setInterval(1);
-    disconnectConnections();
-    mConnections<<connect(&mTimer,&QTimer::timeout,[this,row](){showSeasonDetails(row);});
-    mTimer.start();
+    willDo([this,row](){showSeasonDetails(row);});
 }
 
 void Controller::showSeasonDetails(const int row)
@@ -143,11 +140,7 @@ void Controller::disconnectConnections()
 
 void Controller::willShowEpisodeDetails(const int row)
 {
-    mTimer.setSingleShot(1);
-    mTimer.setInterval(1);
-    disconnectConnections();
-    mConnections<<connect(&mTimer,&QTimer::timeout,[this,row](){showEpisodeDetails(row);});
-    mTimer.start();
+    willDo([this,row](){showEpisodeDetails(row);});
 }
 
 void Controller::showEpisodeDetails(const int row)
