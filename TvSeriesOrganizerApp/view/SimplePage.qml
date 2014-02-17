@@ -10,13 +10,14 @@ Rectangle
     signal back()
     property alias imageSource:image.source
     default property alias children : insidePageItem.children
+    Keys.onSpacePressed: simplePage.back()
+    Keys.onBackPressed: simplePage.back()
 
     Image
     {
         id:image
         x:0
         y:0
-        //sourceSize.width: parent.width
         width:parent.width
         height:width*sourceSize.height/sourceSize.width
     }

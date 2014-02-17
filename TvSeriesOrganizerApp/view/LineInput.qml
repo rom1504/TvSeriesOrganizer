@@ -3,11 +3,12 @@ import QtQuick 2.0
 FocusScope {
     id: wrapper
 
-    property alias text: input.text
     property alias hint: hint.text
     property alias prefix: prefix.text
 
     signal accepted
+    signal returnText(string text)
+    onAccepted: {returnText(input.text);input.text="";}
 
     Rectangle {
         anchors.fill: parent

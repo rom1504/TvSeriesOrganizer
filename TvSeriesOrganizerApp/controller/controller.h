@@ -41,7 +41,9 @@ private:
     SeriesList * mSeriesList;
     Series * mCurrentSeries;
     Season * mCurrentSeason;
+    int mCurrentSeriesRow;
     int mCurrentSeasonRow;
+    int mCurrentEpisodeRow;
     QTimer mTimer;
     QList<QMetaObject::Connection> mConnections;
 

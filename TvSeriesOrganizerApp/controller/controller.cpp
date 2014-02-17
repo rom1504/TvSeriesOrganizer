@@ -20,7 +20,7 @@ QString Controller::cachePath;
 QString Controller::filesPath;
 
 Controller::Controller(bool demo, QObject *parent) :
-    QObject(parent)
+    QObject(parent),mCurrentSeriesRow(0)
 {
     qmlRegisterInterface<QAbstractItemModel >("QAbstractItemModel");
 
@@ -69,8 +69,11 @@ void Controller::showSeriesList()
 {
     SignalListAdapter<Series*> * adapter=new SignalListAdapter<Series*>(mSeriesList->series(),"series");
 
+    mCurrentSeasonRow=0;
+    mCurrentEpisodeRow=0;
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("seriesList", adapter);
+    ctxt->setContextProperty("seriesIndex",mCurrentSeriesRow);
     mViewer.setSource(QUrl("qrc:/view/SeriesList.qml"));
     QObject *seriesDetails = mViewer.rootObject();
     disconnectConnections();
@@ -85,13 +88,20 @@ void Controller::willShowSeriesDetails(const int row)
 
 void Controller::showSeriesDetails(const int row)
 {
-    if(row!=-1) mCurrentSeries=mSeriesList->getSeries(row);
+    if(row!=-1)
+    {
+        mCurrentSeries=mSeriesList->getSeries(row);
+        mCurrentSeriesRow=row;
+        mCurrentSeasonRow=0;
+    }
+    mCurrentEpisodeRow=0;
     SignalListAdapter<Season*> * adapter=new SignalListAdapter<Season*>(mCurrentSeries->seasons(),"season");
 
 
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("seriesModel", adapter);
     ctxt->setContextProperty("series", mCurrentSeries);
+    ctxt->setContextProperty("seasonIndex",mCurrentSeasonRow);
     mViewer.setSource(QUrl("qrc:/view/SeriesDetails.qml"));
     QObject *seriesDetails = mViewer.rootObject();
     disconnectConnections();
@@ -111,12 +121,14 @@ void Controller::showSeasonDetails(const int row)
     {
         mCurrentSeason=mCurrentSeries->getSeason(row);
         mCurrentSeasonRow=row;
+        mCurrentEpisodeRow=0;
     }
     SignalListAdapter<Episode*> * adapter= new SignalListAdapter<Episode*>(mCurrentSeason->episodes(),"episode");
     QQmlContext *ctxt = mViewer.rootContext();
 
     ctxt->setContextProperty("seasonModel", adapter);
     ctxt->setContextProperty("seasonIndex",mCurrentSeasonRow);
+    ctxt->setContextProperty("episodeIndex",mCurrentEpisodeRow);
     ctxt->setContextProperty("season", mCurrentSeason);
     mViewer.setSource(QUrl("qrc:/view/SeasonDetails.qml"));
     QObject *seasonDetails = mViewer.rootObject();
@@ -145,6 +157,7 @@ void Controller::willShowEpisodeDetails(const int row)
 
 void Controller::showEpisodeDetails(const int row)
 {
+    mCurrentEpisodeRow=row;
     QQmlContext *ctxt = mViewer.rootContext();
     ctxt->setContextProperty("episode",mCurrentSeason->getEpisode(row));
     ctxt->setContextProperty("episodeIndex",row);

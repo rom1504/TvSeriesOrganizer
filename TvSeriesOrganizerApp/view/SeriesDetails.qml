@@ -7,6 +7,7 @@ TabPage
     id:seriesDetails
     imageSource:series.banner
     signal seasonClicked(int seasonNumber)
+    property int listBeginIndex:seasonIndex
     tabContentModel: VisualItemModel
     {
         ListView
@@ -15,6 +16,12 @@ TabPage
             model:seriesModel
             width: seriesDetails.width-40
             height: seriesDetails.height
+            currentIndex: listBeginIndex
+
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            id:listview
+            Keys.onDownPressed: listview.incrementCurrentIndex()
+            Keys.onUpPressed: listview.decrementCurrentIndex()
         }
         Item
         {

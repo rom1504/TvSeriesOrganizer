@@ -22,6 +22,7 @@ SimplePage
         height: tabPage.height
         Component.onCompleted: {positionViewAtIndex(beginIndex,ListView.Center); contentXChanged();}
         clip: true
+        focus:true
         highlightRangeMode:ListView.StrictlyEnforceRange
         orientation:ListView.Horizontal
         snapMode:ListView.SnapOneItem
@@ -38,6 +39,8 @@ SimplePage
             tabPage.currentTabChanged(listview.currentIndex,listview.currentItem)
             tabChanged(listview.currentIndex)
         }
+        Keys.onLeftPressed: {if(currentIndex>0) {positionViewAtIndex(currentIndex-1,ListView.Center); contentXChanged();}}
+        Keys.onRightPressed: {if(currentIndex<count-1) {positionViewAtIndex(currentIndex+1,ListView.Center); contentXChanged();}}
     }
     Item
     {

@@ -7,6 +7,7 @@ ListPage
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
     pageModel: seriesList
     pageDelegate: Series{}
+    beginIndex: seriesIndex
     signal addSeries(string seriesName)
 
     LineInput
@@ -16,7 +17,7 @@ ListPage
         y:-28
         width:330
         height:25
-        onAccepted: addSeries(lineInput.text)
+        onReturnText: addSeries(text)
         hint:"Tv series name"
     }
 

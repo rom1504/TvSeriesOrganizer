@@ -9,6 +9,7 @@ TabPage
     onTabChanged: seasonChanged(column)
     onCurrentTabChanged:seasonDetails.imageSource=currentItem.myData.banner;
     tabContentModel: seriesModel
+    property int listBeginIndex:episodeIndex
     tabContentDelegate:
         ListView
         {
@@ -17,6 +18,11 @@ TabPage
             model:season.seasonModel
             width: seasonDetails.width-40
             height: parent.height
+            currentIndex: listBeginIndex
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            id:listview
+            Keys.onDownPressed: listview.incrementCurrentIndex()
+            Keys.onUpPressed: listview.decrementCurrentIndex()
         }
     tabDelegate:TabItem{tabText:"Season "+season.number;tabPage:seasonDetails}
 

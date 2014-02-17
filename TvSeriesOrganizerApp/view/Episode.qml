@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 ShadowBorderRectangle
 {
+    Keys.onReturnPressed: seasonDetails.episodeClicked(index)
     onClicked: seasonDetails.episodeClicked(index)
     TitleImageDescriptionItem
     {
