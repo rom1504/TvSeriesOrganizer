@@ -17,11 +17,13 @@ public:
     void saveSeries(QString fileName="") const;
     void loadSeries(QString fileName="");
     void addSeries(const QString &seriesName);
+    void removeSeries(int row);
 
 signals:
 
 public slots:
     void addSaveSeries(const QString &seriesName);
+    void removeSaveSeries(int row);
 
 private:
     SignalList<Series*> mSeries;

@@ -7,8 +7,11 @@ Item
     id:root
     width: parent.width
     height:container.height
+    property alias mouseX : mouseArea.mouseX
+    property alias mouseY : mouseArea.mouseY
     default property alias children : insideItem.children
     signal clicked
+    signal pressAndHold
 
     Item
     {
@@ -56,9 +59,11 @@ Item
 
     MouseArea
     {
+        propagateComposedEvents:true
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
         onClicked: parent.clicked()
+        onPressAndHold:parent.pressAndHold()
     }
 }

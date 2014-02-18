@@ -16,6 +16,19 @@ Series * SeriesList::getSeries(int row) const
     return mSeries.get(row);
 }
 
+
+void SeriesList::removeSeries(int row)
+{
+    mSeries.remove(row);
+}
+
+void SeriesList::removeSaveSeries(int row)
+{
+    removeSeries(row);
+    saveSeries();
+}
+
+
 SignalList<Series *> * SeriesList::series()
 {
     return &mSeries;

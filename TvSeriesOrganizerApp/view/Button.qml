@@ -3,8 +3,8 @@ import QtQuick 2.0
 Item
 {
     id:container
-    width: button.width +5
-    height: button.height +5
+    width: button.contentWidth +5
+    height: button.contentHeight +5
     signal clicked
     property alias text:button.text
     Rectangle
@@ -20,8 +20,10 @@ Item
     }
     MouseArea
     {
+        hoverEnabled:true
         id:area
         anchors.fill: parent
         onClicked: container.clicked()
+        preventStealing:true
     }
 }

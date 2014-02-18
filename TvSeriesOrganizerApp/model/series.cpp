@@ -112,12 +112,15 @@ void Series::loadBanners(QString xmlFileContent)
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
-            if(bannerType=="poster" && language=="en") setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
-            else if(bannerType=="season")
+            if(language=="en")
             {
-                auto i=std::find_if(mSeasons.constBegin(),mSeasons.constEnd(),[season](Season * a){return a->number()==season;});
-                if(bannerType2=="seasonwide") (*i)->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
-                else if(bannerType2=="season") (*i)->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                if(bannerType=="poster" && !mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                else if(bannerType=="season")
+                {
+                    auto i=std::find_if(mSeasons.constBegin(),mSeasons.constEnd(),[season](Season * a){return a->number()==season;});
+                    if(bannerType2=="seasonwide") (*i)->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    else if(bannerType2=="season") (*i)->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                }
             }
         }
         root = root.nextSiblingElement();

@@ -78,6 +78,7 @@ void Controller::showSeriesList()
     QObject *seriesDetails = mViewer.rootObject();
     disconnectConnections();
     mConnections<<connect(seriesDetails, SIGNAL(seriesClicked(const int)),this,SLOT(willShowSeriesDetails(const int)));
+    mConnections<<connect(seriesDetails, SIGNAL(removeSeries(const int)),mSeriesList,SLOT(removeSaveSeries(const int)));
     mConnections<<connect(seriesDetails,SIGNAL(addSeries(const QString)),mSeriesList,SLOT(addSaveSeries(const QString)));
 }
 

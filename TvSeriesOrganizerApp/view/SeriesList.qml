@@ -4,6 +4,7 @@ ListPage
 {
     id:seriesListPage
     signal seriesClicked(int seriesNumber)
+    signal removeSeries(int seriesNumber)
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
     pageModel: seriesList
     pageDelegate: Series{}
