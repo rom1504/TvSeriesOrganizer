@@ -5,6 +5,8 @@ TabPage
 {
     id:episodeDetails
     imageSource:episode.banner
+    signal episodeChanged(int column)
+    onTabChanged: episodeChanged(column)
     onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner;
     tabContentModel: seasonModel
     tabContentDelegate:

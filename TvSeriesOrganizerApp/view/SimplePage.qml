@@ -1,18 +1,19 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
+
 Rectangle
 {
     id: simplePage
-    width: 580
-    height: 880
+    width: awidth
+    height: aheight
     color: "#EAEAEA"
     signal back()
     property alias imageSource:image.source
     default property alias children : insidePageItem.children
-    Keys.onSpacePressed: simplePage.back()
+    property alias buttonBarHeight:backContainer.height
     Keys.onBackPressed: simplePage.back()
-
+    Keys.onPressed: if(event.key === Qt.Key_Backspace) simplePage.back()
     Image
     {
         id:image

@@ -6,4 +6,5 @@ Text
     font { family: 'arial'}
     wrapMode: Text.WordWrap
     font.pointSize: 20
+    height:contentHeight
 }

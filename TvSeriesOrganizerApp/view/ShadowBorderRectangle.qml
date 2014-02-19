@@ -59,7 +59,6 @@ Item
 
     MouseArea
     {
-        propagateComposedEvents:true
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true

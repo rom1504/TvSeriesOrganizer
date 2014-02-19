@@ -32,6 +32,7 @@ private slots:
     void showEpisodeDetails(const int row);
     void showSeasonDetails(const int row);
     void changeCurrentSeason(int row);
+    void changeCurrentEpisode(int row);
 
 private:
     void disconnectConnections();

@@ -40,7 +40,7 @@ TabPage
                     id:labels
                     font.family: 'arial'
                     wrapMode: Text.WordWrap
-                    font.pointSize: 12
+                    font.pointSize:  12
                     y:text3.y+text3.height+5
                     text:"Network: \nFirst aired: "
                 }

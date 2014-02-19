@@ -36,6 +36,15 @@ Controller::Controller(bool demo, QObject *parent) :
 
     QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
     mViewer.engine()->setNetworkAccessManagerFactory(factory);
+    mViewer.showExpanded();
+    QQmlContext *ctxt = mViewer.rootContext();
+#if defined(Q_OS_ANDROID)
+    ctxt->setContextProperty("awidth",mViewer.width());
+    ctxt->setContextProperty("aheight",mViewer.height());
+#else
+    ctxt->setContextProperty("awidth",580);
+    ctxt->setContextProperty("aheight",880);
+#endif
 
     if(demo)
     {
@@ -166,6 +175,13 @@ void Controller::showEpisodeDetails(const int row)
     QObject *episodeDetails = mViewer.rootObject();
     disconnectConnections();
     mConnections<<connect(episodeDetails,SIGNAL(back()),this,SLOT(willShowSeasonDetails()));
+    mConnections<<connect(episodeDetails,SIGNAL(episodeChanged(int)),this,SLOT(changeCurrentEpisode(int)));
+}
+
+
+void Controller::changeCurrentEpisode(int row)
+{
+    mCurrentEpisodeRow=row;
 }
 
 void Controller::run()

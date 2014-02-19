@@ -15,12 +15,13 @@ SimplePage
 
     onTabClicked: {listview.positionViewAtIndex(index,ListView.Center);listview.contentXChanged();}
 
+
     ListView
     {
         id:listview
         width: tabPage.width-40
         height: tabPage.height
-        Component.onCompleted: {positionViewAtIndex(beginIndex,ListView.Center); contentXChanged();}
+        Component.onCompleted: positionViewAtIndex(beginIndex,ListView.Center);
         clip: true
         focus:true
         highlightRangeMode:ListView.StrictlyEnforceRange
@@ -28,11 +29,14 @@ SimplePage
         snapMode:ListView.SnapOneItem
         onContentXChanged:
         {
-            var newX=(listview.contentX/(tabPage.width-40)-1)*(tabPage.width-100)/3
-            tabList.contentX=newX<0 || newX>(tabPage.width-100)/3*(count-3)? tabList.contentX : newX
+            var newX=(listview.contentX/(tabPage.width-40)-1)*tabbar.width/3
             if(newX<0) marquer.x=newX+tabbar.width/3;
-            else if(newX>(tabPage.width-100)/3*(count-3) && count>2) marquer.x=newX+tabbar.width/3-(tabPage.width-100)/3*(count-3);
-            else marquer.x=tabbar.width/3;
+            else if(newX>tabbar.width/3*(count-3) && count>2) marquer.x=newX+tabbar.width/3-tabbar.width/3*(count-3);
+            else
+            {
+                marquer.x=tabbar.width/3;
+                tabList.contentX=newX
+            }
         }
         onCurrentIndexChanged:
         {
@@ -47,25 +51,41 @@ SimplePage
         id:tabbar
         height:50
         width:tabPage.width-100
+
         clip:true
-        y:-70
+        y:-10-buttonBarHeight-citem.height
 
-        ListView
+        Column
         {
-            id:tabList
+            id:citem
+            spacing: 2
             width:parent.width
-            model:tabModel
-            orientation:ListView.Horizontal
-        }
+            ListView
+            {
+                Component.onCompleted: positionViewAtIndex(beginIndex==count-1 && count>2 ? beginIndex-1 : beginIndex,ListView.Center);
+                snapMode:ListView.SnapOneItem
 
-        Rectangle
-        {
-            id:marquer
-            x:tabbar.width/3
-            width:tabbar.width/3
-            height:8
-            y:tabbar.height-21
-            color:"#EAEAEA"
+                highlightRangeMode:ListView.StrictlyEnforceRange
+                height:contentItem.childrenRect.height
+                id:tabList
+                width:parent.width
+                model:tabModel
+                orientation:ListView.Horizontal
+            }
+
+            Rectangle
+            {
+                id:marquer
+                width:tabbar.width/3
+                height:5
+                color:"#EAEAEA"
+                Component.onCompleted:
+                {
+                    if(beginIndex==0) x=0;
+                    else if(beginIndex==tabList.count-1) x=2*tabbar.width/3;
+                    else x=tabbar.width/3;
+                }
+            }
         }
     }
 

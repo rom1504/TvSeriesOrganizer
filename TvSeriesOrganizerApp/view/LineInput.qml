@@ -21,7 +21,7 @@ FocusScope {
             anchors { fill: parent; leftMargin: 14 }
             verticalAlignment: Text.AlignVCenter
             text: "Enter word"
-            font.pixelSize: 16
+            font.pointSize: 12
             color: "#707070"
             opacity: input.length ? 0 : 1
         }
@@ -30,7 +30,7 @@ FocusScope {
             id: prefix
             anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 16
+            font.pointSize: 12
             color: "#707070"
             opacity: !hint.opacity
         }
@@ -40,7 +40,7 @@ FocusScope {
             focus: true
             anchors { left: prefix.right; right: parent.right; top: parent.top; bottom: parent.bottom }
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 16
+            font.pointSize: 12
             color: "#707070"
             onAccepted: wrapper.accepted()
         }
