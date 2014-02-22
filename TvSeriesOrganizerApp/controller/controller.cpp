@@ -186,5 +186,5 @@ void Controller::changeCurrentEpisode(int row)
 
 void Controller::run()
 {
-    mViewer.showExpanded();
+
 }

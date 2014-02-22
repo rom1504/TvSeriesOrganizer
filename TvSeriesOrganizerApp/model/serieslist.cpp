@@ -59,9 +59,9 @@ void SeriesList::saveSeries(QString fileName) const
 void SeriesList::loadSeries(QString fileName)
 {
     fileName=fileName=="" ? mSaveFileName : fileName;
+    mSaveFileName=fileName;
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
     while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed()));
     file.close();
-    mSaveFileName=fileName;
 }
