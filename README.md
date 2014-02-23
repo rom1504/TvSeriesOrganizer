@@ -3,7 +3,7 @@ Application targetting desktop and mobile to organize your tv series
 
 [![Build Status](https://travis-ci.org/rom1504/TvSeriesOrganizer.png?branch=master)](https://travis-ci.org/rom1504/TvSeriesOrganizer)
 
-[Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot.html)
+[Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot.php)
 
 
 ## Features
