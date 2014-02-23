@@ -19,7 +19,7 @@
 QString Controller::cachePath;
 QString Controller::filesPath;
 
-Controller::Controller(bool demo, QObject *parent) :
+Controller::Controller(QObject *parent) :
     QObject(parent),mCurrentSeriesRow(0)
 {
     qmlRegisterInterface<QAbstractItemModel >("QAbstractItemModel");
@@ -46,17 +46,8 @@ Controller::Controller(bool demo, QObject *parent) :
     ctxt->setContextProperty("aheight",880);
 #endif
 
-    if(demo)
-    {
-        QFile file(Controller::filesPath+"/mydemoseries.txt");
-        file.open(QIODevice::WriteOnly | QIODevice::Text);
-        QTextStream flux(&file);
-        flux<<"suits\nbreaking bad\nthe big bang theory\n";
-        file.close();
-    }
-
     mSeriesList=new SeriesList;
-    mSeriesList->loadSeries(demo ? Controller::filesPath+"/mydemoseries.txt" : Controller::filesPath+"/myseries.txt");
+    mSeriesList->loadSeries(Controller::filesPath+"/myseries.txt");
     showSeriesList();
 }
 
