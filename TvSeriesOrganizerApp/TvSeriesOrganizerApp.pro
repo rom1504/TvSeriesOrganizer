@@ -62,6 +62,7 @@ OTHER_FILES += \
     view/Title.qml \
     view/Description.qml \
     view/Button.qml \
-    view/LineInput.qml
+    view/LineInput.qml \
+    view/FixedSizeShadowBorderItem.qml
 
 QT+= xml

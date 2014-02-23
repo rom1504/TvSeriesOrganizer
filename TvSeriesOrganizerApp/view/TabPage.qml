@@ -12,12 +12,31 @@ SimplePage
     property alias tabDelegate:tabList.delegate
     property alias tabBar:tabbar
     property int beginIndex
+    function goRight() {listview.goRight()}
+    function goLeft() {listview.goLeft()}
+
 
     onTabClicked: {listview.positionViewAtIndex(index,ListView.Center);listview.contentXChanged();}
 
 
     ListView
     {
+        function goLeft()
+        {
+            if(currentIndex>0)
+            {
+                positionViewAtIndex(currentIndex-1,ListView.Center);
+                contentXChanged();
+            }
+        }
+        function goRight()
+        {
+            if(currentIndex<count-1)
+            {
+                positionViewAtIndex(currentIndex+1,ListView.Center);
+                contentXChanged();
+            }
+        }
         id:listview
         width: tabPage.width-40
         height: tabPage.height
@@ -43,8 +62,8 @@ SimplePage
             tabPage.currentTabChanged(listview.currentIndex,listview.currentItem)
             tabChanged(listview.currentIndex)
         }
-        Keys.onLeftPressed: {if(currentIndex>0) {positionViewAtIndex(currentIndex-1,ListView.Center); contentXChanged();}}
-        Keys.onRightPressed: {if(currentIndex<count-1) {positionViewAtIndex(currentIndex+1,ListView.Center); contentXChanged();}}
+        Keys.onLeftPressed: goLeft()
+        Keys.onRightPressed: goRight()
     }
     Item
     {

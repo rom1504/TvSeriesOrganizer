@@ -16,6 +16,8 @@ class Series : public QObject
     Q_PROPERTY(int seasonCount READ seasonCount NOTIFY seasonCountChanged)
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
     Q_PROPERTY(QString network READ network NOTIFY networkChanged)
+    Q_PROPERTY(QAbstractItemModel * fanArts READ fanArts NOTIFY fanArtsChanged)
+    Q_PROPERTY(QAbstractItemModel * posters READ posters NOTIFY postersChanged)
 
 
 public:
@@ -36,6 +38,8 @@ public:
     int seasonCount() const;
     QDate firstAired() const;
     QString network() const;
+    QAbstractItemModel * fanArts();
+    QAbstractItemModel * posters();
 
 
 signals:
@@ -46,6 +50,8 @@ signals:
     void seasonCountChanged();
     void firstAiredChanged();
     void networkChanged();
+    void fanArtsChanged();
+    void postersChanged();
 
 public slots:
 
@@ -64,6 +70,8 @@ private:
     QString mOverview;
     QDate mFirstAired;
     QString mNetwork;
+    SignalList<QUrl> mFanArts;
+    SignalList<QUrl> mPosters;
 
 };
 Q_DECLARE_METATYPE (Series*)

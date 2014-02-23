@@ -102,25 +102,32 @@ void Series::loadBanners(QString xmlFileContent)
             QString bannerType2;
             QString bannerPath;
             QString language;
+            QString thumbnailPath;
             int season;
             while(!bannerElement.isNull())
             {
                 if(bannerElement.tagName()=="BannerType") bannerType=bannerElement.text();
                 else if(bannerElement.tagName()=="BannerType2") bannerType2=bannerElement.text();
                 else if(bannerElement.tagName()=="BannerPath") bannerPath=bannerElement.text();
+                else if(bannerElement.tagName()=="ThumbnailPath") thumbnailPath=bannerElement.text();
                 else if(bannerElement.tagName()=="Season") season=bannerElement.text().toInt();
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
             if(language=="en")
             {
-                if(bannerType=="poster" && !mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                if(bannerType=="poster")
+                {
+                    if(!mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    mPosters.append(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                }
                 else if(bannerType=="season")
                 {
                     auto i=std::find_if(mSeasons.constBegin(),mSeasons.constEnd(),[season](Season * a){return a->number()==season;});
                     if(bannerType2=="seasonwide") (*i)->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
                     else if(bannerType2=="season") (*i)->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
                 }
+                else if(bannerType=="fanart") mFanArts.append(QUrl("http://thetvdb.com/banners/"+thumbnailPath));
             }
         }
         root = root.nextSiblingElement();
@@ -191,6 +198,17 @@ SignalList<Season *> *Series::seasons()
 QString Series::overview() const
 {
     return mOverview;
+}
+
+QAbstractItemModel *Series::fanArts()
+{
+    return new SignalListAdapter<QUrl>(&mFanArts,"fanArt");
+}
+
+
+QAbstractItemModel * Series::posters()
+{
+    return new SignalListAdapter<QUrl>(&mPosters,"poster");
 }
 
 QString Series::name() const

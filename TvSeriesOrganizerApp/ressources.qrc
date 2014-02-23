@@ -22,5 +22,6 @@
         <file>view/Description.qml</file>
         <file>view/Button.qml</file>
         <file>view/LineInput.qml</file>
+        <file>view/FixedSizeShadowBorderItem.qml</file>
     </qresource>
 </RCC>

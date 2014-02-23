@@ -1,5 +1,6 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.1
+import QtGraphicalEffects 1.0
 
 
 TabPage
@@ -70,8 +71,68 @@ TabPage
                 }
             }
         }
+        GridView
+        {
+            id:fanArtsView
+            width: seriesDetails.width-40
+            height:seriesDetails.height
+            cellWidth:width/2
+            cellHeight: 1080/1920*cellWidth
+            model:series.fanArts
+
+            property double itemMargin: cellWidth*0.03
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            Keys.onDownPressed: moveCurrentIndexDown()
+            Keys.onUpPressed: moveCurrentIndexUp()
+            Keys.onLeftPressed: seriesDetails.goLeft()
+            Keys.onRightPressed: seriesDetails.goRight()
+
+            delegate:
+                FixedSizeShadowBorderItem
+                {
+                    width:fanArtsView.cellWidth-fanArtsView.itemMargin
+                    height:fanArtsView.cellHeight-fanArtsView.itemMargin
+                    Image
+                    {
+                        id:fanArtImage
+                        width:parent.width
+                        height:parent.height
+                        source:fanArt
+                    }
+                }
+        }
+        GridView
+        {
+            id:postersView
+            width: seriesDetails.width-40
+            height:seriesDetails.height
+            cellWidth:width/3
+            cellHeight: 1000/680*cellWidth
+            model:series.posters
+
+            property double itemMargin: cellWidth*0.03
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            Keys.onDownPressed: moveCurrentIndexDown()
+            Keys.onUpPressed: moveCurrentIndexUp()
+            Keys.onLeftPressed: seriesDetails.goLeft()
+            Keys.onRightPressed: seriesDetails.goRight()
+
+            delegate:
+                FixedSizeShadowBorderItem
+                {
+                    width:postersView.cellWidth-postersView.itemMargin
+                    height:postersView.cellHeight-postersView.itemMargin
+                    Image
+                    {
+                        id:posterImage
+                        width:parent.width
+                        height:parent.height
+                        source:poster
+                    }
+                }
+        }
     }
-    tabModel:["Seasons","Info"]
+    tabModel:["Seasons","Info","Fan arts","Posters"]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesDetails}
 
     beginIndex:0
