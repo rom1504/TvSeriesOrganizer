@@ -42,7 +42,8 @@ unix:!macx: PRE_TARGETDEPS += $$OUT_PWD/../SignalList/libSignalList.a
 QMAKE_CXXFLAGS += -std=c++11
 
 RESOURCES += \
-    ressources.qrc
+    resources.qrc \
+    view/GeneralQmlItems/GeneralQmlItemsResources.qrc
 
 OTHER_FILES += \
     view/Episode.qml \
@@ -63,6 +64,18 @@ OTHER_FILES += \
     view/Description.qml \
     view/Button.qml \
     view/LineInput.qml \
-    view/FixedSizeShadowBorderItem.qml
+    view/FixedSizeShadowBorderItem.qml \
+    view/GeneralQmlItems/Button.qml \
+    view/GeneralQmlItems/Description.qml \
+    view/GeneralQmlItems/FixedSizeShadowBorderItem.qml \
+    view/GeneralQmlItems/LineInput.qml \
+    view/GeneralQmlItems/ListPage.qml \
+    view/GeneralQmlItems/ShadowBorderRectangle.qml \
+    view/GeneralQmlItems/ShadowBorderRectangleText.qml \
+    view/GeneralQmlItems/SimplePage.qml \
+    view/GeneralQmlItems/TabItem.qml \
+    view/GeneralQmlItems/TabPage.qml \
+    view/GeneralQmlItems/Title.qml \
+    view/GeneralQmlItems/TitleImageDescriptionItem.qml
 
 QT+= xml

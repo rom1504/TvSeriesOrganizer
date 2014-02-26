@@ -1,4 +1,5 @@
 import QtQuick 2.2
+import "qrc:/GeneralQmlItems/"
 
 ListPage
 {
