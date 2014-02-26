@@ -36,9 +36,9 @@ Controller::Controller(QObject *parent) :
 
     QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
     mViewer.engine()->setNetworkAccessManagerFactory(factory);
-    mViewer.showExpanded();
     QQmlContext *ctxt = mViewer.rootContext();
 #if defined(Q_OS_ANDROID)
+    mViewer.showExpanded();
     ctxt->setContextProperty("awidth",mViewer.width());
     ctxt->setContextProperty("aheight",mViewer.height());
 #else
@@ -49,6 +49,12 @@ Controller::Controller(QObject *parent) :
     mSeriesList=new SeriesList;
     mSeriesList->loadSeries(Controller::filesPath+"/myseries.txt");
     showSeriesList();
+
+
+#if !defined(Q_OS_ANDROID)
+    mViewer.showExpanded();
+#endif
+
 }
 
 void Controller::willShowSeriesList()

@@ -7,7 +7,6 @@ Application targetting desktop and mobile to organize your tv series
 
 
 ## Features
- * See a list of episode of a season
  * List of episodes organized by season and series
  * From  http://www.thetvdb.com/ database, download list of episode and season with :
    * banners
