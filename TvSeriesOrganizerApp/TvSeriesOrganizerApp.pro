@@ -43,7 +43,8 @@ QMAKE_CXXFLAGS += -std=c++11
 
 RESOURCES += \
     resources.qrc \
-    view/GeneralQmlItems/GeneralQmlItemsResources.qrc
+    ../GeneralQmlItems/GeneralQmlItemsResources.qrc
+
 
 OTHER_FILES += \
     view/Episode.qml \
@@ -54,28 +55,9 @@ OTHER_FILES += \
     view/ShadowBorderRectangle.qml \
     view/Series.qml \
     view/SeriesList.qml \
-    view/SimplePage.qml \
-    view/ListPage.qml \
-    view/ShadowBorderRectangleText.qml \
-    view/TitleImageDescriptionItem.qml \
-    view/TabPage.qml \
-    view/TabItem.qml \
-    view/Title.qml \
-    view/Description.qml \
-    view/Button.qml \
-    view/LineInput.qml \
-    view/FixedSizeShadowBorderItem.qml \
-    view/GeneralQmlItems/Button.qml \
-    view/GeneralQmlItems/Description.qml \
-    view/GeneralQmlItems/FixedSizeShadowBorderItem.qml \
-    view/GeneralQmlItems/LineInput.qml \
-    view/GeneralQmlItems/ListPage.qml \
-    view/GeneralQmlItems/ShadowBorderRectangle.qml \
-    view/GeneralQmlItems/ShadowBorderRectangleText.qml \
-    view/GeneralQmlItems/SimplePage.qml \
-    view/GeneralQmlItems/TabItem.qml \
-    view/GeneralQmlItems/TabPage.qml \
-    view/GeneralQmlItems/Title.qml \
-    view/GeneralQmlItems/TitleImageDescriptionItem.qml
 
 QT+= xml
+
+
+INCLUDEPATH += $$PWD/../GeneralQmlItems
+DEPENDPATH += $$PWD/../GeneralQmlItems
