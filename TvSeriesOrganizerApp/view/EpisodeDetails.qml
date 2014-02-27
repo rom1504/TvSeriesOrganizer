@@ -14,11 +14,21 @@ TabPage
         ShadowBorderRectangleText
         {
             property variant myData:episode
+            onClicked:
+            {
+                if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+            }
             TitleImageDescriptionItem
             {
                 title:episode.name
                 imageSource:episode.banner
                 description:"Episode number "+episode.number+"\n"+"First aired: "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+            }
+            SeenIndicator
+            {
+                id:seenRectangle
+                seen:episode.seen
+                onSeenHasChanged:episode.seen=seenRectangle.seen
             }
             width:episodeDetails.width-40
         }

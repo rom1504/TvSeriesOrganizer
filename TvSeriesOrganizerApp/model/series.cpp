@@ -19,6 +19,7 @@ Series::Series(QString name, QUrl banner, QObject *parent) :
 
 Series::Series(QString name, QObject *parent) : QObject(parent),mName(name)
 {
+    connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
     loadLocallyOrRemotely(Controller::cachePath+"/"+mName+"_small.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+mName),std::bind(&Series::beginLoadingSeries,this,std::placeholders::_1));
 }
 
@@ -215,6 +216,7 @@ void Series::loadSeriesSeenFile()
             root = root.nextSiblingElement();
         }
     }
+    else emit seenChanged();
     connect(this,&Series::seenChanged,this,&Series::saveSeriesSeenFile);
 }
 

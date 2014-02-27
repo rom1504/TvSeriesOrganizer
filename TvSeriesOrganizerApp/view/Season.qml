@@ -21,11 +21,7 @@ ShadowBorderRectangle
     {
         id:seenRectangle
         seen:season.seen
-        onSeenHasChanged:
-        {
-            season.seen=seenRectangle.seen
-            seenRatioSlider.value=season.seenRatio
-        }
+        onSeenHasChanged:season.seen=seenRectangle.seen
     }
     Slider
     {
