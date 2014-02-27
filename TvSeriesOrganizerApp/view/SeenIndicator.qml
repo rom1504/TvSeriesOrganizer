@@ -28,7 +28,6 @@ Rectangle
     ]
 
     state:seen ? "Seen" : "NotSeen"
-    x:parent.width/1.5
     y:0
     width:55
     height:20

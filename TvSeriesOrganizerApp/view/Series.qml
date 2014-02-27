@@ -25,7 +25,7 @@ ShadowBorderRectangle
     {
         id:removeButton
         text:"Remove"
-        x:parent.width-width
+        x:parent.width/1.4
         focus:true
         onClicked: seriesListPage.removeSeries(index)
     }
@@ -35,6 +35,7 @@ ShadowBorderRectangle
         id:seenRectangle
         seen:series.seen
         onSeenHasChanged: series.seen=seenRectangle.seen
+        x:parent.width-width-5
     }
 
     Slider

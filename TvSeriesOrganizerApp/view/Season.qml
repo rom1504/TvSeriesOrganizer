@@ -22,6 +22,7 @@ ShadowBorderRectangle
         id:seenRectangle
         seen:season.seen
         onSeenHasChanged:season.seen=seenRectangle.seen
+        x:parent.width-width-5
     }
     Slider
     {

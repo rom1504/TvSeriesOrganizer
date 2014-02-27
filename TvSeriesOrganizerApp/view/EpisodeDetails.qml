@@ -29,6 +29,7 @@ TabPage
                 id:seenRectangle
                 seen:episode.seen
                 onSeenHasChanged:episode.seen=seenRectangle.seen
+                x:parent.width-width-5
             }
             width:episodeDetails.width-40
         }
