@@ -3,15 +3,19 @@ import "qrc:/GeneralQmlItems/"
 
 ShadowBorderRectangle
 {
+    id:seriesItem
     Keys.onReturnPressed: seriesListPage.seriesClicked(index)
+
     onClicked:
     {
-        if(removeButton.enabled==true && removeButton.x<mouseX && mouseX<removeButton.x+removeButton.width && removeButton.y<mouseY && mouseY<removeButton.y+removeButton.height) removeButton.clicked()
+        if(removeButton.enabled==true && isMouseIn(removeButton)) removeButton.clicked()
+        else if(isMouseIn(seenRectangle)) seenRectangle.clicked()
         else seriesListPage.seriesClicked(index)
     }
     onPressAndHold: state="expanded"
     TitleImageDescriptionItem
     {
+        id:content
         title:series.name
         imageSource:series.poster
         description:series.overview
@@ -26,6 +30,25 @@ ShadowBorderRectangle
         onClicked: seriesListPage.removeSeries(index)
     }
 
+    SeenIndicator
+    {
+        id:seenRectangle
+        seen:series.seen
+        onSeenHasChanged:
+        {
+            series.seen=seenRectangle.seen
+            seenRatioSlider.value=series.seenRatio
+        }
+    }
+
+    Slider
+    {
+        id:seenRatioSlider
+        value:series.seenRatio
+        y:content.height+5
+        height:5
+        width:parent.width-5
+    }
 
 
     states:[

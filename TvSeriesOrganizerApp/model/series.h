@@ -18,7 +18,8 @@ class Series : public QObject
     Q_PROPERTY(QString network READ network NOTIFY networkChanged)
     Q_PROPERTY(QAbstractItemModel * fanArts READ fanArts NOTIFY fanArtsChanged)
     Q_PROPERTY(QAbstractItemModel * posters READ posters NOTIFY postersChanged)
-
+    Q_PROPERTY(bool seen READ seen WRITE setSeen NOTIFY seenChanged)
+    Q_PROPERTY(double seenRatio READ seenRatio NOTIFY seenRatioChanged)
 
 public:
     explicit Series(QString name, QUrl banner, QObject *parent = 0);
@@ -40,6 +41,14 @@ public:
     QString network() const;
     QAbstractItemModel * fanArts();
     QAbstractItemModel * posters();
+    bool seen() const;
+    double seenRatio() const;
+    int episodeSeenCount() const;
+    int episodeCount() const;
+
+
+
+    void setSeen(bool seen);
 
 
 signals:
@@ -52,10 +61,14 @@ signals:
     void networkChanged();
     void fanArtsChanged();
     void postersChanged();
+    void seenChanged();
+    void seenRatioChanged();
 
 public slots:
 
 private:
+    void loadSeriesSeenFile();
+    void saveSeriesSeenFile();
     void loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load);
     void loadSeries(QString xmlFileContent);
     void loadBanners(QString xmlFileContent);

@@ -14,6 +14,7 @@
 Series::Series(QString name, QUrl banner, QObject *parent) :
     QObject(parent),mName(name),mBanner(banner)
 {
+    connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
 }
 
 Series::Series(QString name, QObject *parent) : QObject(parent),mName(name)
@@ -174,13 +175,87 @@ void Series::loadSeries(QString xmlFileContent)
         root = root.nextSiblingElement();
     }
     loadLocallyOrRemotely(Controller::cachePath+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
+    loadSeriesSeenFile();
 }
 
 
+void Series::loadSeriesSeenFile()
+{
+    QString fileName=Controller::filesPath+"/"+mId+"_seen.xml";
+    QFile seriesSeenFile(fileName);
+    if(seriesSeenFile.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        QString xmlFileContent=seriesSeenFile.readAll();
+        seriesSeenFile.close();
+
+        QDomDocument doc;
+        doc.setContent(xmlFileContent);
+        QDomElement root = doc.documentElement();
+        root = root.firstChildElement();
+        while(!root.isNull())
+        {
+            if(root.tagName() == "Season")
+            {
+                QString seasonNumber=root.attribute("number");
+                Season * currentSeason=*(std::find_if(mSeasons.begin(),mSeasons.end(),[seasonNumber](Season* season){return season->number()==seasonNumber.toInt();}));
+                QDomElement episodeElement=root.firstChildElement();
+                while(!episodeElement.isNull())
+                {
+                    if(episodeElement.tagName()=="Episode")
+                    {
+                        QString seen;
+                        QString episodeNumber=episodeElement.attribute("number");
+                        Episode* currentEpisode=*(std::find_if(currentSeason->episodes()->begin(),currentSeason->episodes()->end(),[episodeNumber](Episode* episode){return episode->number()==episodeNumber.toInt();}));
+                        seen=episodeElement.text();
+                        currentEpisode->setSeen(seen=="Seen");
+                        episodeElement=episodeElement.nextSiblingElement();
+                    }
+                }
+            }
+            root = root.nextSiblingElement();
+        }
+    }
+    connect(this,&Series::seenChanged,this,&Series::saveSeriesSeenFile);
+}
+
+void Series::saveSeriesSeenFile()
+{
+    QDomDocument doc("seriesSeen");
+    QDomElement root = doc.createElement("Series");
+    doc.appendChild(root);
+
+    for(Season* season : mSeasons)
+    {
+        QDomElement tag = doc.createElement("Season");
+        tag.setAttribute("number",season->number());
+        root.appendChild(tag);
+
+        for(Episode* episode : *(season->episodes()))
+        {
+            QDomElement tag2 = doc.createElement("Episode");
+            tag2.setAttribute("number",episode->number());
+            tag.appendChild(tag2);
+
+            QDomText t = doc.createTextNode(episode->seen() ? "Seen" : "NotSeen");
+            tag2.appendChild(t);
+        }
+    }
+
+    QString xmlContent = doc.toString();
+
+
+    QString fileName=Controller::filesPath+"/"+mId+"_seen.xml";
+    QFile seriesSeenFile(fileName);
+    seriesSeenFile.open(QIODevice::WriteOnly|QIODevice::Text);
+    QTextStream out(&seriesSeenFile);
+    out<<xmlContent;
+    seriesSeenFile.close();
+}
 
 void Series::addSeason(Season * season)
 {
     mSeasons.append(season);
+    connect(season,&Season::seenChanged,this,&Series::seenChanged);
     emit seasonCountChanged();
 }
 
@@ -188,6 +263,39 @@ void Series::addSeason(Season * season)
 Season * Series::getSeason(int row) const
 {
     return mSeasons.get(row);
+}
+
+
+bool Series::seen() const
+{
+    for(Season * season : mSeasons) if(!season->seen()) return false;
+    return true;
+}
+
+int Series::episodeSeenCount() const
+{
+    return std::accumulate(mSeasons.begin(),mSeasons.end(),0,[](int acc,Season* season){return acc+season->episodeSeenCount();});
+}
+
+int Series::episodeCount() const
+{
+    return std::accumulate(mSeasons.begin(),mSeasons.end(),0,[](int acc,Season* season){return acc+season->episodeCount();});
+}
+
+double Series::seenRatio() const
+{
+    return double(episodeSeenCount())/double(episodeCount());
+}
+
+void Series::setSeen(bool seen)
+{
+    for(Season * season : mSeasons)
+    {
+        disconnect(season,&Season::seenChanged,this,&Series::seenChanged);
+        season->setSeen(seen);
+        connect(season,&Season::seenChanged,this,&Series::seenChanged);
+    }
+    emit seenChanged();
 }
 
 SignalList<Season *> *Series::seasons()

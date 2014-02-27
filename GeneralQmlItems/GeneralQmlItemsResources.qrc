@@ -12,5 +12,6 @@
         <file>TabPage.qml</file>
         <file>Title.qml</file>
         <file>TitleImageDescriptionItem.qml</file>
+        <file>Slider.qml</file>
     </qresource>
 </RCC>

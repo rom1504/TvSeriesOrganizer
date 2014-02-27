@@ -1,7 +1,7 @@
 #include "episode.h"
 
 Episode::Episode(int number, const QString & name, const QString& overview, QUrl banner, QDate firstAired, QObject *parent) :
-    QObject(parent),mNumber(number),mName(name),mOverview(overview),mBanner(banner),mFirstAired(firstAired)
+    QObject(parent),mNumber(number),mName(name),mOverview(overview),mBanner(banner),mFirstAired(firstAired),mSeen(false)
 {
 }
 
@@ -28,4 +28,16 @@ QUrl Episode::banner() const
 QDate Episode::firstAired() const
 {
     return mFirstAired;
+}
+
+bool Episode::seen() const
+{
+    return mSeen;
+}
+
+
+void Episode::setSeen(bool seen)
+{
+    mSeen=seen;
+    emit seenChanged();
 }

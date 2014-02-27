@@ -13,6 +13,11 @@ Item
     signal clicked
     signal pressAndHold
 
+    function isMouseIn(rect)
+    {
+        return rect.x<mouseX-10 && mouseX-10<rect.x+rect.width && rect.y<mouseY-10 && mouseY-10<rect.y+rect.height;
+    }
+
     Item
     {
         id: container

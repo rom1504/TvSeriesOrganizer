@@ -11,5 +11,6 @@
         <file>images/episode.jpg</file>
         <file>images/season.jpg</file>
         <file>images/TvSeriesOrganizer.jpg</file>
+        <file>view/SeenIndicator.qml</file>
     </qresource>
 </RCC>

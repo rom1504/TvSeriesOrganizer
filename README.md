@@ -14,10 +14,10 @@ Application targetting desktop and mobile to organize your tv series
    * description
    * name
  * Good looking interface
+ * Track the episode and series you have seen
  
 ### Roadmap
  * Download subtitles from subtitles website
- * Track the episode and series you have seen
  * Recommend you some other series you might like
  * Actors of series
  * Calendar and airing times

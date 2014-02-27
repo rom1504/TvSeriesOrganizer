@@ -25,5 +25,6 @@ OTHER_FILES += \
     TabItem.qml \
     TabPage.qml \
     Title.qml \
-    TitleImageDescriptionItem.qml
+    TitleImageDescriptionItem.qml \
+    Slider.qml
 

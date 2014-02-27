@@ -14,6 +14,7 @@ class Episode : public QObject
     Q_PROPERTY(QString overview READ overview NOTIFY overviewChanged)
     Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
+    Q_PROPERTY(bool seen READ seen WRITE setSeen NOTIFY seenChanged)
 
 public:
     explicit Episode(int number, const QString & name, const QString& overview, QUrl banner,QDate firstAired, QObject *parent = 0);
@@ -22,6 +23,10 @@ public:
     QString overview() const;
     QUrl banner() const;
     QDate firstAired() const;
+    bool seen() const;
+
+
+    void setSeen(bool seen);
 
 signals:
     void numberChanged();
@@ -29,6 +34,7 @@ signals:
     void overviewChanged();
     void bannerChanged();
     void firstAiredChanged();
+    void seenChanged();
 
 public slots:
 
@@ -38,6 +44,7 @@ private:
     QString mOverview;
     QUrl mBanner;
     QDate mFirstAired;
+    bool mSeen;
 };
 
 Q_DECLARE_METATYPE (Episode*)
