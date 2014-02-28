@@ -60,9 +60,25 @@ QUrl Season::poster() const
 }
 
 
+QDate Season::firstAired() const
+{
+    Episode * firstEpisode=*(std::min_element(mEpisodes.begin(),mEpisodes.end(),[](Episode *const& a,Episode * const& b)
+    {
+        if(!(a->firstAired().isValid())) return false;
+        if(!(b->firstAired().isValid())) return true;
+        return a->firstAired()<b->firstAired();
+    }));
+    return firstEpisode->firstAired();
+}
+
 int Season::episodeSeenCount() const
 {
     return std::accumulate(mEpisodes.begin(),mEpisodes.end(),0,[](int acc,Episode* episode){return acc+episode->seen();});
+}
+
+int Season::episodeAiredCount() const
+{
+    return std::accumulate(mEpisodes.begin(),mEpisodes.end(),0,[](int acc,Episode* episode){return acc+episode->aired();});
 }
 
 int Season::episodeCount() const
@@ -73,6 +89,11 @@ int Season::episodeCount() const
 double Season::seenRatio() const
 {
     return double(episodeSeenCount())/double(episodeCount());
+}
+
+double Season::airedRatio() const
+{
+    return double(episodeAiredCount())/double(episodeCount());
 }
 
 bool Season::seen() const

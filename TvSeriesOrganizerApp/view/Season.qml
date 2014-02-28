@@ -3,6 +3,19 @@ import "qrc:/GeneralQmlItems/"
 
 ShadowBorderRectangle
 {
+    function plural(n)
+    {
+        return n>1 ? "s":"";
+    }
+
+    function betterNumber(n,max)
+    {
+        if(n===0) return "No";
+        if(n===1) return "One";
+        if(n===max) return "All";
+        return n;
+    }
+
     Keys.onReturnPressed: seriesDetails.seasonClicked(index)
     onClicked:
     {
@@ -14,9 +27,30 @@ ShadowBorderRectangle
         id:content
         title:"Season " + season.number
         imageSource:season.poster
-        description:season.episodeCount+" episode"+(season.episodeCount>1 ? "s" : "")+"\n"+season.episodeSeenCount+" episode"+(season.episodeSeenCount>1 ? "s" : "")+" seen"
-    }
+        description:"First aired:"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+season.episodeCount+" episode"+plural(season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount)+" episode"+plural(season.episodeSeenCount)+" seen"
 
+        Column
+        {
+            width:parent.width-x
+            height:childrenRect.height
+            Slider
+            {
+                value:season.seenRatio
+                height:5
+                width:parent.width-5
+            }
+            Description
+            {
+                text:betterNumber(season.episodeAiredCount,season.episodeCount)+" episode"+plural(season.episodeAiredCount)+" aired"
+            }
+            Slider
+            {
+                value:season.airedRatio
+                height:5
+                width:parent.width-5
+            }
+        }
+    }
     SeenIndicator
     {
         id:seenRectangle
@@ -24,13 +58,4 @@ ShadowBorderRectangle
         onSeenHasChanged:season.seen=seenRectangle.seen
         x:parent.width-width-5
     }
-    Slider
-    {
-        id:seenRatioSlider
-        value:season.seenRatio
-        y:content.height+5
-        height:5
-        width:parent.width-5
-    }
-
 }

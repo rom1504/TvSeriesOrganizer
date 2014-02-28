@@ -35,6 +35,12 @@ bool Episode::seen() const
     return mSeen;
 }
 
+bool Episode::aired() const
+{
+    if(!(mFirstAired.isValid())) return true;
+    return mFirstAired<=QDate::currentDate();
+}
+
 
 void Episode::setSeen(bool seen)
 {

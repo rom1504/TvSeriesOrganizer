@@ -22,6 +22,9 @@ class Season : public QObject
     Q_PROPERTY(double seenRatio READ seenRatio NOTIFY seenRatioChanged)
     Q_PROPERTY(int episodeCount READ episodeCount NOTIFY episodeCountChanged)
     Q_PROPERTY(int episodeSeenCount READ episodeSeenCount NOTIFY episodeSeenCountChanged)
+    Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
+    Q_PROPERTY(double airedRatio READ airedRatio NOTIFY airedRatioChanged)
+    Q_PROPERTY(int episodeAiredCount READ episodeAiredCount NOTIFY episodeAiredCountChanged)
 
 public:
     explicit Season(int number,QUrl banner,QUrl poster,QObject *parent = 0);
@@ -35,6 +38,9 @@ public:
     int episodeSeenCount() const;
     int episodeCount() const;
     double seenRatio() const;
+    QDate firstAired() const;
+    double airedRatio() const;
+    int episodeAiredCount() const;
 
     void setSeen(bool seen);
     void setBanner(QUrl banner);
@@ -51,6 +57,9 @@ signals:
     void seenRatioChanged();
     void episodeCountChanged();
     void episodeSeenCountChanged();
+    void firstAiredChanged();
+    void airedRatioChanged();
+    void episodeAiredCountChanged();
 
 public slots:
 
