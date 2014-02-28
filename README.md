@@ -25,13 +25,13 @@ Application targetting desktop and mobile to organize your tv series
  
 ## Installation
 
-Dependencies : gcc >=4.8, Qt >=5.1 
-
 ### Binary
  * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz
  * android : http://download.rom1504.fr/TvSeriesOrganizer/android/TvSeriesOrganizer.apk
 
 ### Compilation
+Dependencies : gcc >=4.8, Qt >=5.1 
+
 Two possibilities :
  * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git && cd TvSeriesOrganizer && qmake && make
  * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git && cd TvSeriesOrganizer && qtcreator TvSeriesOrganizer.pro
