@@ -48,6 +48,8 @@ public:
 
     SignalList<Episode *> * episodes();
 
+    Episode* findEpisode(int episodeNumber);
+
 signals:
     void numberChanged();
     void bannerChanged();

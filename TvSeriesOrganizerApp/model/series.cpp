@@ -12,12 +12,12 @@
 
 
 Series::Series(QString name, QUrl banner, QObject *parent) :
-    QObject(parent),mName(name),mBanner(banner)
+    QObject(parent),mName(name),mBanner(banner),mSeasons([](Season* a,Season* b){return a->number()<b->number();})
 {
     connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
 }
 
-Series::Series(QString name, QObject *parent) : QObject(parent),mName(name)
+Series::Series(QString name, QObject *parent) : QObject(parent),mName(name),mSeasons([](Season* a,Season* b){return a->number()<b->number();})
 {
     connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
     loadLocallyOrRemotely(Controller::cachePath+"/"+mName+"_small.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+mName),std::bind(&Series::beginLoadingSeries,this,std::placeholders::_1));
@@ -105,14 +105,14 @@ void Series::loadBanners(QString xmlFileContent)
             QString bannerPath;
             QString language;
             QString thumbnailPath;
-            int season;
+            int seasonNumber;
             while(!bannerElement.isNull())
             {
                 if(bannerElement.tagName()=="BannerType") bannerType=bannerElement.text();
                 else if(bannerElement.tagName()=="BannerType2") bannerType2=bannerElement.text();
                 else if(bannerElement.tagName()=="BannerPath") bannerPath=bannerElement.text();
                 else if(bannerElement.tagName()=="ThumbnailPath") thumbnailPath=bannerElement.text();
-                else if(bannerElement.tagName()=="Season") season=bannerElement.text().toInt();
+                else if(bannerElement.tagName()=="Season") seasonNumber=bannerElement.text().toInt();
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
@@ -125,9 +125,9 @@ void Series::loadBanners(QString xmlFileContent)
                 }
                 else if(bannerType=="season")
                 {
-                    auto i=std::find_if(mSeasons.constBegin(),mSeasons.constEnd(),[season](Season * a){return a->number()==season;});
-                    if(bannerType2=="seasonwide") (*i)->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
-                    else if(bannerType2=="season") (*i)->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    Season * season=findSeason(seasonNumber);
+                    if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
                 }
                 else if(bannerType=="fanart") mFanArts.append(QUrl("http://thetvdb.com/banners/"+thumbnailPath));
             }
@@ -142,7 +142,6 @@ void Series::loadSeries(QString xmlFileContent)
     doc.setContent(xmlFileContent);
     QDomElement root = doc.documentElement();
     root = root.firstChildElement();
-    QString currentSeasonNumber="";
     Season * currentSeason=nullptr;
     while(!root.isNull())
     {
@@ -165,10 +164,10 @@ void Series::loadSeries(QString xmlFileContent)
                 else if(episodeElement.tagName()=="FirstAired") firstAired=episodeElement.text();
                 episodeElement=episodeElement.nextSiblingElement();
             }
-            if(seasonNumber!=currentSeasonNumber)
+            currentSeason=findSeason(seasonNumber.toInt());
+            if(currentSeason==nullptr)
             {
-                currentSeasonNumber=seasonNumber;
-                currentSeason=new Season(currentSeasonNumber.toInt(),banner(),QUrl());
+                currentSeason=new Season(seasonNumber.toInt(),banner(),QUrl());
                 addSeason(currentSeason);
             }
             currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeOverview,QUrl(episodeBanner=="" ? currentSeason->banner() : "http://thetvdb.com/banners/"+episodeBanner),QDate::fromString(firstAired,"yyyy-MM-dd")));
@@ -177,6 +176,14 @@ void Series::loadSeries(QString xmlFileContent)
     }
     loadLocallyOrRemotely(Controller::cachePath+"/"+mId+"_banners.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+mId+"/banners.xml"),std::bind(&Series::loadBanners,this,std::placeholders::_1));
     loadSeriesSeenFile();
+}
+
+
+Season* Series::findSeason(int seasonNumber)
+{
+    auto seasonIt=std::find_if(mSeasons.begin(),mSeasons.end(),[seasonNumber](Season* season){return season->number()==seasonNumber;});
+    if(seasonIt==mSeasons.end()) return nullptr;
+    return *seasonIt;
 }
 
 
@@ -198,7 +205,7 @@ void Series::loadSeriesSeenFile()
             if(root.tagName() == "Season")
             {
                 QString seasonNumber=root.attribute("number");
-                Season * currentSeason=*(std::find_if(mSeasons.begin(),mSeasons.end(),[seasonNumber](Season* season){return season->number()==seasonNumber.toInt();}));
+                Season * currentSeason=findSeason(seasonNumber.toInt());
                 QDomElement episodeElement=root.firstChildElement();
                 while(!episodeElement.isNull())
                 {
@@ -206,7 +213,7 @@ void Series::loadSeriesSeenFile()
                     {
                         QString seen;
                         QString episodeNumber=episodeElement.attribute("number");
-                        Episode* currentEpisode=*(std::find_if(currentSeason->episodes()->begin(),currentSeason->episodes()->end(),[episodeNumber](Episode* episode){return episode->number()==episodeNumber.toInt();}));
+                        Episode* currentEpisode=currentSeason->findEpisode(episodeNumber.toInt());
                         seen=episodeElement.text();
                         currentEpisode->setSeen(seen=="Seen");
                         episodeElement=episodeElement.nextSiblingElement();

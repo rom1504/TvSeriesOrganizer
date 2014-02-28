@@ -1,7 +1,7 @@
 #include "serieslist.h"
 
 SeriesList::SeriesList(QObject *parent) :
-    QObject(parent)
+    QObject(parent),mSeries([](Series* a,Series * b){return a->name()<b->name();})
 {
 }
 

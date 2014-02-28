@@ -28,6 +28,14 @@ QAbstractItemModel *Season::seasonModel()
 }
 
 
+Episode* Season::findEpisode(int episodeNumber)
+{
+    auto episodeIt=std::find_if(mEpisodes.begin(),mEpisodes.end(),[episodeNumber](Episode* episode){return episode->number()==episodeNumber;});
+    if(episodeIt==mEpisodes.end()) return nullptr;
+    return *episodeIt;
+}
+
+
 void Season::setPoster(QUrl poster)
 {
     mPoster=poster;

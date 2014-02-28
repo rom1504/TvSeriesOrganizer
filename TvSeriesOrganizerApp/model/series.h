@@ -73,6 +73,7 @@ private:
     void loadSeries(QString xmlFileContent);
     void loadBanners(QString xmlFileContent);
     void beginLoadingSeries(QString xmlContent);
+    Season* findSeason(int seasonNumber);
 
 private:
     QString mName;
