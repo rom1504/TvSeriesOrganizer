@@ -7,14 +7,24 @@ TabPage
 {
     id:seriesDetails
     imageSource:series.banner
-    signal seasonClicked(int seasonNumber)
+    property int seasonIndex:0
+    property var series
     property int listBeginIndex:seasonIndex
+    onBack:stackview.pop({immediate:true})
+
+    function seasonClicked(seasonNumber)
+    {
+        seasonIndex=seasonNumber
+        stackview.push({item:seasonDetailsItem,immediate:true,
+                                        properties:{seasonIndex:seriesDetails.seasonIndex,season:series.getSeason(seasonNumber),seriesModel:series.seriesModel}})
+    }
+
     tabContentModel: VisualItemModel
     {
         ListView
         {
             delegate:Season{}
-            model:seriesModel
+            model:series.seriesModel
             width: seriesDetails.width-40
             height: seriesDetails.height
             currentIndex: listBeginIndex

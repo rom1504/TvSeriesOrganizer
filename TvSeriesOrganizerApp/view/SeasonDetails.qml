@@ -5,12 +5,34 @@ TabPage
 {
     id:seasonDetails
     imageSource:season.banner
-    signal episodeClicked(int episodeNumber)
-    signal seasonChanged(int row)
-    onTabChanged: seasonChanged(column)
+    property int episodeIndex:0
+    property var seriesModel
+    property var season
+    property var seasonIndex
+    onTabChanged: stackview.get(1).seasonIndex=column
     onCurrentTabChanged:seasonDetails.imageSource=currentItem.myData.banner;
     tabContentModel: seriesModel
     property int listBeginIndex:episodeIndex
+
+    onBack:stackview.pop({immediate:true})
+
+
+    function episodeClicked(episodeNumber)
+    {
+        episodeIndex=episodeNumber
+        stackview.push
+        ({
+           item:episodeDetailsItem,
+           immediate:true,
+           properties:
+           {
+               episodeIndex:seasonDetails.episodeIndex,
+               episode:season.getEpisode(episodeNumber),
+               seasonModel:season.seasonModel
+           }
+        })
+    }
+
     tabContentDelegate:
         ListView
         {

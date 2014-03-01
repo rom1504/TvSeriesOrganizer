@@ -361,3 +361,8 @@ QString Series::network() const
     return mNetwork;
 }
 
+
+QAbstractItemModel * Series::seriesModel()
+{
+    return new SignalListAdapter<Season*>(&mSeasons,"season");
+}

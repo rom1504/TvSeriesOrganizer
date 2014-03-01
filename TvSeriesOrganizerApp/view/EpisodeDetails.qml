@@ -6,9 +6,17 @@ TabPage
 {
     id:episodeDetails
     imageSource:episode.banner
-    signal episodeChanged(int column)
-    onTabChanged: episodeChanged(column)
+
+    property int episodeIndex
+    property var seasonModel
+    property var episode
+
+    onTabChanged: stackview.get(2).episodeIndex=column
     onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner;
+
+    onBack:stackview.pop({immediate:true})
+
+
     tabContentModel: seasonModel
     tabContentDelegate:
         ShadowBorderRectangleText

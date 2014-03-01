@@ -21,32 +21,9 @@ public:
 
 signals:
 
-private slots:
-    void willDo(std::function<void(void)> f);
-    void willShowSeriesList();
-    void showSeriesList();
-    void willShowSeriesDetails(const int row=-1);
-    void showSeriesDetails(const int row);
-    void willShowSeasonDetails(const int row=-1);
-    void willShowEpisodeDetails(const int row);
-    void showEpisodeDetails(const int row);
-    void showSeasonDetails(const int row);
-    void changeCurrentSeason(int row);
-    void changeCurrentEpisode(int row);
-
-private:
-    void disconnectConnections();
-
 private:
     QtQuick2ApplicationViewer mViewer;
     SeriesList * mSeriesList;
-    Series * mCurrentSeries;
-    Season * mCurrentSeason;
-    int mCurrentSeriesRow;
-    int mCurrentSeasonRow;
-    int mCurrentEpisodeRow;
-    QTimer mTimer;
-    QList<QMetaObject::Connection> mConnections;
 
 };
 

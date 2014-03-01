@@ -4,13 +4,30 @@ import "qrc:/GeneralQmlItems/"
 ListPage
 {
     id:seriesListPage
-    signal seriesClicked(int seriesNumber)
-    signal removeSeries(int seriesNumber)
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
-    pageModel: seriesList
+    property int seriesIndex:0
+    property var seriesList
+    pageModel: seriesList.seriesListModel
     pageDelegate: Series{}
     beginIndex: seriesIndex
-    signal addSeries(string seriesName)
+
+
+    function seriesClicked(seriesNumber)
+    {
+        seriesIndex=seriesNumber
+        stackview.push({item:seriesDetailsItem,immediate:true,
+                                        properties:{series:seriesList.getSeries(seriesNumber)}})
+    }
+
+    function removeSeries(seriesNumber)
+    {
+        seriesList.removeSaveSeries(seriesNumber)
+    }
+
+    function addSeries(seriesNames)
+    {
+        seriesList.addSaveSeries(seriesNames)
+    }
 
     LineInput
     {

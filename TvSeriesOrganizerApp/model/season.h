@@ -29,7 +29,6 @@ class Season : public QObject
 public:
     explicit Season(int number,QUrl banner,QUrl poster,QObject *parent = 0);
     void addEpisode(Episode * episode);
-    Episode *getEpisode(int row) const;
     int number() const;
     QUrl banner() const;
     QUrl poster() const;
@@ -64,6 +63,7 @@ signals:
     void episodeAiredCountChanged();
 
 public slots:
+    Episode *getEpisode(int row) const;
 
 private:
     int mNumber;

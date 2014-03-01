@@ -17,6 +17,12 @@ Series * SeriesList::getSeries(int row) const
 }
 
 
+QAbstractItemModel * SeriesList::seriesListModel()
+{
+    return new SignalListAdapter<Series*>(&mSeries,"series");
+}
+
+
 void SeriesList::removeSeries(int row)
 {
     mSeries.remove(row);

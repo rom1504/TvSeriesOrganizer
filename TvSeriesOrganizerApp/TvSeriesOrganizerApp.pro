@@ -55,7 +55,8 @@ OTHER_FILES += \
     view/ShadowBorderRectangle.qml \
     view/Series.qml \
     view/SeriesList.qml \
-    view/SeenIndicator.qml
+    view/SeenIndicator.qml \
+    view/MainView.qml
 
 QT+= xml
 
