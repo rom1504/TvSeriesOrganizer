@@ -12,6 +12,8 @@ TabPage
     property int listBeginIndex:seasonIndex
     onBack:stackview.pop({immediate:true})
 
+
+
     function seasonClicked(seasonNumber)
     {
         seasonIndex=seasonNumber
@@ -28,11 +30,13 @@ TabPage
             width: seriesDetails.width-40
             height: seriesDetails.height
             currentIndex: listBeginIndex
+            focus:true
 
             highlightRangeMode:ListView.StrictlyEnforceRange
             id:listview
             Keys.onDownPressed: listview.incrementCurrentIndex()
             Keys.onUpPressed: listview.decrementCurrentIndex()
+            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
         }
         Item
         {

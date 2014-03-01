@@ -46,6 +46,7 @@ TabPage
             id:listview
             Keys.onDownPressed: listview.incrementCurrentIndex()
             Keys.onUpPressed: listview.decrementCurrentIndex()
+            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
         }
     tabDelegate:TabItem{tabText:"Season "+season.number;tabPage:seasonDetails}
 
