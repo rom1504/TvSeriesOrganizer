@@ -22,7 +22,7 @@ TabPage
         episodeIndex=episodeNumber
         stackview.push
         ({
-           item:episodeDetailsItem,
+           item:"qrc:/view/EpisodeDetails.qml",
            immediate:true,
            properties:
            {

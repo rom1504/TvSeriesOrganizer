@@ -16,7 +16,7 @@ ListPage
     function seriesClicked(seriesNumber)
     {
         seriesIndex=seriesNumber
-        stackview.push({item:seriesDetailsItem,immediate:true,
+        stackview.push({item:"qrc:/view/SeriesDetails.qml",immediate:true,
                                         properties:{series:seriesList.getSeries(seriesNumber)}})
     }
 

@@ -17,7 +17,7 @@ TabPage
     function seasonClicked(seasonNumber)
     {
         seasonIndex=seasonNumber
-        stackview.push({item:seasonDetailsItem,immediate:true,
+        stackview.push({item:"qrc:/view/SeasonDetails.qml",immediate:true,
                                         properties:{seasonIndex:seriesDetails.seasonIndex,season:series.getSeason(seasonNumber),seriesModel:series.seriesModel}})
     }
 

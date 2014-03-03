@@ -16,10 +16,5 @@ StackView
     Keys.onPressed: if(event.key === Qt.Key_Backspace) currentItem.bback(event)
     Keys.onReturnPressed: currentItem.enter(event)
 
-
-    Component{id:seriesListItem;SeriesList{}}
-    Component{id:seriesDetailsItem;SeriesDetails{}}
-    Component{id:seasonDetailsItem;SeasonDetails{}}
-    Component{id:episodeDetailsItem;EpisodeDetails{}}
-    initialItem: {"item":seriesListItem,"properties":{seriesList:seriesList}}
+    initialItem: {"item":"qrc:/view/SeriesList.qml","properties":{seriesList:seriesList}}
 }
