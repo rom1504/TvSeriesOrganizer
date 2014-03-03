@@ -10,6 +10,7 @@ ListPage
     pageModel: seriesList.seriesListModel
     pageDelegate: Series{}
     beginIndex: seriesIndex
+    onEnter:if(!(lineInput.activeFocus)) listView.currentItem.Keys.onReturnPressed(event)
 
 
     function seriesClicked(seriesNumber)
