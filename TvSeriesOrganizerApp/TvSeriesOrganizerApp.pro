@@ -56,7 +56,11 @@ OTHER_FILES += \
     view/Series.qml \
     view/SeriesList.qml \
     view/SeenIndicator.qml \
-    view/MainView.qml
+    view/MainView.qml \
+    view/ListPage.qml \
+    view/SimplePage.qml \
+    view/TabItem.qml \
+    view/TabPage.qml
 
 QT+= xml
 

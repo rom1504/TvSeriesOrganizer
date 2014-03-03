@@ -13,5 +13,9 @@
         <file>images/TvSeriesOrganizer.jpg</file>
         <file>view/SeenIndicator.qml</file>
         <file>view/MainView.qml</file>
+        <file>view/ListPage.qml</file>
+        <file>view/SimplePage.qml</file>
+        <file>view/TabItem.qml</file>
+        <file>view/TabPage.qml</file>
     </qresource>
 </RCC>
