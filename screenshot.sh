@@ -28,7 +28,7 @@ function takeScreenshot
 
 function addSeries
 {
-	moveClick 100 210
+	moveClick 100 240
 	xte -x $DISPLAY "str $1"
 	xte -x $DISPLAY "key Return"
 	sleep $sleeptime
