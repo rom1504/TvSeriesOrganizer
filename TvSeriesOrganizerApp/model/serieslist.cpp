@@ -1,4 +1,5 @@
 #include "serieslist.h"
+#include "adapter/signallistfilter.h"
 
 SeriesList::SeriesList(QObject *parent) :
     QObject(parent),mSeries([](Series* a,Series * b){return a->name()<b->name();})
@@ -7,7 +8,8 @@ SeriesList::SeriesList(QObject *parent) :
 
 void SeriesList::addSeries(Series * series)
 {
-    mSeries.append(series);
+    int insertionIndex=mSeries.append(series);
+    connect(series,&Series::seenChanged,[insertionIndex,this](){emit mSeries.dataChanged(insertionIndex,insertionIndex);});
 }
 
 
@@ -17,9 +19,23 @@ Series * SeriesList::getSeries(int row) const
 }
 
 
-QAbstractItemModel * SeriesList::seriesListModel()
+SignalListAdapter<Series*> * SeriesList::seriesListModelT()
 {
     return new SignalListAdapter<Series*>(&mSeries,"series");
+}
+
+QAbstractItemModel * SeriesList::seriesListModel()
+{
+    return seriesListModelT();
+}
+
+
+QAbstractItemModel * SeriesList::seriesListUpcomingModel()
+{
+    SignalListFilter<Series*> * filter=new SignalListFilter<Series*>();
+    filter->setFilter([](Series* series){return !series->seen();});
+    filter->setSourceModel(seriesListModelT());
+    return filter;
 }
 
 

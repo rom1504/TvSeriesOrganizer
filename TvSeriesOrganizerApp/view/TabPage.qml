@@ -89,6 +89,7 @@ SimplePage
             width:parent.width
             ListView
             {
+                interactive:false
                 Component.onCompleted: positionViewAtIndex(beginIndex==count-1 && count>2 ? beginIndex-1 : beginIndex,ListView.Center);
                 snapMode:ListView.SnapOneItem
 

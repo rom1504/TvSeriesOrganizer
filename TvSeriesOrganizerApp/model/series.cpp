@@ -8,6 +8,7 @@
 
 #include "series.h"
 #include "controller/controller.h"
+#include "adapter/signallistfilter.h"
 
 
 
@@ -263,7 +264,8 @@ void Series::saveSeriesSeenFile()
 
 void Series::addSeason(Season * season)
 {
-    mSeasons.append(season);
+    int insertionIndex=mSeasons.append(season);
+    connect(season,&Season::seenChanged,[insertionIndex,this](){emit mSeasons.dataChanged(insertionIndex,insertionIndex);});
     connect(season,&Season::seenChanged,this,&Series::seenChanged);
     emit seasonCountChanged();
 }
@@ -363,6 +365,21 @@ QString Series::network() const
 
 
 QAbstractItemModel * Series::seriesModel()
+{
+    return seriesModelT();
+}
+
+
+QAbstractItemModel * Series::seriesUpcomingModel()
+{
+    SignalListFilter<Season*> * filter=new SignalListFilter<Season*>();
+    filter->setFilter([](Season* season){return !season->seen();});
+    filter->setSourceModel(seriesModelT());
+    return filter;
+}
+
+
+SignalListAdapter<Season*> * Series::seriesModelT()
 {
     return new SignalListAdapter<Season*>(&mSeasons,"season");
 }

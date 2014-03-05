@@ -16,6 +16,7 @@ Application targetting desktop and mobile to organize your tv series
  * Good looking interface
  * Track the episode and series you have seen
  * Air time of episodes
+ * Display upcoming series/season/episode
  
 ### Roadmap
  * Download subtitles from subtitles website

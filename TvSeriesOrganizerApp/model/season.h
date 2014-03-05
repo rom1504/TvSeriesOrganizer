@@ -25,6 +25,7 @@ class Season : public QObject
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
     Q_PROPERTY(double airedRatio READ airedRatio NOTIFY airedRatioChanged)
     Q_PROPERTY(int episodeAiredCount READ episodeAiredCount NOTIFY episodeAiredCountChanged)
+    Q_PROPERTY(QAbstractItemModel * seasonUpcomingModel READ seasonUpcomingModel NOTIFY seasonUpcomingModelChanged)
 
 public:
     explicit Season(int number,QUrl banner,QUrl poster,QObject *parent = 0);
@@ -33,6 +34,7 @@ public:
     QUrl banner() const;
     QUrl poster() const;
     QAbstractItemModel *seasonModel();
+    QAbstractItemModel *seasonUpcomingModel();
     bool seen() const;
     int episodeSeenCount() const;
     int episodeCount() const;
@@ -49,6 +51,9 @@ public:
 
     Episode* findEpisode(int episodeNumber);
 
+private:
+    SignalListAdapter<Episode *> *seasonModelT();
+
 signals:
     void numberChanged();
     void bannerChanged();
@@ -61,6 +66,7 @@ signals:
     void firstAiredChanged();
     void airedRatioChanged();
     void episodeAiredCountChanged();
+    void seasonUpcomingModelChanged();
 
 public slots:
     Episode *getEpisode(int row) const;

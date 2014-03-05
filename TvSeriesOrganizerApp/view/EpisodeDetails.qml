@@ -10,12 +10,13 @@ TabPage
     property int episodeIndex
     property var seasonModel
     property var episode
+    property bool upcoming:false
+// à fin
 
     onTabChanged: stackview.get(2).episodeIndex=column
     onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner;
 
     onBack:stackview.pop({immediate:true})
-
 
     tabContentModel: seasonModel
     tabContentDelegate:

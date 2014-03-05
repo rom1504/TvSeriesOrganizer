@@ -10,23 +10,33 @@ TabPage
     property int seasonIndex:0
     property var series
     property int listBeginIndex:seasonIndex
+    property bool upcoming:false
+
     onBack:stackview.pop({immediate:true})
 
-
-
-    function seasonClicked(seasonNumber)
+    function seasonClicked(seasonNumber,upcoming)
     {
         seasonIndex=seasonNumber
-        stackview.push({item:"qrc:/view/SeasonDetails.qml",immediate:true,
-                                        properties:{seasonIndex:seriesDetails.seasonIndex,season:series.getSeason(seasonNumber),seriesModel:series.seriesModel}})
+        stackview.push
+        ({
+             item:"qrc:/view/SeasonDetails.qml",
+             immediate:true,
+             properties:
+             {
+                 seasonIndex:seriesDetails.seasonIndex,
+                 season:series.getSeason(seasonNumber),
+                 seriesModel:upcoming ? series.seriesUpcomingModel : series.seriesModel,
+                 upcoming:upcoming
+             }
+         })
     }
 
     tabContentModel: VisualItemModel
     {
         ListView
         {
-            delegate:Season{}
-            model:series.seriesModel
+            delegate:Season{onSeasonClicked: seriesDetails.seasonClicked(index,upcoming)}
+            model:upcoming ? series.seriesUpcomingModel : series.seriesModel
             width: seriesDetails.width-40
             height: seriesDetails.height
             currentIndex: listBeginIndex

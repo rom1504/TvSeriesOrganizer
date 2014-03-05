@@ -15,12 +15,13 @@ ShadowBorderRectangle
         if(n===max) return "All";
         return n;
     }
+    signal seasonClicked(int index)
 
-    Keys.onReturnPressed: seriesDetails.seasonClicked(index)
+    Keys.onReturnPressed: seasonClicked(index)
     onClicked:
     {
         if(isMouseIn(seenRectangle)) seenRectangle.clicked()
-        else seriesDetails.seasonClicked(index)
+        else seasonClicked(index)
     }
     TitleImageDescriptionItem
     {

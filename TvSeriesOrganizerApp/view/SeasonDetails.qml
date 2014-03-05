@@ -13,11 +13,13 @@ TabPage
     onCurrentTabChanged:seasonDetails.imageSource=currentItem.myData.banner;
     tabContentModel: seriesModel
     property int listBeginIndex:episodeIndex
+    property bool upcoming:false
+
 
     onBack:stackview.pop({immediate:true})
 
 
-    function episodeClicked(episodeNumber)
+    function episodeClicked(episodeNumber,upcoming,season)
     {
         episodeIndex=episodeNumber
         stackview.push
@@ -28,7 +30,8 @@ TabPage
            {
                episodeIndex:seasonDetails.episodeIndex,
                episode:season.getEpisode(episodeNumber),
-               seasonModel:season.seasonModel
+               seasonModel:upcoming ? season.seasonUpcomingModel : season.seasonModel,
+               upcoming:upcoming
            }
         })
     }
@@ -37,8 +40,8 @@ TabPage
         ListView
         {
             property variant myData:season
-            delegate:Episode{}
-            model:season.seasonModel
+            delegate:Episode{onEpisodeClicked:seasonDetails.episodeClicked(index,upcoming,season)}
+            model:upcoming ? season.seasonUpcomingModel : season.seasonModel
             width: seasonDetails.width-40
             height: parent.height
             currentIndex: listBeginIndex

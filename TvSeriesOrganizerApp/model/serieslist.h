@@ -10,6 +10,7 @@ class SeriesList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QAbstractItemModel * seriesListModel READ seriesListModel NOTIFY seriesListModelChanged)
+    Q_PROPERTY(QAbstractItemModel * seriesListUpcomingModel READ seriesListUpcomingModel NOTIFY seriesListUpcomingModelChanged)
 
 public:
     explicit SeriesList(QObject *parent = 0);
@@ -20,10 +21,16 @@ public:
     void addSeries(const QString &seriesName);
     void removeSeries(int row);
 
+
     QAbstractItemModel * seriesListModel();
+    QAbstractItemModel * seriesListUpcomingModel();
+
+private:
+    SignalListAdapter<Series*> * seriesListModelT();
 
 signals:
     void seriesListModelChanged();
+    void seriesListUpcomingModelChanged();
 
 public slots:
     Series *getSeries(int row) const;

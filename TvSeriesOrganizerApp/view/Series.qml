@@ -4,13 +4,14 @@ import "qrc:/GeneralQmlItems/"
 ShadowBorderRectangle
 {
     id:seriesItem
-    Keys.onReturnPressed: seriesListPage.seriesClicked(index)
+    signal seriesClicked(int index)
+    Keys.onReturnPressed:seriesClicked(index)
 
     onClicked:
     {
         if(removeButton.enabled==true && isMouseIn(removeButton)) removeButton.clicked()
         else if(isMouseIn(seenRectangle)) seenRectangle.clicked()
-        else seriesListPage.seriesClicked(index)
+        else seriesClicked(index)
     }
     onPressAndHold: state="expanded"
     TitleImageDescriptionItem

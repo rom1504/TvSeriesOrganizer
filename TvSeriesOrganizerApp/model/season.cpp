@@ -1,4 +1,5 @@
 #include "season.h"
+#include "adapter/signallistfilter.h"
 
 Season::Season(int number, QUrl banner,QUrl poster, QObject *parent) :
     QObject(parent),mNumber(number),mBanner(banner),mPoster(poster)
@@ -10,8 +11,9 @@ Season::Season(int number, QUrl banner,QUrl poster, QObject *parent) :
 
 void Season::addEpisode(Episode * episode)
 {
-    mEpisodes.append(episode);
+    int insertionIndex=mEpisodes.append(episode);
     connect(episode,&Episode::seenChanged,this,&Season::seenChanged);
+    connect(episode,&Episode::seenChanged,[insertionIndex,this](){emit mEpisodes.dataChanged(insertionIndex,insertionIndex);});
 }
 
 
@@ -23,6 +25,20 @@ void Season::setBanner(QUrl banner)
 
 
 QAbstractItemModel *Season::seasonModel()
+{
+    return seasonModelT();
+}
+
+
+QAbstractItemModel *Season::seasonUpcomingModel()
+{
+    SignalListFilter<Episode*> * filter=new SignalListFilter<Episode*>();
+    filter->setFilter([](Episode* episode){return !episode->seen();});
+    filter->setSourceModel(seasonModelT());
+    return filter;
+}
+
+SignalListAdapter<Episode *> *Season::seasonModelT()
 {
     return  new SignalListAdapter<Episode*>(episodes(),"episode");
 }

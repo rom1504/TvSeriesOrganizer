@@ -21,6 +21,7 @@ class Series : public QObject
     Q_PROPERTY(bool seen READ seen WRITE setSeen NOTIFY seenChanged)
     Q_PROPERTY(double seenRatio READ seenRatio NOTIFY seenRatioChanged)
     Q_PROPERTY(QAbstractItemModel * seriesModel READ seriesModel NOTIFY seriesModelChanged)
+    Q_PROPERTY(QAbstractItemModel * seriesUpcomingModel READ seriesUpcomingModel NOTIFY seriesUpcomingModelChanged)
 
 public:
     explicit Series(QString name, QUrl banner, QObject *parent = 0);
@@ -46,9 +47,14 @@ public:
     int episodeSeenCount() const;
     int episodeCount() const;
     QAbstractItemModel * seriesModel();
+    QAbstractItemModel * seriesUpcomingModel();
 
 
     void setSeen(bool seen);
+
+
+private:
+    SignalListAdapter<Season*> * seriesModelT();
 
 
 signals:
@@ -64,6 +70,7 @@ signals:
     void seenChanged();
     void seenRatioChanged();
     void seriesModelChanged();
+    void seriesUpcomingModelChanged();
 
 public slots:
     Season *getSeason(int row) const;

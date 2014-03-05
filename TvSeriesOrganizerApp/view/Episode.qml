@@ -3,11 +3,13 @@ import "qrc:/GeneralQmlItems/"
 
 ShadowBorderRectangle
 {
-    Keys.onReturnPressed: seasonDetails.episodeClicked(index)
+    signal episodeClicked(int index)
+
+    Keys.onReturnPressed: episodeClicked(index)
     onClicked:
     {
         if(isMouseIn(seenRectangle)) seenRectangle.clicked()
-        else seasonDetails.episodeClicked(index)
+        else episodeClicked(index)
     }
     TitleImageDescriptionItem
     {
