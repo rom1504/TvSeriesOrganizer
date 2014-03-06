@@ -2,7 +2,7 @@
 #include "adapter/signallistfilter.h"
 
 SeriesList::SeriesList(QObject *parent) :
-    QObject(parent),mSeries([](Series* a,Series * b){return a->name()<b->name();})
+    QObject(parent),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
 {
 }
 
