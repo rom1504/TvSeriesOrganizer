@@ -1,15 +1,20 @@
+#include <QDomDocument>
+#include <QDomElement>
+
 #include "serieslist.h"
 #include "adapter/signallistfilter.h"
+#include "controller/controller.h"
 
 SeriesList::SeriesList(QObject *parent) :
     QObject(parent),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
 {
 }
 
-void SeriesList::addSeries(Series * series)
+int SeriesList::addSeries(Series * series)
 {
     int insertionIndex=mSeries.append(series);
     connect(series,&Series::seenChanged,[insertionIndex,this](){emit mSeries.dataChanged(insertionIndex,insertionIndex);});
+    return insertionIndex;
 }
 
 
@@ -57,15 +62,34 @@ SignalList<Series *> * SeriesList::series()
 }
 
 
-void SeriesList::addSeries(const QString& seriesName)
+void SeriesList::completeAddSaveSeries(Series* series)
 {
-    addSeries(new Series(seriesName));
+    connect(series,&Series::completed,[this,series](){
+        int index=addSeries(series);
+        saveSeries();
+        emit seriesAdded(index);
+    });
+    series->complete();
 }
 
-void SeriesList::addSaveSeries(const QString& seriesName)
+
+void SeriesList::searchSeries(const QString &seriesName)
 {
-    addSeries(seriesName);
-    saveSeries();
+    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName),[this](QString xmlContent){
+        SignalList<Series*> * searchList=new SignalList<Series*>;
+        QDomDocument doc;
+        doc.setContent(xmlContent);
+        QDomElement root = doc.documentElement();
+        root = root.firstChildElement();
+        while(!root.isNull())
+        {
+            Series * series=new Series(root);
+            searchList->append(series);
+            root = root.nextSiblingElement();
+        }
+        SignalListAdapter<Series*> * searchListModel=new SignalListAdapter<Series*>(searchList,"series");
+        emit searchCompleted(searchListModel);
+    });
 }
 
 void SeriesList::saveSeries(QString fileName) const
@@ -74,7 +98,7 @@ void SeriesList::saveSeries(QString fileName) const
     QFile file(fileName);
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream flux(&file);
-    for(auto series : mSeries) flux<<series->name()<<"\n";
+    for(auto series : mSeries) flux<<series->id()<<"\n";
     file.close();
 }
 
@@ -84,6 +108,6 @@ void SeriesList::loadSeries(QString fileName)
     mSaveFileName=fileName;
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
-    while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed()));
+    while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed().toInt()));
     file.close();
 }

@@ -14,11 +14,10 @@ class SeriesList : public QObject
 
 public:
     explicit SeriesList(QObject *parent = 0);
-    void addSeries(Series * series);
+    int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;
     void loadSeries(QString fileName="");
-    void addSeries(const QString &seriesName);
     void removeSeries(int row);
 
 
@@ -31,11 +30,14 @@ private:
 signals:
     void seriesListModelChanged();
     void seriesListUpcomingModelChanged();
+    void searchCompleted(QAbstractItemModel * searchListModel);
+    void seriesAdded(int addIndex);
 
 public slots:
     Series *getSeries(int row) const;
-    void addSaveSeries(const QString &seriesName);
+    void completeAddSaveSeries(Series* series);
     void removeSaveSeries(int row);
+    void searchSeries(const QString &seriesName);
 
 private:
     SignalList<Series*> mSeries;

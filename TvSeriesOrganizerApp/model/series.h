@@ -2,6 +2,7 @@
 #define SERIE_H
 
 #include <QObject>
+#include <QDomElement>
 
 #include "season.h"
 #include "model/signallist.h"
@@ -24,10 +25,12 @@ class Series : public QObject
     Q_PROPERTY(QAbstractItemModel * seriesUpcomingModel READ seriesUpcomingModel NOTIFY seriesUpcomingModelChanged)
 
 public:
-    explicit Series(QString name, QUrl banner, QObject *parent = 0);
-    explicit Series(QString name, QObject *parent = 0);
+    explicit Series(int id, QObject *parent = 0);
+    explicit Series(const QDomElement & element, QObject*parent=0);
     void addSeason(Season * season);
     SignalList<Season *> *seasons();
+
+    void complete();
 
     void setName(QString name);
     void setOverview(QString overview);
@@ -49,8 +52,13 @@ public:
     QAbstractItemModel * seriesModel();
     QAbstractItemModel * seriesUpcomingModel();
 
+    int id() const;
+
+
 
     void setSeen(bool seen);
+
+    static void loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load);
 
 
 private:
@@ -72,16 +80,16 @@ signals:
     void seriesModelChanged();
     void seriesUpcomingModelChanged();
 
+    void completed();
+
 public slots:
     Season *getSeason(int row) const;
 
 private:
     void loadSeriesSeenFile();
     void saveSeriesSeenFile();
-    void loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load);
     void loadSeries(QString xmlFileContent);
     void loadBanners(QString xmlFileContent);
-    void beginLoadingSeries(QString xmlContent);
     Season* findSeason(int seasonNumber);
 
 private:
@@ -89,7 +97,7 @@ private:
     QUrl mBanner;
     QUrl mPoster;
     SignalList<Season*> mSeasons;
-    QString mId;
+    int mId;
     QString mOverview;
     QDate mFirstAired;
     QString mNetwork;

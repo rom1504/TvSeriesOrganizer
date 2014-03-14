@@ -60,7 +60,8 @@ OTHER_FILES += \
     view/ListPage.qml \
     view/SimplePage.qml \
     view/TabItem.qml \
-    view/TabPage.qml
+    view/TabPage.qml \
+    view/SeriesSearch.qml
 
 QT+= xml
 

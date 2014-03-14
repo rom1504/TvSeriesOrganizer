@@ -24,7 +24,12 @@ SimplePage
 
     onEnter:listview.currentItem.Keys.onReturnPressed(event)
 
-    onTabClicked: {listview.positionViewAtIndex(index,ListView.Center);listview.contentXChanged();}
+    function goTo(index)
+    {
+        listview.positionViewAtIndex(index,ListView.Center);listview.contentXChanged();
+    }
+
+    onTabClicked: goTo(index)
 
 
     ListView

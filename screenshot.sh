@@ -28,10 +28,19 @@ function takeScreenshot
 
 function addSeries
 {
+	moveClick 400 170
+	sleep 1
 	moveClick 100 240
 	xte -x $DISPLAY "str $1"
+	sleep 1
 	xte -x $DISPLAY "key Return"
-	sleep $sleeptime
+ 	sleep $sleeptime
+ 	if [[ $2 -eq 1 ]]
+ 	then
+		takeScreenshot SeriesSearch
+	fi
+	moveClick 515 305
+	sleep 1
 }
 
 function moveClickTakeScreenshot
@@ -41,14 +50,14 @@ function moveClickTakeScreenshot
 	takeScreenshot $3
 }
 
+addSeries "merlin" 1
 addSeries "suits"
 addSeries "breaking bad"
-addSeries "the big bang theory"
 
 sleep $sleeptime
 takeScreenshot SeriesList
 
-moveClickTakeScreenshot 40 550 SeriesDetails
+moveClickTakeScreenshot 40 350 SeriesDetails
 moveClickTakeScreenshot 200 90 SeriesInfo
 moveClickTakeScreenshot 400 90 SeriesFanArts
 moveClickTakeScreenshot 400 90 SeriesPosters

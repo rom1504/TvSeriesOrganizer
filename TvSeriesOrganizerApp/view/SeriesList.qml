@@ -7,6 +7,7 @@ TabPage
     imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
     property int seriesIndex:0
     property var seriesList
+    onTabChanged: stackview.focus=true
 
     function seriesClicked(seriesNumber,upcoming)
     {
@@ -23,60 +24,25 @@ TabPage
     {
         seriesList.removeSaveSeries(seriesNumber)
     }
-
-    function addSeries(seriesNames)
-    {
-        seriesList.addSaveSeries(seriesNames)
-    }
-
     tabContentModel: VisualItemModel
     {
-        Item
+        ListView
         {
-            width:childrenRect.width
-            height:childrenRect.height
             Keys.onDownPressed: listview.incrementCurrentIndex()
             Keys.onUpPressed: listview.decrementCurrentIndex()
-            Keys.onReturnPressed:if(!(lineInput.activeFocus)) listview.currentItem.Keys.onReturnPressed(event)
-            Column
-            {
-                Row
-                {
-                    spacing:150
-                    x:20
-                    LineInput
-                    {
-                        id:lineInput
-                        width:330
-                        height:25
-                        onReturnText: addSeries(text)
-                        hint:"Tv series name"
-                    }
-
-                    Button
-                    {
-                        id:add
-                        onClicked:lineInput.accepted()
-                        text:"Add"
-                    }
-                }
-                ListView
-                {
-                    delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,false)}
-                    model:seriesList.seriesListModel
-                    width: seriesListPage.width-40
-                    height: seriesListPage.height
-                    currentIndex: seriesIndex
-                    focus:true
-                    clip:true
+            Keys.onReturnPressed:listview.currentItem.Keys.onReturnPressed(event)
+            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,false)}
+            model:seriesList.seriesListModel
+            width: seriesListPage.width-40
+            height: seriesListPage.height
+            currentIndex: seriesIndex
+            focus:true
+            clip:true
 
 
-                    highlightRangeMode:ListView.StrictlyEnforceRange
-                    id:listview
-                }
-            }
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            id:listview
         }
-
         ListView
         {
             delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,true)}
@@ -94,9 +60,20 @@ TabPage
             Keys.onUpPressed: listviewupcoming.decrementCurrentIndex()
             Keys.onReturnPressed:listviewupcoming.currentItem.Keys.onReturnPressed(event)
         }
+        SeriesSearch
+        {
+            seriesList:seriesListPage.seriesList
+            width: seriesListPage.width-40
+            height: seriesListPage.height
+            onSearchFinished:
+            {
+                seriesListPage.goTo(0)
+                listview.currentIndex=addIndex;
+            }
+        }
     }
 
-    tabModel:["Series","Upcoming"]
+    tabModel:["Series","Upcoming","Search"]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesListPage}
     beginIndex: 0
 }
