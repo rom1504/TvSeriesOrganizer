@@ -2,3 +2,5 @@
 description.txt
 *.kate-swp
 secret/
+oldfiles/
+*.autosave

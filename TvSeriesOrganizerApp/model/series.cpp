@@ -58,7 +58,7 @@ void Series::loadSeries(QString xmlFileContent)
         else if(root.tagName() == "Episode")
         {
             QDomElement episodeElement=root.firstChildElement();
-            QString seasonNumber;
+            QString seasonNumber="-1";
             QString episodeNumber;
             QString episodeName;
             QString episodeOverview;
@@ -77,10 +77,11 @@ void Series::loadSeries(QString xmlFileContent)
             currentSeason=findSeason(seasonNumber.toInt());
             if(currentSeason==nullptr)
             {
-                currentSeason=new Season(seasonNumber.toInt(),banner(),QUrl());
+                Q_ASSERT(seasonNumber!="-1");
+                currentSeason=new Season(seasonNumber.toInt(),banner(),QUrl(),this);
                 addSeason(currentSeason);
             }
-            currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeOverview,QUrl(episodeBanner=="" ? currentSeason->banner() : "http://thetvdb.com/banners/"+episodeBanner),QDate::fromString(firstAired,"yyyy-MM-dd")));
+            currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeOverview,QUrl(episodeBanner=="" ? currentSeason->banner() : "http://thetvdb.com/banners/"+episodeBanner),QDate::fromString(firstAired,"yyyy-MM-dd"),currentSeason));
         }
         root = root.nextSiblingElement();
     }

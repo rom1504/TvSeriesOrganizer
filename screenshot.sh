@@ -28,9 +28,9 @@ function takeScreenshot
 
 function addSeries
 {
-	moveClick 400 170
+	moveClick 400 90
 	sleep 1
-	moveClick 100 240
+	moveClick 100 160
 	xte -x $DISPLAY "str $1"
 	sleep 1
 	xte -x $DISPLAY "key Return"
@@ -39,7 +39,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 515 305
+	moveClick 520 200
 	sleep 1
 }
 

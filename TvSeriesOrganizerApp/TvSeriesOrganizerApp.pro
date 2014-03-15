@@ -68,3 +68,4 @@ QT+= xml
 
 INCLUDEPATH += $$PWD/../GeneralQmlItems
 DEPENDPATH += $$PWD/../GeneralQmlItems
+

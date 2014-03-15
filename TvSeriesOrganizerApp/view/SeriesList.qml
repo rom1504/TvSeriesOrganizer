@@ -4,19 +4,52 @@ import "qrc:/GeneralQmlItems/"
 TabPage
 {
     id:seriesListPage
-    imageSource:"qrc:/images/TvSeriesOrganizer.jpg"
+    imageSource:"qrc:/images/TvSeriesOrganizerHeader.png"
     property int seriesIndex:0
     property var seriesList
     onTabChanged: stackview.focus=true
+    property alias stimer:timer
+
+    Component.onCompleted: imageSource=seriesList.seriesCount>0 ? seriesList.getSeries(0).banner : "qrc:/images/TvSeriesOrganizerHeader.png"
+
+    Text
+    {
+
+       Timer
+        {
+                id:timer
+                interval: 5000
+                running: seriesList.seriesCount>0
+                repeat: true
+                onTriggered:
+                {
+                    currentBannerIndex++;
+                    if(currentBannerIndex>=seriesList.seriesCount) currentBannerIndex=0;
+                    newImageSource=seriesList.getSeries(currentBannerIndex).banner;
+                }
+        }
+        x:awidth/2-width/2
+        y:-height-aheight/14
+        width:contentWidth
+        height:contentHeight
+        font.pointSize: 35
+        color:"white"
+        font.family: "georgia"
+        text:"Tv Series Organizer"
+    }
+
+
+    property int currentBannerIndex:0
 
     function seriesClicked(seriesNumber,upcoming)
     {
-        seriesIndex=seriesNumber
+        timer.running=false
+        seriesListPage.seriesIndex=seriesNumber
         stackview.push
         ({
              item:"qrc:/view/SeriesDetails.qml",
              immediate:true,
-             properties:{series:seriesList.getSeries(seriesNumber),upcoming:upcoming}
+             properties:{series:seriesListPage.seriesList.getSeries(seriesNumber),upcoming:upcoming}
         })
     }
 
@@ -28,9 +61,9 @@ TabPage
     {
         ListView
         {
-            Keys.onDownPressed: listview.incrementCurrentIndex()
-            Keys.onUpPressed: listview.decrementCurrentIndex()
-            Keys.onReturnPressed:listview.currentItem.Keys.onReturnPressed(event)
+            Keys.onDownPressed: if(currentIndex-1<count) listview.incrementCurrentIndex()
+            Keys.onUpPressed: if(currentIndex>0) listview.decrementCurrentIndex()
+            Keys.onReturnPressed:seriesListPage.seriesClicked(currentIndex,false);
             delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,false)}
             model:seriesList.seriesListModel
             width: seriesListPage.width-40

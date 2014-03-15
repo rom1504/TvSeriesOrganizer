@@ -14,6 +14,7 @@ int SeriesList::addSeries(Series * series)
 {
     int insertionIndex=mSeries.append(series);
     connect(series,&Series::seenChanged,[insertionIndex,this](){emit mSeries.dataChanged(insertionIndex,insertionIndex);});
+    emit seriesCountChanged();
     return insertionIndex;
 }
 
@@ -21,6 +22,11 @@ int SeriesList::addSeries(Series * series)
 Series * SeriesList::getSeries(int row) const
 {
     return mSeries.get(row);
+}
+
+int SeriesList::seriesCount() const
+{
+    return mSeries.size();
 }
 
 
@@ -47,6 +53,7 @@ QAbstractItemModel * SeriesList::seriesListUpcomingModel()
 void SeriesList::removeSeries(int row)
 {
     mSeries.remove(row);
+    emit seriesCountChanged();
 }
 
 void SeriesList::removeSaveSeries(int row)
@@ -83,7 +90,7 @@ void SeriesList::searchSeries(const QString &seriesName)
         root = root.firstChildElement();
         while(!root.isNull())
         {
-            Series * series=new Series(root);
+            Series * series=new Series(root,this);
             searchList->append(series);
             root = root.nextSiblingElement();
         }
@@ -108,6 +115,6 @@ void SeriesList::loadSeries(QString fileName)
     mSaveFileName=fileName;
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
-    while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed().toInt()));
+    while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed().toInt(),this));
     file.close();
 }

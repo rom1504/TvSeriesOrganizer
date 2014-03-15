@@ -12,7 +12,11 @@ TabPage
     property int listBeginIndex:seasonIndex
     property bool upcoming:false
 
-    onBack:stackview.pop({immediate:true})
+    onBack:
+    {
+        stackview.pop({immediate:true})
+        stackview.get(0).stimer.running=true
+    }
 
     function seasonClicked(seasonNumber,upcoming)
     {

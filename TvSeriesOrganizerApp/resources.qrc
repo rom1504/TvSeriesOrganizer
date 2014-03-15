@@ -7,10 +7,6 @@
         <file>view/SeriesDetails.qml</file>
         <file>view/Series.qml</file>
         <file>view/SeriesList.qml</file>
-        <file>images/series.jpg</file>
-        <file>images/episode.jpg</file>
-        <file>images/season.jpg</file>
-        <file>images/TvSeriesOrganizer.jpg</file>
         <file>view/SeenIndicator.qml</file>
         <file>view/MainView.qml</file>
         <file>view/ListPage.qml</file>
@@ -18,5 +14,6 @@
         <file>view/TabItem.qml</file>
         <file>view/TabPage.qml</file>
         <file>view/SeriesSearch.qml</file>
+        <file>images/TvSeriesOrganizerHeader.png</file>
     </qresource>
 </RCC>
