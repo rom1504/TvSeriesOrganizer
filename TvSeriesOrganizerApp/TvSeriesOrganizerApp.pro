@@ -61,11 +61,14 @@ OTHER_FILES += \
     view/SimplePage.qml \
     view/TabItem.qml \
     view/TabPage.qml \
-    view/SeriesSearch.qml
+    view/SeriesSearch.qml \
+    android/AndroidManifest.xml
 
 QT+= xml
 
 
 INCLUDEPATH += $$PWD/../GeneralQmlItems
 DEPENDPATH += $$PWD/../GeneralQmlItems
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

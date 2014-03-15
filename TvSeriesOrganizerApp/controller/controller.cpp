@@ -25,6 +25,7 @@ Controller::Controller(QObject *parent) :
     Controller::cachePath=current.absolutePath()+"/cache";
     Controller::filesPath=current.absolutePath()+"/files";
 #else
+    mViewer.setIcon(QIcon(":/images/icon512.png"));
     Controller::cachePath=QCoreApplication::applicationDirPath();
     Controller::filesPath=QCoreApplication::applicationDirPath();
 #endif

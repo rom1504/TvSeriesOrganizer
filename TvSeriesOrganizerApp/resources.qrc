@@ -15,5 +15,6 @@
         <file>view/TabPage.qml</file>
         <file>view/SeriesSearch.qml</file>
         <file>images/TvSeriesOrganizerHeader.png</file>
+        <file>images/icon512.png</file>
     </qresource>
 </RCC>
