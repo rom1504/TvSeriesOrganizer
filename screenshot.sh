@@ -23,7 +23,7 @@ function moveClick
 
 function takeScreenshot
 {
-	xwd -id $id | convert xwd:- screenshot/$1.png
+	import -window $id screenshot/$1.png
 }
 
 function addSeries
