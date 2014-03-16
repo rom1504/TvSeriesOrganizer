@@ -38,6 +38,7 @@ Rectangle
         {
             if(image.opacity==1)
             {
+                nextImage.enabled=true
                 nextImage.source=image.newSource
                 state="forward"
             }
@@ -81,6 +82,7 @@ Rectangle
     }
     Image
     {
+        enabled: false
         opacity:0
         id:nextImage
         x:0
