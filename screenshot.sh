@@ -39,7 +39,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 520 200
+	moveClick 520 210
 	sleep 1
 }
 
