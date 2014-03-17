@@ -22,7 +22,7 @@ Series::Series(const QDomElement & element, QObject*parent) : QObject(parent)
     QDomElement root = element.firstChildElement();
     while(!root.isNull())
     {
-        if(root.tagName() == "banner") mBanner="http://thetvdb.com/banners/"+root.text();
+        if(root.tagName() == "banner") mBanner="http://thetvdb.com/banners/_cache/"+root.text();
         else if(root.tagName() == "id") mId=root.text().toInt();
         else if(root.tagName() == "SeriesName") setName(root.text());
         else if(root.tagName() == "Overview") setOverview(root.text());
@@ -47,7 +47,7 @@ void Series::loadSeries(QString xmlFileContent)
             QDomElement seriesElement=root.firstChildElement();
             while(!seriesElement.isNull())
             {
-                if(seriesElement.tagName() == "banner") mBanner="http://thetvdb.com/banners/"+seriesElement.text();
+                if(seriesElement.tagName() == "banner") mBanner="http://thetvdb.com/banners/_cache/"+seriesElement.text();
                 else if(seriesElement.tagName() == "SeriesName") setName(seriesElement.text());
                 else if(seriesElement.tagName() == "Overview") setOverview(seriesElement.text());
                 else if(seriesElement.tagName()=="FirstAired") mFirstAired=QDate::fromString(seriesElement.text(),"yyyy-MM-dd");
@@ -177,14 +177,14 @@ void Series::loadBanners(QString xmlFileContent)
             {
                 if(bannerType=="poster")
                 {
-                    if(!mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
-                    mPosters.append(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    if(!mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                    mPosters.append(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
                 }
                 else if(bannerType=="season")
                 {
                     Season * season=findSeason(seasonNumber);
-                    if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/"+bannerPath));
-                    else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/"+bannerPath));
+                    if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                    else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
                 }
                 else if(bannerType=="fanart") mFanArts.append(QUrl("http://thetvdb.com/banners/"+thumbnailPath));
             }

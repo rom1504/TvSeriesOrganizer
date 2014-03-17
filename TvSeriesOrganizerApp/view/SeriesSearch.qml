@@ -9,6 +9,7 @@ Column
     property var seriesList
 
     signal searchFinished(int addIndex)
+    y:5
 
     Connections
     {
@@ -21,7 +22,7 @@ Column
         }
     }
 
-    spacing:20
+    spacing:15
     Row
     {
         width: parent.width
@@ -30,7 +31,7 @@ Column
         LineInput
         {
             id:lineInput
-            font.pointSize:14
+            font.pointSize:16
             width:seriesSearch.width/1.3
             onReturnText: seriesList.searchSeries(text);
             hint:"Tv series name"
@@ -41,6 +42,7 @@ Column
             id:searchButton
             onClicked:lineInput.accepted()
             text:"Search"
+            font.pointSize: 16
         }
     }
     ListView
@@ -64,6 +66,7 @@ Column
                 {
                     id:addButton
                     text:"Add"
+                    font.pointSize: 18
                     x:parent.width-width
                     focus:true
                     onClicked: seriesList.completeAddSaveSeries(series)

@@ -22,7 +22,7 @@ Rectangle
     property alias imageSource:image.source
     property alias newImageSource:image.newSource
     default property alias children : insidePageItem.children
-    property alias buttonBarHeight:backContainer.height
+    property int buttonBarHeight:0
     Keys.onBackPressed: simplePage.back()
     Keys.onPressed: if(event.key === Qt.Key_Backspace) simplePage.back()
     Image
@@ -40,7 +40,8 @@ Rectangle
         {
             if(image.opacity==1)
             {
-                nextImage.enabled=true
+                nbc.enabled=true
+                nbc.visible=true
                 nextImage.source=image.newSource
                 state="forward"
             }
@@ -73,9 +74,6 @@ Rectangle
                     NumberAnimation { target:nextImage; properties: "opacity"; duration: 2000;easing.type: Easing.Linear  }
             }
         ]
-
-        visible:false
-
     }
     BrightnessContrast {
 
@@ -87,7 +85,6 @@ Rectangle
     Image
     {
         visible:false
-        enabled: false
         opacity:0
         id:nextImage
         x:0
@@ -100,6 +97,8 @@ Rectangle
 
 
     BrightnessContrast {
+            id:nbc
+            visible:false
             anchors.fill: nextImage
             source: nextImage
             brightness: -0.3
@@ -107,19 +106,36 @@ Rectangle
         }
 
 
-    Button
+    Item
     {
         id:backContainer
-        x:parent.width-60
-        y:image.height+5
-        onClicked:simplePage.back()
-        text:"Back"
+        x:5
+        y:5
+        width: button.width +5
+        height: button.height +5
+        signal clicked
+        onClicked: simplePage.back()
+        Image
+        {
+            source:"qrc:/images/back.png"
+            width:50
+            height:50
+            id:button
+        }
+        MouseArea
+        {
+            hoverEnabled:true
+            id:area
+            anchors.fill: parent
+            onClicked: backContainer.clicked()
+            preventStealing:true
+        }
     }
     Item
     {
         id:insidePageItem
         x:20
-        y:backContainer.height+backContainer.y+5
-        height:simplePage.height-backContainer.y-backContainer.height
+        y:image.height+image.y+5
+        height:simplePage.height-image.y-image.height
     }
 }

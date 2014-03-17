@@ -30,7 +30,7 @@ function addSeries
 {
 	moveClick 400 90
 	sleep 1
-	moveClick 100 160
+	moveClick 100 130
 	xte -x $DISPLAY "str $1"
 	sleep 1
 	xte -x $DISPLAY "key Return"
@@ -39,7 +39,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 520 210
+	moveClick 520 180
 	sleep 1
 }
 
@@ -57,15 +57,15 @@ addSeries "breaking bad"
 sleep $sleeptime
 takeScreenshot SeriesList
 
-moveClickTakeScreenshot 40 350 SeriesDetails
+moveClickTakeScreenshot 40 320 SeriesDetails
 moveClickTakeScreenshot 200 90 SeriesInfo
 moveClickTakeScreenshot 400 90 SeriesFanArts
 moveClickTakeScreenshot 400 90 SeriesPosters
 moveClick 100 90
 moveClick 100 90
 
-moveClickTakeScreenshot 40 400 SeasonDetails
-moveClickTakeScreenshot 40 300 EpisodeDetails
+moveClickTakeScreenshot 40 380 SeasonDetails
+moveClickTakeScreenshot 40 280 EpisodeDetails
 
 pkill Xvfb
 export DISPLAY=:0

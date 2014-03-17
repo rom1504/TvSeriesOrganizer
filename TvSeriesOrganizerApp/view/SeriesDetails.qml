@@ -115,19 +115,13 @@ TabPage
             Keys.onLeftPressed: seriesDetails.goLeft()
             Keys.onRightPressed: seriesDetails.goRight()
 
-            delegate:
-                FixedSizeShadowBorderItem
-                {
-                    width:fanArtsView.cellWidth-fanArtsView.itemMargin
-                    height:fanArtsView.cellHeight-fanArtsView.itemMargin
-                    Image
+            delegate:Image
                     {
+                        width:fanArtsView.cellWidth-fanArtsView.itemMargin
+                        height:fanArtsView.cellHeight-fanArtsView.itemMargin
                         id:fanArtImage
-                        width:parent.width
-                        height:parent.height
                         source:fanArt
                     }
-                }
         }
         GridView
         {
@@ -145,19 +139,13 @@ TabPage
             Keys.onLeftPressed: seriesDetails.goLeft()
             Keys.onRightPressed: seriesDetails.goRight()
 
-            delegate:
-                FixedSizeShadowBorderItem
-                {
-                    width:postersView.cellWidth-postersView.itemMargin
-                    height:postersView.cellHeight-postersView.itemMargin
-                    Image
+            delegate:Image
                     {
                         id:posterImage
-                        width:parent.width
-                        height:parent.height
+                        width:postersView.cellWidth-postersView.itemMargin
+                        height:postersView.cellHeight-postersView.itemMargin
                         source:poster
                     }
-                }
         }
     }
     tabModel:["Seasons","Info","Fan arts","Posters"]

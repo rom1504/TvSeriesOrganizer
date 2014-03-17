@@ -16,5 +16,6 @@
         <file>view/SeriesSearch.qml</file>
         <file>images/TvSeriesOrganizerHeader.png</file>
         <file>images/icon512.png</file>
+        <file>images/back.png</file>
     </qresource>
 </RCC>

@@ -85,7 +85,7 @@ SimplePage
         width:tabPage.width-100
 
         clip:true
-        y:-10-buttonBarHeight-citem.height
+        y:-5-citem.height
 
         Column
         {

@@ -30,7 +30,7 @@ TabPage
                 }
         }
         x:awidth/2-width/2
-        y:-height-aheight/14
+        y:-height-aheight/20
         width:contentWidth
         height:contentHeight
         font.pointSize: 35

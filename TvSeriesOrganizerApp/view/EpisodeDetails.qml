@@ -14,7 +14,7 @@ TabPage
 // à fin
 
     onTabChanged: stackview.get(2).episodeIndex=column
-    onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner;
+    onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner
 
     onBack:stackview.pop({immediate:true})
 
