@@ -10,7 +10,8 @@ TabPage
     onTabChanged: stackview.focus=true
     property alias stimer:timer
 
-    Component.onCompleted: imageSource=seriesList.seriesCount>0 ? seriesList.getSeries(0).banner : "qrc:/images/TvSeriesOrganizerHeader.png"
+    onBack:Qt.quit()
+    Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner
 
     Text
     {

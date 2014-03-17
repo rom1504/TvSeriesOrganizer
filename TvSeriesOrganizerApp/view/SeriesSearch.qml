@@ -30,8 +30,8 @@ Column
         LineInput
         {
             id:lineInput
-            width:330
-            height:25
+            font.pointSize:14
+            width:seriesSearch.width/1.3
             onReturnText: seriesList.searchSeries(text);
             hint:"Tv series name"
         }

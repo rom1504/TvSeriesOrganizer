@@ -33,6 +33,8 @@ Rectangle
         opacity:1
         width:parent.width
         height:width*sourceSize.height/sourceSize.width
+        state:""
+
         property url newSource
         onNewSourceChanged:
         {
@@ -72,16 +74,19 @@ Rectangle
             }
         ]
 
-        BrightnessContrast {
-
-                anchors.fill: image
-                source: image
-                brightness: -0.3
-            }
+        visible:false
 
     }
+    BrightnessContrast {
+
+            opacity:image.opacity
+            anchors.fill: image
+            source: image
+            brightness: -0.3
+        }
     Image
     {
+        visible:false
         enabled: false
         opacity:0
         id:nextImage
@@ -90,15 +95,16 @@ Rectangle
         width:parent.width
         height:width*sourceSize.height/sourceSize.width
 
-        BrightnessContrast {
-                anchors.fill: nextImage
-                source: nextImage
-                brightness: -0.3
-            }
 
     }
 
 
+    BrightnessContrast {
+            anchors.fill: nextImage
+            source: nextImage
+            brightness: -0.3
+            opacity:nextImage.opacity
+        }
 
 
     Button

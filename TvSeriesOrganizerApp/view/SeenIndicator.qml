@@ -29,15 +29,15 @@ Rectangle
 
     state:seen ? "Seen" : "NotSeen"
     y:0
-    width:55
-    height:20
+    width:seenText.contentWidth
+    height:seenText.contentHeight
     color:"orange"
     Text
     {
         id:seenText
         text:"Seen"
         color:"white"
-        font.pointSize: 8
+        font.pointSize: 14
         anchors.centerIn: parent
     }
 }
