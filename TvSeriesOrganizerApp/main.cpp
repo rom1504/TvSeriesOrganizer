@@ -22,7 +22,24 @@ int main(int argc, char *argv[])
     translator.load(QString(":/translations/TvSeriesOrganizer_") + locale);
     QGuiApplication::installTranslator(&translator);
 
-    Controller c;
+    QGuiApplication::setApplicationName("TvSeriesOrganizer");
+    QGuiApplication::setApplicationVersion("0.8.2");
+
+    QString datadir="";
+
+#if !defined(Q_OS_ANDROID)
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    //parser.addPositionalArgument("data-dir", QCoreApplication::translate("main", "Directory where data are saved"));
+    QCommandLineOption dataDirectoryOption(QStringList() << "data-dir",QGuiApplication::translate("main", "Directory where data are saved"),QGuiApplication::translate("main", "directory"));
+    parser.addOption(dataDirectoryOption);
+    parser.process(app);
+
+    datadir = parser.value(dataDirectoryOption);
+#endif
+
+    Controller c(datadir);
     c.run();
 
     return app.exec();

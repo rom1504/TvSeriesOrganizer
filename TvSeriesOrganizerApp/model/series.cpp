@@ -207,7 +207,7 @@ Season* Series::findSeason(int seasonNumber)
 
 void Series::loadSeriesSeenFile()
 {
-    QString fileName=Controller::filesPath+"/"+QString::number(mId)+"_seen.xml";
+    QString fileName=Controller::dataPath+"/"+QString::number(mId)+"_seen.xml";
     QFile seriesSeenFile(fileName);
     if(seriesSeenFile.open(QIODevice::ReadOnly|QIODevice::Text))
     {
@@ -271,7 +271,7 @@ void Series::saveSeriesSeenFile()
     QString xmlContent = doc.toString();
 
 
-    QString fileName=Controller::filesPath+"/"+QString::number(mId)+"_seen.xml";
+    QString fileName=Controller::dataPath+"/"+QString::number(mId)+"_seen.xml";
     QFile seriesSeenFile(fileName);
     seriesSeenFile.open(QIODevice::WriteOnly|QIODevice::Text);
     QTextStream out(&seriesSeenFile);

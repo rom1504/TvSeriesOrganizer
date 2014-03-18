@@ -12,9 +12,9 @@
 
 
 QString Controller::cachePath;
-QString Controller::filesPath;
+QString Controller::dataPath;
 
-Controller::Controller(QObject *parent) :
+Controller::Controller(QString datadir, QObject *parent) :
     QObject(parent)
 {
     qmlRegisterInterface<QAbstractItemModel >("QAbstractItemModel");
@@ -26,8 +26,12 @@ Controller::Controller(QObject *parent) :
     Controller::filesPath=current.absolutePath()+"/files";
 #else
     mViewer.setIcon(QIcon(":/images/icon512.png"));
-    Controller::cachePath=QCoreApplication::applicationDirPath();
-    Controller::filesPath=QCoreApplication::applicationDirPath();
+    QString baseBase=datadir!="" ? datadir : QDir::homePath()+"/.TvSeriesOrganizer";
+    Controller::cachePath=baseBase+"/cache";
+    Controller::dataPath=baseBase+"/data";
+    QDir dir;
+    dir.mkpath(Controller::cachePath);
+    dir.mkpath(Controller::dataPath);
 #endif
 
     QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
@@ -43,7 +47,7 @@ Controller::Controller(QObject *parent) :
 #endif
 
     mSeriesList=new SeriesList;
-    mSeriesList->loadSeries(Controller::filesPath+"/myseries.txt");
+    mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
     ctxt->setContextProperty("seriesList", mSeriesList);
     mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
 
