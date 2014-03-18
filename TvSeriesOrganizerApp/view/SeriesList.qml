@@ -107,7 +107,7 @@ TabPage
         }
     }
 
-    tabModel:["Series","Upcoming","Search"]
+    tabModel:[qsTr("Series"),qsTr("Upcoming"),qsTr("Search")]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesListPage}
     beginIndex: 0
 }

@@ -11,7 +11,6 @@ TabPage
     property var seasonModel
     property var episode
     property bool upcoming:false
-// à fin
 
     onTabChanged: stackview.get(2).episodeIndex=column
     onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner
@@ -31,7 +30,7 @@ TabPage
             {
                 title:episode.name
                 imageSource:episode.banner
-                description:"Episode number "+episode.number+"\n"+"First aired: "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+                description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
             }
             SeenIndicator
             {
@@ -42,7 +41,7 @@ TabPage
             }
             width:episodeDetails.width-40
         }
-    tabDelegate:TabItem{tabText:"Episode "+episode.number;tabPage:episodeDetails}
+    tabDelegate:TabItem{tabText:qsTr("Episode")+" "+episode.number;tabPage:episodeDetails}
 
     beginIndex:episodeIndex
 }

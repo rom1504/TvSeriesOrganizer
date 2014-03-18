@@ -97,7 +97,7 @@ int Series::id() const
 
 void Series::complete()
 {
-    loadLocallyOrRemotely(Controller::cachePath+"/"+QString::number(mId)+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+QString::number(mId)+"/all/en.xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
+    loadLocallyOrRemotely(Controller::cachePath+"/"+QString::number(mId)+QLocale().bcp47Name()+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+QString::number(mId)+"/all/"+QLocale().bcp47Name()+".xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
 }
 
 void Series::setName(QString name)
@@ -173,7 +173,7 @@ void Series::loadBanners(QString xmlFileContent)
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
-            if(language=="en")
+            if(language=="en" || language==QLocale().bcp47Name())
             {
                 if(bannerType=="poster")
                 {

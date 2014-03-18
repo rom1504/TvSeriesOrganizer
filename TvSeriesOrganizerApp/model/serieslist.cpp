@@ -82,14 +82,18 @@ void SeriesList::completeAddSaveSeries(Series* series)
 
 void SeriesList::searchSeries(const QString &seriesName)
 {
-    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName),[this](QString xmlContent){
+    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+QLocale().bcp47Name()+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName+"&language="+QLocale().bcp47Name()),[this](QString xmlContent){
         SignalList<Series*> * searchList=new SignalList<Series*>;
         QDomDocument doc;
         doc.setContent(xmlContent);
         QDomElement root = doc.documentElement();
         root = root.firstChildElement();
+        QSet<int> ids;
         while(!root.isNull())
         {
+            int id=root.elementsByTagName("seriesid").at(0).toElement().text().toInt();
+            if(ids.contains(id)) {root = root.nextSiblingElement();continue;}
+            else ids<<id;
             Series * series=new Series(root,this);
             searchList->append(series);
             root = root.nextSiblingElement();

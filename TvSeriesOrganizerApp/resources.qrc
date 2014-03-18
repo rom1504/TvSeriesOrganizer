@@ -17,5 +17,7 @@
         <file>images/TvSeriesOrganizerHeader.png</file>
         <file>images/icon512.png</file>
         <file>images/back.png</file>
+        <file>translations/TvSeriesOrganizer_en.qm</file>
+        <file>translations/TvSeriesOrganizer_fr.qm</file>
     </qresource>
 </RCC>

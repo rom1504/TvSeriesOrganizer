@@ -16,14 +16,14 @@ Rectangle
         {
             name:"Seen"
             PropertyChanges{target:seenRectangle; color:"orange";}
-            PropertyChanges{target:seenText;text:"Seen";}
+            PropertyChanges{target:seenText;text:qsTr("Seen");}
         },
 
         State
         {
             name:"NotSeen"
             PropertyChanges{target:seenRectangle; color:"#A0A0A0";}
-            PropertyChanges{target:seenText;text:"Not seen";}
+            PropertyChanges{target:seenText;text:qsTr("Not seen");}
         }
     ]
 
@@ -35,7 +35,7 @@ Rectangle
     Text
     {
         id:seenText
-        text:"Seen"
+        text:qsTr("Seen")
         color:"white"
         font.pointSize: 14
         anchors.centerIn: parent

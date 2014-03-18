@@ -62,7 +62,7 @@ TabPage
                 Title
                 {
                     id:text3
-                    text:"Details: "
+                    text:qsTr("Details")+": "
                 }
                 Text
                 {
@@ -71,7 +71,7 @@ TabPage
                     wrapMode: Text.WordWrap
                     font.pointSize:  12
                     y:text3.y+text3.height+5
-                    text:"Network: \nFirst aired: "
+                    text:qsTr("Network")+": \n"+qsTr("First aired")+": "
                 }
                 Text
                 {
@@ -90,7 +90,7 @@ TabPage
                 Title
                 {
                     id:text1
-                    text:"Plot: "
+                    text:qsTr("Plot")+": "
                 }
                 Description
                 {
@@ -148,7 +148,7 @@ TabPage
                     }
         }
     }
-    tabModel:["Seasons","Info","Fan arts","Posters"]
+    tabModel:[qsTr("Seasons"),qsTr("Info"),qsTr("Fan arts"),qsTr("Posters")]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesDetails}
 
     beginIndex:0

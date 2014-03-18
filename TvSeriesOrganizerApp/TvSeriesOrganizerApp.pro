@@ -46,23 +46,7 @@ RESOURCES += \
     ../GeneralQmlItems/GeneralQmlItemsResources.qrc
 
 
-OTHER_FILES += \
-    view/Episode.qml \
-    view/EpisodeDetails.qml \
-    view/SeasonDetails.qml \
-    view/Season.qml \
-    view/SeriesDetails.qml \
-    view/ShadowBorderRectangle.qml \
-    view/Series.qml \
-    view/SeriesList.qml \
-    view/SeenIndicator.qml \
-    view/MainView.qml \
-    view/ListPage.qml \
-    view/SimplePage.qml \
-    view/TabItem.qml \
-    view/TabPage.qml \
-    view/SeriesSearch.qml \
-    android/AndroidManifest.xml
+OTHER_FILES += android/AndroidManifest.xml
 
 QT+= xml
 
@@ -72,3 +56,23 @@ DEPENDPATH += $$PWD/../GeneralQmlItems
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
+
+TRANSLATIONS += translations/TvSeriesOrganizer_fr.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_en.ts
+
+lupdate_only{
+SOURCES = view/Episode.qml \
+    view/EpisodeDetails.qml \
+    view/SeasonDetails.qml \
+    view/Season.qml \
+    view/SeriesDetails.qml \
+    view/Series.qml \
+    view/SeriesList.qml \
+    view/SeenIndicator.qml \
+    view/MainView.qml \
+    view/ListPage.qml \
+    view/SimplePage.qml \
+    view/TabItem.qml \
+    view/TabPage.qml \
+    view/SeriesSearch.qml \
+}

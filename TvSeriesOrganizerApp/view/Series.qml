@@ -25,7 +25,7 @@ ShadowBorderRectangle
     Button
     {
         id:removeButton
-        text:"Remove"
+        text:qsTr("Remove")
         font.pointSize: 14
         x:parent.width/2
         focus:true

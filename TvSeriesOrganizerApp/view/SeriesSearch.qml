@@ -32,16 +32,16 @@ Column
         {
             id:lineInput
             font.pointSize:16
-            width:seriesSearch.width/1.3
+            width:seriesSearch.width/1.4
             onReturnText: seriesList.searchSeries(text);
-            hint:"Tv series name"
+            hint:qsTr("Tv series name")
         }
 
         Button
         {
             id:searchButton
             onClicked:lineInput.accepted()
-            text:"Search"
+            text:qsTr("Search")
             font.pointSize: 16
         }
     }
@@ -65,7 +65,7 @@ Column
                 Button
                 {
                     id:addButton
-                    text:"Add"
+                    text:qsTr("Add")
                     font.pointSize: 18
                     x:parent.width-width
                     focus:true

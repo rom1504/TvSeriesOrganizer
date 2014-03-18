@@ -3,16 +3,12 @@ import "qrc:/GeneralQmlItems/"
 
 ShadowBorderRectangle
 {
-    function plural(n)
-    {
-        return n>1 ? "s":"";
-    }
 
-    function betterNumber(n,max)
+    function betterNumber(n,max,no,one,all)
     {
-        if(n===0) return "No";
-        if(n===1) return "One";
-        if(n===max) return "All";
+        if(n===0) return no;
+        if(n===1) return one;
+        if(n===max) return all;
         return n;
     }
     signal seasonClicked(int index)
@@ -26,9 +22,9 @@ ShadowBorderRectangle
     TitleImageDescriptionItem
     {
         id:content
-        title:"Season " + season.number
+        title:qsTr("Season")+" " + season.number
         imageSource:season.poster
-        description:"First aired:"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+season.episodeCount+" episode"+plural(season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount)+" episode"+plural(season.episodeSeenCount)+" seen"
+        description:qsTr("First aired")+":"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+qsTr("%n episode(s)","",season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount,qsTr("No episode seen"),qsTr("One episode seen"),qsTr("All episodes seen"))
 
         Column
         {
@@ -42,7 +38,7 @@ ShadowBorderRectangle
             }
             Description
             {
-                text:betterNumber(season.episodeAiredCount,season.episodeCount)+" episode"+plural(season.episodeAiredCount)+" aired"
+                text:betterNumber(season.episodeAiredCount,season.episodeCount,qsTr("No episode aired"),qsTr("One episode aired"),qsTr("All episodes aired"))
             }
             Slider
             {

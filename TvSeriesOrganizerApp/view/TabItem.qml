@@ -12,7 +12,6 @@ Text
     color: "#E5E5E5"
     font.pointSize: 14
     width:tabBar.width/3
-    //y:-contentHeight/5
 
     MouseArea
     {
