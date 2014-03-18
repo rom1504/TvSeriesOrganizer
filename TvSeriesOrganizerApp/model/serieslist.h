@@ -45,6 +45,7 @@ public slots:
 private:
     SignalList<Series*> mSeries;
     QString mSaveFileName;
+    QSet<int> mIds;
 
 };
 Q_DECLARE_METATYPE (SeriesList*)

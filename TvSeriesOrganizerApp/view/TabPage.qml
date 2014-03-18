@@ -82,7 +82,7 @@ SimplePage
     {
         id:tabbar
         height:50
-        width:tabPage.width-100
+        width:tabPage.width
 
         clip:true
         y:-5-citem.height

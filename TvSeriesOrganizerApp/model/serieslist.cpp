@@ -12,6 +12,9 @@ SeriesList::SeriesList(QObject *parent) :
 
 int SeriesList::addSeries(Series * series)
 {
+    int id=series->id();
+    if(mIds.contains(id)) return -1;
+    mIds<<id;
     int insertionIndex=mSeries.append(series);
     connect(series,&Series::seenChanged,[insertionIndex,this](){emit mSeries.dataChanged(insertionIndex,insertionIndex);});
     emit seriesCountChanged();
@@ -52,6 +55,7 @@ QAbstractItemModel * SeriesList::seriesListUpcomingModel()
 
 void SeriesList::removeSeries(int row)
 {
+    mIds.remove(mSeries.get(row)->id());
     mSeries.remove(row);
     emit seriesCountChanged();
 }
@@ -73,8 +77,11 @@ void SeriesList::completeAddSaveSeries(Series* series)
 {
     connect(series,&Series::completed,[this,series](){
         int index=addSeries(series);
-        saveSeries();
-        emit seriesAdded(index);
+        if(index!=-1)
+        {
+            saveSeries();
+            emit seriesAdded(index);
+        }
     });
     series->complete();
 }

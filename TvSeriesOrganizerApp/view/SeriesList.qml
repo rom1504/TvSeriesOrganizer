@@ -29,8 +29,8 @@ TabPage
                     newImageSource=seriesList.getSeries(currentBannerIndex).banner;
                 }
         }
-        x:awidth/2-width/2
-        y:-height-aheight/20
+        x:seriesListPage.width/2-width/2
+        y:-height-seriesListPage.height/20
         width:contentWidth
         height:contentHeight
         font.pointSize: 35
