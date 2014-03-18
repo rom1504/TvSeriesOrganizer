@@ -5,6 +5,8 @@ Application targetting desktop and mobile to organize your tv series
 
 [Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot.php)
 
+Translations are done with [Transifex](https://www.transifex.com/projects/p/tvseriesorganizer/), you can contribute there if you want
+
 
 ## Features
  * List of episodes organized by season and series
