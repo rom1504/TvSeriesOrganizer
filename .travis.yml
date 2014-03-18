@@ -33,4 +33,4 @@ env:
   
 
 after_success:
-  - if [[ $TRAVIS_BRANCH = "master" ]] && [[ $MY_SECRET_ENV != "" ]] ; then ./travis_after_success.sh  ; fi
+  - if [[ $MY_SECRET_ENV != "" ]] ; then ./travis_after_success.sh  ; fi
