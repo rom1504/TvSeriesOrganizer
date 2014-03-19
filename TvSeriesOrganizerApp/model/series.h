@@ -23,6 +23,7 @@ class Series : public QObject
     Q_PROPERTY(double seenRatio READ seenRatio NOTIFY seenRatioChanged)
     Q_PROPERTY(QAbstractItemModel * seriesModel READ seriesModel NOTIFY seriesModelChanged)
     Q_PROPERTY(QAbstractItemModel * seriesUpcomingModel READ seriesUpcomingModel NOTIFY seriesUpcomingModelChanged)
+    Q_PROPERTY(QString shortOverview READ shortOverview NOTIFY shortOverviewChanged)
 
 public:
     explicit Series(int id, QObject *parent = 0);
@@ -51,6 +52,7 @@ public:
     int episodeCount() const;
     QAbstractItemModel * seriesModel();
     QAbstractItemModel * seriesUpcomingModel();
+    QString shortOverview() const;
 
     int id() const;
 
@@ -79,6 +81,7 @@ signals:
     void seenRatioChanged();
     void seriesModelChanged();
     void seriesUpcomingModelChanged();
+    void shortOverviewChanged();
 
     void completed();
 
@@ -103,6 +106,7 @@ private:
     QString mNetwork;
     SignalList<QUrl> mFanArts;
     SignalList<QUrl> mPosters;
+    QString mShortOverview;
 
 };
 Q_DECLARE_METATYPE (Series*)

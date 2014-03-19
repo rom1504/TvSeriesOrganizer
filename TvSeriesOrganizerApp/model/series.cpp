@@ -109,6 +109,8 @@ void Series::setName(QString name)
 void Series::setOverview(QString overview)
 {
     mOverview=overview;
+    mShortOverview=mOverview.left(500)+(mOverview.size()>500 ? "..." : "");
+    emit shortOverviewChanged();
     emit overviewChanged();
 }
 
@@ -335,6 +337,12 @@ QString Series::overview() const
 {
     return mOverview;
 }
+
+QString Series::shortOverview() const
+{
+    return mShortOverview;
+}
+
 
 QAbstractItemModel *Series::fanArts()
 {

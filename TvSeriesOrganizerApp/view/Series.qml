@@ -20,7 +20,7 @@ ShadowBorderRectangle
         id:content
         title:series.name
         imageSource:series.poster
-        description:series.overview
+        description:series.shortOverview
     }
 
     onPressedChanged:

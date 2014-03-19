@@ -52,50 +52,80 @@ TabPage
             Keys.onUpPressed: listview.decrementCurrentIndex()
             Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
         }
-        Item
+        Flickable
         {
+            flickableDirection:Flickable.VerticalFlick
+            focus:true
             width: seriesDetails.width-40
             height:seriesDetails.height
-            ShadowBorderRectangle
+            contentHeight: scol.height+150
+            Column
             {
-                id:firstRect
-                Title
+                id:scol
+                height:childrenRect.height
+                spacing:20
+                ShadowBorderRectangle
                 {
-                    id:text3
-                    text:qsTr("Details")+": "
+                    id:firstRect
+                    width:seriesDetails.width-40
+                    height:col.height+20
+                    Column
+                    {
+                        id:col
+                        spacing:1
+                        Title
+                        {
+                            id:text3
+                            text:qsTr("Details")+": "
+                            width:contentWidth
+                            height:contentHeight
+                        }
+
+                        Row
+                        {
+                            spacing:1
+                            height:labels.contentHeight
+                            Text
+                            {
+                                width:contentWidth
+                                id:labels
+                                font.family: 'arial'
+                                wrapMode: Text.WordWrap
+                                font.pointSize:  12
+                                text:qsTr("Network")+": \n"+qsTr("First aired")+": "
+                            }
+                            Text
+                            {
+                                width:contentWidth
+                                font.family: 'arial'
+                                wrapMode: Text.WordWrap
+                                font.pointSize: 12
+                                color: "#717171"
+                                text:series.network+"\n"+Qt.formatDateTime(series.firstAired, "yyyy-MM-dd")
+                            }
+                        }
+                    }
                 }
-                Text
+                ShadowBorderRectangle
                 {
-                    id:labels
-                    font.family: 'arial'
-                    wrapMode: Text.WordWrap
-                    font.pointSize:  12
-                    y:text3.y+text3.height+5
-                    text:qsTr("Network")+": \n"+qsTr("First aired")+": "
-                }
-                Text
-                {
-                    font.family: 'arial'
-                    wrapMode: Text.WordWrap
-                    font.pointSize: 12
-                    color: "#717171"
-                    x:labels.x+labels.contentWidth+5
-                    y:text3.y+text3.height+5
-                    text:series.network+"\n"+Qt.formatDateTime(series.firstAired, "yyyy-MM-dd")
-                }
-            }
-            ShadowBorderRectangle
-            {
-                y:firstRect.y+firstRect.height+5
-                Title
-                {
-                    id:text1
-                    text:qsTr("Plot")+": "
-                }
-                Description
-                {
-                    text:series.overview
-                    y:text1.y+text1.height+5
+                    width:seriesDetails.width-40
+                    height:col2.height
+                    Column
+                    {
+                        width:seriesDetails.width-40
+                        id:col2
+                        Title
+                        {
+                            id:text1
+                            text:qsTr("Plot")+": "
+
+                        }
+                        Description
+                        {
+                            width:seriesDetails.width-80
+                            text:series.overview
+                        }
+                    }
                 }
             }
         }
