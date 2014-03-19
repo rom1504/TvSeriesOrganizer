@@ -8,8 +8,23 @@ ShadowBorderRectangle
     Keys.onReturnPressed: episodeClicked(index)
     onClicked:
     {
-        if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+        if(isMouseIn(seenRectangle,50)) seenRectangle.clicked()
         else episodeClicked(index)
+    }
+    onExited:
+    {
+        seenRectangle.exited()
+    }
+    property bool isInSeen:false
+    onPositionChanged:
+    {
+        var isInl=isMouseIn(seenRectangle,50);
+        if(isInl!==isInSeen)
+        {
+            if(isInl) seenRectangle.entered()
+            else seenRectangle.exited()
+            isInSeen=isInl
+        }
     }
     TitleImageDescriptionItem
     {

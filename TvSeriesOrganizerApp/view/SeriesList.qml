@@ -109,5 +109,5 @@ TabPage
 
     tabModel:[qsTr("Series"),qsTr("Upcoming"),qsTr("Search")]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesListPage}
-    beginIndex: 0
+    beginIndex: seriesList.seriesCount===0 ? 2 : 0
 }

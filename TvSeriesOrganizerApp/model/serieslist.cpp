@@ -106,7 +106,7 @@ void SeriesList::searchSeries(const QString &seriesName)
             root = root.nextSiblingElement();
         }
         SignalListAdapter<Series*> * searchListModel=new SignalListAdapter<Series*>(searchList,"series");
-        emit searchCompleted(searchListModel);
+        emit searchCompleted(searchListModel,searchList->size());
     });
 }
 

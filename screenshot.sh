@@ -28,9 +28,12 @@ function takeScreenshot
 
 function addSeries
 {
-	moveClick 400 90
+	if [[ $3 -ne 1 ]]
+	then
+		moveClick 500 90
+	fi
 	sleep 1
-	moveClick 100 130
+	moveClick 100 120
 	xte -x $DISPLAY "str $1"
 	sleep 1
 	xte -x $DISPLAY "key Return"
@@ -39,7 +42,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 520 180
+	moveClick 520 220
 	sleep 1
 }
 
@@ -50,7 +53,7 @@ function moveClickTakeScreenshot
 	takeScreenshot $3
 }
 
-addSeries "merlin" 1
+addSeries "merlin" 1 1
 addSeries "suits"
 addSeries "breaking bad"
 
@@ -58,9 +61,9 @@ sleep $sleeptime
 takeScreenshot SeriesList
 
 moveClickTakeScreenshot 40 320 SeriesDetails
-moveClickTakeScreenshot 200 90 SeriesInfo
-moveClickTakeScreenshot 400 90 SeriesFanArts
-moveClickTakeScreenshot 400 90 SeriesPosters
+moveClickTakeScreenshot 300 90 SeriesInfo
+moveClickTakeScreenshot 500 90 SeriesFanArts
+moveClickTakeScreenshot 500 90 SeriesPosters
 moveClick 100 90
 moveClick 100 90
 

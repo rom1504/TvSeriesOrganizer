@@ -9,10 +9,11 @@ ShadowBorderRectangle
 
     onClicked:
     {
-        if(removeButton.enabled==true && isMouseIn(removeButton)) removeButton.clicked()
-        else if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+        if(removeButton.enabled&& isMouseIn(removeButton)) removeButton.clicked()
+        else if(isMouseIn(seenRectangle,50)) seenRectangle.clicked()
         else seriesClicked(index)
     }
+
     onPressAndHold: state="expanded"
     TitleImageDescriptionItem
     {
@@ -22,7 +23,42 @@ ShadowBorderRectangle
         description:series.overview
     }
 
-    Button
+    onEntered:
+    {
+        if(isMouseIn(seenRectangle,50)) seenRectangle.entered()
+        else if(removeButton.enabled && isMouseIn(removeButton)) removeButton.entered()
+    }
+
+    onExited:
+    {
+        seenRectangle.exited()
+        if(removeButton.enabled) removeButton.exited()
+    }
+    property bool isInSeen:false
+    property bool isInRemove:false
+    onPositionChanged:
+    {
+        var isInl=isMouseIn(seenRectangle,50);
+        if(isInl!==isInSeen)
+        {
+            if(isInl) seenRectangle.entered()
+            else seenRectangle.exited()
+            isInSeen=isInl
+        }
+
+        if(removeButton.enabled)
+        {
+            var isInl2=isMouseIn(removeButton);
+            if(isInl2!==isInRemove)
+            {
+                if(isInl2) removeButton.entered()
+                else removeButton.exited()
+                isInRemove=isInl2
+            }
+        }
+    }
+
+    TextButton
     {
         id:removeButton
         text:qsTr("Remove")

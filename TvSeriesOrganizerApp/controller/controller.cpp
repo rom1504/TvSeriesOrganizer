@@ -23,7 +23,7 @@ Controller::Controller(QString datadir, QObject *parent) :
     QDir current=QDir::current();
     current.cdUp();
     Controller::cachePath=current.absolutePath()+"/cache";
-    Controller::filesPath=current.absolutePath()+"/files";
+    Controller::dataPath=current.absolutePath()+"/files";
 #else
     mViewer.setIcon(QIcon(":/images/icon512.png"));
     QString baseBase=datadir!="" ? datadir : QDir::homePath()+"/.TvSeriesOrganizer";

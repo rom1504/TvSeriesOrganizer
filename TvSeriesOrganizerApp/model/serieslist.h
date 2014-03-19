@@ -32,7 +32,7 @@ private:
 signals:
     void seriesListModelChanged();
     void seriesListUpcomingModelChanged();
-    void searchCompleted(QAbstractItemModel * searchListModel);
+    void searchCompleted(QAbstractItemModel * searchListModel,int resultsCount);
     void seriesAdded(int addIndex);
     void seriesCountChanged();
 

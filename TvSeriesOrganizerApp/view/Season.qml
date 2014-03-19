@@ -4,7 +4,7 @@ import "qrc:/GeneralQmlItems/"
 ShadowBorderRectangle
 {
 
-    function betterNumber(n,max,no,one,all)
+    function betterNumber(n,max,no,one,medium,all)
     {
         if(n===0) return no;
         if(n===1) return one;
@@ -16,15 +16,31 @@ ShadowBorderRectangle
     Keys.onReturnPressed: seasonClicked(index)
     onClicked:
     {
-        if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+        if(isMouseIn(seenRectangle,50)) seenRectangle.clicked()
         else seasonClicked(index)
+    }
+
+    onExited:
+    {
+        seenRectangle.exited()
+    }
+    property bool isInSeen:false
+    onPositionChanged:
+    {
+        var isInl=isMouseIn(seenRectangle,50);
+        if(isInl!==isInSeen)
+        {
+            if(isInl) seenRectangle.entered()
+            else seenRectangle.exited()
+            isInSeen=isInl
+        }
     }
     TitleImageDescriptionItem
     {
         id:content
         title:qsTr("Season")+" " + season.number
         imageSource:season.poster
-        description:qsTr("First aired")+":"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+qsTr("%n episode(s)","",season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount,qsTr("No episode seen"),qsTr("One episode seen"),qsTr("All episodes seen"))
+        description:qsTr("First aired")+":"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+qsTr("%n episode(s)","",season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount,qsTr("No episode seen"),qsTr("One episode seen"),qsTr("%n episode(s) seen","",season.episodeSeenCount),qsTr("All episodes seen"))
 
         Column
         {
@@ -38,7 +54,7 @@ ShadowBorderRectangle
             }
             Description
             {
-                text:betterNumber(season.episodeAiredCount,season.episodeCount,qsTr("No episode aired"),qsTr("One episode aired"),qsTr("All episodes aired"))
+                text:betterNumber(season.episodeAiredCount,season.episodeCount,qsTr("No episode aired"),qsTr("One episode aired"),qsTr("%n episode(s) aired","",season.episodeAiredCount),qsTr("All episodes aired"))
             }
             Slider
             {

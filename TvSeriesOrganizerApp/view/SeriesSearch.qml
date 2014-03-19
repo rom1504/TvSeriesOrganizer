@@ -14,7 +14,11 @@ Column
     Connections
     {
         target: seriesList
-        onSearchCompleted:searchListView.model=searchListModel
+        onSearchCompleted:
+        {
+            status.text=resultsCount==0 ? qsTr("No results") : qsTr("%n result(s)","",resultsCount)
+            searchListView.model=searchListModel
+        }
         onSeriesAdded:
         {
             searchListView.model=null
@@ -31,20 +35,27 @@ Column
         LineInput
         {
             id:lineInput
-            font.pointSize:16
-            width:seriesSearch.width/1.4
-            onReturnText: seriesList.searchSeries(text);
+            font.pointSize:18
+            width:parent.width-searchButton.width-20
+            onReturnText: {status.text=qsTr("Searching..."); seriesList.searchSeries(text);}
             hint:qsTr("Tv series name")
         }
 
-        Button
+        TextIconButton
         {
             id:searchButton
             onClicked:lineInput.accepted()
             text:qsTr("Search")
-            font.pointSize: 16
+            font.pointSize: 18
+            icon:"qrc:/images/search.png"
         }
     }
+    Text
+    {
+        id:status
+        font.pointSize: 16
+    }
+
     ListView
     {
         id:searchListView
@@ -54,6 +65,19 @@ Column
                 id:seriesItem
 
                 onClicked: if(addButton.enabled==true && isMouseIn(addButton)) addButton.clicked()
+                onExited: addButton.exited()
+                property bool isIn:false
+                onPositionChanged:
+                {
+                    var isInl=isMouseIn(addButton);
+                    if(isInl!==isIn)
+                    {
+                        if(isInl) addButton.entered()
+                        else addButton.exited()
+                        isIn=isInl
+                    }
+                }
+
                 TitleImageDescriptionItem
                 {
                     id:content
@@ -62,7 +86,7 @@ Column
                     description:series.overview
                 }
 
-                Button
+                TextButton
                 {
                     id:addButton
                     text:qsTr("Add")
