@@ -23,39 +23,11 @@ ShadowBorderRectangle
         description:series.overview
     }
 
-    onEntered:
+    onPressedChanged:
     {
-        if(isMouseIn(seenRectangle,50)) seenRectangle.entered()
-        else if(removeButton.enabled && isMouseIn(removeButton)) removeButton.entered()
-    }
-
-    onExited:
-    {
-        seenRectangle.exited()
-        if(removeButton.enabled) removeButton.exited()
-    }
-    property bool isInSeen:false
-    property bool isInRemove:false
-    onPositionChanged:
-    {
-        var isInl=isMouseIn(seenRectangle,50);
-        if(isInl!==isInSeen)
-        {
-            if(isInl) seenRectangle.entered()
-            else seenRectangle.exited()
-            isInSeen=isInl
-        }
-
-        if(removeButton.enabled)
-        {
-            var isInl2=isMouseIn(removeButton);
-            if(isInl2!==isInRemove)
-            {
-                if(isInl2) removeButton.entered()
-                else removeButton.exited()
-                isInRemove=isInl2
-            }
-        }
+        if(!pressed || isMouseIn(seenRectangle,50)) seenRectangle.pressed=pressed
+        if(removeButton.enabled && (!pressed || isMouseIn(removeButton))) removeButton.pressed=pressed
+        if(!(pressed && (isMouseIn(seenRectangle,50) || isMouseIn(removeButton)))) rectColor=pressed ? "#EEEEEE" : "white"
     }
 
     TextButton

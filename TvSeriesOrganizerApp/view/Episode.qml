@@ -11,20 +11,11 @@ ShadowBorderRectangle
         if(isMouseIn(seenRectangle,50)) seenRectangle.clicked()
         else episodeClicked(index)
     }
-    onExited:
+
+    onPressedChanged:
     {
-        seenRectangle.exited()
-    }
-    property bool isInSeen:false
-    onPositionChanged:
-    {
-        var isInl=isMouseIn(seenRectangle,50);
-        if(isInl!==isInSeen)
-        {
-            if(isInl) seenRectangle.entered()
-            else seenRectangle.exited()
-            isInSeen=isInl
-        }
+        if(!pressed || isMouseIn(seenRectangle,50)) seenRectangle.pressed=pressed
+        if(!(pressed && isMouseIn(seenRectangle,50))) rectColor=pressed ? "#EEEEEE" : "white"
     }
     TitleImageDescriptionItem
     {

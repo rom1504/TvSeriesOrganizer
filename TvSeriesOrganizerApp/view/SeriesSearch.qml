@@ -65,17 +65,9 @@ Column
                 id:seriesItem
 
                 onClicked: if(addButton.enabled==true && isMouseIn(addButton)) addButton.clicked()
-                onExited: addButton.exited()
-                property bool isIn:false
-                onPositionChanged:
+                onPressedChanged:
                 {
-                    var isInl=isMouseIn(addButton);
-                    if(isInl!==isIn)
-                    {
-                        if(isInl) addButton.entered()
-                        else addButton.exited()
-                        isIn=isInl
-                    }
+                    if(!pressed || isMouseIn(addButton,50)) addButton.pressed=pressed
                 }
 
                 TitleImageDescriptionItem
