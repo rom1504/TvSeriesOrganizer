@@ -1,3 +1,7 @@
+## 0.8.5
+ * make season 0 extras
+ * overview cut if they are too long on first page
+
 ## 0.8.4
 
  * replace hovering by pressing: fix it on android, make the keyboard go down after a search on android
