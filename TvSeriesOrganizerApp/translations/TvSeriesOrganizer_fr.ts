@@ -4,17 +4,17 @@
 <context>
     <name>Episode</name>
     <message>
-        <location filename="../view/Episode.qml" line="33"/>
+        <location filename="../view/Episode.qml" line="24"/>
         <source>Episode number</source>
         <translation>Episode numéro</translation>
     </message>
     <message>
-        <location filename="../view/Episode.qml" line="33"/>
+        <location filename="../view/Episode.qml" line="24"/>
         <source>First aired</source>
         <translation>Première diffusion</translation>
     </message>
     <message>
-        <location filename="../view/Episode.qml" line="33"/>
+        <location filename="../view/Episode.qml" line="24"/>
         <source>Will be aired</source>
         <translation>Sera diffusé</translation>
     </message>
@@ -52,17 +52,22 @@
         <translation type="vanished">Tous</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="41"/>
+        <location filename="../view/Season.qml" line="32"/>
         <source>Season</source>
         <translation>Saison</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="32"/>
+        <source>Extras</source>
+        <translation>Extras</translation>
+    </message>
+    <message>
+        <location filename="../view/Season.qml" line="34"/>
         <source>First aired</source>
         <translation>Première diffusion</translation>
     </message>
     <message numerus="yes">
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="34"/>
         <source>%n episode(s)</source>
         <translation>
             <numerusform>%n épisode</numerusform>
@@ -70,22 +75,22 @@
         </translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="34"/>
         <source>No episode seen</source>
         <translation>Aucun épisode vu</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="34"/>
         <source>One episode seen</source>
         <translation>Un épisode vu</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="34"/>
         <source>All episodes seen</source>
         <translation>Tous les épisodes sont vus</translation>
     </message>
     <message numerus="yes">
-        <location filename="../view/Season.qml" line="43"/>
+        <location filename="../view/Season.qml" line="34"/>
         <source>%n episode(s) seen</source>
         <translation>
             <numerusform>%n épisode vu</numerusform>
@@ -93,22 +98,22 @@
         </translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="57"/>
+        <location filename="../view/Season.qml" line="48"/>
         <source>No episode aired</source>
         <translation>Aucun épisode diffusé</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="57"/>
+        <location filename="../view/Season.qml" line="48"/>
         <source>One episode aired</source>
         <translation>Un épisode diffusé</translation>
     </message>
     <message>
-        <location filename="../view/Season.qml" line="57"/>
+        <location filename="../view/Season.qml" line="48"/>
         <source>All episodes aired</source>
         <translation>Tous les épisodes sont diffusés</translation>
     </message>
     <message numerus="yes">
-        <location filename="../view/Season.qml" line="57"/>
+        <location filename="../view/Season.qml" line="48"/>
         <source>%n episode(s) aired</source>
         <translation>
             <numerusform>%n épisode diffusé</numerusform>
@@ -137,17 +142,22 @@
         <source>Season</source>
         <translation>Saison</translation>
     </message>
+    <message>
+        <location filename="../view/SeasonDetails.qml" line="54"/>
+        <source>Extras</source>
+        <translation>Extras</translation>
+    </message>
 </context>
 <context>
     <name>SeenIndicator</name>
     <message>
-        <location filename="../view/SeenIndicator.qml" line="33"/>
-        <location filename="../view/SeenIndicator.qml" line="52"/>
+        <location filename="../view/SeenIndicator.qml" line="23"/>
+        <location filename="../view/SeenIndicator.qml" line="42"/>
         <source>Seen</source>
         <translation>Vu</translation>
     </message>
     <message>
-        <location filename="../view/SeenIndicator.qml" line="40"/>
+        <location filename="../view/SeenIndicator.qml" line="30"/>
         <source>Not seen</source>
         <translation>Pas vu</translation>
     </message>
@@ -155,7 +165,7 @@
 <context>
     <name>Series</name>
     <message>
-        <location filename="../view/Series.qml" line="64"/>
+        <location filename="../view/Series.qml" line="36"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -163,42 +173,42 @@
 <context>
     <name>SeriesDetails</name>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="65"/>
+        <location filename="../view/SeriesDetails.qml" line="79"/>
         <source>Details</source>
         <translation>Détails</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="74"/>
+        <location filename="../view/SeriesDetails.qml" line="95"/>
         <source>Network</source>
         <translation>Réseau</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="74"/>
+        <location filename="../view/SeriesDetails.qml" line="95"/>
         <source>First aired</source>
         <translation>Première diffusion</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="93"/>
+        <location filename="../view/SeriesDetails.qml" line="120"/>
         <source>Plot</source>
         <translation>Intrigue</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="151"/>
+        <location filename="../view/SeriesDetails.qml" line="181"/>
         <source>Seasons</source>
         <translation>Saisons</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="151"/>
+        <location filename="../view/SeriesDetails.qml" line="181"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="151"/>
+        <location filename="../view/SeriesDetails.qml" line="181"/>
         <source>Fan arts</source>
         <translation>Fan arts</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="151"/>
+        <location filename="../view/SeriesDetails.qml" line="181"/>
         <source>Posters</source>
         <translation>Posters</translation>
     </message>
@@ -252,7 +262,7 @@
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="92"/>
+        <location filename="../view/SeriesSearch.qml" line="84"/>
         <source>Add</source>
         <translation>Ajouter</translation>
     </message>

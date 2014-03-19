@@ -11,7 +11,11 @@
 
 
 
-Series::Series(int id, QObject *parent) : QObject(parent),mSeasons([](Season* a,Season* b){return a->number()<b->number();}),mId(id)
+Series::Series(int id, QObject *parent) : QObject(parent),mSeasons([](Season* a,Season* b){
+    if(a->number()==0) return false;
+    if(b->number()==0) return true;
+    return a->number()<b->number();
+}),mId(id)
 {
     connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
     complete();

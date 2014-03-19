@@ -51,7 +51,7 @@ TabPage
             Keys.onUpPressed: listview.decrementCurrentIndex()
             Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
         }
-    tabDelegate:TabItem{tabText:qsTr("Season")+" "+season.number;tabPage:seasonDetails}
+    tabDelegate:TabItem{tabText:season.number===0 ? qsTr("Extras") : qsTr("Season")+" "+season.number;tabPage:seasonDetails}
 
     beginIndex:seasonIndex
 }
