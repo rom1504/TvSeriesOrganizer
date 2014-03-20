@@ -21,7 +21,11 @@ Series::Series(int id, QObject *parent) : QObject(parent),mSeasons([](Season* a,
     complete();
 }
 
-Series::Series(const QDomElement & element, QObject*parent) : QObject(parent)
+Series::Series(const QDomElement & element, QObject*parent) : QObject(parent),mSeasons([](Season* a,Season* b){
+    if(a->number()==0) return false;
+    if(b->number()==0) return true;
+    return a->number()<b->number();
+})
 {
     QDomElement root = element.firstChildElement();
     while(!root.isNull())
@@ -189,8 +193,11 @@ void Series::loadBanners(QString xmlFileContent)
                 else if(bannerType=="season")
                 {
                     Season * season=findSeason(seasonNumber);
-                    if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
-                    else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                    if(season!=nullptr)
+                    {
+                        if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                        else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                    }
                 }
                 else if(bannerType=="fanart") mFanArts.append(QUrl("http://thetvdb.com/banners/"+thumbnailPath));
             }
