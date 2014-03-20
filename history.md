@@ -1,3 +1,9 @@
+## 0.9.1
+
+ * fix french translation for seen episode in season and fix the corresponding view
+ * fix bug when clicking on a series/season/episode on upcoming view after a seen index
+ * remove transition that were making autocomplete slower
+
 ## 0.9.0
 
  * fix number of episode seen/aired, remove search status when that search is over
