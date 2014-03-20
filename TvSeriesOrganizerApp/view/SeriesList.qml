@@ -42,15 +42,15 @@ TabPage
 
     property int currentBannerIndex:0
 
-    function seriesClicked(seriesNumber,upcoming)
+    function seriesClicked(seriesIndex,series,upcoming)
     {
         timer.running=false
-        seriesListPage.seriesIndex=seriesNumber
+        seriesListPage.seriesIndex=seriesIndex
         stackview.push
         ({
              item:"qrc:/view/SeriesDetails.qml",
              immediate:true,
-             properties:{series:seriesListPage.seriesList.getSeries(seriesNumber),upcoming:upcoming}
+             properties:{series:series,upcoming:upcoming}
         })
     }
 
@@ -64,8 +64,8 @@ TabPage
         {
             Keys.onDownPressed: if(currentIndex-1<count) listview.incrementCurrentIndex()
             Keys.onUpPressed: if(currentIndex>0) listview.decrementCurrentIndex()
-            Keys.onReturnPressed:seriesListPage.seriesClicked(currentIndex,false);
-            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,false)}
+            Keys.onReturnPressed:listview.currentItem.Keys.onReturnPressed(event)
+            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,series,false)}
             model:seriesList.seriesListModel
             width: seriesListPage.width-40
             height: seriesListPage.height
@@ -79,7 +79,7 @@ TabPage
         }
         ListView
         {
-            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,true)}
+            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,series,true)}
             model:seriesList.seriesListUpcomingModel
             width: seriesListPage.width-40
             height: seriesListPage.height

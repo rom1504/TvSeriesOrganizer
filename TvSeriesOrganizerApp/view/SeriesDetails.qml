@@ -18,9 +18,9 @@ TabPage
         stackview.get(0).stimer.running=true
     }
 
-    function seasonClicked(seasonNumber,upcoming)
+    function seasonClicked(seasonIndex,season,upcoming)
     {
-        seasonIndex=seasonNumber
+        seriesDetails.seasonIndex=seasonIndex
         stackview.push
         ({
              item:"qrc:/view/SeasonDetails.qml",
@@ -28,7 +28,7 @@ TabPage
              properties:
              {
                  seasonIndex:seriesDetails.seasonIndex,
-                 season:series.getSeason(seasonNumber),
+                 season:season,
                  seriesModel:upcoming ? series.seriesUpcomingModel : series.seriesModel,
                  upcoming:upcoming
              }
@@ -39,7 +39,7 @@ TabPage
     {
         ListView
         {
-            delegate:Season{onSeasonClicked: seriesDetails.seasonClicked(index,upcoming)}
+            delegate:Season{onSeasonClicked: seriesDetails.seasonClicked(index,season,upcoming)}
             model:upcoming ? series.seriesUpcomingModel : series.seriesModel
             width: seriesDetails.width-40
             height: seriesDetails.height

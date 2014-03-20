@@ -19,9 +19,9 @@ TabPage
     onBack:stackview.pop({immediate:true})
 
 
-    function episodeClicked(episodeNumber,upcoming,season)
+    function episodeClicked(episodeIndex,episode,upcoming,season)
     {
-        episodeIndex=episodeNumber
+        seasonDetails.episodeIndex=episodeIndex
         stackview.push
         ({
            item:"qrc:/view/EpisodeDetails.qml",
@@ -29,7 +29,7 @@ TabPage
            properties:
            {
                episodeIndex:seasonDetails.episodeIndex,
-               episode:season.getEpisode(episodeNumber),
+               episode:episode,
                seasonModel:upcoming ? season.seasonUpcomingModel : season.seasonModel,
                upcoming:upcoming
            }
@@ -40,7 +40,7 @@ TabPage
         ListView
         {
             property variant myData:season
-            delegate:Episode{onEpisodeClicked:seasonDetails.episodeClicked(index,upcoming,season)}
+            delegate:Episode{onEpisodeClicked:seasonDetails.episodeClicked(index,episode,upcoming,season)}
             model:upcoming ? season.seasonUpcomingModel : season.seasonModel
             width: seasonDetails.width-40
             height: parent.height

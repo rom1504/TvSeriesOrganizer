@@ -52,6 +52,7 @@ Series * SeriesList::getSeries(int row) const
     return mSeries.get(row);
 }
 
+
 int SeriesList::seriesCount() const
 {
     return mSeries.size();
