@@ -1,4 +1,12 @@
+## 0.9.0
+
+ * fix number of episode seen/aired, remove search status when that search is over
+ * fix crash when poster for non-existing seasons, fix order of seasons after adding a series searched
+ * add autocomplete series functionnality on search view
+ * improve series/season/episode item view (make it resolution independant and improve display when no poster is available)
+
 ## 0.8.5
+
  * make season 0 extras
  * overview cut if they are too long on first page
 
