@@ -28,6 +28,7 @@ ShadowBorderRectangle
 
     TitleImageDescriptionItem
     {
+        width:parent.width
         id:content
         title:season.number===0 ? qsTr("Extras") : qsTr("Season")+" " + season.number
         imageSource:season.poster
@@ -35,7 +36,8 @@ ShadowBorderRectangle
 
         Column
         {
-            width:parent.width-x
+            spacing:1
+            width:parent.width
             height:childrenRect.height
             Slider
             {
@@ -55,6 +57,7 @@ ShadowBorderRectangle
             }
         }
     }
+
     SeenIndicator
     {
         id:seenRectangle

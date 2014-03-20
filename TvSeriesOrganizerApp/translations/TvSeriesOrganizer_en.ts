@@ -247,22 +247,22 @@
         </translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="40"/>
+        <location filename="../view/SeriesSearch.qml" line="42"/>
         <source>Searching...</source>
         <translation>Searching...</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="41"/>
+        <location filename="../view/SeriesSearch.qml" line="43"/>
         <source>Tv series name</source>
         <translation>Tv series name</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="48"/>
+        <location filename="../view/SeriesSearch.qml" line="52"/>
         <source>Search</source>
         <translation>Search</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="84"/>
+        <location filename="../view/SeriesSearch.qml" line="90"/>
         <source>Add</source>
         <translation>Add</translation>
     </message>
