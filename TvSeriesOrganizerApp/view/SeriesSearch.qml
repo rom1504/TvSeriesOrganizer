@@ -30,16 +30,19 @@ Column
     spacing:15
     Row
     {
+        z:100
         width: parent.width
         height:childrenRect.height
         spacing:20
-        LineInput
+        AutocompleteLineInput
         {
             id:lineInput
             font.pointSize:18
             width:parent.width-searchButton.width-20
             onReturnText: {status.text=qsTr("Searching..."); seriesList.searchSeries(text);}
             hint:qsTr("Tv series name")
+            fetchedModel:seriesList.autocompleteModel
+            onTextChanged:seriesList.updateAutocompleteModel(text);
         }
 
         TextIconButton
@@ -53,12 +56,14 @@ Column
     }
     Text
     {
+        x:seriesSearch.width-contentWidth
         id:status
         font.pointSize: 16
     }
 
     ListView
     {
+        z:0
         id:searchListView
         delegate:
             ShadowBorderRectangle
@@ -76,7 +81,7 @@ Column
                     id:content
                     title:series.name
                     imageSource:series.poster
-                    description:series.overview
+                    description:series.shortOverview
                 }
 
                 TextButton

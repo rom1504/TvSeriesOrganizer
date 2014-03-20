@@ -6,7 +6,7 @@
 #include "controller/controller.h"
 
 SeriesList::SeriesList(QObject *parent) :
-    QObject(parent),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
+    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
 {
 }
 
@@ -21,6 +21,31 @@ int SeriesList::addSeries(Series * series)
     return insertionIndex;
 }
 
+
+QAbstractItemModel * SeriesList::autocompleteModel()
+{
+    return mAutocompleteModel;
+}
+
+
+void SeriesList::updateAutocompleteModel(const QString &beginSeriesName)
+{
+    mLastAutocompletion=beginSeriesName;
+    QNetworkAccessManager *manager = new QNetworkAccessManager();
+    connect(manager, &QNetworkAccessManager::finished,[this,beginSeriesName](QNetworkReply* reply){
+        if(beginSeriesName!=mLastAutocompletion || beginSeriesName=="") return;
+        QString jsonContent=reply->readAll();
+        jsonContent=jsonContent.replace("results:","\"results\":").replace("id:","\"id\":").replace("value:","\"value\":").replace("info:","\"info\":").replace(",\n]","]");
+
+        QJsonDocument doc=QJsonDocument::fromJson(jsonContent.toUtf8());
+        QJsonArray results=doc.object()["results"].toArray();
+        QStringList * stringList=new QStringList;
+        for(QJsonValue result : results) stringList->append(result.toObject()["value"].toString());
+
+        mAutocompleteModel->setStringList(*stringList);
+    });
+    manager->get(QNetworkRequest("http://thetvdb.com/livesearch.php?q="+beginSeriesName));
+}
 
 Series * SeriesList::getSeries(int row) const
 {
