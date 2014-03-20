@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd ../TvSeriesOrganizerLinux
 mkdir -p ~/.ssh
 openssl aes-256-cbc -pass "pass:$MY_SECRET_ENV" -in .travis/id_rsa_deploy.enc -out ~/.ssh/id_rsa -d -a

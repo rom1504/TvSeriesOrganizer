@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd TvSeriesOrganizerApp
 
 mkdir -p deploy/TvSeriesOrganizer

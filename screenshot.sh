@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
 export DISPLAY=:10
