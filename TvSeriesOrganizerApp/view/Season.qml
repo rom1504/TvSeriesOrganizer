@@ -9,7 +9,7 @@ ShadowBorderRectangle
         if(n===0) return no;
         if(n===1) return one;
         if(n===max) return all;
-        return n;
+        return medium;
     }
     signal seasonClicked(int index)
 

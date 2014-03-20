@@ -21,6 +21,7 @@ Column
         }
         onSeriesAdded:
         {
+            status.text=""
             searchListView.model=null
             searchFinished(addIndex)
         }
