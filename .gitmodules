@@ -1,6 +1,6 @@
 [submodule "SignalList"]
 	path = SignalList
-	url = git://github.com/rom1504/SignalList.git
+	url = https://github.com/rom1504/SignalList.git
 [submodule "GeneralQmlItems"]
 	path = GeneralQmlItems
 	url = https://github.com/rom1504/GeneralQmlItems.git
