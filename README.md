@@ -35,7 +35,7 @@ Translations are done with [Transifex](https://www.transifex.com/projects/p/tvse
  * android : http://download.rom1504.fr/TvSeriesOrganizer/android/TvSeriesOrganizer.apk
 
 ### Compilation
-Dependencies : gcc >=4.8, Qt >=5.1 
+Dependencies : gcc >=4.8, Qt >=5.2.1
 
 Two possibilities :
  * git clone --recursive git://github.com/rom1504/TvSeriesOrganizer.git && cd TvSeriesOrganizer && qmake && make
