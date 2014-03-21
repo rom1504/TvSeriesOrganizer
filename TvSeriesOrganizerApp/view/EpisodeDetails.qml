@@ -19,28 +19,39 @@ TabPage
 
     tabContentModel: seasonModel
     tabContentDelegate:
-        ShadowBorderRectangleText
+        Flickable
         {
             property variant myData:episode
-            onClicked:
+            flickableDirection:Flickable.VerticalFlick
+            focus:true
+            width: episodeDetails.width-40
+            height:episodeDetails.height
+            contentHeight: rect.height+400
+            ShadowBorderRectangleText
             {
-                if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+                id:rect
+                height:tidi.height+seenRectangle.height
+                onClicked:
+                {
+                    if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+                }
+                TitleImageDescriptionItem
+                {
+                    id:tidi
+                    title:episode.name
+                    imageSource:episode.banner
+                    description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+                }
+                SeenIndicator
+                {
+                    id:seenRectangle
+                    seen:episode.seen
+                    onSeenHasChanged:episode.seen=seenRectangle.seen
+                    x:parent.width-width-5
+                }
+                width:episodeDetails.width-40
             }
-            TitleImageDescriptionItem
-            {
-                title:episode.name
-                imageSource:episode.banner
-                description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
-            }
-            SeenIndicator
-            {
-                id:seenRectangle
-                seen:episode.seen
-                onSeenHasChanged:episode.seen=seenRectangle.seen
-                x:parent.width-width-5
-            }
-            width:episodeDetails.width-40
-        }
+       }
     tabDelegate:TabItem{tabText:qsTr("Episode")+" "+episode.number;tabPage:episodeDetails}
 
     beginIndex:episodeIndex

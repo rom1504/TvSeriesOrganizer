@@ -48,8 +48,11 @@ Controller::Controller(QString datadir, QObject *parent) :
 
     mSeriesList=new SeriesList;
     mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
+
     ctxt->setContextProperty("seriesList", mSeriesList);
+
     mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
+
 
 #if !defined(Q_OS_ANDROID)
     mViewer.showExpanded();

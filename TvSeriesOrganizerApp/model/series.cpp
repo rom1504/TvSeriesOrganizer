@@ -295,7 +295,7 @@ void Series::saveSeriesSeenFile()
 void Series::addSeason(Season * season)
 {
     int insertionIndex=mSeasons.append(season);
-    connect(season,&Season::seenChanged,[insertionIndex,this](){emit mSeasons.dataChanged(insertionIndex,insertionIndex);});
+    connect(season,&Season::seenChanged,[insertionIndex,this,season](){if(season->seen()) emit mSeasons.dataChanged(insertionIndex,insertionIndex);});
     connect(season,&Season::seenChanged,this,&Series::seenChanged);
     emit seasonCountChanged();
 }

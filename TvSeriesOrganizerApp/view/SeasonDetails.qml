@@ -15,7 +15,6 @@ TabPage
     property int listBeginIndex:episodeIndex
     property bool upcoming:false
 
-
     onBack:stackview.pop({immediate:true})
 
 
@@ -36,6 +35,8 @@ TabPage
         })
     }
 
+
+
     tabContentDelegate:
         ListView
         {
@@ -47,6 +48,7 @@ TabPage
             currentIndex: listBeginIndex
             highlightRangeMode:ListView.StrictlyEnforceRange
             id:listview
+            onCurrentIndexChanged:listBeginIndex=currentIndex;
             Keys.onDownPressed: listview.incrementCurrentIndex()
             Keys.onUpPressed: listview.decrementCurrentIndex()
             Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
@@ -54,4 +56,5 @@ TabPage
     tabDelegate:TabItem{tabText:season.number===0 ? qsTr("Extras") : qsTr("Season")+" "+season.number;tabPage:seasonDetails}
 
     beginIndex:seasonIndex
+
 }
