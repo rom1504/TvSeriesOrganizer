@@ -34,7 +34,7 @@ ShadowBorderRectangle
     {
         id:removeButton
         text:qsTr("Remove")
-        font.pointSize: 14
+        font.pointSize: 12
         x:parent.width/2
         focus:true
         onClicked: seriesListPage.removeSeries(index)

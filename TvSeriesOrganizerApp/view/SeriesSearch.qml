@@ -50,7 +50,7 @@ Column
             id:searchButton
             onClicked:lineInput.accepted()
             text:qsTr("Search")
-            font.pointSize: 18
+            font.pointSize: 14
             icon:"qrc:/images/search.png"
         }
     }
@@ -88,7 +88,7 @@ Column
                 {
                     id:addButton
                     text:qsTr("Add")
-                    font.pointSize: 18
+                    font.pointSize: 12
                     x:parent.width-width
                     focus:true
                     onClicked: seriesList.completeAddSaveSeries(series)
