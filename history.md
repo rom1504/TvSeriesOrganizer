@@ -1,3 +1,9 @@
+## 1.0.0
+
+ * improve buttons look
+ * fix a bug that was preventing from seeing long episode description
+ * fix a bug that was making the episode list go up when seen/not seen was clicked
+
 ## 0.9.1
 
  * fix french translation for seen episode in season and fix the corresponding view
