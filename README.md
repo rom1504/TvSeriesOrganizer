@@ -7,7 +7,10 @@ Application targetting desktop and mobile to organize your tv series
 
 Translations are done with [Transifex](https://www.transifex.com/projects/p/tvseriesorganizer/), you can contribute there if you want
 
-[On Google Play](https://play.google.com/store/apps/details?id=com.rom1504.TvSeriesOrganizer)
+<a href="https://play.google.com/store/apps/details?id=com.rom1504.TvSeriesOrganizer">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>
 
 ## Features
  * List of episodes organized by season and series
