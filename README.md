@@ -32,6 +32,7 @@ Translations are done with [Transifex](https://www.transifex.com/projects/p/tvse
 
 ### Binary
  * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz
+ * ubuntu 64bit : http://download.rom1504.fr/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer.deb
  * android : http://download.rom1504.fr/TvSeriesOrganizer/android/TvSeriesOrganizer.apk
 
 ### Compilation

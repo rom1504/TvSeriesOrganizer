@@ -19,8 +19,28 @@ ln -s qml/QtGraphicalEffects qml/QtQml qml/QtQuick qml/QtQuick.2 .
 cp ../../../TvSeriesOrganizer.sh .
 cd ..
 tar czf ../TvSeriesOrganizer.tgz TvSeriesOrganizer
+
+mkdir package
+mkdir -p package/DEBIAN
+cp ../../debianPackageInfo package/DEBIAN/
+mkdir -p package/opt
+cp -R TvSeriesOrganizer package/opt/
+mkdir -p package/usr/bin
+cd package/usr/bin
+ln -s ../../opt/TvSeriesOrganizer/TvSeriesOrganizer.sh TvSeriesOrganizer
+cd ../../..
+dpkg --build package ../TvSeriesOrganizer.deb
+
+
+
 cd ..
- 
+
+
+scp -o StrictHostKeyChecking=no TvSeriesOrganizer.deb travis@download.rom1504.fr:download/TvSeriesOrganizer/ubuntu/
+commitNumber=`git rev-parse HEAD`
+command="cp download/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer.deb download/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer-$commitNumber.deb"
+ssh travis@download.rom1504.fr $command
+
 scp -o StrictHostKeyChecking=no TvSeriesOrganizer.tgz travis@download.rom1504.fr:download/TvSeriesOrganizer/linux/
 commitNumber=`git rev-parse HEAD`
 command="cp download/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz download/TvSeriesOrganizer/linux/TvSeriesOrganizer-$commitNumber.tgz"
