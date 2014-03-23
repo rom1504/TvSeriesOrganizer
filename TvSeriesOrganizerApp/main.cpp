@@ -5,6 +5,7 @@
 
 //#define LANG "fr_FR"
 //#define LANG "en_US"
+//#define LANG "it_IT"
 
 int main(int argc, char *argv[])
 {
