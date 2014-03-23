@@ -1,13 +1,15 @@
 # TvSeriesOrganizer
 Application targetting desktop and mobile to organize your tv series
 
-[![Build Status](https://travis-ci.org/rom1504/TvSeriesOrganizer.png?branch=master)](https://travis-ci.org/rom1504/TvSeriesOrganizer)
+[![Build Status](https://travis-ci.org/rom1504/TvSeriesOrganizer.png?branch=master)](https://travis-ci.org/rom1504/TvSeriesOrganizer) <a href="https://play.google.com/store/apps/details?id=com.rom1504.TvSeriesOrganizer">
+  <img  width="80px" alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>  <a href="https://www.transifex.com/projects/p/tvseriesorganizer/"><img src="https://ds0k0en9abmn1.cloudfront.net/static/charts/images/tx-logo-micro.646b0065fce6.png"/></a>  [Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot.php)
 
-[Screenshots](http://download.rom1504.fr/TvSeriesOrganizer/screenshot/screenshot.php)
 
 Translations are done with [Transifex](https://www.transifex.com/projects/p/tvseriesorganizer/), you can contribute there if you want
 
-[On Google Play](https://play.google.com/store/apps/details?id=com.rom1504.TvSeriesOrganizer)
+
 
 ## Features
  * List of episodes organized by season and series
