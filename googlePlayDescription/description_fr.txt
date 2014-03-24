@@ -1,6 +1,7 @@
 Organisez et recherchez vos séries préférées avec Tv Series Organizer
 - Liste d'épisodes organisés par saison et série
 - En utilisant la base de donnée http://www.thetvdb.com/ télécharge les liste d'épisodes et de saisons avec bannières, posters et description
+- Jolie interface
 - Suivre les épisodes et séries que vous avez vu
 - Date de diffusion des épisodes
 - Afficher les séries, saisons et épisodes à venir
