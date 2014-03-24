@@ -1,3 +1,9 @@
+## 1.0.1
+
+ * add debian/ubuntu package to build
+ * add italian translation thanks to giuseppep (https://www.transifex.com/accounts/profile/giuseppep/)
+ * fix a bug that was making seen ratio not update some times and series/season/episode not disapear in upcoming view when marked as seen
+
 ## 1.0.0
 
  * improve buttons look
