@@ -1,0 +1,10 @@
+Organize all your Tv Series with Tv Series Organizer
+- List of episodes organized by season and series
+- From http://www.thetvdb.com/ database, download list of episode and season with banners, poster, description
+- Good looking interface
+- Track the episode and series you have seen
+- Air time of episodes
+- Display upcoming series/season/episode
+- Search and add any series you want
+
+This is an open source project, if you want more information or want to contribute go to https://github.com/rom1504/TvSeriesOrganizer
