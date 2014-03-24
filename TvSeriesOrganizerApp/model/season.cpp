@@ -11,9 +11,9 @@ Season::Season(int number, QUrl banner,QUrl poster, QObject *parent) :
 
 void Season::addEpisode(Episode * episode)
 {
-    int insertionIndex=mEpisodes.append(episode);
+    mEpisodes.append(episode);
     connect(episode,&Episode::seenChanged,this,&Season::seenChanged);
-    connect(episode,&Episode::seenChanged,[insertionIndex,this](){emit mEpisodes.dataChanged(insertionIndex,insertionIndex);});
+    connect(episode,&Episode::seenChanged,[episode,this](){emit mEpisodes.elementChanged(episode);});
 }
 
 

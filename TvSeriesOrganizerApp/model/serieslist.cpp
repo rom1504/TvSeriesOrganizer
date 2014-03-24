@@ -16,7 +16,7 @@ int SeriesList::addSeries(Series * series)
     if(mIds.contains(id)) return -1;
     mIds<<id;
     int insertionIndex=mSeries.append(series);
-    connect(series,&Series::seenChanged,[insertionIndex,this](){emit mSeries.dataChanged(insertionIndex,insertionIndex);});
+    connect(series,&Series::seenChanged,[series,this](){mSeries.elementChanged(series);});
     emit seriesCountChanged();
     return insertionIndex;
 }
