@@ -1,3 +1,10 @@
+## 1.0.2
+
+ * fix search box for swiftkey in android
+ * add "adding..." when adding a tv series
+ * increase back icon size
+ * increase search input height
+
 ## 1.0.1
 
  * add debian/ubuntu package to build
