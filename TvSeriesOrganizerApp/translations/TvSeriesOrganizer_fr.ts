@@ -262,20 +262,25 @@
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="90"/>
+        <location filename="../view/SeriesSearch.qml" line="92"/>
         <source>Add</source>
         <translation>Ajouter</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesSearch.qml" line="96"/>
+        <source>Adding...</source>
+        <translation>Ajout...</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="35"/>
+        <location filename="../main.cpp" line="36"/>
         <source>Directory where data are saved</source>
         <translation>Répertoire où les données sont enregistrées</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="35"/>
+        <location filename="../main.cpp" line="36"/>
         <source>directory</source>
         <translation>répertoire</translation>
     </message>

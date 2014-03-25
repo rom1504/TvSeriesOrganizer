@@ -51,6 +51,8 @@ Column
             onClicked:lineInput.accepted()
             text:qsTr("Search")
             font.pointSize: 14
+            heightMargin:25
+            widthMargin:25
             icon:"qrc:/images/search.png"
         }
     }
@@ -91,7 +93,7 @@ Column
                     font.pointSize: 12
                     x:parent.width-width
                     focus:true
-                    onClicked: seriesList.completeAddSaveSeries(series)
+                    onClicked: {status.text=qsTr("Adding...");seriesList.completeAddSaveSeries(series);}
                 }
             }
 

@@ -109,8 +109,6 @@ Rectangle
     Item
     {
         id:backContainer
-        x:5
-        y:5
         width: button.width +5
         height: button.height +5
         signal clicked
@@ -118,8 +116,8 @@ Rectangle
         Image
         {
             source:"qrc:/images/back.png"
-            width:50
-            height:50
+            width:image.width/7
+            height:width
             id:button
         }
         MouseArea
