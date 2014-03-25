@@ -5,7 +5,7 @@ set -e
 binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
 export DISPLAY=:10
-sleeptime=5
+sleeptime=7
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
 sleep $sleeptime
 $binaryName  &
@@ -44,7 +44,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 520 230
+	moveClick 520 260
 	sleep 1
 }
 
