@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     controller/controller.cpp \
     model/series.cpp \
     model/serieslist.cpp \
-    model/qqmlnetworkaccessmanagerfactorywithcache.cpp
+    model/qqmlnetworkaccessmanagerfactorywithcache.cpp \
+    model/serieslistlist.cpp
 
 # Installation path
 # target.path =
@@ -29,7 +30,8 @@ HEADERS += \
     controller/controller.h \
     model/series.h \
     model/serieslist.h \
-    model/qqmlnetworkaccessmanagerfactorywithcache.h
+    model/qqmlnetworkaccessmanagerfactorywithcache.h \
+    model/serieslistlist.h
 
 
 QMAKE_CXXFLAGS += -std=c++11
@@ -69,6 +71,7 @@ SOURCES = view/Episode.qml \
     view/TabItem.qml \
     view/TabPage.qml \
     view/SeriesSearch.qml \
+    view/ExploreSeries.qml
 }
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SignalList/release/ -lSignalList

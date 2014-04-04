@@ -106,12 +106,11 @@ Rectangle
         }
 
 
-    Item
+    Button
     {
         id:backContainer
         width: button.width +5
         height: button.height +5
-        signal clicked
         onClicked: simplePage.back()
         Image
         {
@@ -119,14 +118,6 @@ Rectangle
             width:image.width/7
             height:width
             id:button
-        }
-        MouseArea
-        {
-            hoverEnabled:true
-            id:area
-            anchors.fill: parent
-            onClicked: backContainer.clicked()
-            preventStealing:true
         }
     }
     Item

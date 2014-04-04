@@ -10,22 +10,23 @@
 #include "adapter/signallistfilter.h"
 
 
-
-Series::Series(int id, QObject *parent) : QObject(parent),mSeasons([](Season* a,Season* b){
-    if(a->number()==0) return false;
-    if(b->number()==0) return true;
-    return a->number()<b->number();
-}),mId(id)
-{
-    connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
-    complete();
-}
-
-Series::Series(const QDomElement & element, QObject*parent) : QObject(parent),mSeasons([](Season* a,Season* b){
+Series::Series(QObject *parent) : QObject(parent),mSeasons([](Season* a,Season* b){
     if(a->number()==0) return false;
     if(b->number()==0) return true;
     return a->number()<b->number();
 })
+{
+    connect(this,&Series::seenChanged,this,&Series::seenRatioChanged);
+}
+
+
+Series::Series(int id, QObject *parent) : Series(parent)
+{
+    mId=id;
+    complete();
+}
+
+Series::Series(const QDomElement & element, QObject*parent) : Series(parent)
 {
     QDomElement root = element.firstChildElement();
     while(!root.isNull())
@@ -129,10 +130,10 @@ void Series::setPoster(QUrl poster)
     emit posterChanged();
 }
 
-void Series::loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load)
+void Series::loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load,int numberOfDaysBeforeDownloadingAgain)
 {
     QFile xmlFile(localFileName);
-    if(!xmlFile.exists())
+    if(!xmlFile.exists() || (numberOfDaysBeforeDownloadingAgain!=-1 && QFileInfo(xmlFile).lastModified().daysTo(QDateTime::currentDateTime())>=numberOfDaysBeforeDownloadingAgain))
     {
         xmlFile.close();
         QNetworkAccessManager *manager = new QNetworkAccessManager();
@@ -337,6 +338,18 @@ void Series::setSeen(bool seen)
         connect(season,&Season::seenChanged,this,&Series::seenChanged);
     }
     emit seenChanged();
+}
+
+void Series::setId(int id)
+{
+    mId=id;
+}
+
+
+void Series::setBanner(QUrl banner)
+{
+    mBanner=banner;
+    emit bannerChanged();
 }
 
 SignalList<Season *> *Series::seasons()

@@ -23,13 +23,13 @@ Translations are done with [Transifex](https://www.transifex.com/projects/p/tvse
  * Air time of episodes
  * Display upcoming series/season/episode
  * Search and add any series you want
+ * Explore series using http://trakt.tv/ database
  
 ### Roadmap
  * Download subtitles from subtitles website
  * Recommend you some other series you might like
  * Actors of series
  * Calendar and airing times
- * Explore series
  
 ## Installation
 

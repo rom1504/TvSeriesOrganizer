@@ -5,11 +5,12 @@ set -e
 binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
 export DISPLAY=:10
-sleeptime=7
+sleeptime=5
+longSleepTime=7
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
-sleep $sleeptime
+sleep $longSleepTime
 $binaryName  &
-sleep $sleeptime
+sleep $longSleepTime
 info=`xwininfo -display $DISPLAY -name $windowName`
 id=`echo "$info" | grep "Window id" | cut -f4 -d' '`
 x=`echo "$info" | grep "Absolute upper-left X" | cut -f7 -d' '`
@@ -28,14 +29,29 @@ function takeScreenshot
 	import -window $id screenshot/$1.png
 }
 
+yTabBar=90
+tab1=100
+tab2=300
+tab3=500
+
+function clickSearchInput
+{
+	moveClick 100 120
+}
+
+function clickAdd
+{
+	moveClick 520 260
+}
+
 function addSeries
 {
 	if [[ $3 -ne 1 ]]
 	then
-		moveClick 500 90
+		moveClick $tab3 $yTabBar
 	fi
 	sleep 1
-	moveClick 100 120
+	clickSearchInput
 	xte -x $DISPLAY "str $1"
 	sleep 1
 	xte -x $DISPLAY "key Return"
@@ -44,7 +60,7 @@ function addSeries
  	then
 		takeScreenshot SeriesSearch
 	fi
-	moveClick 520 260
+	clickAdd
 	sleep 1
 }
 
@@ -55,6 +71,15 @@ function moveClickTakeScreenshot
 	takeScreenshot $3
 }
 
+function clickForward
+{
+	moveClick 550 20
+}
+
+takeScreenshot ExploreSeries
+
+clickForward
+
 addSeries "merlin" 1 1
 addSeries "suits"
 addSeries "breaking bad"
@@ -63,11 +88,11 @@ sleep $sleeptime
 takeScreenshot SeriesList
 
 moveClickTakeScreenshot 40 320 SeriesDetails
-moveClickTakeScreenshot 300 90 SeriesInfo
-moveClickTakeScreenshot 500 90 SeriesFanArts
-moveClickTakeScreenshot 500 90 SeriesPosters
-moveClick 100 90
-moveClick 100 90
+moveClickTakeScreenshot $tab2 $yTabBar SeriesInfo
+moveClickTakeScreenshot $tab3 $yTabBar SeriesFanArts
+moveClickTakeScreenshot $tab3 $yTabBar SeriesPosters
+moveClick $tab1 $yTabBar
+moveClick $tab1 $yTabBar
 
 moveClickTakeScreenshot 40 380 SeasonDetails
 moveClickTakeScreenshot 40 280 EpisodeDetails

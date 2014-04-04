@@ -10,8 +10,31 @@ TabPage
     onTabChanged: stackview.focus=true
     property alias stimer:timer
 
-    onBack:Qt.quit()
+    onBack:stackview.depth===1 ? Qt.quit() : stackview.pop({immediate:true})
     Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner
+
+    Button
+    {
+        id:exploreContainer
+        x:7/8*seriesListPage.width-width/2
+        y:-height-seriesListPage.height/30
+        width: button.width +5
+        height: button.height +5
+        onClicked: stackview.push
+                   ({
+                        item:"qrc:/view/ExploreSeries.qml",
+                        immediate:true,
+                        properties:{followedSeriesList:seriesList}
+                   })
+        Image
+        {
+            source:"qrc:/images/add.png"
+            width:seriesListPage.width/7
+            height:width
+            id:button
+        }
+    }
+
 
     Text
     {
@@ -33,7 +56,7 @@ TabPage
         y:-height-seriesListPage.height/20
         width:contentWidth
         height:contentHeight
-        font.pointSize: 35
+        font.pointSize: 30
         color:"white"
         font.family: "georgia"
         text:"Tv Series Organizer"

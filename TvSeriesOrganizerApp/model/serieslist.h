@@ -13,16 +13,21 @@ class SeriesList : public QObject
     Q_PROPERTY(QAbstractItemModel * seriesListUpcomingModel READ seriesListUpcomingModel NOTIFY seriesListUpcomingModelChanged)
     Q_PROPERTY(int seriesCount READ seriesCount NOTIFY seriesCountChanged)
     Q_PROPERTY(QAbstractItemModel * autocompleteModel READ autocompleteModel NOTIFY autocompleteModelChanged)
+    Q_PROPERTY(QString genre READ genre WRITE setGenre NOTIFY genreChanged)
 
 public:
     explicit SeriesList(QObject *parent = 0);
+    explicit SeriesList(bool, QObject *parent = 0);
     int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;
     void loadSeries(QString fileName="");
     void removeSeries(int row);
     int seriesCount() const;
+    QString genre() const;
 
+
+    void setGenre(QString genre);
 
 
     QAbstractItemModel * seriesListModel();
@@ -39,6 +44,7 @@ signals:
     void seriesAdded(int addIndex);
     void seriesCountChanged();
     void autocompleteModelChanged();
+    void genreChanged();
 
 public slots:
     Series *getSeries(int row) const;
@@ -53,6 +59,7 @@ private:
     SignalList<Series*> mSeries;
     QString mSaveFileName;
     QSet<int> mIds;
+    QString mGenre;
 
 };
 Q_DECLARE_METATYPE (SeriesList*)

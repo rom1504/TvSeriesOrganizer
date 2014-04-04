@@ -21,5 +21,8 @@
         <file>translations/TvSeriesOrganizer_fr.qm</file>
         <file>images/search.png</file>
         <file>translations/TvSeriesOrganizer_it.qm</file>
+        <file>images/add.png</file>
+        <file>view/ExploreSeries.qml</file>
+        <file>images/forward.png</file>
     </qresource>
 </RCC>

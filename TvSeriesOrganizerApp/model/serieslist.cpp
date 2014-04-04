@@ -5,8 +5,16 @@
 #include "adapter/signallistfilter.h"
 #include "controller/controller.h"
 
+
 SeriesList::SeriesList(QObject *parent) :
     QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
+{
+}
+
+
+
+SeriesList::SeriesList(bool, QObject *parent) :
+    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel)
 {
 }
 
@@ -45,6 +53,19 @@ void SeriesList::updateAutocompleteModel(const QString &beginSeriesName)
         mAutocompleteModel->setStringList(*stringList);
     });
     manager->get(QNetworkRequest("http://thetvdb.com/livesearch.php?q="+beginSeriesName));
+}
+
+
+QString SeriesList::genre() const
+{
+    return mGenre;
+}
+
+
+void SeriesList::setGenre(QString genre)
+{
+    mGenre=genre;
+    emit genreChanged();
 }
 
 Series * SeriesList::getSeries(int row) const

@@ -6,5 +6,6 @@ Organisez et recherchez vos séries préférées avec Tv Series Organizer
 - Date de diffusion des épisodes
 - Afficher les séries, saisons et épisodes à venir
 - Cherchez et ajoutez toutes les séries que vous voulez
+- Explorer les series grâce à la base de données de http://trakt.tv/
 
 Ceci est un projet open source, si vous voulez plus d'information ou si vous voulez contribuer, aller sur https://github.com/rom1504/TvSeriesOrganizer

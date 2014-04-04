@@ -26,6 +26,7 @@ class Series : public QObject
     Q_PROPERTY(QString shortOverview READ shortOverview NOTIFY shortOverviewChanged)
 
 public:
+    explicit Series(QObject *parent=0);
     explicit Series(int id, QObject *parent = 0);
     explicit Series(const QDomElement & element, QObject*parent=0);
     void addSeason(Season * season);
@@ -36,6 +37,8 @@ public:
     void setName(QString name);
     void setOverview(QString overview);
     void setPoster(QUrl poster);
+    void setId(int id);
+    void setBanner(QUrl banner);
 
     QString name() const;
     QUrl banner() const;
@@ -60,7 +63,7 @@ public:
 
     void setSeen(bool seen);
 
-    static void loadLocallyOrRemotely(QString localFileName,QUrl remoteUrl,std::function<void(QString)> load);
+    static void loadLocallyOrRemotely(QString localFileName, QUrl remoteUrl, std::function<void(QString)> load, int numberOfDaysBeforeDownloadingAgain=-1);
 
 
 private:

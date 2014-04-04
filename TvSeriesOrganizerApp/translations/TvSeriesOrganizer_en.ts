@@ -38,6 +38,14 @@
     </message>
 </context>
 <context>
+    <name>ExploreSeries</name>
+    <message>
+        <location filename="../view/ExploreSeries.qml" line="109"/>
+        <source>Add</source>
+        <translation>Add</translation>
+    </message>
+</context>
+<context>
     <name>Season</name>
     <message>
         <source>No</source>
@@ -216,19 +224,28 @@
 <context>
     <name>SeriesList</name>
     <message>
-        <location filename="../view/SeriesList.qml" line="110"/>
+        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Series</source>
         <translation>Series</translation>
     </message>
     <message>
-        <location filename="../view/SeriesList.qml" line="110"/>
+        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Upcoming</source>
         <translation>Upcoming</translation>
     </message>
     <message>
-        <location filename="../view/SeriesList.qml" line="110"/>
+        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Search</source>
         <translation>Search</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesListList</name>
+    <message>
+        <location filename="../model/serieslistlist.cpp" line="15"/>
+        <location filename="../model/serieslistlist.cpp" line="16"/>
+        <source>Trending</source>
+        <translation>Trending</translation>
     </message>
 </context>
 <context>

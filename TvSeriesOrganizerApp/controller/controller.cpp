@@ -7,9 +7,7 @@
 
 #include "model/qqmlnetworkaccessmanagerfactorywithcache.h"
 #include "controller.h"
-
-
-
+#include "model/serieslistlist.h"
 
 QString Controller::cachePath;
 QString Controller::dataPath;
@@ -46,10 +44,16 @@ Controller::Controller(QString datadir, QObject *parent) :
     ctxt->setContextProperty("aheight",880);
 #endif
 
+
+
     mSeriesList=new SeriesList;
     mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
 
     ctxt->setContextProperty("seriesList", mSeriesList);
+
+    SeriesListList * seriesListList=new SeriesListList();
+
+    ctxt->setContextProperty("seriesListList", seriesListList);
 
     mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
 
