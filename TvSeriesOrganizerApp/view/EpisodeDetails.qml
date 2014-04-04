@@ -12,7 +12,7 @@ TabPage
     property var episode
     property bool upcoming:false
 
-    onTabChanged: stackview.get(2).episodeIndex=column
+    onTabChanged: stackview.get(stackview.depth-2).episodeIndex=column
     onCurrentTabChanged:episodeDetails.imageSource=currentItem.myData.banner
 
     onBack:stackview.pop({immediate:true})

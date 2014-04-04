@@ -6,10 +6,11 @@ TabPage
     id:seasonDetails
     imageSource:season.banner
     property int episodeIndex:0
+    onEpisodeIndexChanged: listBeginIndex=episodeIndex
     property var seriesModel
     property var season
     property var seasonIndex
-    onTabChanged: stackview.get(1).seasonIndex=column
+    onTabChanged: stackview.get(stackview.depth-2).seasonIndex=column
     onCurrentTabChanged:seasonDetails.imageSource=currentItem.myData.banner;
     tabContentModel: seriesModel
     property int listBeginIndex:episodeIndex
