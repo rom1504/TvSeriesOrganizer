@@ -1,3 +1,7 @@
+## 1.1.0
+
+ * add explore view thanks to trakt.tv database
+
 ## 1.0.2
 
  * fix search box for swiftkey in android

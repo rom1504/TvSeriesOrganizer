@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     QGuiApplication::installTranslator(&translator);
 
     QGuiApplication::setApplicationName("TvSeriesOrganizer");
-    QGuiApplication::setApplicationVersion("1.0.2");
+    QGuiApplication::setApplicationVersion("1.1.0");
 
     QString datadir="";
 
