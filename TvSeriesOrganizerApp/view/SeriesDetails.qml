@@ -14,8 +14,8 @@ TabPage
 
     onBack:
     {
+        stackview.get(stackview.depth-2).stimer.running=true
         stackview.pop({immediate:true})
-        stackview.get(0).stimer.running=true
     }
 
     function seasonClicked(seasonIndex,season,upcoming)
@@ -64,7 +64,7 @@ TabPage
                 id:scol
                 height:childrenRect.height
                 spacing:20
-                ShadowBorderRectangle
+                ShadowBorderRectangleButton
                 {
                     id:firstRect
                     width:seriesDetails.width-40
@@ -106,7 +106,7 @@ TabPage
                         }
                     }
                 }
-                ShadowBorderRectangle
+                ShadowBorderRectangleButton
                 {
                     width:seriesDetails.width-40
                     height:col2.height

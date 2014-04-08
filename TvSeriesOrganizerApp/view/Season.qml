@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import "qrc:/GeneralQmlItems/"
 
-ShadowBorderRectangle
+ShadowBorderRectangleButton
 {
 
     function betterNumber(n,max,no,one,medium,all)

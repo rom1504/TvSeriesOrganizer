@@ -68,7 +68,7 @@ Column
         z:0
         id:searchListView
         delegate:
-            ShadowBorderRectangle
+            ShadowBorderRectangleButton
             {
                 id:seriesItem
 
@@ -86,11 +86,18 @@ Column
                     description:series.shortOverview
                 }
 
-                TextButton
+                Button
                 {
                     id:addButton
-                    text:qsTr("Add")
-                    font.pointSize: 12
+                    Image
+                    {
+                        source:"qrc:/images/add_black.png"
+                        width:content.width/13
+                        height:width
+                        id:ibutton
+                    }
+                    width:ibutton.width
+                    height:ibutton.height
                     x:parent.width-width
                     focus:true
                     onClicked: {status.text=qsTr("Adding...");seriesList.completeAddSaveSeries(series);}

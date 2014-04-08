@@ -26,30 +26,59 @@ TabPage
             focus:true
             width: episodeDetails.width-40
             height:episodeDetails.height
-            contentHeight: rect.height+400
-            ShadowBorderRectangleText
+            contentHeight: col.height+400
+            Column
             {
-                id:rect
-                height:tidi.height+seenRectangle.height
-                onClicked:
+                id:col
+                spacing:5
+                height:rect.height+rect2.height
+                ShadowBorderRectangleButton
                 {
-                    if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+                    id:rect
+                    height:tidi.height+seenRectangle.height
+                    onClicked:
+                    {
+                        if(isMouseIn(seenRectangle)) seenRectangle.clicked()
+                    }
+                    TitleImageDescriptionItem
+                    {
+                        id:tidi
+                        title:episode.name
+                        imageSource:episode.banner
+                        description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+                    }
+                    SeenIndicator
+                    {
+                        id:seenRectangle
+                        seen:episode.seen
+                        onSeenHasChanged:episode.seen=seenRectangle.seen
+                        x:parent.width-width-5
+                    }
+                    width:episodeDetails.width-40
                 }
-                TitleImageDescriptionItem
+                ShadowBorderRectangle
                 {
-                    id:tidi
-                    title:episode.name
-                    imageSource:episode.banner
-                    description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+                    visible:!noPlugin
+                    id:rect2
+                    height:listviewPlugin.height
+                    ListView
+                    {
+                        id:listviewPlugin
+                        delegate:TextButton
+                        {
+                            text: plugin.buttonName
+                            onClicked: plugin.run(episode)
+                        }
+                        orientation:ListView.Horizontal
+                        model:pluginModel
+                        width: episodeDetails.width-40
+                        height: 35
+                        focus:true
+                        clip:true
+                    }
+
+                    width:episodeDetails.width-40
                 }
-                SeenIndicator
-                {
-                    id:seenRectangle
-                    seen:episode.seen
-                    onSeenHasChanged:episode.seen=seenRectangle.seen
-                    x:parent.width-width-5
-                }
-                width:episodeDetails.width-40
             }
        }
     tabDelegate:TabItem{tabText:qsTr("Episode")+" "+episode.number;tabPage:episodeDetails}

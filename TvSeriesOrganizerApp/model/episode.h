@@ -6,6 +6,7 @@
 #include <QUrl>
 #include <QDate>
 
+class Season;
 class Episode : public QObject
 {
     Q_OBJECT
@@ -18,7 +19,7 @@ class Episode : public QObject
     Q_PROPERTY(bool aired READ aired NOTIFY airedChanged)
 
 public:
-    explicit Episode(int number, const QString & name, const QString& overview, QUrl banner,QDate firstAired, QObject *parent = 0);
+    explicit Episode(int number, const QString & name, const QString& overview, QUrl banner,QDate firstAired, Season *parent = 0);
     int number() const;
     QString name() const;
     QString overview() const;
@@ -26,6 +27,7 @@ public:
     QDate firstAired() const;
     bool seen() const;
     bool aired() const;
+    Season* season() const;
 
 
     void setSeen(bool seen);
@@ -48,6 +50,7 @@ private:
     QUrl mBanner;
     QDate mFirstAired;
     bool mSeen;
+    Season* mSeason;
 };
 
 Q_DECLARE_METATYPE (Episode*)

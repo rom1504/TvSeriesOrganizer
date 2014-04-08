@@ -11,6 +11,8 @@
 #include "model/signallist.h"
 #include "adapter/signallistadapter.h"
 
+class Series;
+
 class Season : public QObject
 {
     Q_OBJECT
@@ -28,7 +30,7 @@ class Season : public QObject
     Q_PROPERTY(QAbstractItemModel * seasonUpcomingModel READ seasonUpcomingModel NOTIFY seasonUpcomingModelChanged)
 
 public:
-    explicit Season(int number,QUrl banner,QUrl poster,QObject *parent = 0);
+    explicit Season(int number,QUrl banner,QUrl poster,Series *parent = 0);
     void addEpisode(Episode * episode);
     int number() const;
     QUrl banner() const;
@@ -42,6 +44,7 @@ public:
     QDate firstAired() const;
     double airedRatio() const;
     int episodeAiredCount() const;
+    Series * series() const;
 
     void setSeen(bool seen);
     void setBanner(QUrl banner);
@@ -76,6 +79,7 @@ private:
     QUrl mBanner;
     QUrl mPoster;
     SignalList<Episode *> mEpisodes;
+    Series* mSeries;
 
 };
 Q_DECLARE_METATYPE (Season*)

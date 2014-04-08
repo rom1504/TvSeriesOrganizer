@@ -1,5 +1,4 @@
 # Add more folders to ship with the application, here
-
 DEPLOYMENTFOLDERS =
 
 # Additional import path used to resolve QML modules in Creator's code model
@@ -15,7 +14,9 @@ SOURCES += main.cpp \
     model/series.cpp \
     model/serieslist.cpp \
     model/qqmlnetworkaccessmanagerfactorywithcache.cpp \
-    model/serieslistlist.cpp
+    model/serieslistlist.cpp \
+    model/plugin.cpp \
+    TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp
 
 # Installation path
 # target.path =
@@ -31,7 +32,10 @@ HEADERS += \
     model/series.h \
     model/serieslist.h \
     model/qqmlnetworkaccessmanagerfactorywithcache.h \
-    model/serieslistlist.h
+    model/serieslistlist.h \
+    TvSeriesOrganizerPluginInterface/abstractplugin.h \
+    model/plugin.h \
+    TvSeriesOrganizerPluginInterface/episodeplugininterface.h
 
 
 QMAKE_CXXFLAGS += -std=c++11

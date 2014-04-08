@@ -1,8 +1,8 @@
 #include "season.h"
 #include "adapter/signallistfilter.h"
 
-Season::Season(int number, QUrl banner,QUrl poster, QObject *parent) :
-    QObject(parent),mNumber(number),mBanner(banner),mPoster(poster)
+Season::Season(int number, QUrl banner, QUrl poster, Series *parent) :
+    QObject((QObject*)parent),mNumber(number),mBanner(banner),mPoster(poster),mSeries(parent)
 {
     connect(this,&Season::seenChanged,this,&Season::seenRatioChanged);
     connect(this,&Season::seenChanged,this,&Season::episodeSeenCountChanged);
@@ -14,6 +14,12 @@ void Season::addEpisode(Episode * episode)
     mEpisodes.append(episode);
     connect(episode,&Episode::seenChanged,this,&Season::seenChanged);
     connect(episode,&Episode::seenChanged,[episode,this](){emit mEpisodes.elementChanged(episode);});
+}
+
+
+Series * Season::series() const
+{
+    return mSeries;
 }
 
 

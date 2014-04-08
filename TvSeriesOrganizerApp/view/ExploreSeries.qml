@@ -77,45 +77,41 @@ TabPage
         {
             id:seriesL
             property variant myData:seriesList
-            delegate:ShadowBorderRectangle
+            delegate:Item
             {
                 id:seriesItem
                 width:seriesL.cellWidth-seriesL.itemMargin
                 height:seriesL.cellHeight-seriesL.itemMargin
 
-                onClicked: if(addButton.enabled==true && isMouseIn(addButton)) addButton.clicked()
-                onPressedChanged:
+                Image
                 {
-                    if(!pressed || isMouseIn(addButton,50)) addButton.pressed=pressed
+                    id:image
+                    width:parent.width
+                    height: image.width/138*203
+                    fillMode: Image.PreserveAspectCrop
+                    source:series.poster
                 }
 
-                Column
-                {
-                    width:parent.width-5
-                    spacing:5
-                    Image
-                    {
-                        id:image
-                        width:parent.width
-                        height: image.width/138*203
-                        fillMode: Image.PreserveAspectCrop
-                        source:series.poster
-                    }
-                 }
-
-                TextButton
+                Button
                 {
                     id:addButton
-                    text:qsTr("Add")
-                    font.pointSize: 12
+                    Image
+                    {
+                        source:"qrc:/images/add.png"
+                        width:image.width/4
+                        height:width
+                        id:ibutton
+                    }
+                    width:ibutton.width
+                    height:ibutton.height
                     x:parent.width-width
                     focus:true
                     onClicked: {followedSeriesList.completeAddSaveSeries(series);}
                 }
             }
             cellWidth:width/3
-            cellHeight: cellWidth/138*203/1.05
-            property double itemMargin: -cellWidth*0.03
+            cellHeight: cellWidth/138*203*0.99
+            property double itemMargin: cellWidth*0.03
             model:seriesList.seriesListModel
             width: exploreSeries.width-40
             height: parent.height

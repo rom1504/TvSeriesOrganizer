@@ -24,5 +24,7 @@
         <file>images/add.png</file>
         <file>view/ExploreSeries.qml</file>
         <file>images/forward.png</file>
+        <file>images/add_black.png</file>
+        <file>images/remove_black.png</file>
     </qresource>
 </RCC>

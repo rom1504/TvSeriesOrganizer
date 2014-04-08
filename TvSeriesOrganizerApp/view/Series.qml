@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import "qrc:/GeneralQmlItems/"
 
-ShadowBorderRectangle
+ShadowBorderRectangleButton
 {
     id:seriesItem
     signal seriesClicked(int index)
@@ -30,12 +30,20 @@ ShadowBorderRectangle
         if(!(pressed && (isMouseIn(seenRectangle,50) || isMouseIn(removeButton)))) rectColor=pressed ? "#EEEEEE" : "white"
     }
 
-    TextButton
+    Button
     {
         id:removeButton
-        text:qsTr("Remove")
-        font.pointSize: 12
-        x:parent.width/2
+        Image
+        {
+            source:"qrc:/images/remove_black.png"
+            width:content.width/13
+            height:width
+            id:ibutton
+        }
+        width:ibutton.width
+        height:ibutton.height
+        x:parent.width*4/6
+        y:-5
         focus:true
         onClicked: seriesListPage.removeSeries(index)
     }
