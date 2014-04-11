@@ -24,41 +24,39 @@ SimplePage
 
     onEnter:listview.currentItem.Keys.onReturnPressed(event)
 
-    function goTo(index)
-    {
-        listview.positionViewAtIndex(index,ListView.Center);listview.contentXChanged();
-    }
-
-    onTabClicked: goTo(index)
+    onTabClicked: listview.goTo(index)
 
 
     ListView
     {
+
+        function goTo(index)
+        {
+            if(index<0) return
+            if(index>count-1) return
+            listview.positionViewAtIndex(index,index===0 ? ListView.Left : (index===count-1 ? ListView.Right : ListView.Center));
+            listview.currentIndex=index
+        }
+
         function goLeft()
         {
-            if(currentIndex>0)
-            {
-                positionViewAtIndex(currentIndex-1,ListView.Center);
-                contentXChanged();
-            }
+            goTo(currentIndex-1)
         }
         function goRight()
         {
-            if(currentIndex<count-1)
-            {
-                positionViewAtIndex(currentIndex+1,ListView.Center);
-                contentXChanged();
-            }
+
+            goTo(currentIndex+1)
         }
+
         id:listview
         width: tabPage.width-40
         height: tabPage.height
-        Component.onCompleted: positionViewAtIndex(beginIndex,ListView.Center);
+        Component.onCompleted: goTo(beginIndex)
         clip: true
         focus:true
-        highlightRangeMode:ListView.StrictlyEnforceRange
         orientation:ListView.Horizontal
         snapMode:ListView.SnapOneItem
+
         onContentXChanged:
         {
             var newX=(listview.contentX/(tabPage.width-40)-1)*tabbar.width/3
@@ -69,6 +67,7 @@ SimplePage
                 marquer.x=tabbar.width/3;
                 tabList.contentX=newX
             }
+            currentIndex=Math.round(listview.contentX/listview.width)
         }
         onCurrentIndexChanged:
         {
@@ -82,7 +81,7 @@ SimplePage
     {
         id:tabbar
         height:50
-        width:tabPage.width
+        width:tabPage.width-40
 
         clip:true
         y:-5-citem.height
@@ -98,7 +97,6 @@ SimplePage
                 Component.onCompleted: positionViewAtIndex(beginIndex==count-1 && count>2 ? beginIndex-1 : beginIndex,ListView.Center);
                 snapMode:ListView.SnapOneItem
 
-                highlightRangeMode:ListView.StrictlyEnforceRange
                 height:contentItem.childrenRect.height
                 id:tabList
                 width:parent.width

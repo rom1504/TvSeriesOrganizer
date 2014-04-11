@@ -11,7 +11,7 @@ TabPage
     property var season
     property var seasonIndex
     onTabChanged: stackview.get(stackview.depth-2).seasonIndex=column
-    onCurrentTabChanged:seasonDetails.imageSource=currentItem.myData.banner;
+    onCurrentTabChanged:seasonDetails.imageSource=currentItem===null ? season.banner : currentItem.myData.banner
     tabContentModel: seriesModel
     property int listBeginIndex:episodeIndex
     property bool upcoming:false

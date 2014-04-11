@@ -68,7 +68,6 @@ Controller::Controller(QString datadir, QObject *parent) :
     ctxt->setContextProperty("noPlugin",pluginList->size()==0);
     ctxt->setContextProperty("pluginModel",new SignalListAdapter<Plugin*>(pluginList,"plugin"));
 
-
     mSeriesList=new SeriesList;
     mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
 
