@@ -1,3 +1,10 @@
+## 1.2.0
+
+ * fix a bug on back button
+ * add plugin system, replace add and remove text button by image button, improve explore page, improve shadow border rectangle
+ * don't show tv series you've already added in explore view
+ * add actor list and improve button usability
+
 ## 1.1.0
 
  * add explore view thanks to trakt.tv database
