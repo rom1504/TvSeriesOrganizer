@@ -129,6 +129,32 @@ TabPage
                 }
             }
         }
+        ListView
+        {
+            delegate:ShadowBorderRectangle
+            {
+                TitleImageDescriptionItem
+                {
+                    title:actor.name
+                    imageSource:actor.image
+                    description:qsTr("Role")+": "+actor.role+"\n"+qsTr("Importance")+": "+
+                                (actor.sortOrder===3 ? qsTr("Low") :
+                                (actor.sortOrder===2 ? qsTr("Medium") :
+                                (actor.sortOrder===1 ? qsTr("High") :
+                                (actor.sortOrder===0 ? qsTr("Very low") : ""))))
+                }
+              }
+            model:series.actorListModel
+            width: seriesDetails.width-40
+            height: seriesDetails.height
+            currentIndex: 0
+            focus:true
+
+            highlightRangeMode:ListView.StrictlyEnforceRange
+            Keys.onDownPressed: incrementCurrentIndex()
+            Keys.onUpPressed: decrementCurrentIndex()
+            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
+        }
         GridView
         {
             id:fanArtsView
@@ -178,7 +204,7 @@ TabPage
                     }
         }
     }
-    tabModel:[qsTr("Seasons"),qsTr("Info"),qsTr("Fan arts"),qsTr("Posters")]
+    tabModel:[qsTr("Seasons"),qsTr("Info"),qsTr("Actors"),qsTr("Fan arts"),qsTr("Posters")]
     tabDelegate:TabItem{tabText:modelData;tabPage:seriesDetails}
 
     beginIndex:0

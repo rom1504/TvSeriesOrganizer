@@ -24,11 +24,11 @@ Translations are done with [Transifex](https://www.transifex.com/projects/p/tvse
  * Display upcoming series/season/episode
  * Search and add any series you want
  * Explore series using http://trakt.tv/ database
+ * See all the actors of the tv series : importance in the series, names and role
  
 ### Roadmap
  * Download subtitles from subtitles website
  * Recommend you some other series you might like
- * Actors of series
  * Calendar and airing times
  
 ## Installation

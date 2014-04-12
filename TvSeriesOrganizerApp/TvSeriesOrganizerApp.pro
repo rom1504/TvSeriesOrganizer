@@ -16,7 +16,9 @@ SOURCES += main.cpp \
     model/qqmlnetworkaccessmanagerfactorywithcache.cpp \
     model/serieslistlist.cpp \
     model/plugin.cpp \
-    TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp
+    TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp \
+    model/actor.cpp \
+    model/actorlist.cpp
 
 # Installation path
 # target.path =
@@ -35,7 +37,9 @@ HEADERS += \
     model/serieslistlist.h \
     TvSeriesOrganizerPluginInterface/abstractplugin.h \
     model/plugin.h \
-    TvSeriesOrganizerPluginInterface/episodeplugininterface.h
+    TvSeriesOrganizerPluginInterface/episodeplugininterface.h \
+    model/actor.h \
+    model/actorlist.h
 
 
 QMAKE_CXXFLAGS += -std=c++11

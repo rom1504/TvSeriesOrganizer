@@ -6,6 +6,7 @@
 
 #include "season.h"
 #include "model/signallist.h"
+#include "model/actorlist.h"
 
 class Series : public QObject
 {
@@ -24,6 +25,7 @@ class Series : public QObject
     Q_PROPERTY(QAbstractItemModel * seriesModel READ seriesModel NOTIFY seriesModelChanged)
     Q_PROPERTY(QAbstractItemModel * seriesUpcomingModel READ seriesUpcomingModel NOTIFY seriesUpcomingModelChanged)
     Q_PROPERTY(QString shortOverview READ shortOverview NOTIFY shortOverviewChanged)
+    Q_PROPERTY(QAbstractItemModel * actorListModel READ actorListModel NOTIFY actorListModelChanged)
 
 public:
     explicit Series(QObject *parent=0);
@@ -55,6 +57,7 @@ public:
     int episodeCount() const;
     QAbstractItemModel * seriesModel();
     QAbstractItemModel * seriesUpcomingModel();
+    QAbstractItemModel * actorListModel();
     QString shortOverview() const;
 
     int id() const;
@@ -85,6 +88,7 @@ signals:
     void seriesModelChanged();
     void seriesUpcomingModelChanged();
     void shortOverviewChanged();
+    void actorListModelChanged();
 
     void completed();
 
@@ -96,6 +100,7 @@ private:
     void saveSeriesSeenFile();
     void loadSeries(QString xmlFileContent);
     void loadBanners(QString xmlFileContent);
+    void loadActors(QString xmlFileContent);
     Season* findSeason(int seasonNumber);
 
 private:
@@ -110,6 +115,7 @@ private:
     SignalList<QUrl> mFanArts;
     SignalList<QUrl> mPosters;
     QString mShortOverview;
+    ActorList mActorList;
 
 };
 Q_DECLARE_METATYPE (Series*)

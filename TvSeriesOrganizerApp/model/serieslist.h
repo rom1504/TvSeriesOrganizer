@@ -22,11 +22,11 @@ public:
     int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;
-    void loadSeries(QString fileName="");
     void removeSeries(int row);
     int seriesCount() const;
     QString genre() const;
     bool added(int id) const;
+    void loadSeries(QString fileName="");
 
 
     void setGenre(QString genre);

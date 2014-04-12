@@ -102,9 +102,9 @@ TabPage
                         height:width
                         id:ibutton
                     }
-                    width:ibutton.width
-                    height:ibutton.height
-                    x:parent.width-width
+                    width:ibutton.width+50
+                    height:ibutton.height+50
+                    x:seriesItem.width-ibutton.width
                     focus:true
                     onClicked: {followedSeriesList.completeAddSaveSeries(series);}
                 }

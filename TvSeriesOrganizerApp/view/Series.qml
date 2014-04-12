@@ -9,7 +9,7 @@ ShadowBorderRectangleButton
 
     onClicked:
     {
-        if(removeButton.enabled&& isMouseIn(removeButton)) removeButton.clicked()
+        if(removeButton.enabled&& isMouseIn(removeButton,50)) removeButton.clicked()
         else if(isMouseIn(seenRectangle,50)) seenRectangle.clicked()
         else seriesClicked(index)
     }

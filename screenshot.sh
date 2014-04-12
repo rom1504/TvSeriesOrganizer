@@ -89,8 +89,10 @@ takeScreenshot SeriesList
 
 moveClickTakeScreenshot 40 320 SeriesDetails
 moveClickTakeScreenshot $tab2 $yTabBar SeriesInfo
+moveClickTakeScreenshot $tab3 $yTabBar SeriesActors
 moveClickTakeScreenshot $tab3 $yTabBar SeriesFanArts
 moveClickTakeScreenshot $tab3 $yTabBar SeriesPosters
+moveClick $tab1 $yTabBar
 moveClick $tab1 $yTabBar
 moveClick $tab1 $yTabBar
 

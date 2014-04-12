@@ -72,7 +72,7 @@ Column
             {
                 id:seriesItem
 
-                onClicked: if(addButton.enabled==true && isMouseIn(addButton)) addButton.clicked()
+                onClicked: if(addButton.enabled==true && isMouseIn(addButton,50)) addButton.clicked()
                 onPressedChanged:
                 {
                     if(!pressed || isMouseIn(addButton,50)) addButton.pressed=pressed

@@ -124,6 +124,12 @@ void Series::setOverview(QString overview)
 }
 
 
+QAbstractItemModel * Series::actorListModel()
+{
+    return mActorList.actorListModel();
+}
+
+
 void Series::setPoster(QUrl poster)
 {
     mPoster=poster;
@@ -205,10 +211,16 @@ void Series::loadBanners(QString xmlFileContent)
         }
         root = root.nextSiblingElement();
     }
-    emit completed();
+
+    loadLocallyOrRemotely(Controller::cachePath+"/"+QString::number(mId)+"_actors.xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+QString::number(mId)+"/actors.xml"),std::bind(&Series::loadActors,this,std::placeholders::_1));
 }
 
 
+void Series::loadActors(QString xmlFileContent)
+{
+    mActorList.loadActorList(xmlFileContent);
+    emit completed();
+}
 
 
 Season* Series::findSeason(int seasonNumber)
