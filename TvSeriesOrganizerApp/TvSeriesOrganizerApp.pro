@@ -60,9 +60,12 @@ DEPENDPATH += $$PWD/../GeneralQmlItems
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 
-TRANSLATIONS += translations/TvSeriesOrganizer_fr.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_fr_FR.ts
 TRANSLATIONS += translations/TvSeriesOrganizer_en.ts
 TRANSLATIONS += translations/TvSeriesOrganizer_it.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_de.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_es.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_zh.ts
 
 lupdate_only{
 SOURCES = view/Episode.qml \

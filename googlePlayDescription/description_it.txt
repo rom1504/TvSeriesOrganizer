@@ -1,0 +1,12 @@
+Organizza tutte le tue serie Tv con Tv Series Organizer
+- Elenco degli episodi organizzati per stagione e per serie
+- Scarica dal database http://www.thetvdb.com/, l'elenco degli episodi e delle stagioni, con banner, poster e descrizioni
+- Bellissima interfaccia
+- Tieni traccia degli episodi e delle serie che hai visto
+-Tempo di trasmissione degli episodi
+- Vedi serie/stagioni/episodi in arrivo
+- Cerca e aggiungi qualsiasi serie vuoi
+- Esplora serie usando il database http://trakt.tv/
+- See all the actors of the tv series : importance in the series, names and role
+
+Questo è un progetto open source, se vuoi maggiori informazioni o vuoi contribuire vai su https://github.com/rom1504/TvSeriesOrganizer

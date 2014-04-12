@@ -6,21 +6,17 @@
 //#define LANG "fr_FR"
 //#define LANG "en_US"
 //#define LANG "it_IT"
+//#define LANG "zh"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    QString locale = QLocale::system().name();
-    //locale=LANG;
-    QLocale::setDefault(QLocale(locale));
 
-    QTranslator qtTranslator;
-    qtTranslator.load(":/translation/qt_" + locale);
-    QGuiApplication::installTranslator(&qtTranslator);
-
+    QLocale locale=QLocale::system();
+    //locale=QLocale(LANG);
 
     QTranslator translator;
-    translator.load(QString(":/translations/TvSeriesOrganizer_") + locale);
+    translator.load(locale,"TvSeriesOrganizer","_",":/translations/");
     QGuiApplication::installTranslator(&translator);
 
     QGuiApplication::setApplicationName("TvSeriesOrganizer");
@@ -32,7 +28,6 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
-    //parser.addPositionalArgument("data-dir", QCoreApplication::translate("main", "Directory where data are saved"));
     QCommandLineOption dataDirectoryOption(QStringList() << "data-dir",QGuiApplication::translate("main", "Directory where data are saved"),QGuiApplication::translate("main", "directory"));
     parser.addOption(dataDirectoryOption);
     parser.process(app);

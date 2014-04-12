@@ -324,12 +324,12 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="36"/>
+        <location filename="../main.cpp" line="30"/>
         <source>Directory where data are saved</source>
         <translation>Directory where data are saved</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="36"/>
+        <location filename="../main.cpp" line="30"/>
         <source>directory</source>
         <translation>directory</translation>
     </message>

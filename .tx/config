@@ -1,0 +1,15 @@
+[main]
+host = https://www.transifex.com
+
+[tvseriesorganizer.description_google_playtxt]
+file_filter = googlePlayDescription/description_<lang>.txt
+source_file = googlePlayDescription/description_en.txt
+source_lang = en
+type = TXT
+
+[tvseriesorganizer.tvseriesorganizer_ts]
+file_filter = TvSeriesOrganizerApp/translations/TvSeriesOrganizer_<lang>.ts
+source_file = TvSeriesOrganizerApp/translations/TvSeriesOrganizer_en.ts
+source_lang = en
+type = QT
+
