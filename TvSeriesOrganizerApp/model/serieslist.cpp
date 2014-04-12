@@ -6,16 +6,22 @@
 #include "controller/controller.h"
 
 
-SeriesList::SeriesList(QObject *parent) :
-    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();})
+SeriesList::SeriesList(SeriesList* filterBySeriesList,QObject *parent) :
+    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();}),mFilterBySeriesList(filterBySeriesList)
 {
 }
 
 
 
-SeriesList::SeriesList(bool, QObject *parent) :
-    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel)
+SeriesList::SeriesList(bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent) :
+    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mFilterBySeriesList(filterBySeriesList)
 {
+}
+
+
+bool SeriesList::added(int id) const
+{
+    return mIds.contains(id);
 }
 
 int SeriesList::addSeries(Series * series)
@@ -77,6 +83,16 @@ Series * SeriesList::getSeries(int row) const
 int SeriesList::seriesCount() const
 {
     return mSeries.size();
+}
+
+
+QAbstractItemModel * SeriesList::seriesListFilteredModel()
+{
+    Q_ASSERT(mFilterBySeriesList!=nullptr);
+    SignalListFilter<Series*> * filteredModel=new SignalListFilter<Series*>();
+    filteredModel->setFilter([this](Series* series){return !mFilterBySeriesList->added(series->id());});
+    filteredModel->setSourceModel(seriesListModelT());
+    return filteredModel;
 }
 
 

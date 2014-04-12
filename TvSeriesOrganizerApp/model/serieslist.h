@@ -9,6 +9,7 @@
 class SeriesList : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QAbstractItemModel * seriesListFilteredModel READ seriesListFilteredModel NOTIFY seriesListFilteredModelChanged)
     Q_PROPERTY(QAbstractItemModel * seriesListModel READ seriesListModel NOTIFY seriesListModelChanged)
     Q_PROPERTY(QAbstractItemModel * seriesListUpcomingModel READ seriesListUpcomingModel NOTIFY seriesListUpcomingModelChanged)
     Q_PROPERTY(int seriesCount READ seriesCount NOTIFY seriesCountChanged)
@@ -16,8 +17,8 @@ class SeriesList : public QObject
     Q_PROPERTY(QString genre READ genre WRITE setGenre NOTIFY genreChanged)
 
 public:
-    explicit SeriesList(QObject *parent = 0);
-    explicit SeriesList(bool, QObject *parent = 0);
+    explicit SeriesList(SeriesList* filterBySeriesList=nullptr,QObject *parent = 0);
+    explicit SeriesList(bool /* not sorted */,SeriesList* filterBySeriesList=nullptr, QObject *parent = 0);
     int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;
@@ -25,11 +26,12 @@ public:
     void removeSeries(int row);
     int seriesCount() const;
     QString genre() const;
+    bool added(int id) const;
 
 
     void setGenre(QString genre);
 
-
+    QAbstractItemModel * seriesListFilteredModel();
     QAbstractItemModel * seriesListModel();
     QAbstractItemModel * seriesListUpcomingModel();
     QAbstractItemModel * autocompleteModel();
@@ -38,6 +40,7 @@ private:
     SignalListAdapter<Series*> * seriesListModelT();
 
 signals:
+    void seriesListFilteredModelChanged();
     void seriesListModelChanged();
     void seriesListUpcomingModelChanged();
     void searchCompleted(QAbstractItemModel * searchListModel,int resultsCount);
@@ -60,6 +63,7 @@ private:
     QString mSaveFileName;
     QSet<int> mIds;
     QString mGenre;
+    SeriesList* mFilterBySeriesList;
 
 };
 Q_DECLARE_METATYPE (SeriesList*)

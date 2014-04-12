@@ -13,7 +13,7 @@ class SeriesListList : public QObject
     Q_OBJECT
 
 public:
-    explicit SeriesListList(QObject *parent = 0);
+    explicit SeriesListList(SeriesList * alreadyAddedSeriesList=nullptr,QObject *parent = 0);
     void load(QString jsonFileContent="");
 
 signals:
@@ -24,7 +24,7 @@ public slots:
 private:
     SignalList<SeriesList*> mSeriesListList;
     QMap<QString,SeriesList*> mSeriesListByGenre;
-
+    SeriesList * mAlreadyAddedSeriesList;
 };
 
 #endif // SERIESLISTLIST_H

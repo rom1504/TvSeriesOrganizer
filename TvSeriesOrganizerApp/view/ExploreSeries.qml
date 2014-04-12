@@ -112,7 +112,7 @@ TabPage
             cellWidth:width/3
             cellHeight: cellWidth/138*203*0.99
             property double itemMargin: cellWidth*0.03
-            model:seriesList.seriesListModel
+            model:seriesList.seriesListFilteredModel
             width: exploreSeries.width-40
             height: parent.height
             highlightRangeMode:ListView.StrictlyEnforceRange

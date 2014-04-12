@@ -1,8 +1,8 @@
 #include "controller/controller.h"
 #include "serieslistlist.h"
 
-SeriesListList::SeriesListList(QObject *parent) :
-    QObject(parent)
+SeriesListList::SeriesListList(SeriesList * alreadyAddedSeriesList,QObject *parent) :
+    QObject(parent),mAlreadyAddedSeriesList(alreadyAddedSeriesList)
 {
 
     Series::loadLocallyOrRemotely(Controller::cachePath+"/trendingSeriesList.json",QUrl("http://api.trakt.tv/shows/trending.json/f9201fd7c6183a624a27ccba01555310"),std::bind(&SeriesListList::load,this,std::placeholders::_1),7);
@@ -11,7 +11,7 @@ SeriesListList::SeriesListList(QObject *parent) :
 
 void SeriesListList::load(QString jsonFileContent)
 {
-    SeriesList *seriesListTrending=new SeriesList(true);
+    SeriesList *seriesListTrending=new SeriesList(true,mAlreadyAddedSeriesList);
     seriesListTrending->setGenre(tr("Trending"));
     mSeriesListByGenre[tr("Trending")]=seriesListTrending;
     mSeriesListList.append(seriesListTrending);
@@ -36,7 +36,7 @@ void SeriesListList::load(QString jsonFileContent)
                 if(mSeriesListByGenre.contains(genre)) seriesList=mSeriesListByGenre[genre];
                 else
                 {
-                    seriesList=new SeriesList(true);
+                    seriesList=new SeriesList(true,mAlreadyAddedSeriesList);
                     seriesList->setGenre(genre);
                     mSeriesListByGenre[genre]=seriesList;
                     mSeriesListList.append(seriesList);

@@ -73,7 +73,7 @@ Controller::Controller(QString datadir, QObject *parent) :
 
     ctxt->setContextProperty("seriesList", mSeriesList);
 
-    SeriesListList * seriesListList=new SeriesListList();
+    SeriesListList * seriesListList=new SeriesListList(mSeriesList);
 
     ctxt->setContextProperty("seriesListList", seriesListList);
 
