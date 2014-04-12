@@ -26,6 +26,11 @@ SimplePage
 
     onTabClicked: listview.goTo(index)
 
+    function goTo(index)
+    {
+        listview.goTo(index)
+    }
+
 
     ListView
     {
