@@ -7,5 +7,6 @@ Organize all your Tv Series with Tv Series Organizer
 - Display upcoming series/season/episode
 - Search and add any series you want
 - Explore series using http://trakt.tv/ database
+- See all the actors of the tv series : importance in the series, names and role
 
 This is an open source project, if you want more information or want to contribute go to https://github.com/rom1504/TvSeriesOrganizer
