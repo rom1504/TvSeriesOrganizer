@@ -22,17 +22,17 @@
 <context>
     <name>EpisodeDetails</name>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="43"/>
+        <location filename="../view/EpisodeDetails.qml" line="48"/>
         <source>Episode number</source>
         <translation>Episodio numero</translation>
     </message>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="43"/>
+        <location filename="../view/EpisodeDetails.qml" line="48"/>
         <source>First aired</source>
         <translation>Prima tv</translation>
     </message>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="55"/>
+        <location filename="../view/EpisodeDetails.qml" line="84"/>
         <source>Episode</source>
         <translation>Episodio</translation>
     </message>
@@ -40,9 +40,8 @@
 <context>
     <name>ExploreSeries</name>
     <message>
-        <location filename="../view/ExploreSeries.qml" line="109"/>
         <source>Add</source>
-        <translation>Aggiungi</translation>
+        <translation type="vanished">Aggiungi</translation>
     </message>
 </context>
 <context>
@@ -146,12 +145,12 @@
 <context>
     <name>SeasonDetails</name>
     <message>
-        <location filename="../view/SeasonDetails.qml" line="56"/>
+        <location filename="../view/SeasonDetails.qml" line="57"/>
         <source>Season</source>
         <translation>Stagione</translation>
     </message>
     <message>
-        <location filename="../view/SeasonDetails.qml" line="56"/>
+        <location filename="../view/SeasonDetails.qml" line="57"/>
         <source>Extras</source>
         <translation>Extra</translation>
     </message>
@@ -173,9 +172,8 @@
 <context>
     <name>Series</name>
     <message>
-        <location filename="../view/Series.qml" line="36"/>
         <source>Remove</source>
-        <translation>Rimuovi</translation>
+        <translation type="vanished">Rimuovi</translation>
     </message>
 </context>
 <context>
@@ -201,24 +199,59 @@
         <translation>Trama</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="181"/>
+        <location filename="../view/SeriesDetails.qml" line="140"/>
+        <source>Role</source>
+        <translation>Ruolo</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="140"/>
+        <source>Importance</source>
+        <translation>Importanza</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="141"/>
+        <source>Low</source>
+        <translation>Basso</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="142"/>
+        <source>Medium</source>
+        <translation>Medio</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="143"/>
+        <source>High</source>
+        <translation>Alto</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="144"/>
+        <source>Very low</source>
+        <translation>Molto basso</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Seasons</source>
         <translation>Stagioni</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="181"/>
+        <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Info</source>
         <translation>Informazioni</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="181"/>
+        <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Fan arts</source>
         <translation>Immagini dei fan</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="181"/>
+        <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Posters</source>
         <translation>Poster</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <source>Actors</source>
+        <translation>Attori</translation>
     </message>
 </context>
 <context>
@@ -279,12 +312,11 @@
         <translation>Cerca</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="92"/>
         <source>Add</source>
-        <translation>Aggiungi</translation>
+        <translation type="vanished">Aggiungi</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="96"/>
+        <location filename="../view/SeriesSearch.qml" line="103"/>
         <source>Adding...</source>
         <translation>Aggiungendo...</translation>
     </message>
