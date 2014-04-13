@@ -1,5 +1,9 @@
+#include <numeric>
+
 #include "season.h"
 #include "adapter/signallistfilter.h"
+
+
 
 Season::Season(int number, QUrl banner, QUrl poster, Series *parent) :
     QObject((QObject*)parent),mNumber(number),mBanner(banner),mPoster(poster),mSeries(parent)

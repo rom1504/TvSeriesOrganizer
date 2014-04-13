@@ -1,3 +1,5 @@
+CONFIG += c++11
+
 # Add more folders to ship with the application, here
 DEPLOYMENTFOLDERS =
 

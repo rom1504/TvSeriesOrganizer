@@ -4,6 +4,7 @@
 #include <QFile>
 #include <functional>
 #include <QCoreApplication>
+#include <numeric>
 
 #include "series.h"
 #include "controller/controller.h"
