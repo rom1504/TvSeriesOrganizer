@@ -11,7 +11,7 @@ TabPage
     property alias stimer:timer
 
     onBack:stackview.depth===1 ? Qt.quit() : stackview.pop({immediate:true})
-    Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner
+    Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner.small
 
     Button
     {
@@ -49,7 +49,7 @@ TabPage
                 {
                     currentBannerIndex++;
                     if(currentBannerIndex>=seriesList.seriesCount) currentBannerIndex=0;
-                    newImageSource=seriesList.getSeries(currentBannerIndex).banner;
+                    newImageSource=seriesList.getSeries(currentBannerIndex).banner.small;
                 }
         }
         x:seriesListPage.width/2-width/2

@@ -7,13 +7,14 @@
 #include "season.h"
 #include "model/signallist.h"
 #include "model/actorlist.h"
+#include "model/image.h"
 
 class Series : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
-    Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
-    Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
+    Q_PROPERTY(Image* banner READ banner NOTIFY bannerChanged)
+    Q_PROPERTY(Image* poster READ poster NOTIFY posterChanged)
     Q_PROPERTY(QString overview READ overview NOTIFY overviewChanged)
     Q_PROPERTY(int seasonCount READ seasonCount NOTIFY seasonCountChanged)
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
@@ -38,13 +39,13 @@ public:
 
     void setName(QString name);
     void setOverview(QString overview);
-    void setPoster(QUrl poster);
+    void setPoster(Image* poster);
     void setId(int id);
-    void setBanner(QUrl banner);
+    void setBanner(Image* banner);
 
     QString name() const;
-    QUrl banner() const;
-    QUrl poster() const;
+    Image* banner() const;
+    Image* poster() const;
     QString overview() const;
     int seasonCount() const;
     QDate firstAired() const;
@@ -105,15 +106,15 @@ private:
 
 private:
     QString mName;
-    QUrl mBanner;
-    QUrl mPoster;
+    Image* mPoster;
+    Image* mBanner;
     SignalList<Season*> mSeasons;
     int mId;
     QString mOverview;
     QDate mFirstAired;
     QString mNetwork;
-    SignalList<QUrl> mFanArts;
-    SignalList<QUrl> mPosters;
+    SignalList<Image*> mFanArts;
+    SignalList<Image*> mPosters;
     QString mShortOverview;
     ActorList mActorList;
 

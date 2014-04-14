@@ -6,7 +6,7 @@ import "qrc:/GeneralQmlItems/"
 TabPage
 {
     id:seriesDetails
-    imageSource:series.banner
+    imageSource:series.banner.small
     property int seasonIndex:0
     property var series
     property int listBeginIndex:seasonIndex
@@ -136,7 +136,7 @@ TabPage
                 TitleImageDescriptionItem
                 {
                     title:actor.name
-                    imageSource:actor.image
+                    imageSource:actor.image.small
                     description:qsTr("Role")+": "+actor.role+"\n"+qsTr("Importance")+": "+
                                 (actor.sortOrder===3 ? qsTr("Low") :
                                 (actor.sortOrder===2 ? qsTr("Medium") :
@@ -171,13 +171,13 @@ TabPage
             Keys.onLeftPressed: seriesDetails.goLeft()
             Keys.onRightPressed: seriesDetails.goRight()
 
-            delegate:Image
-                    {
-                        width:fanArtsView.cellWidth-fanArtsView.itemMargin
-                        height:fanArtsView.cellHeight-fanArtsView.itemMargin
-                        id:fanArtImage
-                        source:fanArt
-                    }
+            delegate:ImageButton
+                {
+                    width:fanArtsView.cellWidth-fanArtsView.itemMargin
+                    height:fanArtsView.cellHeight-fanArtsView.itemMargin
+                    imageSource:fanArt.small
+                    onClicked:stackview.push({item:"qrc:/view/ImageViewer.qml",immediate:true,properties:{bigImageSource:fanArt.big}})
+                }
         }
         GridView
         {
@@ -195,13 +195,14 @@ TabPage
             Keys.onLeftPressed: seriesDetails.goLeft()
             Keys.onRightPressed: seriesDetails.goRight()
 
-            delegate:Image
-                    {
-                        id:posterImage
-                        width:postersView.cellWidth-postersView.itemMargin
-                        height:postersView.cellHeight-postersView.itemMargin
-                        source:poster
-                    }
+            delegate:
+                 ImageButton
+                {
+                    width:postersView.cellWidth-postersView.itemMargin
+                    height:postersView.cellHeight-postersView.itemMargin
+                    imageSource:poster.small
+                    onClicked:stackview.push({item:"qrc:/view/ImageViewer.qml",immediate:true,properties:{bigImageSource:poster.big}})
+                }
         }
     }
     tabModel:[qsTr("Seasons"),qsTr("Info"),qsTr("Actors"),qsTr("Fan arts"),qsTr("Posters")]

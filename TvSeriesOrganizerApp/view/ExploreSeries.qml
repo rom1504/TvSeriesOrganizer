@@ -89,7 +89,7 @@ TabPage
                     width:parent.width
                     height: image.width/138*203
                     fillMode: Image.PreserveAspectCrop
-                    source:series.poster
+                    source:series.poster.small
                 }
 
                 Button

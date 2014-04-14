@@ -19,7 +19,7 @@ Controller::Controller(QString datadir, QObject *parent) :
     QObject(parent)
 {
 
-
+    qRegisterMetaType<Image*>("Image");
     qmlRegisterInterface<QAbstractItemModel >("QAbstractItemModel");
 
 #if defined(Q_OS_ANDROID)

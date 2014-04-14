@@ -11,7 +11,7 @@
 #include "adapter/signallistfilter.h"
 
 
-Series::Series(QObject *parent) : QObject(parent),mSeasons([](Season* a,Season* b){
+Series::Series(QObject *parent) : QObject(parent),mPoster(nullptr),mBanner(nullptr),mSeasons([](Season* a,Season* b){
     if(a->number()==0) return false;
     if(b->number()==0) return true;
     return a->number()<b->number();
@@ -32,7 +32,7 @@ Series::Series(const QDomElement & element, QObject*parent) : Series(parent)
     QDomElement root = element.firstChildElement();
     while(!root.isNull())
     {
-        if(root.tagName() == "banner") mBanner="http://thetvdb.com/banners/_cache/"+root.text();
+        if(root.tagName() == "banner") mBanner=new Image(root.text());
         else if(root.tagName() == "id") mId=root.text().toInt();
         else if(root.tagName() == "SeriesName") setName(root.text());
         else if(root.tagName() == "Overview") setOverview(root.text());
@@ -40,7 +40,7 @@ Series::Series(const QDomElement & element, QObject*parent) : Series(parent)
         else if(root.tagName()=="Network") mNetwork=root.text();
         root = root.nextSiblingElement();
     }
-    mPoster="http://thetvdb.com/banners/_cache/posters/"+QString::number(mId)+"-1.jpg";
+    mPoster=new Image("posters/"+QString::number(mId)+"-1.jpg");
 }
 
 void Series::loadSeries(QString xmlFileContent)
@@ -57,7 +57,7 @@ void Series::loadSeries(QString xmlFileContent)
             QDomElement seriesElement=root.firstChildElement();
             while(!seriesElement.isNull())
             {
-                if(seriesElement.tagName() == "banner") mBanner="http://thetvdb.com/banners/_cache/"+seriesElement.text();
+                if(seriesElement.tagName() == "banner") mBanner=new Image(seriesElement.text());
                 else if(seriesElement.tagName() == "SeriesName") setName(seriesElement.text());
                 else if(seriesElement.tagName() == "Overview") setOverview(seriesElement.text());
                 else if(seriesElement.tagName()=="FirstAired") mFirstAired=QDate::fromString(seriesElement.text(),"yyyy-MM-dd");
@@ -88,10 +88,10 @@ void Series::loadSeries(QString xmlFileContent)
             if(currentSeason==nullptr)
             {
                 Q_ASSERT(seasonNumber!="-1");
-                currentSeason=new Season(seasonNumber.toInt(),banner(),QUrl(),this);
+                currentSeason=new Season(seasonNumber.toInt(),banner(),nullptr,this);
                 addSeason(currentSeason);
             }
-            currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeOverview,QUrl(episodeBanner=="" ? currentSeason->banner() : "http://thetvdb.com/banners/"+episodeBanner),QDate::fromString(firstAired,"yyyy-MM-dd"),currentSeason));
+            currentSeason->addEpisode(new Episode(episodeNumber.toInt(),episodeName,episodeOverview,episodeBanner=="" ? currentSeason->banner() : new Image(episodeBanner),QDate::fromString(firstAired,"yyyy-MM-dd"),currentSeason));
         }
         root = root.nextSiblingElement();
     }
@@ -131,7 +131,7 @@ QAbstractItemModel * Series::actorListModel()
 }
 
 
-void Series::setPoster(QUrl poster)
+void Series::setPoster(Image* poster)
 {
     mPoster=poster;
     emit posterChanged();
@@ -169,7 +169,7 @@ void Series::loadBanners(QString xmlFileContent)
     doc.setContent(xmlFileContent);
     QDomElement root = doc.documentElement();
     root = root.firstChildElement();
-    mPoster=QUrl();
+    mPoster=nullptr;
     while(!root.isNull())
     {
         if(root.tagName() == "Banner")
@@ -195,19 +195,20 @@ void Series::loadBanners(QString xmlFileContent)
             {
                 if(bannerType=="poster")
                 {
-                    if(!mPoster.isValid()) setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
-                    mPosters.append(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                    Image * poster=new Image(bannerPath);
+                    if(mPoster==nullptr) setPoster(poster);
+                    mPosters.append(poster);
                 }
                 else if(bannerType=="season")
                 {
                     Season * season=findSeason(seasonNumber);
                     if(season!=nullptr)
                     {
-                        if(bannerType2=="seasonwide") season->setBanner(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
-                        else if(bannerType2=="season") season->setPoster(QUrl("http://thetvdb.com/banners/_cache/"+bannerPath));
+                        if(bannerType2=="seasonwide") season->setBanner(new Image(bannerPath));
+                        else if(bannerType2=="season") season->setPoster(new Image(bannerPath));
                     }
                 }
-                else if(bannerType=="fanart") mFanArts.append(QUrl("http://thetvdb.com/banners/"+thumbnailPath));
+                else if(bannerType=="fanart") mFanArts.append(new Image("http://thetvdb.com/banners/"+thumbnailPath,"http://thetvdb.com/banners/"+bannerPath));
             }
         }
         root = root.nextSiblingElement();
@@ -359,7 +360,7 @@ void Series::setId(int id)
 }
 
 
-void Series::setBanner(QUrl banner)
+void Series::setBanner(Image *banner)
 {
     mBanner=banner;
     emit bannerChanged();
@@ -383,13 +384,13 @@ QString Series::shortOverview() const
 
 QAbstractItemModel *Series::fanArts()
 {
-    return new SignalListAdapter<QUrl>(&mFanArts,"fanArt");
+    return new SignalListAdapter<Image*>(&mFanArts,"fanArt");
 }
 
 
 QAbstractItemModel * Series::posters()
 {
-    return new SignalListAdapter<QUrl>(&mPosters,"poster");
+    return new SignalListAdapter<Image*>(&mPosters,"poster");
 }
 
 QString Series::name() const
@@ -397,13 +398,13 @@ QString Series::name() const
     return mName;
 }
 
-QUrl Series::banner() const
+Image * Series::banner() const
 {
     return mBanner;
 }
 
 
-QUrl Series::poster() const
+Image * Series::poster() const
 {
     return mPoster;
 }

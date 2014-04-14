@@ -6,6 +6,8 @@
 #include <QUrl>
 #include <QDate>
 
+#include "model/image.h"
+
 class Season;
 class Episode : public QObject
 {
@@ -13,17 +15,17 @@ class Episode : public QObject
     Q_PROPERTY(int number READ number NOTIFY numberChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString overview READ overview NOTIFY overviewChanged)
-    Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
+    Q_PROPERTY(Image* banner READ banner NOTIFY bannerChanged)
     Q_PROPERTY(QDate firstAired READ firstAired NOTIFY firstAiredChanged)
     Q_PROPERTY(bool seen READ seen WRITE setSeen NOTIFY seenChanged)
     Q_PROPERTY(bool aired READ aired NOTIFY airedChanged)
 
 public:
-    explicit Episode(int number, const QString & name, const QString& overview, QUrl banner,QDate firstAired, Season *parent = 0);
+    explicit Episode(int number, const QString & name, const QString& overview, Image* banner,QDate firstAired, Season *parent = 0);
     int number() const;
     QString name() const;
     QString overview() const;
-    QUrl banner() const;
+    Image* banner() const;
     QDate firstAired() const;
     bool seen() const;
     bool aired() const;
@@ -47,7 +49,7 @@ private:
     int mNumber;
     QString mName;
     QString mOverview;
-    QUrl mBanner;
+    Image* mBanner;
     QDate mFirstAired;
     bool mSeen;
     Season* mSeason;

@@ -29,5 +29,6 @@
         <file>translations/TvSeriesOrganizer_zh.qm</file>
         <file>translations/TvSeriesOrganizer_es.qm</file>
         <file>translations/TvSeriesOrganizer_fr_FR.qm</file>
+        <file>view/ImageViewer.qml</file>
     </qresource>
 </RCC>

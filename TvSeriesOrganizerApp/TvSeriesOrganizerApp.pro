@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     model/plugin.cpp \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp \
     model/actor.cpp \
-    model/actorlist.cpp
+    model/actorlist.cpp \
+    model/image.cpp
 
 # Installation path
 # target.path =
@@ -41,7 +42,8 @@ HEADERS += \
     model/plugin.h \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.h \
     model/actor.h \
-    model/actorlist.h
+    model/actorlist.h \
+    model/image.h
 
 
 QMAKE_CXXFLAGS += -std=c++11
@@ -51,7 +53,7 @@ RESOURCES += \
     ../GeneralQmlItems/GeneralQmlItemsResources.qrc
 
 
-OTHER_FILES += android/AndroidManifest.xml
+OTHER_FILES += android/AndroidManifest.xml \
 
 QT+= xml
 
@@ -84,7 +86,8 @@ SOURCES = view/Episode.qml \
     view/TabItem.qml \
     view/TabPage.qml \
     view/SeriesSearch.qml \
-    view/ExploreSeries.qml
+    view/ExploreSeries.qml \
+    view/ImageViewer.qml
 }
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SignalList/release/ -lSignalList

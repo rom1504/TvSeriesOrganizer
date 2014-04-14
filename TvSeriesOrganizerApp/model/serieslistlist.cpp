@@ -23,8 +23,9 @@ void SeriesListList::load(QString jsonFileContent)
         Series * series=new Series();
         series->setId(jseries["tvdb_id"].toString().toInt());
         QString poster=jseries["poster"].toString();
+        QString bigPoster=poster;
         poster=poster.section(".",0,-2)+"-138."+poster.section(".",-1);
-        series->setPoster(QUrl(poster));
+        series->setPoster(new Image(QUrl(poster),QUrl(bigPoster)));
         series->setName(jseries["title"].toString());
         QJsonArray genreArray=jseries["genres"].toArray();
         for(QJsonValue genrev : genreArray)

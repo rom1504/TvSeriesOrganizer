@@ -5,7 +5,7 @@
 
 
 
-Season::Season(int number, QUrl banner, QUrl poster, Series *parent) :
+Season::Season(int number, Image *banner, Image *poster, Series *parent) :
     QObject((QObject*)parent),mNumber(number),mBanner(banner),mPoster(poster),mSeries(parent)
 {
     connect(this,&Season::seenChanged,this,&Season::seenRatioChanged);
@@ -27,7 +27,7 @@ Series * Season::series() const
 }
 
 
-void Season::setBanner(QUrl banner)
+void Season::setBanner(Image *banner)
 {
     mBanner=banner;
     emit bannerChanged();
@@ -62,7 +62,7 @@ Episode* Season::findEpisode(int episodeNumber)
 }
 
 
-void Season::setPoster(QUrl poster)
+void Season::setPoster(Image *poster)
 {
     mPoster=poster;
     emit posterChanged();
@@ -83,12 +83,12 @@ int Season::number() const
     return mNumber;
 }
 
-QUrl Season::banner() const
+Image *Season::banner() const
 {
     return mBanner;
 }
 
-QUrl Season::poster() const
+Image *Season::poster() const
 {
     return mPoster;
 }

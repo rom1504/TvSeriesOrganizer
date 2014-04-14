@@ -17,8 +17,8 @@ class Season : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int number READ number NOTIFY numberChanged)
-    Q_PROPERTY(QUrl banner READ banner NOTIFY bannerChanged)
-    Q_PROPERTY(QUrl poster READ poster NOTIFY posterChanged)
+    Q_PROPERTY(Image* banner READ banner NOTIFY bannerChanged)
+    Q_PROPERTY(Image* poster READ poster NOTIFY posterChanged)
     Q_PROPERTY(QAbstractItemModel * seasonModel READ seasonModel NOTIFY seasonModelChanged)
     Q_PROPERTY(bool seen READ seen WRITE setSeen NOTIFY seenChanged)
     Q_PROPERTY(double seenRatio READ seenRatio NOTIFY seenRatioChanged)
@@ -30,11 +30,11 @@ class Season : public QObject
     Q_PROPERTY(QAbstractItemModel * seasonUpcomingModel READ seasonUpcomingModel NOTIFY seasonUpcomingModelChanged)
 
 public:
-    explicit Season(int number,QUrl banner,QUrl poster,Series *parent = 0);
+    explicit Season(int number,Image* banner,Image* poster,Series *parent = 0);
     void addEpisode(Episode * episode);
     int number() const;
-    QUrl banner() const;
-    QUrl poster() const;
+    Image* banner() const;
+    Image* poster() const;
     QAbstractItemModel *seasonModel();
     QAbstractItemModel *seasonUpcomingModel();
     bool seen() const;
@@ -47,8 +47,8 @@ public:
     Series * series() const;
 
     void setSeen(bool seen);
-    void setBanner(QUrl banner);
-    void setPoster(QUrl poster);
+    void setBanner(Image* banner);
+    void setPoster(Image* poster);
 
     SignalList<Episode *> * episodes();
 
@@ -76,13 +76,12 @@ public slots:
 
 private:
     int mNumber;
-    QUrl mBanner;
-    QUrl mPoster;
+    Image* mBanner;
+    Image* mPoster;
     SignalList<Episode *> mEpisodes;
     Series* mSeries;
 
 };
 Q_DECLARE_METATYPE (Season*)
-QML_DECLARE_TYPE (SignalListAdapter<Episode *>*)
 
 #endif // SEASON_H

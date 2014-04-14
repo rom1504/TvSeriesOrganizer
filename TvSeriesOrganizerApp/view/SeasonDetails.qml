@@ -4,14 +4,14 @@ import "qrc:/GeneralQmlItems/"
 TabPage
 {
     id:seasonDetails
-    imageSource:season.banner
+    imageSource:season.banner.small
     property int episodeIndex:0
     onEpisodeIndexChanged: listBeginIndex=episodeIndex
     property var seriesModel
     property var season
     property var seasonIndex
     onTabChanged: stackview.get(stackview.depth-2).seasonIndex=column
-    onCurrentTabChanged:seasonDetails.imageSource=currentItem===null ? season.banner : currentItem.myData.banner
+    onCurrentTabChanged:seasonDetails.imageSource=currentItem===null ? season.banner.small : currentItem.myData.banner.small
     tabContentModel: seriesModel
     property int listBeginIndex:episodeIndex
     property bool upcoming:false

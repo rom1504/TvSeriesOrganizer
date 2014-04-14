@@ -20,7 +20,7 @@ ShadowBorderRectangleButton
     TitleImageDescriptionItem
     {
         title:episode.name
-        imageSource:episode.banner
+        imageSource:episode.banner.small
         description:qsTr("Episode number")+" "+episode.number+"\n"+(episode.aired ? qsTr("First aired") : qsTr("Will be aired"))+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
     }
     SeenIndicator

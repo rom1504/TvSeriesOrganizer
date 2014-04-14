@@ -1,6 +1,6 @@
 #include "episode.h"
 
-Episode::Episode(int number, const QString & name, const QString& overview, QUrl banner, QDate firstAired, Season *parent) :
+Episode::Episode(int number, const QString & name, const QString& overview, Image *banner, QDate firstAired, Season *parent) :
     QObject((QObject*)parent),mNumber(number),mName(name),mOverview(overview),mBanner(banner),mFirstAired(firstAired),mSeen(false),mSeason(parent)
 {
 }
@@ -26,7 +26,7 @@ QString Episode::overview() const
     return mOverview;
 }
 
-QUrl Episode::banner() const
+Image *Episode::banner() const
 {
     return mBanner;
 }

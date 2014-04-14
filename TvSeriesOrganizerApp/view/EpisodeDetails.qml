@@ -5,7 +5,7 @@ import "qrc:/GeneralQmlItems/"
 TabPage
 {
     id:episodeDetails
-    imageSource:episode.banner
+    imageSource:episode.banner.small
 
     property int episodeIndex
     property var seasonModel
@@ -13,7 +13,7 @@ TabPage
     property bool upcoming:false
 
     onTabChanged: stackview.get(stackview.depth-2).episodeIndex=column
-    onCurrentTabChanged:episodeDetails.imageSource=currentItem===null ? episode.banner : currentItem.myData.banner
+    onCurrentTabChanged:episodeDetails.imageSource=currentItem===null ? episode.banner.small : currentItem.myData.banner.small
 
     onBack:stackview.pop({immediate:true})
 
@@ -44,7 +44,7 @@ TabPage
                     {
                         id:tidi
                         title:episode.name
-                        imageSource:episode.banner
+                        imageSource:episode.banner.small
                         description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
                     }
                     SeenIndicator
