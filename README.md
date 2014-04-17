@@ -49,3 +49,10 @@ Two possibilities :
  * Programmed with c++11, Qt5 and Qml
  * The app is made with a Model View Controller organization
  * Using Qml for the view makes it possible to target both desktop and mobile with the same code
+
+## Languages
+All series, season and episode text translation have been done in many languages by thetvdb contributors.
+The text of this application (menu, google play description, buttons, ...) have been translated from English in :
+ * French (rom1504)
+ * Italian (giuseppep (https://www.transifex.com/accounts/profile/giuseppep/))
+ * Romanian (ArianServ (https://www.transifex.com/accounts/profile/ArianServ/))

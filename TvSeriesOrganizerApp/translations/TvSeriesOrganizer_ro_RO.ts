@@ -1,20 +1,20 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr_FR" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ro_RO" version="2.1">
 <context>
     <name>Episode</name>
     <message>
         <location filename="../view/Episode.qml" line="24"/>
         <source>Episode number</source>
-        <translation>Episode numéro</translation>
+        <translation>Număr Episod</translation>
     </message>
     <message>
         <location filename="../view/Episode.qml" line="24"/>
         <source>First aired</source>
-        <translation>Première diffusion</translation>
+        <translation>Premiera</translation>
     </message>
     <message>
         <location filename="../view/Episode.qml" line="24"/>
         <source>Will be aired</source>
-        <translation>Sera diffusé</translation>
+        <translation>Va fi lansat</translation>
     </message>
 </context>
 <context>
@@ -22,44 +22,44 @@
     <message>
         <location filename="../view/EpisodeDetails.qml" line="48"/>
         <source>Episode number</source>
-        <translation>Episode numéro</translation>
+        <translation>Număr Episod</translation>
     </message>
     <message>
         <location filename="../view/EpisodeDetails.qml" line="48"/>
         <source>First aired</source>
-        <translation>Première diffusion</translation>
+        <translation>Premiera</translation>
     </message>
     <message>
         <location filename="../view/EpisodeDetails.qml" line="84"/>
         <source>Episode</source>
-        <translation>Episode</translation>
+        <translation>Episod</translation>
     </message>
 </context>
 <context>
     <name>ExploreSeries</name>
     <message>
         <source>Add</source>
-        <translation type="vanished">Ajouter</translation>
+        <translation type="vanished">Adăugare</translation>
     </message>
 </context>
 <context>
     <name>Season</name>
     <message>
         <source>No</source>
-        <translation type="vanished">Aucun</translation>
+        <translation type="vanished">Nu</translation>
     </message>
     <message>
         <source>One</source>
-        <translation type="vanished">Un</translation>
+        <translation type="vanished">Unul</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="vanished">Tous</translation>
+        <translation type="vanished">Toate</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="33"/>
         <source>Season</source>
-        <translation>Saison</translation>
+        <translation>Sezon</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="33"/>
@@ -69,60 +69,60 @@
     <message>
         <location filename="../view/Season.qml" line="35"/>
         <source>First aired</source>
-        <translation>Première diffusion</translation>
+        <translation>Premiera</translation>
     </message>
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s)</source>
-        <translation><numerusform>%n épisode</numerusform><numerusform>%n épisodes</numerusform></translation>
+        <translation><numerusform>%n episod</numerusform><numerusform>%n episoade</numerusform><numerusform>%n de episoade</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="35"/>
         <source>No episode seen</source>
-        <translation>Aucun épisode vu</translation>
+        <translation>Nici-un episod văzut</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="35"/>
         <source>One episode seen</source>
-        <translation>Un épisode vu</translation>
+        <translation>Un episod văzut</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="35"/>
         <source>All episodes seen</source>
-        <translation>Tous les épisodes sont vus</translation>
+        <translation>Toate episoadele văzute</translation>
     </message>
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s) seen</source>
-        <translation><numerusform>%n épisode vu</numerusform><numerusform>%n épisodes vus</numerusform></translation>
+        <translation><numerusform>%n episod văzut</numerusform><numerusform>%n episoade văzute</numerusform><numerusform>%n de episoade văzute</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="50"/>
         <source>No episode aired</source>
-        <translation>Aucun épisode diffusé</translation>
+        <translation>Nici-un episod lansat</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="50"/>
         <source>One episode aired</source>
-        <translation>Un épisode diffusé</translation>
+        <translation>Un episod lansat</translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="50"/>
         <source>All episodes aired</source>
-        <translation>Tous les épisodes sont diffusés</translation>
+        <translation>Toate episoadele lansate</translation>
     </message>
     <message numerus="yes">
         <location filename="../view/Season.qml" line="50"/>
         <source>%n episode(s) aired</source>
-        <translation><numerusform>%n épisode diffusé</numerusform><numerusform>%n épisodes diffusés</numerusform></translation>
+        <translation><numerusform>%n episod lansat</numerusform><numerusform>%n episoade lansate</numerusform><numerusform>%n de episoade lansate</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) seen</source>
-        <translation type="vanished"><numerusform>épisode vu</numerusform><numerusform>épisodes vus</numerusform></translation>
+        <translation type="vanished"><numerusform>episod văzut</numerusform><numerusform>episoade văzute</numerusform><numerusform>de episoade văzute</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) aired</source>
-        <translation type="vanished"><numerusform>épisode diffusé</numerusform><numerusform>épisodes diffusés</numerusform></translation>
+        <translation type="vanished"><numerusform>episod lansat</numerusform><numerusform>episoade lansate</numerusform><numerusform>de episoade lansate</numerusform></translation>
     </message>
 </context>
 <context>
@@ -130,7 +130,7 @@
     <message>
         <location filename="../view/SeasonDetails.qml" line="57"/>
         <source>Season</source>
-        <translation>Saison</translation>
+        <translation>Sezon</translation>
     </message>
     <message>
         <location filename="../view/SeasonDetails.qml" line="57"/>
@@ -144,19 +144,19 @@
         <location filename="../view/SeenIndicator.qml" line="23"/>
         <location filename="../view/SeenIndicator.qml" line="42"/>
         <source>Seen</source>
-        <translation>Vu</translation>
+        <translation>Văzut</translation>
     </message>
     <message>
         <location filename="../view/SeenIndicator.qml" line="30"/>
         <source>Not seen</source>
-        <translation>Pas vu</translation>
+        <translation>Nevizualizat</translation>
     </message>
 </context>
 <context>
     <name>Series</name>
     <message>
         <source>Remove</source>
-        <translation type="vanished">Supprimer</translation>
+        <translation type="vanished">Eliminare</translation>
     </message>
 </context>
 <context>
@@ -164,57 +164,57 @@
     <message>
         <location filename="../view/SeriesDetails.qml" line="79"/>
         <source>Details</source>
-        <translation>Détails</translation>
+        <translation>Detalii</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="95"/>
         <source>Network</source>
-        <translation>Réseau</translation>
+        <translation>Reţea</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="95"/>
         <source>First aired</source>
-        <translation>Première diffusion</translation>
+        <translation>Premiera</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="120"/>
         <source>Plot</source>
-        <translation>Intrigue</translation>
+        <translation>Intrigă</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="140"/>
         <source>Role</source>
-        <translation>Role</translation>
+        <translation>Rol</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="140"/>
         <source>Importance</source>
-        <translation>Importance</translation>
+        <translation>Importanţă</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="141"/>
         <source>Low</source>
-        <translation>Basse</translation>
+        <translation>Scăzută</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="142"/>
         <source>Medium</source>
-        <translation>Moyenne</translation>
+        <translation>Medie</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="143"/>
         <source>High</source>
-        <translation>Haute</translation>
+        <translation>Deosebită</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="144"/>
         <source>Very low</source>
-        <translation>Très basse</translation>
+        <translation>Foarte scăzută</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Seasons</source>
-        <translation>Saisons</translation>
+        <translation>Sezoane</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="207"/>
@@ -229,12 +229,12 @@
     <message>
         <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Posters</source>
-        <translation>Posters</translation>
+        <translation>Postere</translation>
     </message>
     <message>
         <location filename="../view/SeriesDetails.qml" line="207"/>
         <source>Actors</source>
-        <translation>Acteurs</translation>
+        <translation>Actori</translation>
     </message>
 </context>
 <context>
@@ -242,17 +242,17 @@
     <message>
         <location filename="../view/SeriesList.qml" line="133"/>
         <source>Series</source>
-        <translation>Séries</translation>
+        <translation>Serii</translation>
     </message>
     <message>
         <location filename="../view/SeriesList.qml" line="133"/>
         <source>Upcoming</source>
-        <translation>A venir</translation>
+        <translation>În curând</translation>
     </message>
     <message>
         <location filename="../view/SeriesList.qml" line="133"/>
         <source>Search</source>
-        <translation>Rechercher</translation>
+        <translation>Căutare</translation>
     </message>
 </context>
 <context>
@@ -261,7 +261,7 @@
         <location filename="../model/serieslistlist.cpp" line="15"/>
         <location filename="../model/serieslistlist.cpp" line="16"/>
         <source>Trending</source>
-        <translation>Populaire</translation>
+        <translation>Popularitate</translation>
     </message>
 </context>
 <context>
@@ -269,36 +269,36 @@
     <message>
         <location filename="../view/SeriesSearch.qml" line="19"/>
         <source>No results</source>
-        <translation>Aucun résultat</translation>
+        <translation>Nici-un rezultat</translation>
     </message>
     <message numerus="yes">
         <location filename="../view/SeriesSearch.qml" line="19"/>
         <source>%n result(s)</source>
-        <translation><numerusform>%n résultat</numerusform><numerusform>%n résultats</numerusform></translation>
+        <translation><numerusform>%n rezultat</numerusform><numerusform>%n rezultate</numerusform><numerusform>%n de rezultate</numerusform></translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="42"/>
         <source>Searching...</source>
-        <translation>Recherche en cours...</translation>
+        <translation>Căutare...</translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="43"/>
         <source>Tv series name</source>
-        <translation>Nom de la série TV</translation>
+        <translation>Numele Seriei Tv</translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="52"/>
         <source>Search</source>
-        <translation>Rechercher</translation>
+        <translation>Căutare</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Ajouter</translation>
+        <translation type="vanished">Adăugare</translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="103"/>
         <source>Adding...</source>
-        <translation>Ajout...</translation>
+        <translation>Adăugare...</translation>
     </message>
 </context>
 <context>
@@ -306,12 +306,12 @@
     <message>
         <location filename="../main.cpp" line="30"/>
         <source>Directory where data are saved</source>
-        <translation>Répertoire où les données sont enregistrées</translation>
+        <translation>Directorul unde sunt salvate datele</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="30"/>
         <source>directory</source>
-        <translation>répertoire</translation>
+        <translation>director</translation>
     </message>
 </context>
 </TS>

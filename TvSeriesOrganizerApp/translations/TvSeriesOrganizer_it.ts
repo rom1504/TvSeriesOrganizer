@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="it">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.1">
 <context>
     <name>Episode</name>
     <message>
@@ -76,10 +74,7 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s)</source>
-        <translation>
-            <numerusform>%n episodio</numerusform>
-            <numerusform>%n episodi</numerusform>
-        </translation>
+        <translation><numerusform>%n episodio</numerusform><numerusform>%n episodi</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="35"/>
@@ -99,10 +94,7 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s) seen</source>
-        <translation>
-            <numerusform>%n episodio visto</numerusform>
-            <numerusform>%n episodi visti</numerusform>
-        </translation>
+        <translation><numerusform>%n episodio visto</numerusform><numerusform>%n episodi visti</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="50"/>
@@ -122,24 +114,15 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="50"/>
         <source>%n episode(s) aired</source>
-        <translation>
-            <numerusform>%n episodio in onda</numerusform>
-            <numerusform>%n episodi in onda</numerusform>
-        </translation>
+        <translation><numerusform>%n episodio in onda</numerusform><numerusform>%n episodi in onda</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) seen</source>
-        <translation type="vanished">
-            <numerusform>episodio visto</numerusform>
-            <numerusform>episodi visti</numerusform>
-        </translation>
+        <translation type="vanished"><numerusform>episodio visto</numerusform><numerusform>episodi visti</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) aired</source>
-        <translation type="vanished">
-            <numerusform>episodio in onda</numerusform>
-            <numerusform>episodi in onda</numerusform>
-        </translation>
+        <translation type="vanished"><numerusform>episodio in onda</numerusform><numerusform>episodi in onda</numerusform></translation>
     </message>
 </context>
 <context>
@@ -291,10 +274,7 @@
     <message numerus="yes">
         <location filename="../view/SeriesSearch.qml" line="19"/>
         <source>%n result(s)</source>
-        <translation>
-            <numerusform>%n risultato</numerusform>
-            <numerusform>%n risultati</numerusform>
-        </translation>
+        <translation><numerusform>%n risultato</numerusform><numerusform>%n risultati</numerusform></translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="42"/>

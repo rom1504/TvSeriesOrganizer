@@ -70,6 +70,7 @@ TRANSLATIONS += translations/TvSeriesOrganizer_it.ts
 TRANSLATIONS += translations/TvSeriesOrganizer_de.ts
 TRANSLATIONS += translations/TvSeriesOrganizer_es.ts
 TRANSLATIONS += translations/TvSeriesOrganizer_zh.ts
+TRANSLATIONS += translations/TvSeriesOrganizer_ro_RO.ts
 
 lupdate_only{
 SOURCES = view/Episode.qml \

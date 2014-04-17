@@ -1,0 +1,12 @@
+Organizaţi-vă toate Serialele TV cu Tv Series Organizer
+- Lista episoadelor organizate după sezon şi serie
+- Din baza de date a http://www.thetvdb.com/, descărcaţi lista de episoade şi sezoane cu bannere, postere şi descrieri
+- Interfaţă deosebită
+- Urmăriţi episoadele şi serialele pe care le-aţi văzut
+- Data de lansare a episoadelor
+- Afişarea  următoarele serii/sezoane/episoade
+- Căutarea şi adăugarea oricărui serial dorit
+- Exploraţi seriale folosind baza de date http://trakt.tv/
+- Vedeţi toţi actorii serialului tv : importanţa în serial, nume şi roluri
+
+Acesta este un proiect de tip open source, dacă doriţi mai multe informaţii ori dacă doriţi să contribuiţi, navigaţi către https://github.com/rom1504/TvSeriesOrganizer
