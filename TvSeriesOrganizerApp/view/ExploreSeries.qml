@@ -57,7 +57,7 @@ TabPage
         height: button.height +5
         onClicked: stackview.push
                    ({
-                        item:"qrc:/view/SeriesList.qml",
+                        item:"qrc:/view/SeriesListPage.qml",
                         immediate:true,
                         properties:{seriesList:followedSeriesList}
                    })

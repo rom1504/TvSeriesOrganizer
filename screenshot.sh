@@ -76,6 +76,21 @@ function clickForward
 	moveClick 550 20
 }
 
+function clickBack
+{
+	moveClick 50 20
+}
+
+function clickSettings
+{
+	moveClick 570 25
+}
+
+function clickSeriesListStyle
+{
+	moveClick 100 170
+}
+
 takeScreenshot ExploreSeries
 
 clickForward
@@ -85,7 +100,19 @@ addSeries "suits"
 addSeries "breaking bad"
 
 sleep $sleeptime
+takeScreenshot SeriesGrid
+
+clickSettings
+sleep $sleeptime
+takeScreenshot Settings
+
+clickSeriesListStyle
+
+clickBack
+
+sleep $sleeptime
 takeScreenshot SeriesList
+
 
 moveClickTakeScreenshot 40 320 SeriesDetails
 moveClickTakeScreenshot $tab2 $yTabBar SeriesInfo
