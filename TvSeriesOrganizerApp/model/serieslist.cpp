@@ -116,16 +116,16 @@ QAbstractItemModel * SeriesList::seriesListUpcomingModel()
 }
 
 
-void SeriesList::removeSeries(int row)
+void SeriesList::removeSeries(Series *series)
 {
-    mIds.remove(mSeries.get(row)->id());
-    mSeries.remove(row);
+    mIds.remove(series->id());
+    mSeries.remove(series);
     emit seriesCountChanged();
 }
 
-void SeriesList::removeSaveSeries(int row)
+void SeriesList::removeSaveSeries(Series *series)
 {
-    removeSeries(row);
+    removeSeries(series);
     saveSeries();
 }
 

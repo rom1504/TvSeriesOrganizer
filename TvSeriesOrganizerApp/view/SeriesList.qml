@@ -1,136 +1,19 @@
-import QtQuick 2.2
-import "qrc:/GeneralQmlItems/"
+import QtQuick 2.0
 
-TabPage
+ListView
 {
-    id:seriesListPage
-    imageSource:"qrc:/images/TvSeriesOrganizerHeader.png"
-    property int seriesIndex:0
-    property var seriesList
-    onTabChanged: stackview.focus=true
-    property alias stimer:timer
-
-    onBack:stackview.depth===1 ? Qt.quit() : stackview.pop({immediate:true})
-    Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner.small
-
-    Button
+    signal seriesClicked(int index,var series)
+    signal seriesRemoved(var series)
+    Keys.onDownPressed: listview.incrementCurrentIndex()
+    Keys.onUpPressed: listview.decrementCurrentIndex()
+    Keys.onReturnPressed:listview.currentItem.Keys.onReturnPressed(event)
+    delegate: Series
     {
-        id:exploreContainer
-        x:7/8*seriesListPage.width-width/2
-        y:-height-seriesListPage.height/30
-        width: button.width +5
-        height: button.height +5
-        onClicked: stackview.push
-                   ({
-                        item:"qrc:/view/ExploreSeries.qml",
-                        immediate:true,
-                        properties:{followedSeriesList:seriesList}
-                   })
-        Image
-        {
-            source:"qrc:/images/add.png"
-            width:seriesListPage.width/7
-            height:width
-            id:button
-        }
+        onSeriesClicked: listview.seriesClicked(index,series)
+        onSeriesRemoved: listview.seriesRemoved(series)
     }
-
-
-    Text
-    {
-
-       Timer
-        {
-                id:timer
-                interval: 5000
-                running: seriesList.seriesCount>0
-                repeat: true
-                onTriggered:
-                {
-                    currentBannerIndex++;
-                    if(currentBannerIndex>=seriesList.seriesCount) currentBannerIndex=0;
-                    newImageSource=seriesList.getSeries(currentBannerIndex).banner.small;
-                }
-        }
-        x:seriesListPage.width/2-width/2
-        y:-height-seriesListPage.height/20
-        width:contentWidth
-        height:contentHeight
-        font.pointSize: 30
-        color:"white"
-        font.family: "georgia"
-        text:"Tv Series Organizer"
-    }
-
-
-    property int currentBannerIndex:0
-
-    function seriesClicked(seriesIndex,series,upcoming)
-    {
-        timer.running=false
-        seriesListPage.seriesIndex=seriesIndex
-        stackview.push
-        ({
-             item:"qrc:/view/SeriesDetails.qml",
-             immediate:true,
-             properties:{series:series,upcoming:upcoming}
-        })
-    }
-
-    function removeSeries(seriesNumber)
-    {
-        seriesList.removeSaveSeries(seriesNumber)
-    }
-    tabContentModel: VisualItemModel
-    {
-        ListView
-        {
-            Keys.onDownPressed: if(currentIndex-1<count) listview.incrementCurrentIndex()
-            Keys.onUpPressed: if(currentIndex>0) listview.decrementCurrentIndex()
-            Keys.onReturnPressed:listview.currentItem.Keys.onReturnPressed(event)
-            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,series,false)}
-            model:seriesList.seriesListModel
-            width: seriesListPage.width-40
-            height: seriesListPage.height
-            currentIndex: seriesIndex
-            focus:true
-            clip:true
-
-
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            id:listview
-        }
-        ListView
-        {
-            delegate: Series{onSeriesClicked: seriesListPage.seriesClicked(index,series,true)}
-            model:seriesList.seriesListUpcomingModel
-            width: seriesListPage.width-40
-            height: seriesListPage.height
-            currentIndex: seriesIndex
-            focus:true
-            clip:true
-
-
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            id:listviewupcoming
-            Keys.onDownPressed: listviewupcoming.incrementCurrentIndex()
-            Keys.onUpPressed: listviewupcoming.decrementCurrentIndex()
-            Keys.onReturnPressed:listviewupcoming.currentItem.Keys.onReturnPressed(event)
-        }
-        SeriesSearch
-        {
-            seriesList:seriesListPage.seriesList
-            width: seriesListPage.width-40
-            height: seriesListPage.height
-            onSearchFinished:
-            {
-                seriesListPage.goTo(0)
-                listview.currentIndex=addIndex;
-            }
-        }
-    }
-
-    tabModel:[qsTr("Series"),qsTr("Upcoming"),qsTr("Search")]
-    tabDelegate:TabItem{tabText:modelData;tabPage:seriesListPage}
-    beginIndex: seriesList.seriesCount===0 ? 2 : 0
+    focus:true
+    clip:true
+    highlightRangeMode:ListView.StrictlyEnforceRange
+    id:listview
 }

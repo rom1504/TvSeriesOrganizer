@@ -25,7 +25,7 @@ TabPage
                     {
                         stackview.push
                        ({
-                            item:"qrc:/view/SeriesList.qml",
+                            item:"qrc:/view/SeriesListPage.qml",
                             immediate:true,
                             properties:{seriesList:followedSeriesList}
                        })
@@ -73,55 +73,29 @@ TabPage
 
 
     tabContentDelegate:
-        GridView
+        SeriesGrid
         {
-            id:seriesL
-            property variant myData:seriesList
-            delegate:Item
-            {
-                id:seriesItem
-                width:seriesL.cellWidth-seriesL.itemMargin
-                height:seriesL.cellHeight-seriesL.itemMargin
-
-                Image
-                {
-                    id:image
-                    width:parent.width
-                    height: image.width/138*203
-                    fillMode: Image.PreserveAspectCrop
-                    source:series.poster.small
-                }
-
-                Button
-                {
-                    id:addButton
-                    Image
-                    {
-                        source:"qrc:/images/add.png"
-                        width:image.width/4
-                        height:width
-                        id:ibutton
-                    }
-                    width:ibutton.width+50
-                    height:ibutton.height+50
-                    x:seriesItem.width-ibutton.width
-                    focus:true
-                    onClicked: {followedSeriesList.completeAddSaveSeries(series);}
-                }
-            }
-            cellWidth:width/3
-            cellHeight: cellWidth/138*203*0.99
-            property double itemMargin: cellWidth*0.03
-            model:seriesList.seriesListFilteredModel
             width: exploreSeries.width-40
             height: parent.height
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            Keys.onDownPressed: moveCurrentIndexDown()
-            Keys.onUpPressed: moveCurrentIndexUp()
             Keys.onLeftPressed: exploreSeries.goLeft()
             Keys.onRightPressed: exploreSeries.goRight()
-
-            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
+            model:seriesList.seriesListFilteredModel
+            seriesComp:Button
+            {
+                id:addButton
+                Image
+                {
+                    source:"qrc:/images/add.png"
+                    width:seriesImage.width/4
+                    height:width
+                    id:ibutton
+                }
+                width:ibutton.width+50
+                height:ibutton.height+50
+                x:delegateItem.width-ibutton.width
+                focus:true
+                onClicked: {followedSeriesList.completeAddSaveSeries(mseries);}
+            }
         }
     tabDelegate:TabItem{tabText:seriesList.genre;tabPage:exploreSeries}
 

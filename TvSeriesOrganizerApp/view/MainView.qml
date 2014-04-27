@@ -17,5 +17,5 @@ StackView
     Keys.onReturnPressed: currentItem.enter(event)
 
 
-    initialItem: seriesList.seriesCount===0 ? {"item":"qrc:/view/ExploreSeries.qml","properties":{followedSeriesList:seriesList}} : {"item":"qrc:/view/SeriesList.qml","properties":{seriesList:seriesList}}
+    initialItem: seriesList.seriesCount===0 ? {"item":"qrc:/view/ExploreSeries.qml","properties":{followedSeriesList:seriesList}} : {"item":"qrc:/view/SeriesListPage.qml","properties":{seriesList:seriesList}}
 }

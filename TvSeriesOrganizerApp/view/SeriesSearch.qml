@@ -82,7 +82,7 @@ Column
                 {
                     id:content
                     title:series.name
-                    imageSource:series.poster
+                    imageSource:series.poster.small
                     description:series.shortOverview
                 }
 

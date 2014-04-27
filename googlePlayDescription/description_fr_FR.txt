@@ -9,4 +9,4 @@ Organisez et recherchez vos séries préférées avec Tv Series Organizer
 - Explorer les series grâce à la base de données de http://trakt.tv/
 - Voir tous les acteurs des séries : importance dans la série, nom, role et photo
 
-Ceci est un projet open source, si vous voulez plus d'information ou si vous voulez contribuer, aller sur https://github.com/rom1504/TvSeriesOrganizer
+Ceci est un projet open source, si vous voulez plus d'information ou si vous voulez contribuer, allez sur https://github.com/rom1504/TvSeriesOrganizer

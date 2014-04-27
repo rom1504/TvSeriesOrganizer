@@ -6,7 +6,6 @@
         <file>view/Season.qml</file>
         <file>view/SeriesDetails.qml</file>
         <file>view/Series.qml</file>
-        <file>view/SeriesList.qml</file>
         <file>view/SeenIndicator.qml</file>
         <file>view/MainView.qml</file>
         <file>view/ListPage.qml</file>
@@ -31,5 +30,13 @@
         <file>translations/TvSeriesOrganizer_fr_FR.qm</file>
         <file>view/ImageViewer.qml</file>
         <file>translations/TvSeriesOrganizer_ro_RO.qm</file>
+        <file>view/SeriesListPage.qml</file>
+        <file>view/SeriesList.qml</file>
+        <file>view/SeriesGrid.qml</file>
+        <file>images/remove_white.png</file>
+        <file>view/ThumbnailSeries.qml</file>
+        <file>images/settings_white.png</file>
+        <file>view/Settings.qml</file>
+        <file>view/SeriesCollection.qml</file>
     </qresource>
 </RCC>

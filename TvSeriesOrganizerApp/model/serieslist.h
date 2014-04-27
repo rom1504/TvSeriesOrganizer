@@ -22,7 +22,6 @@ public:
     int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;
-    void removeSeries(int row);
     int seriesCount() const;
     QString genre() const;
     bool added(int id) const;
@@ -38,6 +37,7 @@ public:
 
 private:
     SignalListAdapter<Series*> * seriesListModelT();
+    void removeSeries(Series* series);
 
 signals:
     void seriesListFilteredModelChanged();
@@ -52,7 +52,7 @@ signals:
 public slots:
     Series *getSeries(int row) const;
     void completeAddSaveSeries(Series* series);
-    void removeSaveSeries(int row);
+    void removeSaveSeries(Series *series);
     void searchSeries(const QString &seriesName);
     void updateAutocompleteModel(const QString &beginSeriesName);
 

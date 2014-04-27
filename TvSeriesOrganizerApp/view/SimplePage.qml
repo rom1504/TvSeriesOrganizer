@@ -33,6 +33,7 @@ Rectangle
         opacity:1
         width:parent.width
         height:width*sourceSize.height/sourceSize.width
+        //height:100
         state:""
 
         property url newSource

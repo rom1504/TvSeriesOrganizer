@@ -10,6 +10,7 @@
 #include "model/serieslistlist.h"
 #include "model/plugin.h"
 #include "model/signallist.h"
+#include "model/settings.h"
 #include "adapter/signallistadapter.h"
 
 QString Controller::cachePath;
@@ -76,6 +77,11 @@ Controller::Controller(QString datadir, QObject *parent) :
     SeriesListList * seriesListList=new SeriesListList(mSeriesList);
 
     ctxt->setContextProperty("seriesListList", seriesListList);
+
+    Settings::declareSettingsQml();
+    Settings * settings=new Settings();
+
+    ctxt->setContextProperty("settings", settings);
 
     mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
 

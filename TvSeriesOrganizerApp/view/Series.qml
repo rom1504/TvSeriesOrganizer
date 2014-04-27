@@ -5,6 +5,7 @@ ShadowBorderRectangleButton
 {
     id:seriesItem
     signal seriesClicked(int index)
+    signal seriesRemoved()
     Keys.onReturnPressed:seriesClicked(index)
 
     onClicked:
@@ -45,7 +46,7 @@ ShadowBorderRectangleButton
         x:parent.width*4/6
         y:-5
         focus:true
-        onClicked: seriesListPage.removeSeries(index)
+        onClicked: seriesRemoved()
     }
 
     SeenIndicator

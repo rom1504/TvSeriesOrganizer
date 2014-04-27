@@ -1,17 +1,17 @@
 import QtQuick 2.0
+import "qrc:/GeneralQmlItems/"
 
-Rectangle
+Button
 {
-    id:seenRectangle
     property bool seen
     signal seenHasChanged
-
+    id:seenIndicator
     property bool pressed
 
-    function clicked()
+    onClicked:
     {
-        seenRectangle.state=seenRectangle.state=="Seen" ? "NotSeen" : "Seen"
-        seen=seenRectangle.state=="Seen"
+        seenIndicator.state=seenIndicator.state=="Seen" ? "NotSeen" : "Seen"
+        seen=seenIndicator.state=="Seen"
         seenHasChanged()
     }
 
@@ -35,13 +35,19 @@ Rectangle
     y:0
     width:seenText.contentWidth
     height:seenText.contentHeight
-    color:"orange"
-    Text
+    Rectangle
     {
-        id:seenText
-        text:qsTr("Seen")
-        color:"white"
-        font.pointSize: 14
-        anchors.centerIn: parent
+        width:seenText.contentWidth
+        height:seenText.contentHeight
+        id:seenRectangle
+        color:"orange"
+        Text
+        {
+            id:seenText
+            text:qsTr("Seen")
+            color:"white"
+            font.pointSize: 14
+            anchors.centerIn: parent
+        }
     }
 }
