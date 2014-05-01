@@ -12,6 +12,7 @@ TabPage
     property var episode
     property bool upcoming:false
 
+    maxImageHeight:350
     onTabChanged: stackview.get(stackview.depth-2).episodeIndex=column
     onCurrentTabChanged:episodeDetails.imageSource=currentItem===null ? episode.banner.small : currentItem.myData.banner.small
 

@@ -8,6 +8,7 @@ SimplePage
     id:imageViewer
     onBack:stackview.pop({immediate:true})
     imageSource:"qrc:/images/TvSeriesOrganizerHeader.png"
+    title:"Settings"
     Column
     {
         Text

@@ -7,9 +7,6 @@ Rectangle
 {
     id: simplePage
 
-    width: awidth
-    height: aheight
-    color: "#EAEAEA"
     signal left(var event)
     signal right(var event)
     signal up(var event)
@@ -17,23 +14,41 @@ Rectangle
     signal back()
     signal bback(var event)
     signal enter(var event)
-    onBback: back()
 
     property alias imageSource:image.source
     property alias newImageSource:image.newSource
     default property alias children : insidePageItem.children
     property int buttonBarHeight:0
+    property int maxImageHeight:150
+    property Component inImage
+    property string title:""
+
+    width: awidth
+    height: aheight
+    color: "#EAEAEA"
+    onBback: back()
+
     Keys.onBackPressed: simplePage.back()
     Keys.onPressed: if(event.key === Qt.Key_Backspace) simplePage.back()
+
+    Rectangle
+    {
+        width:parent.width
+        height:image.opacity===1 ? image.height : nextImage.height
+        color:"#999"
+
+    }
+
     Image
     {
         id:image
         x:0
         y:0
         opacity:1
-        width:parent.width
-        height:width*sourceSize.height/sourceSize.width
-        //height:100
+        height:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? maxImageHeight : parent.width*sourceSize.height/sourceSize.width
+        width:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? height*sourceSize.width/sourceSize.height
+                                                                              : parent.width
+        anchors.left: parent.Left
         state:""
 
         property url newSource
@@ -90,8 +105,10 @@ Rectangle
         id:nextImage
         x:0
         y:0
-        width:parent.width
-        height:width*sourceSize.height/sourceSize.width
+
+        height:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? maxImageHeight : parent.width*sourceSize.height/sourceSize.width
+        width:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? height*sourceSize.width/sourceSize.height
+                                                                              : parent.width
 
 
     }
@@ -110,16 +127,35 @@ Rectangle
     Button
     {
         id:backContainer
-        width: button.width +5
-        height: button.height +5
+        width: r.width +5
+        height: r.height +5
         onClicked: simplePage.back()
-        Image
+        Row
         {
-            source:"qrc:/images/back.png"
-            width:image.width/7
-            height:width
-            id:button
+            id:r
+            Image
+            {
+                source:"qrc:/images/previous_white.png"
+                width:50
+                height:width
+                id:button
+            }
+
+            Text
+            {
+                width:contentWidth
+                height:contentHeight
+                font.pointSize: 25
+                color:"white"
+                font.family: "georgia"
+                text:simplePage.title
+            }
         }
+    }
+    Loader
+    {
+        id:loader
+        sourceComponent: inImage
     }
     Item
     {

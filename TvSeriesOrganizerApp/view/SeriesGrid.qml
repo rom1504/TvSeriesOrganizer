@@ -48,7 +48,8 @@ GridView
         }
     }
     property bool cellFixedSize: true
-    cellWidth:cellFixedSize ? width/Math.floor(width/((580-40)/3)) : width/3
+    property int defaultColumnNumber: 3
+    cellWidth:cellFixedSize ? width/Math.floor(width/((580-40)/defaultColumnNumber)) : width/defaultColumnNumber
     cellHeight: cellWidth/138*203*0.99
     property double itemMargin: cellWidth*0.03
     highlightRangeMode:ListView.StrictlyEnforceRange

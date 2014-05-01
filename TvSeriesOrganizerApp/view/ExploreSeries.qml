@@ -10,6 +10,7 @@ TabPage
     onBack:stackview.depth===1 ? Qt.quit() : stackview.pop({immediate:true})
 
     property var followedSeriesList
+    title:"Tv Series Organizer"
 
 
     Item
@@ -36,23 +37,10 @@ TabPage
         }
     }
 
-    Text
-    {
-        x:exploreSeries.width/2-width/2
-        y:-height-exploreSeries.height/20
-        width:contentWidth
-        height:contentHeight
-        font.pointSize: 30
-        color:"white"
-        font.family: "georgia"
-        text:"Tv Series Organizer"
-    }
-
-    Button
+    inImage: Button
     {
         id:forwardContainer
-        x:7/8*exploreSeries.width-width/2
-        y:-height-exploreSeries.height/30
+        x:exploreSeries.width-width
         width: button.width +5
         height: button.height +5
         onClicked: stackview.push
@@ -64,7 +52,7 @@ TabPage
         Image
         {
             source:"qrc:/images/forward.png"
-            width:exploreSeries.width/7
+            width:50
             height:width
             id:button
         }

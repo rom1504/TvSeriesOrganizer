@@ -38,5 +38,6 @@
         <file>images/settings_white.png</file>
         <file>view/Settings.qml</file>
         <file>view/SeriesCollection.qml</file>
+        <file>images/previous_white.png</file>
     </qresource>
 </RCC>
