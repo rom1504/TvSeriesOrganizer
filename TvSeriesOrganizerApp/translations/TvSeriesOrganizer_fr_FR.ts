@@ -20,17 +20,17 @@
 <context>
     <name>EpisodeDetails</name>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="48"/>
+        <location filename="../view/EpisodeDetails.qml" line="49"/>
         <source>Episode number</source>
         <translation>Episode numéro</translation>
     </message>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="48"/>
+        <location filename="../view/EpisodeDetails.qml" line="49"/>
         <source>First aired</source>
         <translation>Première diffusion</translation>
     </message>
     <message>
-        <location filename="../view/EpisodeDetails.qml" line="84"/>
+        <location filename="../view/EpisodeDetails.qml" line="86"/>
         <source>Episode</source>
         <translation>Episode</translation>
     </message>
@@ -128,12 +128,12 @@
 <context>
     <name>SeasonDetails</name>
     <message>
-        <location filename="../view/SeasonDetails.qml" line="57"/>
+        <location filename="../view/SeasonDetails.qml" line="62"/>
         <source>Season</source>
         <translation>Saison</translation>
     </message>
     <message>
-        <location filename="../view/SeasonDetails.qml" line="57"/>
+        <location filename="../view/SeasonDetails.qml" line="62"/>
         <source>Extras</source>
         <translation>Extras</translation>
     </message>
@@ -142,7 +142,7 @@
     <name>SeenIndicator</name>
     <message>
         <location filename="../view/SeenIndicator.qml" line="23"/>
-        <location filename="../view/SeenIndicator.qml" line="42"/>
+        <location filename="../view/SeenIndicator.qml" line="47"/>
         <source>Seen</source>
         <translation>Vu</translation>
     </message>
@@ -162,77 +162,81 @@
 <context>
     <name>SeriesDetails</name>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="79"/>
+        <location filename="../view/SeriesDetails.qml" line="86"/>
         <source>Details</source>
         <translation>Détails</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="95"/>
+        <location filename="../view/SeriesDetails.qml" line="102"/>
         <source>Network</source>
         <translation>Réseau</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="95"/>
+        <location filename="../view/SeriesDetails.qml" line="102"/>
         <source>First aired</source>
         <translation>Première diffusion</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="120"/>
+        <location filename="../view/SeriesDetails.qml" line="127"/>
         <source>Plot</source>
         <translation>Intrigue</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="140"/>
+        <location filename="../view/SeriesDetails.qml" line="150"/>
         <source>Role</source>
         <translation>Role</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="140"/>
+        <location filename="../view/SeriesDetails.qml" line="150"/>
         <source>Importance</source>
         <translation>Importance</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="141"/>
+        <location filename="../view/SeriesDetails.qml" line="151"/>
         <source>Low</source>
         <translation>Basse</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="142"/>
+        <location filename="../view/SeriesDetails.qml" line="152"/>
         <source>Medium</source>
         <translation>Moyenne</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="143"/>
+        <location filename="../view/SeriesDetails.qml" line="153"/>
         <source>High</source>
         <translation>Haute</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="144"/>
-        <source>Very low</source>
-        <translation>Très basse</translation>
+        <location filename="../view/SeriesDetails.qml" line="154"/>
+        <source>Very High</source>
+        <translation>Très haute</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <source>Very low</source>
+        <translation type="vanished">Très basse</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesDetails.qml" line="201"/>
         <source>Seasons</source>
         <translation>Saisons</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <location filename="../view/SeriesDetails.qml" line="201"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <location filename="../view/SeriesDetails.qml" line="201"/>
         <source>Fan arts</source>
         <translation>Fan arts</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <location filename="../view/SeriesDetails.qml" line="201"/>
         <source>Posters</source>
         <translation>Posters</translation>
     </message>
     <message>
-        <location filename="../view/SeriesDetails.qml" line="207"/>
+        <location filename="../view/SeriesDetails.qml" line="201"/>
         <source>Actors</source>
         <translation>Acteurs</translation>
     </message>
@@ -240,19 +244,16 @@
 <context>
     <name>SeriesList</name>
     <message>
-        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Series</source>
-        <translation>Séries</translation>
+        <translation type="vanished">Séries</translation>
     </message>
     <message>
-        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Upcoming</source>
-        <translation>A venir</translation>
+        <translation type="vanished">A venir</translation>
     </message>
     <message>
-        <location filename="../view/SeriesList.qml" line="133"/>
         <source>Search</source>
-        <translation>Rechercher</translation>
+        <translation type="vanished">Rechercher</translation>
     </message>
 </context>
 <context>
@@ -262,6 +263,24 @@
         <location filename="../model/serieslistlist.cpp" line="16"/>
         <source>Trending</source>
         <translation>Populaire</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesListPage</name>
+    <message>
+        <location filename="../view/SeriesListPage.qml" line="132"/>
+        <source>Series</source>
+        <translation>Séries</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesListPage.qml" line="132"/>
+        <source>Upcoming</source>
+        <translation>A venir</translation>
+    </message>
+    <message>
+        <location filename="../view/SeriesListPage.qml" line="132"/>
+        <source>Search</source>
+        <translation>Rechercher</translation>
     </message>
 </context>
 <context>
@@ -296,22 +315,105 @@
         <translation type="vanished">Ajouter</translation>
     </message>
     <message>
-        <location filename="../view/SeriesSearch.qml" line="103"/>
+        <location filename="../view/SeriesSearch.qml" line="108"/>
         <source>Adding...</source>
         <translation>Ajout...</translation>
     </message>
 </context>
 <context>
+    <name>Settings</name>
+    <message>
+        <location filename="../view/Settings.qml" line="11"/>
+        <source>Settings</source>
+        <translation>Paramètres</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="17"/>
+        <source>Series collection style</source>
+        <translation>Style de collection de série</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="19"/>
+        <source>Series list</source>
+        <translation>Liste de série</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="19"/>
+        <source>Series grid</source>
+        <translation>Grille de série</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="26"/>
+        <source>Series card type</source>
+        <translation>Type de carte de série</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="28"/>
+        <source>Small Card</source>
+        <translation>Petite carte</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="28"/>
+        <source>Large card</source>
+        <translation>Carte large</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="34"/>
+        <source>Season collection style</source>
+        <translation>Style de collection de saison</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="36"/>
+        <source>Season list</source>
+        <translation>Liste de saison</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="36"/>
+        <source>Season grid</source>
+        <translation>Grille de saison</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="43"/>
+        <source>Episode collection style</source>
+        <translation>Style de collection d&apos;épisode</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="45"/>
+        <source>Episode list</source>
+        <translation>Liste d&apos;épisode</translation>
+    </message>
+    <message>
+        <location filename="../view/Settings.qml" line="45"/>
+        <source>Episode grid</source>
+        <translation>Grille d&apos;épisode</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="30"/>
+        <location filename="../main.cpp" line="33"/>
         <source>Directory where data are saved</source>
         <translation>Répertoire où les données sont enregistrées</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="30"/>
+        <location filename="../main.cpp" line="33"/>
         <source>directory</source>
         <translation>répertoire</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="34"/>
+        <source>Size of the application (default to 580x880)</source>
+        <translation>Taille de l&apos;application (défaut : 580x880)</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="34"/>
+        <source>widthxheight</source>
+        <translation>largeurxhauteur</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="35"/>
+        <source>Maximize the window</source>
+        <translation>Maximise la fenêtre</translation>
     </message>
 </context>
 </TS>
