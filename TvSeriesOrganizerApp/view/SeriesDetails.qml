@@ -1,5 +1,6 @@
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
+import com.rom1504.TvSeriesOrganizer 1.0
 import "qrc:/GeneralQmlItems/"
 
 
@@ -37,21 +38,27 @@ TabPage
 
     tabContentModel: VisualItemModel
     {
-        ListView
+        CollectionView
         {
-            delegate:Season{onSeasonClicked: seriesDetails.seasonClicked(index,season,upcoming)}
-            model:upcoming ? series.seriesUpcomingModel : series.seriesModel
-            width: seriesDetails.width-40
-            height: seriesDetails.height
-            currentIndex: listBeginIndex
-            focus:true
+               id:seasonCollection
+               viewType:settings.seasonCollectionStyle
 
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            id:listview
-            Keys.onDownPressed: listview.incrementCurrentIndex()
-            Keys.onUpPressed: listview.decrementCurrentIndex()
-            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
+               delegate:Season
+                   {
+                       width:seasonCollection.viewCellWidth+(seasonCollection.viewType===SettingsModel.GridView ? 10 : 0)
+                       height: seasonCollection.viewType===SettingsModel.GridView ? seasonCollection.viewCellHeight+15 : defaultHeight
+                       onSeasonClicked: seriesDetails.seasonClicked(index,season,upcoming)
+                   }
+               gridCellAdditionalHeightMargin:5
+               currentIndex: listBeginIndex
+               width: seriesDetails.width-40
+               height: seriesDetails.height
+               model:upcoming ? series.seriesUpcomingModel : series.seriesModel
+               defaultGridColumnNumber:1
+               gridCellRatio:3/8
         }
+
+
         Flickable
         {
             flickableDirection:Flickable.VerticalFlick
@@ -129,10 +136,13 @@ TabPage
                 }
             }
         }
-        ListView
+        CommonGridView
         {
+            id:actorCollection
             delegate:ShadowBorderRectangle
             {
+                width:actorCollection.realCellWidth+10
+                height:actorCollection.realCellHeight+15
                 TitleImageDescriptionItem
                 {
                     title:actor.name
@@ -141,65 +151,48 @@ TabPage
                                 (actor.sortOrder===3 ? qsTr("Low") :
                                 (actor.sortOrder===2 ? qsTr("Medium") :
                                 (actor.sortOrder===1 ? qsTr("High") :
-                                (actor.sortOrder===0 ? qsTr("Very low") : ""))))
+                                (actor.sortOrder===0 ? qsTr("Very High") : ""))))
                 }
               }
+            cellRatio:3/8
             model:series.actorListModel
             width: seriesDetails.width-40
             height: seriesDetails.height
             currentIndex: 0
-            focus:true
-
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            Keys.onDownPressed: incrementCurrentIndex()
-            Keys.onUpPressed: decrementCurrentIndex()
-            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
+            defaultColumnNumber: 1
         }
-        GridView
+        CommonGridView
         {
             id:fanArtsView
             width: seriesDetails.width-40
             height:seriesDetails.height
-            cellWidth:width/2
-            cellHeight: 1080/1920*cellWidth
             model:series.fanArts
-
-            property double itemMargin: cellWidth*0.03
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            Keys.onDownPressed: moveCurrentIndexDown()
-            Keys.onUpPressed: moveCurrentIndexUp()
-            Keys.onLeftPressed: seriesDetails.goLeft()
-            Keys.onRightPressed: seriesDetails.goRight()
+            cellRatio:1080/1920
+            defaultColumnNumber: 2
 
             delegate:ImageButton
                 {
-                    width:fanArtsView.cellWidth-fanArtsView.itemMargin
-                    height:fanArtsView.cellHeight-fanArtsView.itemMargin
+                    width:fanArtsView.realCellWidth
+                    height:fanArtsView.realCellHeight
                     imageSource:fanArt.small
                     onClicked:stackview.push({item:"qrc:/view/ImageViewer.qml",immediate:true,properties:{bigImageSource:fanArt.big}})
                 }
         }
-        GridView
+        CommonGridView
         {
             id:postersView
             width: seriesDetails.width-40
             height:seriesDetails.height
-            cellWidth:width/3
-            cellHeight: 1000/680*cellWidth
+            defaultColumnNumber: 3
+            cellRatio: 1000/680
             model:series.posters
 
-            property double itemMargin: cellWidth*0.03
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            Keys.onDownPressed: moveCurrentIndexDown()
-            Keys.onUpPressed: moveCurrentIndexUp()
-            Keys.onLeftPressed: seriesDetails.goLeft()
-            Keys.onRightPressed: seriesDetails.goRight()
 
             delegate:
                  ImageButton
                 {
-                    width:postersView.cellWidth-postersView.itemMargin
-                    height:postersView.cellHeight-postersView.itemMargin
+                     width:postersView.realCellWidth
+                     height:postersView.realCellHeight
                     imageSource:poster.small
                     onClicked:stackview.push({item:"qrc:/view/ImageViewer.qml",immediate:true,properties:{bigImageSource:poster.big}})
                 }

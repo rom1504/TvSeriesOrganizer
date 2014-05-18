@@ -1,57 +1,40 @@
 import QtQuick 2.0
-import "qrc:/GeneralQmlItems/"
 
 Item
 {
-    signal removeSeries(var series)
-    function pressAndHold() {state="expanded";}
-    Button
+    id:seriesItem
+    signal clicked()
+    property bool pressed
+    signal pressAndHold()
+    property Component addition
+    onPressAndHold:loader.item.pressAndHold()
+
+    Image
     {
-        id:removeButton
-        Image
-        {
-            source:"qrc:/images/remove_white.png"
-            width:seriesImage.width/5
-            height:width
-            id:ibutton
-        }
-        width:ibutton.width
-        height:ibutton.height
-        x:0
-        y:0
-        focus:true
-        onClicked: removeSeries(mseries)
+        id:image
+        width:parent.width
+        height: image.width/138*203
+        fillMode: Image.PreserveAspectCrop
+        source:series.poster.small
     }
 
-    SeenIndicator
+    MouseArea
     {
-        id:seenRectangle
-        seen:mseries.seen
-        onSeenHasChanged: mseries.seen=seenRectangle.seen
-        x:delegateItem.width-width-5
+        hoverEnabled:true
+        id:area
+        anchors.fill: parent
+        onClicked: parent.clicked()
+        onPressedChanged: parent.pressed=pressed
+
+        onPressAndHold:parent.pressAndHold()
     }
 
-    Slider
+    Loader
     {
-        id:seenRatioSlider
-        value:mseries.seenRatio
-        y:seriesImage.height-5
-        x:0
-        height:5
-        width:delegateItem.width
+        id:loader
+        property Item delegateItem:seriesItem
+        property Image seriesImage: image
+        property var mseries:series
+        sourceComponent: addition
     }
-    states:[
-        State
-        {
-            name:"simple"
-            PropertyChanges { target: removeButton ; enabled:false; opacity:0;}
-        }
-        ,
-        State
-        {
-            name:"expanded"
-            PropertyChanges { target: removeButton ; enabled:true; opacity:1;}
-        }
-    ]
-    state:"simple"
 }

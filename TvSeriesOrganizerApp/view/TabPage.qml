@@ -26,6 +26,12 @@ SimplePage
 
     onTabClicked: listview.goTo(index)
 
+    property int defaultTabNumber: 3
+    property int maxTabNumber:10
+    property int computedTabNumber: (tabPage.width-40)/540*defaultTabNumber
+    property int tabNumber:computedTabNumber>maxTabNumber ? maxTabNumber : computedTabNumber
+    //property int tabNumber: 17
+
     function goTo(index)
     {
         listview.goTo(index)
@@ -39,8 +45,8 @@ SimplePage
         {
             if(index<0) return
             if(index>count-1) return
-            listview.positionViewAtIndex(index,index===0 ? ListView.Left : (index===count-1 ? ListView.Right : ListView.Center));
             listview.currentIndex=index
+            contentX=(tabPage.width-40)*index
         }
 
         function goLeft()
@@ -53,10 +59,12 @@ SimplePage
             goTo(currentIndex+1)
         }
 
+
         id:listview
         width: tabPage.width-40
         height: tabPage.height
-        Component.onCompleted: goTo(beginIndex)
+        Timer{interval:10;id:timer;onTriggered:goTo(beginIndex)}
+        Component.onCompleted: timer.start()
         clip: true
         focus:true
         orientation:ListView.Horizontal
@@ -64,15 +72,40 @@ SimplePage
 
         onContentXChanged:
         {
-            var newX=(listview.contentX/(tabPage.width-40)-1)*tabbar.width/3
-            if(newX<0) marquer.x=newX+tabbar.width/3;
-            else if(newX>tabbar.width/3*(count-3) && count>2) marquer.x=newX+tabbar.width/3-tabbar.width/3*(count-3);
+            currentIndex=Math.round(listview.contentX/listview.width)
+            var stayOn=Math.ceil(tabNumber/2)
+            var tabWidth=tabbar.width/tabNumber
+            var itemWidth=tabPage.width-40
+            var newX=listview.contentX/itemWidth*tabWidth
+            if(newX>tabWidth*(stayOn-1) || (tabList.contentX+tabWidth*(stayOn-1)>tabWidth*(stayOn-1) && newX>tabWidth*(stayOn-2)))
+            {
+                if(newX>tabWidth*(count-1-(tabNumber-stayOn)) || (marker.x>tabWidth*(stayOn-1) && newX>tabWidth*(count-2-(tabNumber-stayOn))))
+                {
+                    //console.log("the last one")
+                    marker.x=newX-tabWidth*(count-1-(tabNumber-stayOn))+(count>=tabNumber ? tabWidth*(stayOn-1) : tabWidth)
+                    //useful when jumping
+                    tabList.contentX=count>tabNumber ? (tabWidth*(count-tabNumber)) : 0
+                }
+                else
+                {
+                    //console.log("after the penultimate which can go in the bar")
+                    tabList.contentX=newX-tabWidth*(stayOn-1)
+                    //useful when jumping
+                    marker.x=tabWidth*(stayOn-1)
+                }
+            }
             else
             {
-                marquer.x=tabbar.width/3;
-                tabList.contentX=newX
+                //console.log("before the penultimate which can go in the bar")
+                marker.x=newX;
+                //useful when jumping
+                tabList.contentX=0
             }
-            currentIndex=Math.round(listview.contentX/listview.width)
+
+            // 3 cases
+            // - 1) before the penultimate which can go in the bar : the tabList doesn't move, the marker moves
+            // - 2) after the penultimate which can go in the bar : the tabList moves, the marker stay on the penultimate
+            // - 3) the last one : the list doesn't move, the marker moves on the last one
         }
         onCurrentIndexChanged:
         {
@@ -99,7 +132,6 @@ SimplePage
             ListView
             {
                 interactive:false
-                Component.onCompleted: positionViewAtIndex(beginIndex==count-1 && count>2 ? beginIndex-1 : beginIndex,ListView.Center);
                 snapMode:ListView.SnapOneItem
 
                 height:contentItem.childrenRect.height
@@ -111,16 +143,10 @@ SimplePage
 
             Rectangle
             {
-                id:marquer
-                width:tabbar.width/3
+                id:marker
+                width:tabbar.width/tabNumber
                 height:5
                 color:"#EAEAEA"
-                Component.onCompleted:
-                {
-                    if(beginIndex==0) x=0;
-                    else if(beginIndex==tabList.count-1) x=2*tabbar.width/3;
-                    else x=tabbar.width/3;
-                }
             }
         }
     }

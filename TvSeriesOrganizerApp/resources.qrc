@@ -31,13 +31,16 @@
         <file>view/ImageViewer.qml</file>
         <file>translations/TvSeriesOrganizer_ro_RO.qm</file>
         <file>view/SeriesListPage.qml</file>
-        <file>view/SeriesList.qml</file>
-        <file>view/SeriesGrid.qml</file>
         <file>images/remove_white.png</file>
-        <file>view/ThumbnailSeries.qml</file>
         <file>images/settings_white.png</file>
         <file>view/Settings.qml</file>
         <file>view/SeriesCollection.qml</file>
         <file>images/previous_white.png</file>
+        <file>view/CollectionView.qml</file>
+        <file>view/CommonGridView.qml</file>
+        <file>view/CommonListView.qml</file>
+        <file>view/ThumbnailSeriesAddition.qml</file>
+        <file>view/ThumbnailSeries.qml</file>
+        <file>view/RadioChoice.qml</file>
     </qresource>
 </RCC>

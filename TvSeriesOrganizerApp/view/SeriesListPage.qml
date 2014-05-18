@@ -99,7 +99,8 @@ TabPage
             currentIndex: seriesIndex
             onSeriesClicked: seriesListPage.seriesClicked(seriesIndex,series,false)
             onSeriesRemoved: seriesListPage.removeSeries(series)
-            grid:settings.seriesCollectionStyle
+            viewType:settings.seriesCollectionStyle
+            cardType: settings.seriesCardType
         }
 
         SeriesCollection
@@ -111,7 +112,8 @@ TabPage
             currentIndex: seriesIndex
             onSeriesClicked: seriesListPage.seriesClicked(seriesIndex,series,true)
             onSeriesRemoved: seriesListPage.removeSeries(series)
-            grid:settings.seriesCollectionStyle
+            viewType:settings.seriesCollectionStyle
+            cardType: settings.seriesCardType
         }
 
         SeriesSearch
@@ -122,7 +124,7 @@ TabPage
             onSearchFinished:
             {
                 seriesListPage.goTo(0)
-                seriesCollection.currentIndex=addIndex;
+                seriesCollection.currentIndex=addIndex
             }
         }
     }

@@ -3,8 +3,8 @@ import "qrc:/GeneralQmlItems/"
 
 Column
 {
-    Keys.onDownPressed: searchListView.incrementCurrentIndex()
-    Keys.onUpPressed: searchListView.decrementCurrentIndex()
+    Keys.onDownPressed: searchSeriesCollection.incrementCurrentIndex()
+    Keys.onUpPressed: searchSeriesCollection.decrementCurrentIndex()
     id:seriesSearch
     property var seriesList
 
@@ -17,12 +17,12 @@ Column
         onSearchCompleted:
         {
             status.text=resultsCount==0 ? qsTr("No results") : qsTr("%n result(s)","",resultsCount)
-            searchListView.model=searchListModel
+            searchSeriesCollection.model=searchListModel
         }
         onSeriesAdded:
         {
             status.text=""
-            searchListView.model=null
+            searchSeriesCollection.model=null
             searchFinished(addIndex)
         }
     }
@@ -63,15 +63,17 @@ Column
         font.pointSize: 16
     }
 
-    ListView
+    CommonGridView
     {
         z:0
-        id:searchListView
+        id:searchSeriesCollection
         delegate:
             ShadowBorderRectangleButton
             {
                 id:seriesItem
 
+                width:searchSeriesCollection.realCellWidth
+                height:searchSeriesCollection.realCellHeight
                 onClicked: if(addButton.enabled==true && isMouseIn(addButton,50)) addButton.clicked()
                 onPressedChanged:
                 {
@@ -84,6 +86,9 @@ Column
                     title:series.name
                     imageSource:series.poster.small
                     description:series.shortOverview
+                    width:parent.width-10
+                    maximumDescriptionHeight: 135
+                    forceDescriptionHeight:true
                 }
 
                 Button
@@ -107,10 +112,9 @@ Column
         width: seriesSearch.width
         height: seriesSearch.height
         currentIndex: 0
-        focus:true
-        clip:true
 
+        defaultColumnNumber:1
+        cellRatio:3/8
 
-        highlightRangeMode:ListView.StrictlyEnforceRange
     }
 }

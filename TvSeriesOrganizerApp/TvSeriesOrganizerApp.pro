@@ -91,11 +91,14 @@ SOURCES = view/Episode.qml \
     view/ExploreSeries.qml \
     view/ImageViewer.qml \
     view/SeriesListPage.qml \
-    view/SeriesList.qml  \
-    view/SeriesGrid.qml \
-    view/ThumbnailSeries.qml \
     view/Settings.qml \
-    view/SeriesCollection.qml
+    view/SeriesCollection.qml \
+    view/CollectionView.qml \
+    view/CommonListView.qml \
+    view/CommonGridView.qml \
+    view/ThumbnailSeriesAddition.qml \
+    view/ThumbnailSeries.qml \
+    view/RadioChoice.qml
 }
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SignalList/release/ -lSignalList

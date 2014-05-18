@@ -61,29 +61,35 @@ TabPage
 
 
     tabContentDelegate:
-        SeriesGrid
+        CommonGridView
         {
+            id:gvs
             width: exploreSeries.width-40
             height: parent.height
-            Keys.onLeftPressed: exploreSeries.goLeft()
-            Keys.onRightPressed: exploreSeries.goRight()
             model:seriesList.seriesListFilteredModel
-            seriesComp:Button
+            delegate:ThumbnailSeries
             {
-                id:addButton
-                Image
-                {
-                    source:"qrc:/images/add.png"
-                    width:seriesImage.width/4
-                    height:width
-                    id:ibutton
-                }
-                width:ibutton.width+50
-                height:ibutton.height+50
-                x:delegateItem.width-ibutton.width
-                focus:true
-                onClicked: {followedSeriesList.completeAddSaveSeries(mseries);}
+                width:gvs.realCellWidth
+                height:gvs.realCellHeight
+                addition:Button
+                        {
+                            id:addButton
+                            Image
+                            {
+                                source:"qrc:/images/add.png"
+                                width:seriesImage.width/4
+                                height:width
+                                id:ibutton
+                            }
+                            width:ibutton.width+50
+                            height:ibutton.height+50
+                            x:delegateItem.width-ibutton.width
+                            focus:true
+                            onClicked: {followedSeriesList.completeAddSaveSeries(mseries);}
+                        }
             }
+
+
         }
     tabDelegate:TabItem{tabText:seriesList.genre;tabPage:exploreSeries}
 

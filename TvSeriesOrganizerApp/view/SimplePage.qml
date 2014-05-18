@@ -46,8 +46,7 @@ Rectangle
         y:0
         opacity:1
         height:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? maxImageHeight : parent.width*sourceSize.height/sourceSize.width
-        width:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? height*sourceSize.width/sourceSize.height
-                                                                              : parent.width
+        width:parent.width*sourceSize.height/sourceSize.width>maxImageHeight ? height*sourceSize.width/sourceSize.height : parent.width
         anchors.left: parent.Left
         state:""
 
@@ -133,6 +132,7 @@ Rectangle
         Row
         {
             id:r
+            spacing:5
             Image
             {
                 source:"qrc:/images/previous_white.png"
@@ -143,6 +143,7 @@ Rectangle
 
             Text
             {
+                y:5
                 width:contentWidth
                 height:contentHeight
                 font.pointSize: 25

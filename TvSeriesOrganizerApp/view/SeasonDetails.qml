@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import "qrc:/GeneralQmlItems/"
+import com.rom1504.TvSeriesOrganizer 1.0
 
 TabPage
 {
@@ -39,20 +40,24 @@ TabPage
 
 
     tabContentDelegate:
-        ListView
+        CollectionView
         {
-            property variant myData:season
-            delegate:Episode{onEpisodeClicked:seasonDetails.episodeClicked(index,episode,upcoming,season)}
-            model:upcoming ? season.seasonUpcomingModel : season.seasonModel
-            width: seasonDetails.width-40
-            height: parent.height
-            currentIndex: listBeginIndex
-            highlightRangeMode:ListView.StrictlyEnforceRange
-            id:listview
-            onCurrentIndexChanged:listBeginIndex=currentIndex;
-            Keys.onDownPressed: listview.incrementCurrentIndex()
-            Keys.onUpPressed: listview.decrementCurrentIndex()
-            Keys.onReturnPressed:currentItem.Keys.onReturnPressed(event)
+               id:episodeCollection
+               viewType:settings.episodeCollectionStyle
+
+               delegate:Episode
+               {
+                   width:episodeCollection.viewCellWidth+(episodeCollection.viewType===SettingsModel.GridView ? 10 : 0)
+                   height: episodeCollection.viewType===SettingsModel.GridView ? episodeCollection.viewCellHeight+15 : defaultHeight
+                   onEpisodeClicked:seasonDetails.episodeClicked(index,episode,upcoming,season)
+               }
+               gridCellAdditionalHeightMargin:5
+               currentIndex: listBeginIndex
+               width: seasonDetails.width-40
+               height: seasonDetails.height
+               model:upcoming ? season.seasonUpcomingModel : season.seasonModel
+               defaultGridColumnNumber:1
+               gridCellRatio:3/8
         }
     tabDelegate:TabItem{tabText:season.number===0 ? qsTr("Extras") : qsTr("Season")+" "+season.number;tabPage:seasonDetails}
 

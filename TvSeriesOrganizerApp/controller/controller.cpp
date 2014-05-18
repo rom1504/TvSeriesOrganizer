@@ -16,7 +16,7 @@
 QString Controller::cachePath;
 QString Controller::dataPath;
 
-Controller::Controller(QString datadir, QObject *parent) :
+Controller::Controller(QString datadir, QString size, bool maximize, QObject *parent) :
     QObject(parent)
 {
 
@@ -46,8 +46,17 @@ Controller::Controller(QString datadir, QObject *parent) :
     ctxt->setContextProperty("awidth",mViewer.width());
     ctxt->setContextProperty("aheight",mViewer.height());
 #else
-    ctxt->setContextProperty("awidth",580);
-    ctxt->setContextProperty("aheight",880);
+    QStringList cSize=size.split("x");
+    ctxt->setContextProperty("awidth",cSize[0].toInt());
+    ctxt->setContextProperty("aheight",cSize[1].toInt());
+    if(maximize)
+    {
+        QTimer * maximizeTimer=new QTimer();
+        maximizeTimer->setInterval(0);
+        maximizeTimer->setSingleShot(true);
+        connect(maximizeTimer,&QTimer::timeout,[this](){mViewer.showMaximized();});
+        maximizeTimer->start();
+    }
 #endif
 
 
@@ -87,9 +96,11 @@ Controller::Controller(QString datadir, QObject *parent) :
 
 
 #if !defined(Q_OS_ANDROID)
-    mViewer.showExpanded();
+   if(!maximize) mViewer.showExpanded();
 #endif
-
+    //qDebug()<<mViewer.size();
+    //mViewer.setMaximumSize(mViewer.size());
+    //mViewer.setMinimumSize(mViewer.size()-QSize(10,10));
 }
 
 void Controller::run()

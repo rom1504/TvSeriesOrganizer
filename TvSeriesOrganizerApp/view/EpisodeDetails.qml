@@ -47,6 +47,7 @@ TabPage
                         title:episode.name
                         imageSource:episode.banner.small
                         description:qsTr("Episode number")+" "+episode.number+"\n"+qsTr("First aired")+": "+Qt.formatDateTime(episode.firstAired, "yyyy-MM-dd")+"\n"+episode.overview
+                        width:parent.width-10
                     }
                     SeenIndicator
                     {

@@ -43,7 +43,7 @@ ShadowBorderRectangleButton
             {
                 value:season.seenRatio
                 height:5
-                width:parent.width-5
+                width:parent.width-10
             }
             Description
             {
@@ -53,7 +53,7 @@ ShadowBorderRectangleButton
             {
                 value:season.airedRatio
                 height:5
-                width:parent.width-5
+                width:parent.width-10
             }
         }
     }

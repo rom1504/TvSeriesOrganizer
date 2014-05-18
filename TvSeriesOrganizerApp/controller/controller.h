@@ -11,7 +11,7 @@ class Controller : public QObject
 {
     Q_OBJECT
 public:
-    explicit Controller(QString datadir,QObject *parent = 0);
+    explicit Controller(QString datadir, QString size, bool maximize, QObject *parent = 0);
 
     static QString cachePath;
     static QString dataPath;

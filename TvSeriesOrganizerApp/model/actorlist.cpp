@@ -2,10 +2,7 @@
 #include "series.h"
 
 ActorList::ActorList(QObject *parent) :
-    QObject(parent),mActorList([](Actor* a,Actor* b){
-    if(a->sortOrder()==0) return false;
-    if(b->sortOrder()==0) return true;
-    return a->sortOrder()<b->sortOrder();})
+    QObject(parent),mActorList([](Actor* a,Actor* b){return a->sortOrder()<b->sortOrder();})
 {
 
 }

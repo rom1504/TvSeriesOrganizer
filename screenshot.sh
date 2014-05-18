@@ -2,9 +2,9 @@
 
 set -e
 
-binaryName="/media/donnees/builds/build-TvSeriesOrganizer-Desktop_Qt_5_2_1_GCC_64bit-Debug/TvSeriesOrganizerApp/TvSeriesOrganizer --data-dir /media/donnees/builds/build-TvSeriesOrganizer-Desktop_Qt_5_2_1_GCC_64bit-Debug/TvSeriesOrganizerApp/"
+binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
 windowName=TvSeriesOrganizer
-export DISPLAY=:0
+export DISPLAY=:10
 sleeptime=5
 longSleepTime=7
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
@@ -86,9 +86,9 @@ function clickSettings
 	moveClick 550 15
 }
 
-function clickSeriesListStyle
+function clickSmallCard
 {
-	moveClick 100 170
+	moveClick 100 270
 }
 
 takeScreenshot ExploreSeries
@@ -100,18 +100,19 @@ addSeries "suits"
 addSeries "breaking bad"
 
 sleep $sleeptime
-takeScreenshot SeriesGrid
+takeScreenshot SeriesCollectionLargeCard
 
 clickSettings
 sleep $sleeptime
 takeScreenshot Settings
 
-clickSeriesListStyle
+clickSmallCard
+sleep $sleeptime
 
 clickBack
 
 sleep $sleeptime
-takeScreenshot SeriesList
+takeScreenshot SeriesCollectionSmallCard
 
 
 moveClickTakeScreenshot 40 320 SeriesDetails

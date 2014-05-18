@@ -7,26 +7,54 @@
 class Settings : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(SeriesCollectionStyle)
-    Q_PROPERTY(SeriesCollectionStyle seriesCollectionStyle READ seriesCollectionStyle WRITE setSeriesCollectionStyle NOTIFY seriesCollectionStyleChanged)
+    Q_ENUMS(CollectionViewStyle)
+    Q_ENUMS(CardType)
+    Q_PROPERTY(CollectionViewStyle seriesCollectionStyle READ seriesCollectionStyle WRITE setSeriesCollectionStyle NOTIFY seriesCollectionStyleChanged)
+    Q_PROPERTY(CardType seriesCardType READ seriesCardType WRITE setSeriesCardType NOTIFY seriesCardTypeChanged)
+    Q_PROPERTY(CollectionViewStyle seasonCollectionStyle READ seasonCollectionStyle WRITE setSeasonCollectionStyle NOTIFY seasonCollectionStyleChanged)
+    Q_PROPERTY(CollectionViewStyle episodeCollectionStyle READ episodeCollectionStyle WRITE setEpisodeCollectionStyle NOTIFY episodeCollectionStyleChanged)
+
 public:
-    enum SeriesCollectionStyle
+    enum CollectionViewStyle
     {
-         SeriesList,
-         SeriesGrid
-     };
+         ListView,
+         GridView
+    };
+
+    enum CardType
+    {
+        SmallCard,
+        LargeCard
+    };
+
     explicit Settings(QObject *parent = 0);
 
-    SeriesCollectionStyle seriesCollectionStyle() const;
-    void setSeriesCollectionStyle(SeriesCollectionStyle seriesCollectionStyle);
+    CollectionViewStyle seriesCollectionStyle() const;
+    void setSeriesCollectionStyle(CollectionViewStyle seriesCollectionStyle);
+
+    CardType seriesCardType() const;
+    void setSeriesCardType(CardType seriesCardType);
+
+    CollectionViewStyle seasonCollectionStyle() const;
+    void setSeasonCollectionStyle(CollectionViewStyle seasonCollectionStyle);
+
+    CollectionViewStyle episodeCollectionStyle() const;
+    void setEpisodeCollectionStyle(CollectionViewStyle episodeCollectionStyle);
+
 
     static void declareSettingsQml();
 
 signals:
     void seriesCollectionStyleChanged();
+    void seriesCardTypeChanged();
+    void seasonCollectionStyleChanged();
+    void episodeCollectionStyleChanged();
 
 private:
-    SeriesCollectionStyle mSeriesCollectionStyle;
+    CollectionViewStyle mSeriesCollectionStyle;
+    CardType mSeriesCardType;
+    CollectionViewStyle mSeasonCollectionStyle;
+    CollectionViewStyle mEpisodeCollectionStyle;
     QSettings mSettings;
 };
 

@@ -22,6 +22,8 @@ ShadowBorderRectangleButton
         title:series.name
         imageSource:series.poster.small
         description:series.shortOverview
+        maximumDescriptionHeight: 115
+        width:parent.width-10
     }
 
     onPressedChanged:

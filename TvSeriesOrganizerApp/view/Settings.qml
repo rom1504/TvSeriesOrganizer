@@ -8,41 +8,42 @@ SimplePage
     id:imageViewer
     onBack:stackview.pop({immediate:true})
     imageSource:"qrc:/images/TvSeriesOrganizerHeader.png"
-    title:"Settings"
+    title:qsTr("Settings")
+
     Column
     {
-        Text
+        RadioChoice
         {
-            text:"Series collection style :"
-            font.pointSize: 18
+            name: qsTr("Series collection style")
+            currentValue: settings.seriesCollectionStyle
+            values:[{"name":qsTr("Series list"),"value":SettingsModel.ListView},{"name":qsTr("Series grid"),"value":SettingsModel.GridView}]
+            onValueChanged: settings.seriesCollectionStyle=currentValue
         }
 
-        GroupBox {
-            width:imageViewer.width-40
-            Column {
-                spacing:10
-                ExclusiveGroup { id: group }
-                RadioButton {
-                    text: qsTr("Series list")
-                    exclusiveGroup: group
-                    checked: settings.seriesCollectionStyle===SettingsModel.SeriesList
-                    style:RadioButtonStyle {
-                            label:Text {text:control.text;font.pointSize: 16}
-                    }
-                    onClicked: if(checked) settings.seriesCollectionStyle=SettingsModel.SeriesList
-                }
-                RadioButton {
-                    text: qsTr("Series grid")
-                    exclusiveGroup: group
-                    checked: settings.seriesCollectionStyle===SettingsModel.SeriesGrid
-                    style:RadioButtonStyle {
-                            label:Text {text:control.text;font.pointSize: 16}
-                    }
-                    onClicked: if(checked) settings.seriesCollectionStyle=SettingsModel.SeriesGrid
-                }
-            }
+        RadioChoice
+        {
+            id:radio2
+            name: qsTr("Series card type")
+            currentValue: settings.seriesCardType
+            values:[{"name":qsTr("Small Card"),"value":SettingsModel.SmallCard},{"name":qsTr("Large card"),"value":SettingsModel.LargeCard}]
+            onValueChanged: settings.seriesCardType=currentValue
+        }
+
+        RadioChoice
+        {
+            name: qsTr("Season collection style")
+            currentValue: settings.seasonCollectionStyle
+            values:[{"name":qsTr("Season list"),"value":SettingsModel.ListView},{"name":qsTr("Season grid"),"value":SettingsModel.GridView}]
+            onValueChanged: settings.seasonCollectionStyle=currentValue
+        }
+
+
+        RadioChoice
+        {
+            name: qsTr("Episode collection style")
+            currentValue: settings.episodeCollectionStyle
+            values:[{"name":qsTr("Episode list"),"value":SettingsModel.ListView},{"name":qsTr("Episode grid"),"value":SettingsModel.GridView}]
+            onValueChanged: settings.episodeCollectionStyle=currentValue
         }
     }
 }
-
-// list de settings (bool ou string ou ?)

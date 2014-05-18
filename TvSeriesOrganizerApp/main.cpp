@@ -23,19 +23,24 @@ int main(int argc, char *argv[])
     QGuiApplication::setApplicationVersion("1.2.0");
 
     QString datadir="";
+    QString size="";
+    bool maximize=false;
 
 #if !defined(Q_OS_ANDROID)
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
-    QCommandLineOption dataDirectoryOption(QStringList() << "data-dir",QGuiApplication::translate("main", "Directory where data are saved"),QGuiApplication::translate("main", "directory"));
-    parser.addOption(dataDirectoryOption);
+    parser.addOption(QCommandLineOption("data-dir",QGuiApplication::translate("main", "Directory where data are saved"),QGuiApplication::translate("main", "directory")));
+    parser.addOption(QCommandLineOption("size",QGuiApplication::translate("main", "Size of the application (default to 580x880)"),QGuiApplication::translate("main", "widthxheight"),"580x880"));
+    parser.addOption(QCommandLineOption("maximize",QGuiApplication::translate("main", "Maximize the window")));
     parser.process(app);
 
-    datadir = parser.value(dataDirectoryOption);
+    datadir=parser.value("data-dir");
+    size=parser.value("size");
+    maximize=parser.isSet("maximize");
 #endif
 
-    Controller c(datadir);
+    Controller c(datadir,size,maximize);
     c.run();
 
     return app.exec();
