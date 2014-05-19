@@ -11,7 +11,7 @@ dataDirPrefix=$3
 screenshotDirPrefix=$4
 
 sizes=( Smartphone Tablet )
-langs=( en fr_FR it )
+langs=( en fr_FR it ro_RO )
 disp=10
 parallel=0
 for siz in "${sizes[@]}"

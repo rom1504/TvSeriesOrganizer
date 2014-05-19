@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ro_RO">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ro_RO" version="2.1">
 <context>
     <name>Episode</name>
     <message>
@@ -76,11 +74,7 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s)</source>
-        <translation>
-            <numerusform>%n episod</numerusform>
-            <numerusform>%n episoade</numerusform>
-            <numerusform>%n de episoade</numerusform>
-        </translation>
+        <translation><numerusform>%n episod</numerusform><numerusform>%n episoade</numerusform><numerusform>%n de episoade</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="35"/>
@@ -100,11 +94,7 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="35"/>
         <source>%n episode(s) seen</source>
-        <translation>
-            <numerusform>%n episod văzut</numerusform>
-            <numerusform>%n episoade văzute</numerusform>
-            <numerusform>%n de episoade văzute</numerusform>
-        </translation>
+        <translation><numerusform>%n episod văzut</numerusform><numerusform>%n episoade văzute</numerusform><numerusform>%n de episoade văzute</numerusform></translation>
     </message>
     <message>
         <location filename="../view/Season.qml" line="50"/>
@@ -124,27 +114,15 @@
     <message numerus="yes">
         <location filename="../view/Season.qml" line="50"/>
         <source>%n episode(s) aired</source>
-        <translation>
-            <numerusform>%n episod lansat</numerusform>
-            <numerusform>%n episoade lansate</numerusform>
-            <numerusform>%n de episoade lansate</numerusform>
-        </translation>
+        <translation><numerusform>%n episod lansat</numerusform><numerusform>%n episoade lansate</numerusform><numerusform>%n de episoade lansate</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) seen</source>
-        <translation type="vanished">
-            <numerusform>episod văzut</numerusform>
-            <numerusform>episoade văzute</numerusform>
-            <numerusform>de episoade văzute</numerusform>
-        </translation>
+        <translation type="vanished"><numerusform>episod văzut</numerusform><numerusform>episoade văzute</numerusform><numerusform>de episoade văzute</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>episode(s) aired</source>
-        <translation type="vanished">
-            <numerusform>episod lansat</numerusform>
-            <numerusform>episoade lansate</numerusform>
-            <numerusform>de episoade lansate</numerusform>
-        </translation>
+        <translation type="vanished"><numerusform>episod lansat</numerusform><numerusform>episoade lansate</numerusform><numerusform>de episoade lansate</numerusform></translation>
     </message>
 </context>
 <context>
@@ -231,7 +209,7 @@
     <message>
         <location filename="../view/SeriesDetails.qml" line="154"/>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Foarte Înalt</translation>
     </message>
     <message>
         <source>Very low</source>
@@ -292,17 +270,17 @@
     <message>
         <location filename="../view/SeriesListPage.qml" line="132"/>
         <source>Series</source>
-        <translation type="unfinished">Serii</translation>
+        <translation>Serie</translation>
     </message>
     <message>
         <location filename="../view/SeriesListPage.qml" line="132"/>
         <source>Upcoming</source>
-        <translation type="unfinished">În curând</translation>
+        <translation>În curând</translation>
     </message>
     <message>
         <location filename="../view/SeriesListPage.qml" line="132"/>
         <source>Search</source>
-        <translation type="unfinished">Căutare</translation>
+        <translation>Căutare</translation>
     </message>
 </context>
 <context>
@@ -315,11 +293,7 @@
     <message numerus="yes">
         <location filename="../view/SeriesSearch.qml" line="19"/>
         <source>%n result(s)</source>
-        <translation>
-            <numerusform>%n rezultat</numerusform>
-            <numerusform>%n rezultate</numerusform>
-            <numerusform>%n de rezultate</numerusform>
-        </translation>
+        <translation><numerusform>%n rezultat</numerusform><numerusform>%n rezultate</numerusform><numerusform>%n de rezultate</numerusform></translation>
     </message>
     <message>
         <location filename="../view/SeriesSearch.qml" line="42"/>
@@ -351,67 +325,67 @@
     <message>
         <location filename="../view/Settings.qml" line="11"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurări</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="17"/>
         <source>Series collection style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil colecție serie</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="19"/>
         <source>Series list</source>
-        <translation type="unfinished"></translation>
+        <translation>Listă serie</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="19"/>
         <source>Series grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Grilă serie</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="26"/>
         <source>Series card type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tip card serie</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="28"/>
         <source>Small Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Card Mic</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="28"/>
         <source>Large card</source>
-        <translation type="unfinished"></translation>
+        <translation>Card Mare</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="34"/>
         <source>Season collection style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil colecție sezon</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="36"/>
         <source>Season list</source>
-        <translation type="unfinished"></translation>
+        <translation>Listă sezon</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="36"/>
         <source>Season grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Grilă sezon</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="43"/>
         <source>Episode collection style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil colecție episod</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="45"/>
         <source>Episode list</source>
-        <translation type="unfinished"></translation>
+        <translation>Listă Episod</translation>
     </message>
     <message>
         <location filename="../view/Settings.qml" line="45"/>
         <source>Episode grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Grilă episod</translation>
     </message>
 </context>
 <context>
@@ -429,17 +403,17 @@
     <message>
         <location filename="../main.cpp" line="34"/>
         <source>Size of the application (default to 580x880)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensiunea aplicației (implicit la 580x880)</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="34"/>
         <source>widthxheight</source>
-        <translation type="unfinished"></translation>
+        <translation>lățimeaxînălțimea</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="35"/>
         <source>Maximize the window</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximizare fereastră</translation>
     </message>
 </context>
 </TS>
