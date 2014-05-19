@@ -13,8 +13,9 @@ export LANGUAGE=$3
 binaryName="$1 --size 1640x930"
 windowName=TvSeriesOrganizer
 export DISPLAY=$2
-sleeptime=7
+sleeptime=5
 longSleepTime=7
+verylongsleeptime=11
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
 xvfb_pid=$!
 sleep $longSleepTime
@@ -129,7 +130,7 @@ sleep $sleeptime
 takeScreenshot Settings
 
 clickSmallCard
-sleep $sleeptime
+sleep $verylongsleeptime
 
 clickBack
 
