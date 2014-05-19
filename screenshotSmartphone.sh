@@ -1,22 +1,32 @@
 #!/bin/bash
 
-set -e
+if [[ $# -ne 4 ]]
+then
+		echo "usage : $0 <binary name> <display> <locale> <screenshot folder>" 
+		exit 1
+fi
 
-binaryName=TvSeriesOrganizerApp/TvSeriesOrganizer
+set -e
+# ./screenshot.sh TvSeriesOrganizerApp/TvSeriesOrganizer :10 en screenshot
+screenshot=$4
+export LANGUAGE=$3
+binaryName="$1 --size 580x880"
 windowName=TvSeriesOrganizer
-export DISPLAY=:10
+export DISPLAY=$2
 sleeptime=5
 longSleepTime=7
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
+xvfb_pid=$!
 sleep $longSleepTime
 $binaryName  &
+tso_pid=$!
 sleep $longSleepTime
 info=`xwininfo -display $DISPLAY -name $windowName`
 id=`echo "$info" | grep "Window id" | cut -f4 -d' '`
 x=`echo "$info" | grep "Absolute upper-left X" | cut -f7 -d' '`
 y=`echo "$info" | grep "Absolute upper-left Y" | cut -f7 -d' '`
 
-mkdir -p  screenshot/
+mkdir -p  $screenshot/
 
 function moveClick
 {
@@ -26,7 +36,7 @@ function moveClick
 
 function takeScreenshot
 {
-	import -window $id screenshot/$1.png
+	import -window $id $screenshot/$1.png
 }
 
 yTabBar=90
@@ -61,7 +71,7 @@ function addSeries
 		takeScreenshot SeriesSearch
 	fi
 	clickAdd
-	sleep 1
+	sleep $sleeptime
 }
 
 function moveClickTakeScreenshot
@@ -127,5 +137,5 @@ moveClick $tab1 $yTabBar
 moveClickTakeScreenshot 40 380 SeasonDetails
 moveClickTakeScreenshot 40 280 EpisodeDetails
 
-pkill Xvfb
-export DISPLAY=:0
+kill $tso_pid
+kill $xvfb_pid

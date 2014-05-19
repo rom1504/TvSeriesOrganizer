@@ -81,8 +81,9 @@ SimplePage
             {
                 if(newX>tabWidth*(count-1-(tabNumber-stayOn)) || (marker.x>tabWidth*(stayOn-1) && newX>tabWidth*(count-2-(tabNumber-stayOn))))
                 {
-                    //console.log("the last one")
-                    marker.x=newX-tabWidth*(count-1-(tabNumber-stayOn))+(count>=tabNumber ? tabWidth*(stayOn-1) : tabWidth)
+                    //console.log("the last ones")
+                    //console.log(count>tabNumber ? "more tabs than the bar" : "all tab in one bar")
+                    marker.x=newX-tabWidth*(count-1-(tabNumber-stayOn))+(count>tabNumber ? tabWidth*(stayOn-1) : tabWidth*(-tabNumber+count+stayOn-1))
                     //useful when jumping
                     tabList.contentX=count>tabNumber ? (tabWidth*(count-tabNumber)) : 0
                 }
