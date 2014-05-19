@@ -34,3 +34,6 @@ env:
 
 after_success:
   - if [[ $MY_SECRET_ENV != "" ]] ; then ./travis_after_success.sh  ; fi
+  
+notifications:
+  irc: "chat.freenode.net#TvSeriesOrganizer"
