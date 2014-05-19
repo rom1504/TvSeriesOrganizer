@@ -15,7 +15,6 @@ windowName=TvSeriesOrganizer
 export DISPLAY=$2
 sleeptime=5
 longSleepTime=7
-verylongsleeptime=11
 Xvfb $DISPLAY -screen 0 1920x1080x24  &
 xvfb_pid=$!
 sleep $longSleepTime
@@ -105,7 +104,7 @@ function clickSettings
 
 function clickSmallCard
 {
-	moveClick 100 300
+	moveClick 100 310
 }
 
 function sleepThenTakeScreenShot
@@ -130,7 +129,7 @@ sleep $sleeptime
 takeScreenshot Settings
 
 clickSmallCard
-sleep $verylongsleeptime
+sleep $sleeptime
 
 clickBack
 
