@@ -152,7 +152,7 @@ void SeriesList::completeAddSaveSeries(Series* series)
 
 void SeriesList::searchSeries(const QString &seriesName)
 {
-    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+QLocale().bcp47Name()+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName+"&language="+QLocale().bcp47Name()),[this](QString xmlContent){
+    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+Series::currentTheTvDBLanguage()+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName+"&language="+Series::currentTheTvDBLanguage()),[this](QString xmlContent){
         SignalList<Series*> * searchList=new SignalList<Series*>;
         QDomDocument doc;
         doc.setContent(xmlContent);

@@ -35,6 +35,10 @@ public:
     void addSeason(Season * season);
     SignalList<Season *> *seasons();
 
+
+    static bool isAThetvdbSupportedLanguages(QString language);
+    static QString currentTheTvDBLanguage();
+
     void complete();
 
     void setName(QString name);
@@ -117,6 +121,9 @@ private:
     SignalList<Image*> mPosters;
     QString mShortOverview;
     ActorList mActorList;
+
+private:
+    static QSet<QString> mTheTvDBSupportedLanguages;
 
 };
 Q_DECLARE_METATYPE (Series*)

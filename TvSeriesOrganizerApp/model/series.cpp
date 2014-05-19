@@ -10,6 +10,10 @@
 #include "controller/controller.h"
 #include "adapter/signallistfilter.h"
 
+// http://thetvdb.com/wiki/index.php/Multi_Language
+QSet<QString> Series::mTheTvDBSupportedLanguages={"en","sv","no","da","fi","nl","de","it","es","fr","pl","hu","el","tr","ru","he"
+                                                 ,"ja","pt","zh","cs","sl","hr","ko"};
+
 
 Series::Series(QObject *parent) : QObject(parent),mPoster(nullptr),mBanner(nullptr),mSeasons([](Season* a,Season* b){
     if(a->number()==0) return false;
@@ -41,6 +45,17 @@ Series::Series(const QDomElement & element, QObject*parent) : Series(parent)
         root = root.nextSiblingElement();
     }
     mPoster=new Image("posters/"+QString::number(mId)+"-1.jpg");
+}
+
+bool Series::isAThetvdbSupportedLanguages(QString language)
+{
+    return mTheTvDBSupportedLanguages.contains(language);
+}
+
+QString Series::currentTheTvDBLanguage()
+{
+    QString language=QLocale().bcp47Name();
+    return isAThetvdbSupportedLanguages(language) ? language : "en";
 }
 
 void Series::loadSeries(QString xmlFileContent)
@@ -107,7 +122,7 @@ int Series::id() const
 
 void Series::complete()
 {
-    loadLocallyOrRemotely(Controller::cachePath+"/"+QString::number(mId)+QLocale().bcp47Name()+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+QString::number(mId)+"/all/"+QLocale().bcp47Name()+".xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
+    loadLocallyOrRemotely(Controller::cachePath+"/"+QString::number(mId)+currentTheTvDBLanguage()+".xml",QUrl("http://thetvdb.com/api/CDD6BACEDE53AF9F/series/"+QString::number(mId)+"/all/"+currentTheTvDBLanguage()+".xml"),std::bind(&Series::loadSeries,this,std::placeholders::_1));
 }
 
 void Series::setName(QString name)
@@ -191,7 +206,7 @@ void Series::loadBanners(QString xmlFileContent)
                 else if(bannerElement.tagName()=="Language") language=bannerElement.text();
                 bannerElement=bannerElement.nextSiblingElement();
             }
-            if(language=="en" || language==QLocale().bcp47Name())
+            if(language=="en" || language==currentTheTvDBLanguage())
             {
                 if(bannerType=="poster")
                 {
