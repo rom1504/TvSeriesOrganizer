@@ -43,7 +43,7 @@ Series::Series(const QDomElement & element, QObject*parent) : Series(parent)
         else if(root.tagName()=="FirstAired") mFirstAired=QDate::fromString(root.text(),"yyyy-MM-dd");
         else if(root.tagName()=="Network") mNetwork=root.text();
         root = root.nextSiblingElement();
-    }
+    }//check here
     mPoster=new Image("posters/"+QString::number(mId)+"-1.jpg");
 }
 

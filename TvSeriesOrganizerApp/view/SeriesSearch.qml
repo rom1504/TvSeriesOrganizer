@@ -72,8 +72,8 @@ Column
             {
                 id:seriesItem
                 fixedSize: true
-                width:searchSeriesCollection.realCellWidth
-                height:searchSeriesCollection.realCellHeight
+                width:searchSeriesCollection.realCellWidth+10
+                height:searchSeriesCollection.realCellHeight+15
                 onClicked: if(addButton.enabled==true && isMouseIn(addButton,50)) addButton.clicked()
                 onPressedChanged:
                 {
