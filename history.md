@@ -1,3 +1,12 @@
+## 1.3.0
+ * fix actors order
+ * add settings pages with option to change the style of display of series, seasons, episodes
+ * more tab and several card side by side for bigger resolutions
+ * support tablet
+ * improve buttons look
+ * fix a bug when removing a series in upcoming
+ * add romanian translation thanks to ArianServ (https://www.transifex.com/accounts/profile/ArianServ/)
+
 ## 1.2.0
 
  * fix a bug on back button
