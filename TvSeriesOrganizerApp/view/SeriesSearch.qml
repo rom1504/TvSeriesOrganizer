@@ -71,7 +71,7 @@ Column
             ShadowBorderRectangleButton
             {
                 id:seriesItem
-
+                fixedSize: true
                 width:searchSeriesCollection.realCellWidth
                 height:searchSeriesCollection.realCellHeight
                 onClicked: if(addButton.enabled==true && isMouseIn(addButton,50)) addButton.clicked()
