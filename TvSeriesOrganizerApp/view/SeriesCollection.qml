@@ -47,6 +47,7 @@ CollectionView
            id:largeSeriesCard
            Series
            {
+               fixedSize:seriesCollection.viewType===SettingsModel.GridView
                id:a
                width:seriesCollection.viewCellWidth+(seriesCollection.viewType===SettingsModel.GridView ? 10 : 0)
                height:seriesCollection.viewType===SettingsModel.GridView ? seriesCollection.viewCellHeight+15 : defaultHeight

@@ -47,6 +47,7 @@ TabPage
 
                delegate:Episode
                {
+                   fixedSize:episodeCollection.viewType===SettingsModel.GridView
                    width:episodeCollection.viewCellWidth+(episodeCollection.viewType===SettingsModel.GridView ? 10 : 0)
                    height: episodeCollection.viewType===SettingsModel.GridView ? episodeCollection.viewCellHeight+15 : defaultHeight
                    onEpisodeClicked:seasonDetails.episodeClicked(index,episode,upcoming,season)

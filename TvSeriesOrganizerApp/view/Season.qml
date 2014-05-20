@@ -31,7 +31,7 @@ ShadowBorderRectangleButton
         width:parent.width
         id:content
         title:season.number===0 ? qsTr("Extras") : qsTr("Season")+" " + season.number
-        imageSource:season.poster.small
+        imageSource:season.poster!==null ? season.poster.small : ""
         description:qsTr("First aired")+":"+Qt.formatDateTime(season.firstAired, "yyyy-MM-dd")+"\n"+qsTr("%n episode(s)","",season.episodeCount)+"\n"+betterNumber(season.episodeSeenCount,season.episodeCount,qsTr("No episode seen"),qsTr("One episode seen"),qsTr("%n episode(s) seen","",season.episodeSeenCount),qsTr("All episodes seen"))
 
         Column

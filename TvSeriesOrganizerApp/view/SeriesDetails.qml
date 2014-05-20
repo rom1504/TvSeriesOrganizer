@@ -45,6 +45,7 @@ TabPage
 
                delegate:Season
                    {
+                       fixedSize:seasonCollection.viewType===SettingsModel.GridView
                        width:seasonCollection.viewCellWidth+(seasonCollection.viewType===SettingsModel.GridView ? 10 : 0)
                        height: seasonCollection.viewType===SettingsModel.GridView ? seasonCollection.viewCellHeight+15 : defaultHeight
                        onSeasonClicked: seriesDetails.seasonClicked(index,season,upcoming)
@@ -141,6 +142,7 @@ TabPage
             id:actorCollection
             delegate:ShadowBorderRectangle
             {
+                fixedSize:true
                 width:actorCollection.realCellWidth+10
                 height:actorCollection.realCellHeight+15
                 TitleImageDescriptionItem
