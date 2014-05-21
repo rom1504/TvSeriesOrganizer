@@ -1,8 +1,7 @@
-Package: TvSeriesOrganizer
+Package: tvseriesorganizer
 Version: 1.3.0
 Section: base
 Priority: optional
 Architecture: all
-Depends: 
 Maintainer: Romain Beaumont <romain.rom1@gmail.com>
 Description: Organize all your Tv Series with TvSeriesOrganizer
