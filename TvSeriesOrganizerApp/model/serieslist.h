@@ -5,6 +5,7 @@
 
 #include "series.h"
 #include "model/signallist.h"
+#include "API/thetvdbapi.h"
 
 class SeriesList : public QObject
 {
@@ -57,14 +58,13 @@ public slots:
     void updateAutocompleteModel(const QString &beginSeriesName);
 
 private:
-    QString mLastAutocompletion;
     QStringListModel * mAutocompleteModel;
     SignalList<Series*> mSeries;
     QString mSaveFileName;
     QSet<int> mIds;
     QString mGenre;
     SeriesList* mFilterBySeriesList;
-
+    TheTvDBAPI* mTheTvDBAPI;
 };
 Q_DECLARE_METATYPE (SeriesList*)
 

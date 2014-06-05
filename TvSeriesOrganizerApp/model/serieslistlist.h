@@ -4,17 +4,15 @@
 #include <QObject>
 #include <QAbstractItemModel>
 #include "model/serieslist.h"
-
-
 #include "model/signallist.h"
+#include "model/API/trakttvapi.h"
 
 class SeriesListList : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit SeriesListList(SeriesList * alreadyAddedSeriesList=nullptr,QObject *parent = 0);
-    void load(QString jsonFileContent="");
+    explicit SeriesListList(SeriesList* alreadyAddedSeriesList,QObject *parent = 0);
 
 signals:
 
@@ -23,8 +21,7 @@ public slots:
 
 private:
     SignalList<SeriesList*> mSeriesListList;
-    QMap<QString,SeriesList*> mSeriesListByGenre;
-    SeriesList * mAlreadyAddedSeriesList;
+    TraktTvAPI * mTraktTvAPI;
 };
 
 #endif // SERIESLISTLIST_H

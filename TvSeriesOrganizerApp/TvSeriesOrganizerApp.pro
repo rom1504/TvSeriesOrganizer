@@ -20,9 +20,11 @@ SOURCES += main.cpp \
     model/plugin.cpp \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp \
     model/actor.cpp \
-    model/actorlist.cpp \
     model/image.cpp \
-    model/settings.cpp
+    model/settings.cpp \
+    model/API/thetvdbapi.cpp \
+    model/API/trakttvapi.cpp \
+    model/diskcache.cpp
 
 # Installation path
 # target.path =
@@ -43,9 +45,11 @@ HEADERS += \
     model/plugin.h \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.h \
     model/actor.h \
-    model/actorlist.h \
     model/image.h \
-    model/settings.h
+    model/settings.h \
+    model/API/thetvdbapi.h \
+    model/API/trakttvapi.h \
+    model/diskcache.h
 
 
 QMAKE_CXXFLAGS += -std=c++11
@@ -56,9 +60,6 @@ RESOURCES += \
 
 
 OTHER_FILES += android/AndroidManifest.xml
-
-QT+= xml
-
 
 INCLUDEPATH += $$PWD/../GeneralQmlItems
 DEPENDPATH += $$PWD/../GeneralQmlItems

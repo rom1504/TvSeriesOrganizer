@@ -2,7 +2,6 @@
 #define ACTOR_H
 
 #include <QObject>
-#include <QDomElement>
 #include <QUrl>
 
 #include "model/image.h"
@@ -17,7 +16,6 @@ public:
     Q_PROPERTY(int sortOrder READ sortOrder NOTIFY sortOrderChanged)
 
     explicit Actor(int id,Image* image,QString name,QString role,int sortOrder,QObject *parent = 0);
-    explicit Actor(QDomElement element,QObject *parent = 0);
 
     QString role() const;
     int sortOrder() const;

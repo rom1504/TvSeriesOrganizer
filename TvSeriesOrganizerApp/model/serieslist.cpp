@@ -1,20 +1,17 @@
-#include <QDomDocument>
-#include <QDomElement>
-
 #include "serieslist.h"
 #include "adapter/signallistfilter.h"
 #include "controller/controller.h"
 
 
 SeriesList::SeriesList(SeriesList* filterBySeriesList,QObject *parent) :
-    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();}),mFilterBySeriesList(filterBySeriesList)
+    QObject(parent),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();}),mFilterBySeriesList(filterBySeriesList),mTheTvDBAPI(new TheTvDBAPI(Controller::cachePath,"http://thetvdb.com","CDD6BACEDE53AF9F",this))
 {
 }
 
 
 
 SeriesList::SeriesList(bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent) :
-    QObject(parent),mLastAutocompletion(""),mAutocompleteModel(new QStringListModel),mFilterBySeriesList(filterBySeriesList)
+    QObject(parent),mAutocompleteModel(new QStringListModel),mFilterBySeriesList(filterBySeriesList)
 {
 }
 
@@ -44,21 +41,10 @@ QAbstractItemModel * SeriesList::autocompleteModel()
 
 void SeriesList::updateAutocompleteModel(const QString &beginSeriesName)
 {
-    mLastAutocompletion=beginSeriesName;
-    QNetworkAccessManager *manager = new QNetworkAccessManager();
-    connect(manager, &QNetworkAccessManager::finished,[this,beginSeriesName](QNetworkReply* reply){
-        if(beginSeriesName!=mLastAutocompletion || beginSeriesName=="") return;
-        QString jsonContent=reply->readAll();
-        jsonContent=jsonContent.replace("results:","\"results\":").replace("id:","\"id\":").replace("value:","\"value\":").replace("info:","\"info\":").replace(",\n]","]");
-
-        QJsonDocument doc=QJsonDocument::fromJson(jsonContent.toUtf8());
-        QJsonArray results=doc.object()["results"].toArray();
-        QStringList * stringList=new QStringList;
-        for(QJsonValue result : results) stringList->append(result.toObject()["value"].toString());
-
+    mTheTvDBAPI->liveSearchSeries(beginSeriesName,[this](QStringList* stringList)
+    {
         mAutocompleteModel->setStringList(*stringList);
     });
-    manager->get(QNetworkRequest("http://thetvdb.com/livesearch.php?q="+beginSeriesName));
 }
 
 
@@ -146,28 +132,13 @@ void SeriesList::completeAddSaveSeries(Series* series)
             emit seriesAdded(index);
         }
     });
-    series->complete();
+    mTheTvDBAPI->loadSeries(series,[series](){series->loadSeriesSeenFile();},[series](){emit series->completed();});
 }
 
 
 void SeriesList::searchSeries(const QString &seriesName)
 {
-    Series::loadLocallyOrRemotely(Controller::cachePath+"/"+seriesName+Series::currentTheTvDBLanguage()+"_search.xml",QUrl("http://thetvdb.com/api/GetSeries.php?seriesname="+seriesName+"&language="+Series::currentTheTvDBLanguage()),[this](QString xmlContent){
-        SignalList<Series*> * searchList=new SignalList<Series*>;
-        QDomDocument doc;
-        doc.setContent(xmlContent);
-        QDomElement root = doc.documentElement();
-        root = root.firstChildElement();
-        QSet<int> ids;
-        while(!root.isNull())
-        {
-            int id=root.elementsByTagName("seriesid").at(0).toElement().text().toInt();
-            if(ids.contains(id)) {root = root.nextSiblingElement();continue;}
-            else ids<<id;
-            Series * series=new Series(root,this);
-            searchList->append(series);
-            root = root.nextSiblingElement();
-        }
+    mTheTvDBAPI->searchSeries(seriesName,[this](SignalList<Series*> * searchList){
         SignalListAdapter<Series*> * searchListModel=new SignalListAdapter<Series*>(searchList,"series");
         emit searchCompleted(searchListModel,searchList->size());
     });
@@ -189,6 +160,11 @@ void SeriesList::loadSeries(QString fileName)
     mSaveFileName=fileName;
     QFile file(fileName);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) return;
-    while (!file.atEnd()) addSeries(new Series(QString::fromUtf8(file.readLine()).trimmed().toInt(),this));
+    while (!file.atEnd())
+    {
+        Series * series=new Series(QString::fromUtf8(file.readLine()).trimmed().toInt(),this);
+        mTheTvDBAPI->loadSeries(series,[series](){series->loadSeriesSeenFile();},[series](){emit series->completed();});
+        addSeries(series);
+    }
     file.close();
 }

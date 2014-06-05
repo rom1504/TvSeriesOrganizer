@@ -2,11 +2,10 @@
 #define SERIE_H
 
 #include <QObject>
-#include <QDomElement>
 
 #include "season.h"
 #include "model/signallist.h"
-#include "model/actorlist.h"
+#include "model/actor.h"
 #include "model/image.h"
 
 class Series : public QObject
@@ -31,21 +30,20 @@ class Series : public QObject
 public:
     explicit Series(QObject *parent=0);
     explicit Series(int id, QObject *parent = 0);
-    explicit Series(const QDomElement & element, QObject*parent=0);
     void addSeason(Season * season);
     SignalList<Season *> *seasons();
-
-
-    static bool isAThetvdbSupportedLanguages(QString language);
-    static QString currentTheTvDBLanguage();
-
-    void complete();
 
     void setName(QString name);
     void setOverview(QString overview);
     void setPoster(Image* poster);
     void setId(int id);
     void setBanner(Image* banner);
+    void setFirstAired(QDate firstAired);
+    void setNetwork(QString network);
+
+    void addPoster(Image* poster);
+    void addFanArt(Image* fanArt);
+    void addActor(Actor* actor);
 
     QString name() const;
     Image* banner() const;
@@ -66,12 +64,14 @@ public:
     QString shortOverview() const;
 
     int id() const;
+    Season* findSeason(int seasonNumber);
 
 
 
     void setSeen(bool seen);
 
-    static void loadLocallyOrRemotely(QString localFileName, QUrl remoteUrl, std::function<void(QString)> load, int numberOfDaysBeforeDownloadingAgain=-1);
+
+    void loadSeriesSeenFile();
 
 
 private:
@@ -101,12 +101,7 @@ public slots:
     Season *getSeason(int row) const;
 
 private:
-    void loadSeriesSeenFile();
     void saveSeriesSeenFile();
-    void loadSeries(QString xmlFileContent);
-    void loadBanners(QString xmlFileContent);
-    void loadActors(QString xmlFileContent);
-    Season* findSeason(int seasonNumber);
 
 private:
     QString mName;
@@ -120,10 +115,7 @@ private:
     SignalList<Image*> mFanArts;
     SignalList<Image*> mPosters;
     QString mShortOverview;
-    ActorList mActorList;
-
-private:
-    static QSet<QString> mTheTvDBSupportedLanguages;
+    SignalList<Actor*> mActorList;
 
 };
 Q_DECLARE_METATYPE (Series*)
