@@ -64,7 +64,7 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
     DiskCache::loadLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_banners.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/banners.xml"),[this,series,loaded](QString content){
         QXmlStreamReader xml(content);
         QSet<QString> bannerWantedFields={"BannerType","BannerType2","BannerPath","ThumbnailPath","Season","Language"};
-        series->setPoster(nullptr);
+        bool seriesPosterAlreadySet=false;
         while(!xml.atEnd())
         {
             xml.readNext();
@@ -79,7 +79,11 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
                 if(bannerType=="poster")
                 {
                     Image * poster=new Image(bannerPath);
-                    if(series->poster()==nullptr) series->setPoster(poster);
+                    if(!seriesPosterAlreadySet)
+                    {
+                        seriesPosterAlreadySet=true;
+                        series->setPoster(poster);
+                    }
                     series->addPoster(poster);
                 }
                 else if(bannerType=="season")
