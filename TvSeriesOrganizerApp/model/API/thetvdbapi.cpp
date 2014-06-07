@@ -18,9 +18,9 @@ void TheTvDBAPI::loadSeries(int id,QObject * parent,std::function<void(void)> al
 
 void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoaded,std::function<void(void)> loaded)
 {
-    DiskCache::loadLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+currentTheTvDBLanguage()+".xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/all/"+currentTheTvDBLanguage()+".xml"),[series,this,loaded,almostLoaded](QString content)
+    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+currentTheTvDBLanguage()+".xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/all/"+currentTheTvDBLanguage()+".xml"),[series,this,loaded,almostLoaded](QIODevice* device)
     {
-        QXmlStreamReader xml(content);
+        QXmlStreamReader xml(device);
         QSet<QString> seriesWantedFields={"banner","SeriesName","Overview","FirstAired","Network"};
         QSet<QString> episodeWantedFields={"Combined_season","EpisodeNumber","EpisodeName","Overview","filename","FirstAired"};
         Season * currentSeason=nullptr;
@@ -53,6 +53,7 @@ void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoade
                 currentSeason->addEpisode(new Episode(fields->value("EpisodeNumber").toInt(),fields->value("EpisodeName"),fields->value("Overview"),episodeBanner=="" ? currentSeason->banner() : new Image(episodeBanner),QDate::fromString(fields->value("FirstAired"),"yyyy-MM-dd"),currentSeason));
             }
         }
+        device->close();
         almostLoaded();
         loadBanners(series,loaded);
     });
@@ -61,8 +62,8 @@ void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoade
 
 void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
 {
-    DiskCache::loadLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_banners.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/banners.xml"),[this,series,loaded](QString content){
-        QXmlStreamReader xml(content);
+    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_banners.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/banners.xml"),[this,series,loaded](QIODevice* device){
+        QXmlStreamReader xml(device);
         QSet<QString> bannerWantedFields={"BannerType","BannerType2","BannerPath","ThumbnailPath","Season","Language"};
         bool seriesPosterAlreadySet=false;
         while(!xml.atEnd())
@@ -98,6 +99,7 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
                 else if(bannerType=="fanart") series->addFanArt(new Image(QUrl(mServer+"/banners/"+fields->value("ThumbnailPath")),mServer+"/banners/"+bannerPath));
             }
         }
+        device->close();
         loadActors(series,loaded);
     });
 }
@@ -116,9 +118,9 @@ QMap<QString,QString>* TheTvDBAPI::getFields(QXmlStreamReader & xml,QString cont
 
 void TheTvDBAPI::loadActors(Series * series,std::function<void(void)> loaded)
 {
-    DiskCache::loadLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_actors.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/actors.xml"),[this,series,loaded](QString content)
+    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_actors.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/actors.xml"),[this,series,loaded](QIODevice* device)
     {
-        QXmlStreamReader xml(content);
+        QXmlStreamReader xml(device);
         QSet<QString> actorWantedFields={"id","Image","Name","Role","SortOrder"};
         while(!xml.atEnd())
         {
@@ -126,15 +128,16 @@ void TheTvDBAPI::loadActors(Series * series,std::function<void(void)> loaded)
             QMap<QString,QString>* fields=getFields(xml,"Actor",actorWantedFields);
             if(fields!=nullptr) series->addActor(new Actor(fields->value("id").toInt(),new Image(fields->value("Image")),fields->value("Name"),fields->value("Role"),fields->value("SortOrder").toInt()));
         }
+        device->close();
         loaded();
     });
 }
 
 void TheTvDBAPI::searchSeries(QString seriesName, std::function<void(SignalList<Series *> *)> callback)
 {
-    DiskCache::loadLocallyOrRemotely(mCachePath+"/"+seriesName+currentTheTvDBLanguage()+"_search.xml",QUrl(mServer+"/api/GetSeries.php?seriesname="+seriesName+"&language="+currentTheTvDBLanguage()),[this,seriesName,callback](QString content)
+    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+seriesName+currentTheTvDBLanguage()+"_search.xml",QUrl(mServer+"/api/GetSeries.php?seriesname="+seriesName+"&language="+currentTheTvDBLanguage()),[this,seriesName,callback](QIODevice* device)
     {
-        QXmlStreamReader xml(content);
+        QXmlStreamReader xml(device);
         SignalList<Series*> * searchList=new SignalList<Series*>;
         QSet<int> ids;
         QSet<QString> searchSeriesWantedFields={"banner","id","SeriesName","Overview","FirstAired","Network"};
@@ -158,6 +161,7 @@ void TheTvDBAPI::searchSeries(QString seriesName, std::function<void(SignalList<
                 searchList->append(series);
             }
         }
+        device->close();
         callback(searchList);
     });
 }
