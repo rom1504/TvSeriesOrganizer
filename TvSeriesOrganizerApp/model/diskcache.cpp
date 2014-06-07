@@ -7,6 +7,7 @@
 
 #include "diskcache.h"
 
+// might be broken (seem to give the device too early when loading from the network)
 void DiskCache::streamLocallyOrRemotely(QString localFileName, QUrl remoteUrl, std::function<void(QIODevice*)> stream, int numberOfDaysBeforeDownloadingAgain)
 {
     QFile * xmlFile=new QFile(localFileName);
