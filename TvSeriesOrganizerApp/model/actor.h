@@ -15,7 +15,7 @@ public:
     Q_PROPERTY(QString role READ role NOTIFY roleChanged)
     Q_PROPERTY(int sortOrder READ sortOrder NOTIFY sortOrderChanged)
 
-    explicit Actor(int id,Image* image,QString name,QString role,int sortOrder,QObject *parent = 0);
+    explicit Actor(int id,Image* image,QString name,QString role,int sortOrder,QObject *parent);
 
     QString role() const;
     int sortOrder() const;

@@ -23,6 +23,7 @@ bool SeriesList::added(int id) const
 
 int SeriesList::addSeries(Series * series)
 {
+    Q_ASSERT(series!=nullptr);
     int id=series->id();
     if(mIds.contains(id)) return -1;
     mIds<<id;
@@ -62,7 +63,9 @@ void SeriesList::setGenre(QString genre)
 
 Series * SeriesList::getSeries(int row) const
 {
-    return mSeries.get(row);
+    Series * series=mSeries.get(row);
+    Q_ASSERT(series!=nullptr);
+    return series;
 }
 
 

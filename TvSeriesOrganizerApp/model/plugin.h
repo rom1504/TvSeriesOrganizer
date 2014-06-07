@@ -12,7 +12,7 @@ class Plugin : public QObject
     Q_PROPERTY(QString buttonName READ buttonName NOTIFY buttonNameChanged)
 
 public:
-    explicit Plugin(AbstractPlugin * realPlugin,QObject *parent = 0);
+    explicit Plugin(AbstractPlugin * realPlugin,QObject *parent);
     QString buttonName() const;
 
 signals:

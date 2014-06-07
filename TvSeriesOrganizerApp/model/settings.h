@@ -27,7 +27,7 @@ public:
         LargeCard
     };
 
-    explicit Settings(QObject *parent = 0);
+    explicit Settings(QObject *parent=0);
 
     CollectionViewStyle seriesCollectionStyle() const;
     void setSeriesCollectionStyle(CollectionViewStyle seriesCollectionStyle);

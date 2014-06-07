@@ -30,7 +30,7 @@ class Season : public QObject
     Q_PROPERTY(QAbstractItemModel * seasonUpcomingModel READ seasonUpcomingModel NOTIFY seasonUpcomingModelChanged)
 
 public:
-    explicit Season(int number,Image* banner,Image* poster,Series *parent = 0);
+    explicit Season(int number,Image* banner,Image* poster,Series *parent);
     void addEpisode(Episode * episode);
     int number() const;
     Image* banner() const;

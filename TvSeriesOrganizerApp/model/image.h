@@ -11,8 +11,8 @@ class Image : public QObject
     Q_PROPERTY(QUrl big READ big NOTIFY bigChanged)
 
 public:
-    explicit Image(QUrl small,QUrl big,QObject *parent = 0);
-    explicit Image(QString thetvdbFileName,QObject *parent = 0);
+    explicit Image(QUrl small,QUrl big,QObject *parent);
+    explicit Image(QString thetvdbFileName,QObject *parent);
 
     QUrl small() const;
     QUrl big() const;

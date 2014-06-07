@@ -31,7 +31,7 @@ void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoade
             {
                 QMap<QString,QString>* fields=getFields(xml,"Series",seriesWantedFields);
                 if(fields==nullptr) continue;
-                series->setBanner(new Image(fields->value("banner")));
+                series->setBanner(new Image(fields->value("banner"),series));
                 series->setName(fields->value("SeriesName"));
                 series->setOverview(fields->value("Overview"));
                 series->setFirstAired(QDate::fromString(fields->value("FirstAired"),"yyyy-MM-dd"));
@@ -50,7 +50,7 @@ void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoade
                     currentSeason=new Season(seasonNumber.toInt(),series->banner(),nullptr,series);
                     series->addSeason(currentSeason);
                 }
-                currentSeason->addEpisode(new Episode(fields->value("EpisodeNumber").toInt(),fields->value("EpisodeName"),fields->value("Overview"),episodeBanner=="" ? currentSeason->banner() : new Image(episodeBanner),QDate::fromString(fields->value("FirstAired"),"yyyy-MM-dd"),currentSeason));
+                currentSeason->addEpisode(new Episode(fields->value("EpisodeNumber").toInt(),fields->value("EpisodeName"),fields->value("Overview"),episodeBanner=="" ? currentSeason->banner() : new Image(episodeBanner,series),QDate::fromString(fields->value("FirstAired"),"yyyy-MM-dd"),currentSeason));
             }
         }
         almostLoaded();
@@ -78,7 +78,7 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
             {
                 if(bannerType=="poster")
                 {
-                    Image * poster=new Image(bannerPath);
+                    Image * poster=new Image(bannerPath,series);
                     if(!seriesPosterAlreadySet)
                     {
                         seriesPosterAlreadySet=true;
@@ -91,11 +91,11 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
                     Season * season=series->findSeason(fields->value("Season").toInt());
                     if(season!=nullptr)
                     {
-                        if(bannerType2=="seasonwide") season->setBanner(new Image(bannerPath));
-                        else if(bannerType2=="season") season->setPoster(new Image(bannerPath));
+                        if(bannerType2=="seasonwide") season->setBanner(new Image(bannerPath,series));
+                        else if(bannerType2=="season") season->setPoster(new Image(bannerPath,series));
                     }
                 }
-                else if(bannerType=="fanart") series->addFanArt(new Image(QUrl(mServer+"/banners/"+fields->value("ThumbnailPath")),mServer+"/banners/"+bannerPath));
+                else if(bannerType=="fanart") series->addFanArt(new Image(QUrl(mServer+"/banners/"+fields->value("ThumbnailPath")),mServer+"/banners/"+bannerPath,series));
             }
         }
         loadActors(series,loaded);
@@ -124,7 +124,7 @@ void TheTvDBAPI::loadActors(Series * series,std::function<void(void)> loaded)
         {
             xml.readNext();
             QMap<QString,QString>* fields=getFields(xml,"Actor",actorWantedFields);
-            if(fields!=nullptr) series->addActor(new Actor(fields->value("id").toInt(),new Image(fields->value("Image")),fields->value("Name"),fields->value("Role"),fields->value("SortOrder").toInt()));
+            if(fields!=nullptr) series->addActor(new Actor(fields->value("id").toInt(),new Image(fields->value("Image"),series),fields->value("Name"),fields->value("Role"),fields->value("SortOrder").toInt(),series));
         }
         loaded();
     });
@@ -141,20 +141,20 @@ void TheTvDBAPI::searchSeries(QString seriesName, std::function<void(SignalList<
         while(!xml.atEnd())
         {
             xml.readNext();
-            Series * series=new Series();
+            Series * series=new Series(this);
             QMap<QString,QString>* fields=getFields(xml,"Series",searchSeriesWantedFields);
             if(fields!=nullptr)
             {
                 int id=fields->value("id").toInt();
                 if(ids.contains(id)) continue;
                 else ids<<id;
-                series->setBanner(new Image(fields->value("banner")));
+                series->setBanner(new Image(fields->value("banner"),series));
                 series->setId(fields->value("id").toInt());
                 series->setName(fields->value("SeriesName"));
                 series->setOverview(fields->value("Overview"));
                 series->setFirstAired(QDate::fromString(fields->value("FirstAired"),"yyyy-MM-dd"));
                 series->setNetwork(fields->value("Network"));
-                series->setPoster(new Image("posters/"+QString::number(series->id())+"-1.jpg"));
+                series->setPoster(new Image("posters/"+QString::number(series->id())+"-1.jpg",series));
                 searchList->append(series);
             }
         }

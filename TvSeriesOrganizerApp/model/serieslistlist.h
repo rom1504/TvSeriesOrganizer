@@ -12,7 +12,7 @@ class SeriesListList : public QObject
     Q_OBJECT
 
 public:
-    explicit SeriesListList(SeriesList* alreadyAddedSeriesList,QObject *parent = 0);
+    explicit SeriesListList(SeriesList* alreadyAddedSeriesList,QObject *parent);
 
 signals:
 

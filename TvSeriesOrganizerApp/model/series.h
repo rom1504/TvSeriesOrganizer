@@ -28,8 +28,8 @@ class Series : public QObject
     Q_PROPERTY(QAbstractItemModel * actorListModel READ actorListModel NOTIFY actorListModelChanged)
 
 public:
-    explicit Series(QObject *parent=0);
-    explicit Series(int id, QObject *parent = 0);
+    explicit Series(QObject *parent);
+    explicit Series(int id, QObject *parent);
     void addSeason(Season * season);
     SignalList<Season *> *seasons();
 

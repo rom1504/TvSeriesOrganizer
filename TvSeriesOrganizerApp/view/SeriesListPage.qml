@@ -63,7 +63,11 @@ TabPage
                  {
                      currentBannerIndex++;
                      if(currentBannerIndex>=seriesList.seriesCount) currentBannerIndex=0;
-                     newImageSource=seriesList.getSeries(currentBannerIndex).banner.small;
+                     var tseries=seriesList.getSeries(currentBannerIndex)
+                     console.assert(tseries!==null, "Series object must not be null");
+                     var tbanner=tseries.banner
+                     console.assert(tbanner!==null, "Banner object must not be null");
+                     newImageSource=tbanner.small
                  }
          }
     }

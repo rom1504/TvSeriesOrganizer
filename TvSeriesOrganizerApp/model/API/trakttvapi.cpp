@@ -11,7 +11,7 @@ void TraktTvAPI::loadSeriesListList(SignalList<SeriesList *> * seriesListList, s
 {
     DiskCache::loadLocallyOrRemotely(mCachePath+"/trendingSeriesList.json",QUrl(mServer+"/shows/trending.json/"+mAPIKey),[seriesListList,this,callback](QString jsonFileContent)
     {
-        SeriesList *seriesListTrending=new SeriesList(true,mAlreadyAddedSeriesList);
+        SeriesList *seriesListTrending=new SeriesList(true,mAlreadyAddedSeriesList,this);
         seriesListTrending->setGenre(tr("Trending"));
         QMap<QString,SeriesList*> seriesListByGenre;
         seriesListByGenre[tr("Trending")]=seriesListTrending;
@@ -21,12 +21,12 @@ void TraktTvAPI::loadSeriesListList(SignalList<SeriesList *> * seriesListList, s
         for(QJsonValue seriesv : seriesList)
         {
             QJsonObject jseries=seriesv.toObject();
-            Series * series=new Series();
+            Series * series=new Series(this);
             series->setId(jseries["tvdb_id"].toString().toInt());
             QString poster=jseries["poster"].toString();
             QString bigPoster=poster;
             poster=poster.section(".",0,-2)+"-138."+poster.section(".",-1);
-            series->setPoster(new Image(QUrl(poster),QUrl(bigPoster)));
+            series->setPoster(new Image(QUrl(poster),QUrl(bigPoster),series));
             series->setName(jseries["title"].toString());
             QJsonArray genreArray=jseries["genres"].toArray();
             for(QJsonValue genrev : genreArray)
@@ -38,7 +38,7 @@ void TraktTvAPI::loadSeriesListList(SignalList<SeriesList *> * seriesListList, s
                     if(seriesListByGenre.contains(genre)) seriesList=seriesListByGenre[genre];
                     else
                     {
-                        seriesList=new SeriesList(true,mAlreadyAddedSeriesList);
+                        seriesList=new SeriesList(true,mAlreadyAddedSeriesList,this);
                         seriesList->setGenre(genre);
                         seriesListByGenre[genre]=seriesList;
                         seriesListList->append(seriesList);

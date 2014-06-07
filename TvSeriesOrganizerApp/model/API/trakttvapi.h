@@ -9,7 +9,8 @@ class TraktTvAPI : public QObject
 {
     Q_OBJECT
 public:
-    explicit TraktTvAPI(QString cachePath, SeriesList *alreadyAddedSeriesList, QString server="http://api.trakt.tv", QString APIKey="f9201fd7c6183a624a27ccba01555310", QObject *parent = 0);
+    // server="http://api.trakt.tv", APIKey="f9201fd7c6183a624a27ccba01555310" can be used
+    explicit TraktTvAPI(QString cachePath, SeriesList *alreadyAddedSeriesList, QString server, QString APIKey, QObject *parent);
 
     void loadSeriesListList(SignalList<SeriesList*>* seriesListList,std::function<void(void)> callback=[](){});
 

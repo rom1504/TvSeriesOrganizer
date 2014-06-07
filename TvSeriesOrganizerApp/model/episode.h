@@ -21,7 +21,7 @@ class Episode : public QObject
     Q_PROPERTY(bool aired READ aired NOTIFY airedChanged)
 
 public:
-    explicit Episode(int number, const QString & name, const QString& overview, Image* banner,QDate firstAired, Season *parent = 0);
+    explicit Episode(int number, const QString & name, const QString& overview, Image* banner,QDate firstAired, Season *parent);
     int number() const;
     QString name() const;
     QString overview() const;

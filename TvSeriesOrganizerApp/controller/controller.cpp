@@ -70,7 +70,7 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
         if(plugin)
         {
             AbstractPlugin * plug = qobject_cast<AbstractPlugin *>(plugin);
-            Plugin * plug2=new Plugin(plug);
+            Plugin * plug2=new Plugin(plug,this);
             pluginList->append(plug2);
         }
     }
@@ -78,17 +78,17 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
     ctxt->setContextProperty("noPlugin",pluginList->size()==0);
     ctxt->setContextProperty("pluginModel",new SignalListAdapter<Plugin*>(pluginList,"plugin"));
 
-    mSeriesList=new SeriesList;
+    mSeriesList=new SeriesList(nullptr,this);
     mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
 
     ctxt->setContextProperty("seriesList", mSeriesList);
 
-    SeriesListList * seriesListList=new SeriesListList(mSeriesList);
+    SeriesListList * seriesListList=new SeriesListList(mSeriesList,this);
 
     ctxt->setContextProperty("seriesListList", seriesListList);
 
     Settings::declareSettingsQml();
-    Settings * settings=new Settings();
+    Settings * settings=new Settings(this);
 
     ctxt->setContextProperty("settings", settings);
 
