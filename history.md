@@ -1,3 +1,6 @@
+## 1.4.0
+ * automatically update series data from thetvdb when it changes
+
 ## 1.3.0
  * fix actors order
  * add settings pages with option to change the style of display of series, seasons, episodes
