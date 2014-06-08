@@ -1,17 +1,17 @@
 #include "trakttvapi.h"
 #include "model/diskcache.h"
 
-TraktTvAPI::TraktTvAPI(QString cachePath, SeriesList* alreadyAddedSeriesList, QString server, QString APIKey, QObject *parent) :
-    QObject(parent),mCachePath(cachePath),mServer(server),mAPIKey(APIKey),mAlreadyAddedSeriesList(alreadyAddedSeriesList)
+TraktTvAPI::TraktTvAPI(QString cachePath, SeriesList* alreadyAddedSeriesList, QString server, QString APIKey, TheTvDBAPI * theTVDBAPI, DiskCache * diskCache, QObject *parent) :
+    QObject(parent),mCachePath(cachePath),mServer(server),mAPIKey(APIKey),mAlreadyAddedSeriesList(alreadyAddedSeriesList),mDiskCache(diskCache),mTheTVDBAPI(theTVDBAPI)
 {
 }
 
 
 void TraktTvAPI::loadSeriesListList(SignalList<SeriesList *> * seriesListList, std::function<void(void)> callback)
 {
-    DiskCache::loadLocallyOrRemotely(mCachePath+"/trendingSeriesList.json",QUrl(mServer+"/shows/trending.json/"+mAPIKey),[seriesListList,this,callback](QString jsonFileContent)
+    mDiskCache->loadLocallyOrRemotely(mCachePath+"/trendingSeriesList.json",QUrl(mServer+"/shows/trending.json/"+mAPIKey),[seriesListList,this,callback](QString jsonFileContent)
     {
-        SeriesList *seriesListTrending=new SeriesList(true,mAlreadyAddedSeriesList,this);
+        SeriesList *seriesListTrending=new SeriesList(mTheTVDBAPI,true,mAlreadyAddedSeriesList,this);
         seriesListTrending->setGenre(tr("Trending"));
         QMap<QString,SeriesList*> seriesListByGenre;
         seriesListByGenre[tr("Trending")]=seriesListTrending;
@@ -38,7 +38,7 @@ void TraktTvAPI::loadSeriesListList(SignalList<SeriesList *> * seriesListList, s
                     if(seriesListByGenre.contains(genre)) seriesList=seriesListByGenre[genre];
                     else
                     {
-                        seriesList=new SeriesList(true,mAlreadyAddedSeriesList,this);
+                        seriesList=new SeriesList(mTheTVDBAPI,true,mAlreadyAddedSeriesList,this);
                         seriesList->setGenre(genre);
                         seriesListByGenre[genre]=seriesList;
                         seriesListList->append(seriesList);

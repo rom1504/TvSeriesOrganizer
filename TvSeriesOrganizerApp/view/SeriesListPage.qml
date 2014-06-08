@@ -12,7 +12,11 @@ TabPage
     title:"Tv Series Organizer"
 
     onBack:stackview.depth===1 ? Qt.quit() : stackview.pop({immediate:true})
-    Component.onCompleted:if(seriesList.seriesCount>0) imageSource=seriesList.getSeries(0).banner.small
+    Component.onCompleted:if(seriesList.seriesCount>0)
+                          {
+                              var tbanner=seriesList.getSeries(0).banner
+                              if(tbanner!==null) imageSource=tbanner.small
+                          }
 
     inImage:
     Row

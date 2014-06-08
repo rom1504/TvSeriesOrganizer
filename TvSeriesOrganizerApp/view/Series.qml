@@ -20,7 +20,7 @@ ShadowBorderRectangleButton
     {
         id:content
         title:series.name
-        imageSource:series.poster.small
+        imageSource:series.poster===null ? "" : series.poster.small
         description:series.shortOverview
         maximumDescriptionHeight: 115
         width:parent.width-10

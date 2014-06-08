@@ -5,11 +5,110 @@
 QSet<QString> TheTvDBAPI::mTheTvDBSupportedLanguages={"en","sv","no","da","fi","nl","de","it","es","fr","pl","hu","el","tr","ru","he"
                                                  ,"ja","pt","zh","cs","sl","hr","ko"};
 
-TheTvDBAPI::TheTvDBAPI(QString cachePath, QString server, QString APIKey, QObject *parent) :
-    QObject(parent),mServer(server),mCachePath(cachePath),mAPIKey(APIKey),mLastAutocompletion("")
+TheTvDBAPI::TheTvDBAPI(QString cachePath, QString server, QString APIKey,QNetworkAccessManager * networkAccessManager, DiskCache * diskCache, QObject *parent) :
+    QObject(parent),mServer(server),mCachePath(cachePath),mAPIKey(APIKey),mLastAutocompletion(""),mNetworkAccessManager(networkAccessManager),mDiskCache(diskCache)
 {
 
 }
+
+
+void TheTvDBAPI::updateCache(std::function<void(void)> finishedUpdating)
+{
+    QString updatePeriod=getUpdatePeriod();
+    writeLastTimeOfUpdate();
+    eraseUnvalidatedCacheFiles(updatePeriod,finishedUpdating);
+}
+
+void TheTvDBAPI::writeLastTimeOfUpdate()
+{
+    QFile file(mCachePath+"/timeOfLastUpdate.txt");
+    qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        qDebug()<<"Can't open timeOfLastUpdate.txt";
+        return;
+    }
+    QTextStream out(&file);
+    out<<currentTime;
+    file.close();
+}
+
+void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<void(void)> finishedUpdating)
+{
+    if(updatePeriod=="nothing") finishedUpdating();
+    else if(updatePeriod=="all")
+    {
+        QDir data7(mCachePath+"/data7");
+        QDir prepared(mCachePath+"/prepared");
+        data7.removeRecursively();
+        prepared.removeRecursively();
+        QDir path(mCachePath);
+        QStringList filter;
+        filter<<"*.xml";
+        for(QString entry : path.entryList(filter,QDir::Files)) path.remove(entry);
+    }
+    else
+    {
+       QNetworkReply* reply=mNetworkAccessManager->get(QNetworkRequest(mServer+"/api/"+mAPIKey+"/updates/updates_"+updatePeriod+".xml"));
+       connect(reply, &QNetworkReply::finished,[this,reply,finishedUpdating](){
+            QString content=reply->readAll();
+            // not reading the Episode fields: I only need to know a series has been updated
+            // Banner fields : get the url and invalidate it in the cache
+            // if series updated : actor and banner files deleted too
+            QDir path(mCachePath);
+            QNetworkDiskCache * cache=new QNetworkDiskCache(this);
+            cache->setCacheDirectory(mCachePath);
+            QXmlStreamReader xml(content);
+            while(!xml.atEnd())
+            {
+                xml.readNext();
+                if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Series")
+                {
+                    QString seriesId=getField(xml,"Series","id");
+                    path.remove(seriesId+currentTheTvDBLanguage()+".xml");
+                    path.remove(seriesId+"_actors.xml");
+                    path.remove(seriesId+"_banners.xml");
+                }
+                else if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Banner")
+                {
+                    QString path=getField(xml,"Banner","path");
+                    cache->remove(mServer+"/banners/_cache/"+path);
+                    cache->remove(mServer+"/banners/"+path);
+                }
+                else if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Episode")
+                {
+                    while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="Episode")) xml.readNext();
+                }
+            }
+            delete cache;
+            finishedUpdating();
+        });
+    }
+}
+
+QString TheTvDBAPI::getUpdatePeriod()
+{
+    QFile file(mCachePath+"/timeOfLastUpdate.txt");
+    QString updatePeriod="";
+    if(!file.open(QIODevice::ReadOnly)) updatePeriod="all";
+    else
+    {
+        QString content=file.readAll();
+        qint64 timeOfLastUpdate=content.toULongLong();
+        qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
+        qint64 difference=currentTime-timeOfLastUpdate;
+        qint64 day=Q_INT64_C(24*3600*1000);
+        qint64 week=day*7;
+        qint64 month=week*4;
+        if(difference<day/2) updatePeriod="nothing";
+        else if(difference<day) updatePeriod="day";
+        else if(difference<week) updatePeriod="week";
+        else if(difference<month) updatePeriod="month";
+        else updatePeriod="all";
+    }
+    return updatePeriod;
+}
+
 
 void TheTvDBAPI::loadSeries(int id,QObject * parent,std::function<void(void)> almostLoaded,std::function<void(void)> loaded)
 {
@@ -18,7 +117,7 @@ void TheTvDBAPI::loadSeries(int id,QObject * parent,std::function<void(void)> al
 
 void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoaded,std::function<void(void)> loaded)
 {
-    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+currentTheTvDBLanguage()+".xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/all/"+currentTheTvDBLanguage()+".xml"),[series,this,loaded,almostLoaded](QIODevice* device)
+    mDiskCache->streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+currentTheTvDBLanguage()+".xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/all/"+currentTheTvDBLanguage()+".xml"),[series,this,loaded,almostLoaded](QIODevice* device)
     {
         QXmlStreamReader xml(device);
         QSet<QString> seriesWantedFields={"banner","SeriesName","Overview","FirstAired","Network"};
@@ -62,7 +161,7 @@ void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoade
 
 void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
 {
-    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_banners.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/banners.xml"),[this,series,loaded](QIODevice* device){
+    mDiskCache->streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_banners.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/banners.xml"),[this,series,loaded](QIODevice* device){
         QXmlStreamReader xml(device);
         QSet<QString> bannerWantedFields={"BannerType","BannerType2","BannerPath","ThumbnailPath","Season","Language"};
         bool seriesPosterAlreadySet=false;
@@ -104,6 +203,16 @@ void TheTvDBAPI::loadBanners(Series * series,std::function<void(void)> loaded)
     });
 }
 
+QString TheTvDBAPI::getField(QXmlStreamReader & xml,QString containerElementName,QString field)
+{
+    QSet<QString> fields;
+    fields<<field;
+    QMap<QString,QString>* gFields=getFields(xml,containerElementName,fields);
+    if(gFields==nullptr) return "";
+    return gFields->value(field);
+}
+
+
 QMap<QString,QString>* TheTvDBAPI::getFields(QXmlStreamReader & xml,QString containerElementName,QSet<QString>& wantedFields)
 {
     if(!(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()==containerElementName)) return nullptr;
@@ -118,7 +227,7 @@ QMap<QString,QString>* TheTvDBAPI::getFields(QXmlStreamReader & xml,QString cont
 
 void TheTvDBAPI::loadActors(Series * series,std::function<void(void)> loaded)
 {
-    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_actors.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/actors.xml"),[this,series,loaded](QIODevice* device)
+    mDiskCache->streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+"_actors.xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/actors.xml"),[this,series,loaded](QIODevice* device)
     {
         QXmlStreamReader xml(device);
         QSet<QString> actorWantedFields={"id","Image","Name","Role","SortOrder"};
@@ -135,7 +244,7 @@ void TheTvDBAPI::loadActors(Series * series,std::function<void(void)> loaded)
 
 void TheTvDBAPI::searchSeries(QString seriesName, std::function<void(SignalList<Series *> *)> callback)
 {
-    DiskCache::streamLocallyOrRemotely(mCachePath+"/"+seriesName+currentTheTvDBLanguage()+"_search.xml",QUrl(mServer+"/api/GetSeries.php?seriesname="+seriesName+"&language="+currentTheTvDBLanguage()),[this,seriesName,callback](QIODevice* device)
+    mDiskCache->streamLocallyOrRemotely(mCachePath+"/"+seriesName+currentTheTvDBLanguage()+"_search.xml",QUrl(mServer+"/api/GetSeries.php?seriesname="+seriesName+"&language="+currentTheTvDBLanguage()),[this,seriesName,callback](QIODevice* device)
     {
         QXmlStreamReader xml(device);
         SignalList<Series*> * searchList=new SignalList<Series*>;
@@ -163,14 +272,14 @@ void TheTvDBAPI::searchSeries(QString seriesName, std::function<void(SignalList<
         }
         device->close();
         callback(searchList);
-    });
+    },1);
 }
 
 void TheTvDBAPI::liveSearchSeries(QString beginSeriesName,std::function<void(QStringList*)> callback)
 {
     mLastAutocompletion=beginSeriesName;
-    QNetworkAccessManager *manager = new QNetworkAccessManager();
-    connect(manager, &QNetworkAccessManager::finished,[this,beginSeriesName,callback](QNetworkReply* reply){
+    QNetworkReply* reply=mNetworkAccessManager->get(QNetworkRequest(mServer+"/livesearch.php?q="+beginSeriesName));
+    connect(reply, &QNetworkReply::finished,[this,beginSeriesName,callback,reply](){
         if(beginSeriesName!=mLastAutocompletion || beginSeriesName=="") return;
         QString jsonContent=reply->readAll();
         jsonContent=jsonContent.replace("results:","\"results\":").replace("id:","\"id\":").replace("value:","\"value\":").replace("info:","\"info\":").replace(",\n]","]");
@@ -182,7 +291,6 @@ void TheTvDBAPI::liveSearchSeries(QString beginSeriesName,std::function<void(QSt
 
         callback(stringList);
     });
-    manager->get(QNetworkRequest(mServer+"/livesearch.php?q="+beginSeriesName));
 }
 
 bool TheTvDBAPI::isAThetvdbSupportedLanguages(QString language)

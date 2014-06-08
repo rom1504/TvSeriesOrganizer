@@ -4,6 +4,7 @@
 #include <QQmlEngine>
 #include <QDir>
 #include <QtQml>
+#include <QNetworkAccessManager>
 
 #include "model/qqmlnetworkaccessmanagerfactorywithcache.h"
 #include "controller.h"
@@ -12,6 +13,9 @@
 #include "model/signallist.h"
 #include "model/settings.h"
 #include "adapter/signallistadapter.h"
+
+#define TheTvDBAPIKey "CDD6BACEDE53AF9F"
+#define TraktTvAPIKey "f9201fd7c6183a624a27ccba01555310"
 
 QString Controller::cachePath;
 QString Controller::dataPath;
@@ -78,29 +82,41 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
     ctxt->setContextProperty("noPlugin",pluginList->size()==0);
     ctxt->setContextProperty("pluginModel",new SignalListAdapter<Plugin*>(pluginList,"plugin"));
 
-    mSeriesList=new SeriesList(nullptr,this);
-    mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
+    QNetworkAccessManager * networkAccessManager=new QNetworkAccessManager(this);
 
-    ctxt->setContextProperty("seriesList", mSeriesList);
+    DiskCache * diskCache=new DiskCache(networkAccessManager,this);
 
-    SeriesListList * seriesListList=new SeriesListList(mSeriesList,this);
-
-    ctxt->setContextProperty("seriesListList", seriesListList);
-
-    Settings::declareSettingsQml();
-    Settings * settings=new Settings(this);
-
-    ctxt->setContextProperty("settings", settings);
-
-    mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
+    TheTvDBAPI * theTvDBAPI=new TheTvDBAPI(Controller::cachePath,"http://thetvdb.com",TheTvDBAPIKey,networkAccessManager,diskCache,this);
+    theTvDBAPI->updateCache([this,theTvDBAPI,ctxt,maximize,diskCache]()
+    {
+        mSeriesList=new SeriesList(theTvDBAPI,nullptr,this);
+        mSeriesList->loadSeries(Controller::dataPath+"/myseries.txt");
 
 
-#if !defined(Q_OS_ANDROID)
-   if(!maximize) mViewer.showExpanded();
-#endif
-    //qDebug()<<mViewer.size();
-    //mViewer.setMaximumSize(mViewer.size());
-    //mViewer.setMinimumSize(mViewer.size()-QSize(10,10));
+        ctxt->setContextProperty("seriesList", mSeriesList);
+
+
+        TraktTvAPI* traktTvAPI = new TraktTvAPI(Controller::cachePath,mSeriesList,"http://api.trakt.tv",TraktTvAPIKey,theTvDBAPI,diskCache,this);
+
+        SeriesListList * seriesListList=new SeriesListList(traktTvAPI,this);
+
+        ctxt->setContextProperty("seriesListList", seriesListList);
+
+        Settings::declareSettingsQml();
+        Settings * settings=new Settings(this);
+
+        ctxt->setContextProperty("settings", settings);
+
+        mViewer.setSource(QUrl("qrc:/view/MainView.qml"));
+
+
+    #if !defined(Q_OS_ANDROID)
+       if(!maximize) mViewer.showExpanded();
+    #endif
+        //qDebug()<<mViewer.size();
+        //mViewer.setMaximumSize(mViewer.size());
+        //mViewer.setMinimumSize(mViewer.size()-QSize(10,10));
+    });
 }
 
 void Controller::run()

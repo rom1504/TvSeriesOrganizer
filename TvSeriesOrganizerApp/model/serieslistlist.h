@@ -12,7 +12,7 @@ class SeriesListList : public QObject
     Q_OBJECT
 
 public:
-    explicit SeriesListList(SeriesList* alreadyAddedSeriesList,QObject *parent);
+    explicit SeriesListList(TraktTvAPI * traktTvAPI, QObject *parent);
 
 signals:
 
@@ -21,6 +21,7 @@ public slots:
 
 private:
     SignalList<SeriesList*> mSeriesListList;
+    TheTvDBAPI * mTheTvDBAPI;
     TraktTvAPI * mTraktTvAPI;
 };
 

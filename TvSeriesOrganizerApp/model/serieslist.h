@@ -18,8 +18,8 @@ class SeriesList : public QObject
     Q_PROPERTY(QString genre READ genre WRITE setGenre NOTIFY genreChanged)
 
 public:
-    explicit SeriesList(SeriesList* filterBySeriesList,QObject *parent); // set filterBySeriesList to nullptr if you don't want to filter
-    explicit SeriesList(bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent);
+    explicit SeriesList(TheTvDBAPI* theTvDBAPI, SeriesList* filterBySeriesList,QObject *parent); // set filterBySeriesList to nullptr if you don't want to filter
+    explicit SeriesList(TheTvDBAPI* theTvDBAPI, bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent);
     int addSeries(Series * series);
     SignalList<Series *> *series();
     void saveSeries(QString fileName="") const;

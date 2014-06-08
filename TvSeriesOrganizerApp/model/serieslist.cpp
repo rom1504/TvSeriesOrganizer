@@ -3,15 +3,15 @@
 #include "controller/controller.h"
 
 
-SeriesList::SeriesList(SeriesList* filterBySeriesList,QObject *parent) :
-    QObject(parent),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();}),mFilterBySeriesList(filterBySeriesList),mTheTvDBAPI(new TheTvDBAPI(Controller::cachePath,"http://thetvdb.com","CDD6BACEDE53AF9F",this))
+SeriesList::SeriesList(TheTvDBAPI* theTvDBAPI, SeriesList* filterBySeriesList,QObject *parent) :
+    QObject(parent),mAutocompleteModel(new QStringListModel),mSeries([](Series* a,Series * b){return a->name().toLower()<b->name().toLower();}),mFilterBySeriesList(filterBySeriesList),mTheTvDBAPI(theTvDBAPI)
 {
 }
 
 
 
-SeriesList::SeriesList(bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent) :
-    QObject(parent),mAutocompleteModel(new QStringListModel),mFilterBySeriesList(filterBySeriesList)
+SeriesList::SeriesList(TheTvDBAPI* theTvDBAPI, bool /* not sorted */,SeriesList* filterBySeriesList, QObject *parent) :
+    QObject(parent),mAutocompleteModel(new QStringListModel),mFilterBySeriesList(filterBySeriesList),mTheTvDBAPI(theTvDBAPI)
 {
 }
 
