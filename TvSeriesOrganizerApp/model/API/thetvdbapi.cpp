@@ -46,6 +46,7 @@ void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<
         QStringList filter;
         filter<<"*.xml";
         for(QString entry : path.entryList(filter,QDir::Files)) path.remove(entry);
+        finishedUpdating();
     }
     else
     {
