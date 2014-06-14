@@ -7,9 +7,11 @@
 class QQmlNetworkAccessManagerFactoryWithCache : public QQmlNetworkAccessManagerFactory
 {
 public:
-    QQmlNetworkAccessManagerFactoryWithCache();
+    QQmlNetworkAccessManagerFactoryWithCache(QString cachePath);
     virtual QNetworkAccessManager *	create(QObject *parent);
 
+private:
+    QString mCachePath;
 };
 
 #endif // QQMLNETWORKACCESSMANAGERFACTORYWITHCACHE_H

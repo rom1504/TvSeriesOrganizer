@@ -1,6 +1,5 @@
 #include "serieslist.h"
 #include "adapter/signallistfilter.h"
-#include "controller/controller.h"
 
 
 SeriesList::SeriesList(TheTvDBAPI* theTvDBAPI, SeriesList* filterBySeriesList,QObject *parent) :

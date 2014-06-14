@@ -4,9 +4,9 @@
 #include <numeric>
 
 #include "series.h"
-#include "controller/controller.h"
 #include "adapter/signallistfilter.h"
 
+QString Series::dataPath;
 
 Series::Series(QObject *parent) : QObject(parent),mPoster(nullptr),mBanner(nullptr),mSeasons([](Season* a,Season* b){
     if(a->number()==0) return false;
@@ -93,7 +93,7 @@ Season* Series::findSeason(int seasonNumber)
 
 void Series::loadSeriesSeenFile()
 {
-    QString fileName=Controller::dataPath+"/"+QString::number(mId)+"_seen.xml";
+    QString fileName=dataPath+"/"+QString::number(mId)+"_seen.xml";
     QFile seriesSeenFile(fileName);
     if(seriesSeenFile.open(QIODevice::ReadOnly|QIODevice::Text))
     {
@@ -132,7 +132,7 @@ void Series::loadSeriesSeenFile()
 
 void Series::saveSeriesSeenFile()
 {
-    QString fileName=Controller::dataPath+"/"+QString::number(mId)+"_seen.xml";
+    QString fileName=dataPath+"/"+QString::number(mId)+"_seen.xml";
     QFile seriesSeenFile(fileName);
     seriesSeenFile.open(QIODevice::WriteOnly|QIODevice::Text);
     QXmlStreamWriter stream(&seriesSeenFile);

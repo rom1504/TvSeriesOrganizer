@@ -1,15 +1,14 @@
 #include <QtQml>
 
 #include "settings.h"
-#include "controller/controller.h"
 
 #define defaultSeriesCollectionStyle CollectionViewStyle::GridView
 #define defaultSeriesCardType CardType::LargeCard
 #define defaultSeasonCollectionStyle CollectionViewStyle::GridView
 #define defaultEpisodeCollectionStyle CollectionViewStyle::GridView
 
-Settings::Settings(QObject *parent) :
-    QObject(parent),mSettings(Controller::dataPath+"/TvSeriesOrganizer.config",QSettings::NativeFormat)
+Settings::Settings(QString dataPath, QObject *parent) :
+    QObject(parent),mSettings(dataPath+"/TvSeriesOrganizer.config",QSettings::NativeFormat)
 {
     mSeriesCollectionStyle=CollectionViewStyle(mSettings.value("seriesCollectionStyle",int(defaultSeriesCollectionStyle)).toInt());
     mSeriesCardType=CardType(mSettings.value("seriesCardType",int(defaultSeriesCardType)).toInt());

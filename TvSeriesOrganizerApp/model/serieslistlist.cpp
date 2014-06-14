@@ -1,4 +1,3 @@
-#include "controller/controller.h"
 #include "serieslistlist.h"
 
 SeriesListList::SeriesListList(TraktTvAPI * traktTvAPI, QObject *parent) :

@@ -42,7 +42,9 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
     dir.mkpath(Controller::dataPath);
 #endif
 
-    QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache();
+    Series::dataPath=Controller::dataPath;
+
+    QQmlNetworkAccessManagerFactoryWithCache * factory=new QQmlNetworkAccessManagerFactoryWithCache(cachePath);
     mViewer.engine()->setNetworkAccessManagerFactory(factory);
     QQmlContext *ctxt = mViewer.rootContext();
 #if defined(Q_OS_ANDROID)
@@ -103,7 +105,7 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
         ctxt->setContextProperty("seriesListList", seriesListList);
 
         Settings::declareSettingsQml();
-        Settings * settings=new Settings(this);
+        Settings * settings=new Settings(dataPath,this);
 
         ctxt->setContextProperty("settings", settings);
 

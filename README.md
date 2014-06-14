@@ -33,6 +33,14 @@ Translations are done with [Transifex](https://www.transifex.com/projects/p/tvse
  
 ## Installation
 
+### Package manager
+That's the best way to install it, it will upgrade with sudo apt-get upgrade
+ * on ubuntu trusty : 
+  * `wget -O- http://rom1504.fr/repos/public.gpg.key | sudo apt-key add - `
+  * `sudo add-apt-repository 'deb http://rom1504.fr/repos/apt/ubuntu trusty main'`
+  * `sudo apt-get update`
+  * `sudo apt-get install tvseriesorganizer`
+
 ### Binary
  * linux 64bit : http://download.rom1504.fr/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz
  * ubuntu 64bit : http://download.rom1504.fr/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer.deb

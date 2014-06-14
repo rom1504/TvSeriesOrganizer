@@ -73,6 +73,7 @@ public:
 
     void loadSeriesSeenFile();
 
+    static QString dataPath;
 
 private:
     SignalListAdapter<Season*> * seriesModelT();
