@@ -20,6 +20,7 @@ install:
   - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
   - sudo mv android-ndk-r9 ndk
   - sudo chmod -R a+rx /opt/
+  - sudo ln -s `sudo find /opt/sdk -name "zipalign"` /opt/sdk/tools/
   - cd $CI_HOME
   
 
