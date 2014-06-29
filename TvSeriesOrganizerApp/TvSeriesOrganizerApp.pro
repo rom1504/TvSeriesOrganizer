@@ -1,10 +1,17 @@
 CONFIG += c++11
 
+QT       += core widgets
+
 # Add more folders to ship with the application, here
 DEPLOYMENTFOLDERS =
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
+
+OBJECTS_DIR = temp/
+MOC_DIR = $$OBJECTS_DIR
+RCC_DIR = $$OBJECTS_DIR
+UI_DIR = $$OBJECTS_DIR
 
 TARGET = TvSeriesOrganizer
 
@@ -102,15 +109,14 @@ SOURCES = view/Episode.qml \
     view/RadioChoice.qml
 }
 
+INCLUDEPATH += $$PWD/../SignalList/source
+DEPENDPATH += $$PWD/../SignalList/source
+
+
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SignalList/release/ -lSignalList
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SignalList/debug/ -lSignalList
 else:unix: LIBS += -L$$OUT_PWD/../SignalList/ -lSignalList
 
-INCLUDEPATH += $$PWD/../SignalList/source
-DEPENDPATH += $$PWD/../SignalList/source
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../SignalList/release/libSignalList.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../SignalList/debug/libSignalList.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../SignalList/release/SignalList.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../SignalList/debug/SignalList.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../SignalList/libSignalList.a
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = $$OUT_PWD/../SignalList/libSignalList.so
+}

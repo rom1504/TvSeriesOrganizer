@@ -65,8 +65,6 @@ Controller::Controller(QString datadir, QString size, bool maximize, QObject *pa
     }
 #endif
 
-
-
     SignalList<Plugin*> * pluginList=new SignalList<Plugin*>();
     QDir pluginDir(QCoreApplication::applicationDirPath()+"/plugin/");
     for(QFileInfo fileInfo : pluginDir.entryInfoList(QDir::Files))

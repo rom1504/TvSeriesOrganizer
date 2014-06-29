@@ -9,5 +9,6 @@ chmod 600 ~/.ssh/id_rsa
 ./deploy.sh
 sudo gcc usleep.c -o /bin/usleep
 sudo apt-get install -qq xautomation x11-utils x11-apps bc
+cp SignalList/libSignalList.so.1.0.0 TvSeriesOrganizerApp/libSignalList.so.1
 time ./multiScreenshot.sh 6 TvSeriesOrganizerApp/TvSeriesOrganizer /tmp/datadir_ screenshot/screenshot_ 
 ./sendScreenShot.sh
