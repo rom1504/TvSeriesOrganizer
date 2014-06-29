@@ -14,7 +14,7 @@ install:
   - sudo mkdir -p /opt
   - cd /opt
   - sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
-  - sudo wget http://dl.google.com/android/android-sdk_r22-linux.tgz -O - | sudo tar zx
+  - sudo wget http://dl.google.com/android/android-sdk_r23-linux.tgz -O - | sudo tar zx
   - sudo mv android-sdk-linux sdk
   - echo yes | sudo $ANDROID update sdk -a --filter android-19,platform-tool,build-tools-19.1.0,tools --no-ui --force
   - sudo wget http://dev.rom1504.fr/android-ndk-r9_small.tgz -O - | sudo tar zx
