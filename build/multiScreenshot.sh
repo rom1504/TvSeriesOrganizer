@@ -32,7 +32,7 @@ do
 		rm -rf $ddir
 		mkdir -p $ddir
 		rm -rf $sdir
-		./screenshot$siz.sh "$binaryFile --data-dir $ddir" :$disp $lang $sdir &
+		build/screenshot$siz.sh "$binaryFile --data-dir $ddir" :$disp $lang $sdir &
 		((disp++))
 		((parallel++))
 	done
