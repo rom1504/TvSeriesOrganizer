@@ -6,4 +6,4 @@
 	url = https://github.com/rom1504/GeneralQmlItems.git
 [submodule "source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface"]
 	path = source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface
-	url = git@github.com:rom1504/TvSeriesOrganizerPluginInterface.git
+	url = https://github.com/rom1504/TvSeriesOrganizerPluginInterface.git
