@@ -1,9 +1,9 @@
 [submodule "SignalList"]
-	path = SignalList
+	path = source/SignalList
 	url = https://github.com/rom1504/SignalList.git
 [submodule "GeneralQmlItems"]
-	path = GeneralQmlItems
+	path = source/GeneralQmlItems
 	url = https://github.com/rom1504/GeneralQmlItems.git
-[submodule "TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface"]
-	path = TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface
-	url = https://github.com/rom1504/TvSeriesOrganizerPluginInterface.git
+[submodule "source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface"]
+	path = source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface
+	url = git@github.com:rom1504/TvSeriesOrganizerPluginInterface.git

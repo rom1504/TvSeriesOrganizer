@@ -2,7 +2,7 @@
 
 set -e
 
-cd TvSeriesOrganizerApp
+cd source/TvSeriesOrganizerApp
 
 mkdir -p deploy/TvSeriesOrganizer
 cd deploy/TvSeriesOrganizer
@@ -23,7 +23,7 @@ tar czf ../TvSeriesOrganizer.tgz TvSeriesOrganizer
 
 mkdir package
 mkdir -p package/DEBIAN
-cp ../../debianPackageInfo package/DEBIAN/control
+cp ../../../build/debianPackageInfo package/DEBIAN/control
 mkdir -p package/opt
 cp -R TvSeriesOrganizer package/opt/
 mkdir -p package/usr/bin
