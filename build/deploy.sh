@@ -17,7 +17,7 @@ cd $p/..
 cp -R /opt/Qt/5.2.1/gcc_64/plugins /opt/Qt/5.2.1/gcc_64/qml .
 ln -s plugins/imageformats plugins/platforminputcontexts plugins/platformthemes plugins/generic plugins/platforms .
 ln -s qml/QtGraphicalEffects qml/QtQml qml/QtQuick qml/QtQuick.2 .
-cp ../../../TvSeriesOrganizer.sh .
+cp ../../../../build/TvSeriesOrganizer.sh .
 cd ..
 tar czf ../TvSeriesOrganizer.tgz TvSeriesOrganizer
 
