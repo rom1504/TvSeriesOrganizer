@@ -1,8 +1,8 @@
 language: cpp
 
 env:
-  - BUILD_OS="android"
-  - BUILD_OS="linux"
+  - BUILD_OS=android
+  - BUILD_OS=linux
 
 compiler:
   - gcc
