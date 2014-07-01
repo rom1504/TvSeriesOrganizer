@@ -3,7 +3,6 @@
 set -e
 
 CI_HOME=`pwd`
-cp -R . ../TvSeriesOrganizerLinux
 export ANDROID_NDK_TOOLCHAIN_VERSION=4.8
 export ANDROID_NDK_TOOLS_PREFIX=arm-linux-androideabi
 export ANDROID_NDK_HOST=linux-x86_64
@@ -25,7 +24,3 @@ then
 else
 	/opt/Qt/5.2.1/android_armv7/bin/androiddeployqt --input source/TvSeriesOrganizerApp/android-libTvSeriesOrganizer.so-deployment-settings.json --output $CI_HOME/android-build/ --android-platform $ANDROID_NDK_PLATFORM --release
 fi
-
-cd ../TvSeriesOrganizerLinux/source
-/opt/Qt/5.2.1/gcc_64/bin/qmake
-make
