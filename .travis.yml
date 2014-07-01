@@ -1,25 +1,25 @@
 language: cpp
 
 env:
-  - BUILD_OS=android
-  - BUILD_OS=linux
+    global:
+        - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
+    matrix:
+        - BUILD_OS=android
+        - BUILD_OS=linux
 
 compiler:
-  - gcc
+    - gcc
 install:
-  - build/installQt.sh
-  - if [[ $BUILD_OS = "android" ]] ; then build/installAndroidTools.sh ; fi
+    - build/installQt.sh
+    - if [[ $BUILD_OS = "android" ]] ; then build/installAndroidTools.sh ; fi
   
 
 script:
-  - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
-  - build/travis_script_$BUILD_OS.sh
-
-env:
-  - secure: "i6PKhVKM8PP2CcR2C83FoeADp8MzzsNAd7hlE5oL0KFpf4lqOT0WQXErp0AZKRtOgzu19bCOzvH4j9nfwl5RGwX7++M1VYN8eAyqlxt9Kr0gju8QVWOzPyteWrEUV5LygqNSS7t8g13nPTAKeNedz7VWwvW7hoTkBMlTL5Jd5kw="
+    - /opt/Qt/5.2.1/gcc_64/bin/qmake --version
+    - build/travis_script_$BUILD_OS.sh
 
 after_success:
-  - if [[ $MY_SECRET_ENV != "" ]] ; then build/travis_after_success_$BUILD_OS.sh  ; fi
+    - if [[ $MY_SECRET_ENV != "" ]] ; then build/travis_after_success_$BUILD_OS.sh  ; fi
   
 notifications:
-  irc: "chat.freenode.net#TvSeriesOrganizer"
+    irc: "chat.freenode.net#TvSeriesOrganizer"
