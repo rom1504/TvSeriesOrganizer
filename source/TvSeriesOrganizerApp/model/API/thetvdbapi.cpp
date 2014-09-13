@@ -14,9 +14,10 @@ TheTvDBAPI::TheTvDBAPI(QString cachePath, QString server, QString APIKey,QNetwor
 
 void TheTvDBAPI::updateCache(std::function<void(void)> finishedUpdating)
 {
-    QString updatePeriod=getUpdatePeriod();
+    qint64 timeOfLastUpdate=getTimeOfLastUpdate();
+    QString updatePeriod=getUpdatePeriod(timeOfLastUpdate);
     writeLastTimeOfUpdate();
-    eraseUnvalidatedCacheFiles(updatePeriod,finishedUpdating);
+    eraseUnvalidatedCacheFiles(updatePeriod,timeOfLastUpdate,finishedUpdating);
 }
 
 void TheTvDBAPI::writeLastTimeOfUpdate()
@@ -33,7 +34,7 @@ void TheTvDBAPI::writeLastTimeOfUpdate()
     file.close();
 }
 
-void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<void(void)> finishedUpdating)
+void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, qint64 timeOfLastUpdate, std::function<void(void)> finishedUpdating)
 {
     if(updatePeriod=="nothing") finishedUpdating();
     else if(updatePeriod=="all")
@@ -51,30 +52,46 @@ void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<
     else
     {
        QNetworkReply* reply=mNetworkAccessManager->get(QNetworkRequest(mServer+"/api/"+mAPIKey+"/updates/updates_"+updatePeriod+".xml"));
-       connect(reply, &QNetworkReply::finished,[this,reply,finishedUpdating](){
+       connect(reply, &QNetworkReply::finished,[this,reply,finishedUpdating,timeOfLastUpdate](){
             QString content=reply->readAll();
             // not reading the Episode fields: I only need to know a series has been updated
             // Banner fields : get the url and invalidate it in the cache
             // if series updated : actor and banner files deleted too
+            // http://thetvdb.com/wiki/index.php?title=API:Update_Records
             QDir path(mCachePath);
             QNetworkDiskCache * cache=new QNetworkDiskCache(this);
             cache->setCacheDirectory(mCachePath);
             QXmlStreamReader xml(content);
+
+            QSet<QString> seriesWantedFields={"id","time"};
+            QSet<QString> bannerWantedFields={"path","time"};
             while(!xml.atEnd())
             {
                 xml.readNext();
                 if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Series")
                 {
-                    QString seriesId=getField(xml,"Series","id");
-                    path.remove(seriesId+currentTheTvDBLanguage()+".xml");
-                    path.remove(seriesId+"_actors.xml");
-                    path.remove(seriesId+"_banners.xml");
+                    QMap<QString,QString>* seriesFields=getFields(xml,"Series",seriesWantedFields);
+                    QString seriesId=seriesFields->value("id");
+                    qint64 time=seriesFields->value("time").toULongLong()*1000;
+                    if(time>=timeOfLastUpdate)
+                    {
+                        //if(path.exists(seriesId+currentTheTvDBLanguage()+".xml")) qDebug()<<"maj "<<seriesId<<" "<<time<<" >= "<<timeOfLastUpdate;
+                        path.remove(seriesId+currentTheTvDBLanguage()+".xml");
+                        path.remove(seriesId+"_actors.xml");
+                        path.remove(seriesId+"_banners.xml");
+                    }
                 }
                 else if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Banner")
                 {
-                    QString path=getField(xml,"Banner","path");
-                    cache->remove(mServer+"/banners/_cache/"+path);
-                    cache->remove(mServer+"/banners/"+path);
+                    QMap<QString,QString>* bannerFields=getFields(xml,"Banner",bannerWantedFields);
+                    QString path=bannerFields->value("path");
+                    qint64 time=bannerFields->value("time").toULongLong()*1000;
+                    if(time>=timeOfLastUpdate)
+                    {
+                        //if(cache->fileMetaData(mServer+"/banners/"+path).isValid()) qDebug()<<"maj "<<path<<" "<<time<<" >= "<<timeOfLastUpdate;
+                        cache->remove(mServer+"/banners/_cache/"+path);
+                        cache->remove(mServer+"/banners/"+path);
+                    }
                 }
                 else if(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="Episode")
                 {
@@ -87,15 +104,25 @@ void TheTvDBAPI::eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<
     }
 }
 
-QString TheTvDBAPI::getUpdatePeriod()
+qint64 TheTvDBAPI::getTimeOfLastUpdate()
 {
     QFile file(mCachePath+"/timeOfLastUpdate.txt");
-    QString updatePeriod="";
-    if(!file.open(QIODevice::ReadOnly)) updatePeriod="all";
+    qint64 timeOfLastUpdate;
+    if(!file.open(QIODevice::ReadOnly)) timeOfLastUpdate=0;
     else
     {
         QString content=file.readAll();
-        qint64 timeOfLastUpdate=content.toULongLong();
+        timeOfLastUpdate=content.toULongLong();
+    }
+    return timeOfLastUpdate;
+}
+
+QString TheTvDBAPI::getUpdatePeriod(qint64 timeOfLastUpdate)
+{
+    QString updatePeriod="";
+    if(timeOfLastUpdate==0) updatePeriod="all";
+    else
+    {
         qint64 currentTime=QDateTime::currentMSecsSinceEpoch();
         qint64 difference=currentTime-timeOfLastUpdate;
         qint64 day=Q_INT64_C(24*3600*1000);
@@ -116,6 +143,7 @@ void TheTvDBAPI::loadSeries(int id,QObject * parent,std::function<void(void)> al
     loadSeries(new Series(id,parent),almostLoaded,loaded);
 }
 
+// make a function like this one to update the series : so series are displayed even if they have to be updated
 void TheTvDBAPI::loadSeries(Series* series,std::function<void(void)> almostLoaded,std::function<void(void)> loaded)
 {
     mDiskCache->streamLocallyOrRemotely(mCachePath+"/"+QString::number(series->id())+currentTheTvDBLanguage()+".xml",QUrl(mServer+"/api/"+mAPIKey+"/series/"+QString::number(series->id())+"/all/"+currentTheTvDBLanguage()+".xml"),[series,this,loaded,almostLoaded](QIODevice* device)

@@ -24,9 +24,10 @@ public:
     void updateCache(std::function<void(void)> finishedUpdating);
 
 private:
-    QString getUpdatePeriod();
+    qint64 getTimeOfLastUpdate();
+    QString getUpdatePeriod(qint64 timeOfLastUpdate);
     void writeLastTimeOfUpdate();
-    void eraseUnvalidatedCacheFiles(QString updatePeriod, std::function<void(void)> finishedUpdating);
+    void eraseUnvalidatedCacheFiles(QString updatePeriod, qint64 timeOfLastUpdate, std::function<void(void)> finishedUpdating);
 
 
     void loadBanners(Series * series, std::function<void(void)> loaded);

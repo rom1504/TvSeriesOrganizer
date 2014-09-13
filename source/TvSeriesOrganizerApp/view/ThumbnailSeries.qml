@@ -15,6 +15,8 @@ Item
         width:parent.width
         height: image.width/138*203
         fillMode: Image.PreserveAspectCrop
+        // is there a better way to avoid the null errors ?
+        //Component.onCompleted: if(series.poster !== null) image.source=series.poster.small
         source:series.poster.small
     }
 
