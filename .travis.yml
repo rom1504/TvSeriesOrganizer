@@ -9,6 +9,10 @@ env:
 
 compiler:
     - gcc
+   
+before_install:
+  - git submodule update --init --recursive
+    
 install:
     - build/installQt.sh
     - if [[ $BUILD_OS = "android" ]] ; then build/installAndroidTools.sh ; fi
