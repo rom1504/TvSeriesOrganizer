@@ -6,9 +6,10 @@
 #include <QtQml>
 #include <QNetworkAccessManager>
 
+#include "serieslistlist.h"
+
 #include "model/qqmlnetworkaccessmanagerfactorywithcache.h"
 #include "controller.h"
-#include "model/serieslistlist.h"
 #include "model/plugin.h"
 #include "model/signallist.h"
 #include "model/settings.h"

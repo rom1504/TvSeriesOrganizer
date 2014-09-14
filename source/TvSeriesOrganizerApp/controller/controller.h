@@ -4,8 +4,10 @@
 #include <QObject>
 #include <QTimer>
 
+
+#include "serieslist.h"
+
 #include "qtquick2applicationviewer.h"
-#include "model/serieslist.h"
 
 class Controller : public QObject
 {

@@ -17,21 +17,11 @@ TARGET = TvSeriesOrganizer
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    model/season.cpp \
-    model/episode.cpp \
     controller/controller.cpp \
-    model/series.cpp \
-    model/serieslist.cpp \
     model/qqmlnetworkaccessmanagerfactorywithcache.cpp \
-    model/serieslistlist.cpp \
     model/plugin.cpp \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.cpp \
-    model/actor.cpp \
-    model/image.cpp \
     model/settings.cpp \
-    model/API/thetvdbapi.cpp \
-    model/API/trakttvapi.cpp \
-    model/diskcache.cpp
 
 # Installation path
 # target.path =
@@ -40,23 +30,12 @@ SOURCES += main.cpp \
 include(qtquick2applicationviewer/qtquick2applicationviewer.pri)
 qtcAddDeployment()
 
-HEADERS += \
-    model/season.h \
-    model/episode.h \
-    controller/controller.h \
-    model/series.h \
-    model/serieslist.h \
+HEADERS += controller/controller.h \
     model/qqmlnetworkaccessmanagerfactorywithcache.h \
-    model/serieslistlist.h \
     TvSeriesOrganizerPluginInterface/abstractplugin.h \
     model/plugin.h \
     TvSeriesOrganizerPluginInterface/episodeplugininterface.h \
-    model/actor.h \
-    model/image.h \
     model/settings.h \
-    model/API/thetvdbapi.h \
-    model/API/trakttvapi.h \
-    model/diskcache.h
 
 
 QMAKE_CXXFLAGS += -std=c++11
@@ -117,6 +96,16 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../SignalList/release/
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../SignalList/debug/ -lSignalList
 else:unix: LIBS += -L$$OUT_PWD/../SignalList/ -lSignalList
 
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../TvSeriesAPI/TvSeriesAPILib/release/ -lTvSeriesAPILib
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../TvSeriesAPI/TvSeriesAPILib/debug/ -lTvSeriesAPILib
+else:unix: LIBS += -L$$OUT_PWD/../TvSeriesAPI/TvSeriesAPILib/ -lTvSeriesAPILib
+
+INCLUDEPATH += $$PWD/../TvSeriesAPI/TvSeriesAPILib
+DEPENDPATH += $$PWD/../TvSeriesAPI/TvSeriesAPILib
+
+
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
-    ANDROID_EXTRA_LIBS = $$OUT_PWD/../SignalList/libSignalList.so
+    ANDROID_EXTRA_LIBS = $$OUT_PWD/../SignalList/libSignalList.so  \
+        $$OUT_PWD/../TvSeriesAPI/TvSeriesAPILib/libTvSeriesAPILib.so
 }

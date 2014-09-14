@@ -1,6 +1,7 @@
 #include <QtGui/QGuiApplication>
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QCommandLineParser>
 #include "controller/controller.h"
 
 //#define LANG "fr_FR"

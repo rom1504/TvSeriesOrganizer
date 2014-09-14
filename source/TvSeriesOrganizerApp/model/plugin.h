@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "TvSeriesOrganizerPluginInterface/abstractplugin.h"
-#include "model/episode.h"
+#include "episode.h"
 
 class Plugin : public QObject
 {

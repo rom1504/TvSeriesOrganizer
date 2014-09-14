@@ -7,3 +7,6 @@
 [submodule "source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface"]
 	path = source/TvSeriesOrganizerApp/TvSeriesOrganizerPluginInterface
 	url = https://github.com/rom1504/TvSeriesOrganizerPluginInterface.git
+[submodule "source/TvSeriesAPI"]
+	path = source/TvSeriesAPI
+	url = https://github.com/rom1504/TvSeriesAPI.git

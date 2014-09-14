@@ -2,5 +2,5 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS = SignalList TvSeriesOrganizerApp \
+SUBDIRS = SignalList TvSeriesAPI TvSeriesOrganizerApp \
     GeneralQmlItems

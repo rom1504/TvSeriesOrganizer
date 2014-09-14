@@ -1,7 +1,7 @@
 #include "plugin.h"
 
-#include "model/season.h"
-#include "model/series.h"
+#include "season.h"
+#include "series.h"
 
 Plugin::Plugin(AbstractPlugin * realPlugin,QObject *parent) :
     QObject(parent),mRealPlugin(realPlugin)
