@@ -8,6 +8,7 @@ mkdir -p deploy/TvSeriesOrganizer
 cd deploy/TvSeriesOrganizer
 cp ../../TvSeriesOrganizer .
 cp ../../../SignalList/libSignalList.so.1.0.0 libSignalList.so.1
+cp ../../../TvSeriesAPI/TvSeriesAPILib/libTvSeriesAPILib.so.1.0.0 libTvSeriesAPILib.so.1
 mkdir qtlib
 cd qtlib
 p=`pwd`
