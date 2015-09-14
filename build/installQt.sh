@@ -11,5 +11,5 @@ sudo ln -s /usr/bin/g++-4.8 /usr/bin/g++
 sudo ln -s /usr/bin/gcc-4.8 /usr/bin/gcc
 sudo mkdir -p /opt
 cd /opt
-sudo wget http://dev.rom1504.fr/qt521_small.tgz -O - | sudo tar xz
+sudo wget http://download.rom1504.fr/stuff/qt521_small.tgz -O - | sudo tar xz
 sudo chmod -R a+rx /opt/
