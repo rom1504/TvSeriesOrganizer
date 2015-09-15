@@ -38,12 +38,12 @@ dpkg --build package ../TvSeriesOrganizer.deb
 cd ..
 
 
-scp -o StrictHostKeyChecking=no TvSeriesOrganizer.deb travis@download.rom1504.fr:download/TvSeriesOrganizer/ubuntu/
+scp -o StrictHostKeyChecking=no TvSeriesOrganizer.deb download@rom1504.fr:download/TvSeriesOrganizer/ubuntu/
 commitNumber=`git rev-parse HEAD`
 command="cp download/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer.deb download/TvSeriesOrganizer/ubuntu/TvSeriesOrganizer-$commitNumber.deb"
-ssh travis@download.rom1504.fr $command
+ssh download@rom1504.fr $command
 
-scp -o StrictHostKeyChecking=no TvSeriesOrganizer.tgz travis@download.rom1504.fr:download/TvSeriesOrganizer/linux/
+scp -o StrictHostKeyChecking=no TvSeriesOrganizer.tgz download@rom1504.fr:download/TvSeriesOrganizer/linux/
 commitNumber=`git rev-parse HEAD`
 command="cp download/TvSeriesOrganizer/linux/TvSeriesOrganizer.tgz download/TvSeriesOrganizer/linux/TvSeriesOrganizer-$commitNumber.tgz"
-ssh travis@download.rom1504.fr $command
+ssh download@rom1504.fr $command

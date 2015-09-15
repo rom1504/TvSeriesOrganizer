@@ -1,4 +1,5 @@
-*.pro.user
+*.pro.user*
 *.kate-swp
 *.autosave
 localscreen.sh
+*.swp
