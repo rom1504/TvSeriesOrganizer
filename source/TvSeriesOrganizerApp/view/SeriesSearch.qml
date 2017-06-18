@@ -3,8 +3,8 @@ import "qrc:/GeneralQmlItems/"
 
 Column
 {
-    Keys.onDownPressed: searchSeriesCollection.incrementCurrentIndex()
-    Keys.onUpPressed: searchSeriesCollection.decrementCurrentIndex()
+    Keys.onDownPressed: searchSeriesCollection.moveCurrentIndexUp()
+    Keys.onUpPressed: searchSeriesCollection.moveCurrentIndexDown()
     id:seriesSearch
     property var seriesList
 
